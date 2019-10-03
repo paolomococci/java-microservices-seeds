@@ -1,0 +1,8 @@
+{
+    "name": "pm-jms-nodejs-consumer",
+    "version": "0.0.1",
+    "keywords": ["util", "functional", "server", "client", "browser"],
+    "author": "paolo mococci",
+    "contributors": [],
+    "dependencies": {}
+}
