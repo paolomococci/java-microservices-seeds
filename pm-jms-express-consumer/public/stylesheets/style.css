@@ -1,0 +1,17 @@
+body {
+    padding: 40px;
+    font: 16px sans-serif;
+}
+
+h1 {
+    text-align: center;
+    text-transform: capitalize;
+}
+
+p {
+    text-transform: capitalize;
+}
+
+a {
+    color: #0bf;
+}
