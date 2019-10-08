@@ -18,6 +18,10 @@
 
 package local.example.seed.repository;
 
-public interface SeedRepository {
+import local.example.seed.model.Seed;
+import org.springframework.data.repository.CrudRepository;
+
+public interface SeedRepository 
+        extends CrudRepository<Seed, Long> {
     
 }
