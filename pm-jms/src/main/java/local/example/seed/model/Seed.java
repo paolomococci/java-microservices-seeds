@@ -18,6 +18,37 @@
 
 package local.example.seed.model;
 
-public class Seed {
+import com.fasterxml.jackson.annotation.JsonFormat;
+import java.io.Serializable;
+import java.time.LocalDateTime;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "seeds")
+public class Seed 
+        implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
     
+    @Column(nullable = true)
+    private String name;
+    
+    @Column(nullable = true)
+    private double value = 0.0;
+    
+    @Column(nullable = true)
+    @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private LocalDateTime created;
 }
