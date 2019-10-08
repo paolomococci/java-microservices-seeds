@@ -37,7 +37,7 @@ public class SeedRestController {
     
     @GetMapping
     public ResponseEntity<CollectionModel<SeedResource>> readAll() {
-        final List<SeedResource> seeds;
+        final List<SeedResource> seedResources;
         return null;
     }
     
