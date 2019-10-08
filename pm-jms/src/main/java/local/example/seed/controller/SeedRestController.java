@@ -18,6 +18,27 @@
 
 package local.example.seed.controller;
 
+import java.util.List;
+import local.example.seed.repository.SeedRepository;
+import local.example.seed.resource.SeedResource;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping(value = "/api/seeds", produces = "application/hal+json")
 public class SeedRestController {
+    
+    @Autowired
+    SeedRepository seedRepository;
+    
+    @GetMapping
+    public ResponseEntity<CollectionModel<SeedResource>> readAll() {
+        final List<SeedResource> seeds;
+        return null;
+    }
     
 }
