@@ -19,7 +19,6 @@
 package local.example.seed.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import java.io.Serializable;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,8 +34,8 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Setter
 @Entity
 @Table(name = "seeds")
-public class Seed 
-        implements Serializable {
+public class Seed {
+    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
