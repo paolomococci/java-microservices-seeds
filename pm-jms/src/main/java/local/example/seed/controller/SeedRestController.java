@@ -19,12 +19,15 @@
 package local.example.seed.controller;
 
 import java.util.List;
+import local.example.seed.model.Seed;
 import local.example.seed.repository.SeedRepository;
-import local.example.seed.resource.SeedResource;
+import local.example.seed.resource.SeedModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,9 +38,14 @@ public class SeedRestController {
     @Autowired
     SeedRepository seedRepository;
     
+    @GetMapping(path = "/{id}")
+    public EntityModel<Seed> read(@PathVariable Long id) {
+        return null;
+    }
+    
     @GetMapping
-    public ResponseEntity<CollectionModel<SeedResource>> readAll() {
-        final List<SeedResource> seedResources;
+    public ResponseEntity<CollectionModel<SeedModel>> readAll() {
+        final List<SeedModel> seedResources;
         return null;
     }
     
