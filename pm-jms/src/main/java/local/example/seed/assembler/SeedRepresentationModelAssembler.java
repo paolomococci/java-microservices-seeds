@@ -34,7 +34,7 @@ public class SeedRepresentationModelAssembler
     }
 
     @Override
-    public CollectionModel toCollectionModel(Iterable entities) {
-        return RepresentationModelAssembler.super.toCollectionModel(entities);
+    public CollectionModel toCollectionModel(Iterable seeds) {
+        return RepresentationModelAssembler.super.toCollectionModel(seeds);
     }
 }
