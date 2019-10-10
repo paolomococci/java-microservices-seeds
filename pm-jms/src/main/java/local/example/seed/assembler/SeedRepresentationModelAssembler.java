@@ -18,6 +18,23 @@
 
 package local.example.seed.assembler;
 
-public class SeedResourceAssembler {
-    
+import local.example.seed.model.Seed;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.RepresentationModelAssembler;
+import org.springframework.stereotype.Component;
+
+@Component
+public class SeedRepresentationModelAssembler 
+        implements RepresentationModelAssembler<Seed, EntityModel<Seed>>{
+
+    @Override
+    public EntityModel<Seed> toModel(Seed seed) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public CollectionModel toCollectionModel(Iterable entities) {
+        return RepresentationModelAssembler.super.toCollectionModel(entities);
+    }
 }
