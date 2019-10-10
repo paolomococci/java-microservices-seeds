@@ -18,6 +18,20 @@
 
 package local.example.seed.advice;
 
+import local.example.seed.exception.SeedNotFoundException;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ControllerAdvice;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
+@ControllerAdvice
 public class SeedNotFoundAdvice {
     
+    @ResponseBody
+    @ExceptionHandler(SeedNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    String seedNotFoundHandler(SeedNotFoundException seedNotFoundException) {
+        return seedNotFoundException.getMessage();
+    }
 }
