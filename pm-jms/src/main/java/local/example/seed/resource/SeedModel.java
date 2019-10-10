@@ -26,11 +26,12 @@ import org.springframework.hateoas.RepresentationModel;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 
 @Getter
-public class SeedResource extends RepresentationModel {
+public class SeedModel 
+        extends RepresentationModel {
     
     private final Seed seed;
 
-    public SeedResource(Seed seed) {
+    public SeedModel(Seed seed) {
         this.seed = seed;
         final Long id = seed.getId();
         add(linkTo(SeedRestController.class).withRel("seeds"));
