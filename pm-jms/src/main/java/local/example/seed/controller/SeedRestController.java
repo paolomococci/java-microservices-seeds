@@ -18,19 +18,16 @@
 
 package local.example.seed.controller;
 
+import com.google.common.collect.Lists;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Optional;
+import local.example.seed.exception.SeedNotFoundException;
 import local.example.seed.model.Seed;
 import local.example.seed.repository.SeedRepository;
-import local.example.seed.resource.SeedModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -46,36 +43,37 @@ public class SeedRestController {
     SeedRepository seedRepository;
     
     @PostMapping
-    ResponseEntity<EntityModel<Seed>> create() 
+    Seed create(@RequestBody Seed seed) 
             throws URISyntaxException {
-        EntityModel<Seed> seedEntityModel;
-        throw new UnsupportedOperationException("Not supported yet.");
+        return seedRepository.save(seed);
     }
     
     @GetMapping(path = "/{id}")
-    public EntityModel<Seed> read(@PathVariable Long id) {
-        Optional<Seed> seed = seedRepository.findById(id);
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Seed read(@PathVariable Long id) {
+        Seed seed = seedRepository.findById(id).orElseThrow(
+                () -> new SeedNotFoundException(id));
+        return seed;
     }
     
     @GetMapping
-    public ResponseEntity<CollectionModel<SeedModel>> readAll() {
-        final List<EntityModel<Seed>> seedResources;
-        throw new UnsupportedOperationException("Not supported yet.");
+    public List<Seed> readAll() {
+        List<Seed> seeds = Lists.newArrayList(seedRepository.findAll());
+        return seeds;
     }
     
     @PutMapping(path = "/{id}")
-    public ResponseEntity<Seed> update(@RequestBody Seed update, @PathVariable Long id) 
+    public Seed update(@RequestBody Seed updated, @PathVariable Long id) 
             throws URISyntaxException {
-        Optional<Seed> seed = seedRepository.findById(id);
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-    
-    @PatchMapping(path = "/{id}")
-    public ResponseEntity<Seed> partialUpdate(@RequestBody Seed update, @PathVariable Long id) 
-            throws URISyntaxException {
-        Optional<Seed> seed = seedRepository.findById(id);
-        throw new UnsupportedOperationException("Not supported yet.");
+        return seedRepository.findById(id)
+                .map(seed -> {
+                    seed.setName(updated.getName());
+                    seed.setSeedDoubleValue(updated.getSeedDoubleValue());
+                    return seedRepository.save(seed);
+                })
+                .orElseGet(() -> {
+                    updated.setId(id);
+                    return seedRepository.save(updated);
+                });
     }
     
     @DeleteMapping(path = "/{id}")
