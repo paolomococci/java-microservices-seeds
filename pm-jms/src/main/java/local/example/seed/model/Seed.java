@@ -26,12 +26,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
-@Getter
-@Setter
+@Data
 @Entity
 @Table(name = "seeds")
 public class Seed {
@@ -44,7 +42,7 @@ public class Seed {
     private String name;
     
     @Column(nullable = true)
-    private double value = 0.0;
+    private double seedDoubleValue = 0.0;
     
     @Column(nullable = true)
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
