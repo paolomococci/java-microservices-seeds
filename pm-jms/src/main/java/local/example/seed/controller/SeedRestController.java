@@ -42,21 +42,27 @@ public class SeedRestController {
     @PostMapping
     public EntityModel<Seed> create(@RequestBody Seed seed) 
             throws URISyntaxException {
-        return seedRepresentationModelAssembler
+        EntityModel<Seed> entityModelOfSeed = seedRepresentationModelAssembler
                 .toModel(seedRepository.save(seed));
+        return entityModelOfSeed;
     }
     
     @GetMapping(path = "/{id}")
     public EntityModel<Seed> read(@PathVariable Long id) {
         Seed seed = seedRepository.findById(id).orElseThrow(
                 () -> new SeedNotFoundException(id));
-        return seedRepresentationModelAssembler.toModel(seed);
+        EntityModel<Seed> entityModelOfSeed = seedRepresentationModelAssembler
+                .toModel(seed);
+        return entityModelOfSeed;
     }
     
     @GetMapping
     public CollectionModel<EntityModel<Seed>> readAll() {
         Iterable<Seed> seeds = seedRepository.findAll();
-        return seedRepresentationModelAssembler.toCollectionModel(seeds);
+        CollectionModel<EntityModel<Seed>> collectionModelOfSeeds;
+        collectionModelOfSeeds = seedRepresentationModelAssembler
+                .toCollectionModel(seeds);
+        return collectionModelOfSeeds;
     }
     
     @PutMapping(path = "/{id}")
@@ -73,7 +79,9 @@ public class SeedRestController {
                     updated.setId(id);
                     return seedRepository.save(updated);
                 });
-        return seedRepresentationModelAssembler.toModel(temp);
+        EntityModel<Seed> entityModelOfSeed = seedRepresentationModelAssembler
+                .toModel(temp);
+        return entityModelOfSeed;
     }
     
     @PatchMapping(path = "/{id}")
@@ -81,19 +89,23 @@ public class SeedRestController {
             throws URISyntaxException {
         Seed temp = seedRepository.findById(id)
                 .map(seed -> {
-                    if (updated.getName() != null) seed.setName(updated.getName());
+                    if (updated.getName() != null) seed
+                            .setName(updated.getName());
                     if (this.isValidDoubleValue(
                             String.valueOf(updated.getSeedDoubleValue()))) {
                         seed.setSeedDoubleValue(updated.getSeedDoubleValue());
                     }
-                    if (updated.getCreated() != null) seed.setCreated(updated.getCreated());
+                    if (updated.getCreated() != null) seed
+                            .setCreated(updated.getCreated());
                     return seedRepository.save(seed);
                 })
                 .orElseGet(() -> {
                     updated.setId(id);
                     return seedRepository.save(updated);
                 });
-        return seedRepresentationModelAssembler.toModel(temp);
+        EntityModel<Seed> entityModelOfSeed = seedRepresentationModelAssembler
+                .toModel(temp);
+        return entityModelOfSeed;
     }
     
     @DeleteMapping(path = "/{id}")
