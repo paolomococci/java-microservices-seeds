@@ -82,7 +82,7 @@ Date: Mon, 07 Oct 2019 21:05:31 GMT
 * Connection #0 to host 127.0.0.1 left intact
 }
 
-$curl -v -i -H "Content-Type:application/json" -d "{\"name\":\"seedOne\"}" http://127.0.0.1:9090/seeds
+$ curl -v -i -H "Content-Type:application/json" -d "{\"name\":\"seedOne\"}" http://127.0.0.1:9090/seeds
 *   Trying 127.0.0.1:9090...
 * TCP_NODELAY set
 * Connected to 127.0.0.1 (127.0.0.1) port 9090 (#0)
