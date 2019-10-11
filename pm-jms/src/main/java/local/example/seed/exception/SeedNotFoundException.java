@@ -18,17 +18,10 @@
 
 package local.example.seed.exception;
 
-import lombok.Getter;
-
-@Getter
 public class SeedNotFoundException 
         extends RuntimeException {
-    
-    private long id;
-
-    public SeedNotFoundException() {}
 
     public SeedNotFoundException(long id) {
-        this.id = id;
+        super("could not find seed with id: " + id);
     }
 }
