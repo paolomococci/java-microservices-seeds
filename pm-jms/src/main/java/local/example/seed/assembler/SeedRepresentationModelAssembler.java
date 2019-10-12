@@ -18,11 +18,14 @@
 
 package local.example.seed.assembler;
 
+import local.example.seed.controller.SeedRestController;
 import local.example.seed.model.Seed;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @Component
 public class SeedRepresentationModelAssembler 
@@ -30,7 +33,10 @@ public class SeedRepresentationModelAssembler
 
     @Override
     public EntityModel<Seed> toModel(Seed seed) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        return new EntityModel<>(seed, 
+                linkTo(methodOn(SeedRestController.class).read(seed.getId())).withSelfRel(),
+                linkTo(methodOn(SeedRestController.class).readAll()).withRel("seeds")
+        );
     }
 
     @Override
