@@ -26,6 +26,7 @@ import local.example.seed.assembler.SeedRepresentationModelAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,39 +41,38 @@ public class SeedRestController {
     SeedRepresentationModelAssembler seedRepresentationModelAssembler;
     
     @PostMapping
-    public EntityModel<Seed> create(@RequestBody Seed seed) 
+    public ResponseEntity<?> create(@RequestBody Seed seed) 
             throws URISyntaxException {
         EntityModel<Seed> entityModelOfSeed = seedRepresentationModelAssembler
                 .toModel(seedRepository.save(seed));
-        return entityModelOfSeed;
+        return new ResponseEntity<>(entityModelOfSeed, HttpStatus.CREATED);
     }
     
     @GetMapping(path = "/{id}")
-    public EntityModel<Seed> read(@PathVariable Long id) {
+    public ResponseEntity<?> read(@PathVariable Long id) {
         Seed seed = seedRepository.findById(id).orElseThrow(
                 () -> new SeedNotFoundException(id));
         EntityModel<Seed> entityModelOfSeed = seedRepresentationModelAssembler
                 .toModel(seed);
-        return entityModelOfSeed;
+        return new ResponseEntity<>(entityModelOfSeed, HttpStatus.OK);
     }
     
     @GetMapping
-    public CollectionModel<EntityModel<Seed>> readAll() {
+    public ResponseEntity<?> readAll() {
         Iterable<Seed> seeds = seedRepository.findAll();
         CollectionModel<EntityModel<Seed>> collectionModelOfSeeds;
         collectionModelOfSeeds = seedRepresentationModelAssembler
                 .toCollectionModel(seeds);
-        return collectionModelOfSeeds;
+        return new ResponseEntity<>(collectionModelOfSeeds, HttpStatus.OK);
     }
     
     @PutMapping(path = "/{id}")
-    public EntityModel<Seed> update(@RequestBody Seed updated, @PathVariable Long id) 
+    public ResponseEntity<?> update(@RequestBody Seed updated, @PathVariable Long id) 
             throws URISyntaxException {
         Seed temp = seedRepository.findById(id)
                 .map(seed -> {
                     seed.setName(updated.getName());
-                    seed.setSeedDoubleValue(updated.getSeedDoubleValue());
-                    seed.setCreated(updated.getCreated());
+                    seed.setPercentage(updated.getPercentage());
                     return seedRepository.save(seed);
                 })
                 .orElseGet(() -> {
@@ -81,31 +81,41 @@ public class SeedRestController {
                 });
         EntityModel<Seed> entityModelOfSeed = seedRepresentationModelAssembler
                 .toModel(temp);
-        return entityModelOfSeed;
+        return new ResponseEntity<>(entityModelOfSeed, HttpStatus.OK);
     }
     
-    @PatchMapping(path = "/{id}")
-    public EntityModel<Seed> partialUpdate(@RequestBody Seed updated, @PathVariable Long id) 
+    @PatchMapping(path = "/{id}/name")
+    public ResponseEntity<?> nameUpdate(@RequestBody Seed updated, @PathVariable Long id) 
             throws URISyntaxException {
         Seed temp = seedRepository.findById(id)
-                .map(seed -> {
-                    if (updated.getName() != null) seed
-                            .setName(updated.getName());
-                    if (this.isValidDoubleValue(
-                            String.valueOf(updated.getSeedDoubleValue()))) {
-                        seed.setSeedDoubleValue(updated.getSeedDoubleValue());
-                    }
-                    if (updated.getCreated() != null) seed
-                            .setCreated(updated.getCreated());
-                    return seedRepository.save(seed);
-                })
                 .orElseGet(() -> {
                     updated.setId(id);
                     return seedRepository.save(updated);
                 });
+        if (updated.getName() != null) {
+            temp.setName(updated.getName());
+            seedRepository.save(temp);
+        }
         EntityModel<Seed> entityModelOfSeed = seedRepresentationModelAssembler
                 .toModel(temp);
-        return entityModelOfSeed;
+        return new ResponseEntity<>(entityModelOfSeed, HttpStatus.OK);
+    }
+    
+    @PatchMapping(path = "/{id}/percentage")
+    public ResponseEntity<?> percentageUpdate(@RequestBody Seed updated, @PathVariable Long id) 
+            throws URISyntaxException {
+        Seed temp = seedRepository.findById(id)
+                .orElseGet(() -> {
+                    updated.setId(id);
+                    return seedRepository.save(updated);
+                });
+        if (Double.isFinite(updated.getPercentage())) {
+            temp.setPercentage(updated.getPercentage());
+            seedRepository.save(temp);
+        }
+        EntityModel<Seed> entityModelOfSeed = seedRepresentationModelAssembler
+                .toModel(temp);
+        return new ResponseEntity<>(entityModelOfSeed, HttpStatus.OK);
     }
     
     @DeleteMapping(path = "/{id}")
@@ -113,9 +123,5 @@ public class SeedRestController {
             throws URISyntaxException {
         seedRepository.deleteById(id);
         return ResponseEntity.noContent().build();
-    }
-    
-    private boolean isValidDoubleValue(String string) {
-        return Double.isNaN(Double.parseDouble(string));
     }
 }
