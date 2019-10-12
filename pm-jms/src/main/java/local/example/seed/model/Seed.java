@@ -26,6 +26,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -41,11 +43,13 @@ public class Seed {
     @Column(nullable = true)
     private String name;
     
-    @Column(nullable = true)
-    private double seedDoubleValue = 0.0;
+    @Column(nullable = false)
+    @Max(value = 1)
+    @Min(value = 0)
+    private double percentage = 0.0;
     
-    @Column(nullable = true)
+    @Column(nullable = false)
     @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
-    @DateTimeFormat(pattern = "yyyy/MM/dd")
-    private LocalDateTime created;
+    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
+    private final LocalDateTime created = LocalDateTime.now();
 }
