@@ -30,6 +30,10 @@ main article section {
     font-family: monospace;
 }
 
+main nav {
+    padding-left: 30px;
+}
+
 footer {
     padding: 2px;
     margin: 0.5em;
