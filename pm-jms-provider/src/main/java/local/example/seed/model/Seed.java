@@ -18,7 +18,6 @@
 
 package local.example.seed.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,7 +28,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
 @Data
 @Entity
@@ -49,7 +47,5 @@ public class Seed {
     private double percentage = 0.0;
     
     @Column(nullable = false)
-    @JsonFormat(pattern = "yyyy/MM/dd HH:mm")
-    @DateTimeFormat(pattern = "yyyy/MM/dd HH:mm")
     private final LocalDateTime created = LocalDateTime.now();
 }
