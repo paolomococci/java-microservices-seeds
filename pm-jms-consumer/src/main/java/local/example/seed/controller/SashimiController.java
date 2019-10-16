@@ -21,7 +21,9 @@ package local.example.seed.controller;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
-import local.example.seed.util.DataRetriever;
+import java.time.LocalDateTime;
+import local.example.seed.model.Seed;
+import local.example.seed.util.SachimiJsonInterpreter;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
@@ -53,13 +55,13 @@ public class SashimiController {
         return "sashimi";
     }
     
-    private String retriever() 
+    private Seed retriever() 
             throws MalformedURLException, 
             ProtocolException, 
             IOException,
             ParseException {
-        DataRetriever dataRetriever = new DataRetriever();
-        dataRetriever.retriever(urlResources);
-        return  dataRetriever.getResult();
+        SachimiJsonInterpreter sachimiJsonInterpreter = new SachimiJsonInterpreter();
+        var jsonObject = sachimiJsonInterpreter.serialize(new Seed(1,"David",0.3,LocalDateTime.now()));
+        return sachimiJsonInterpreter.deserialize(jsonObject);
     }
 }
