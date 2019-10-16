@@ -55,7 +55,6 @@ public class SushiController {
             IOException {
         SushiJsonInterpreter interpreter = new SushiJsonInterpreter();
         String jsonRepresentation = interpreter.serialize(new Seed(1,"David",0.3,LocalDateTime.now()));
-        Seed seedRepresentation = interpreter.deserialize(jsonRepresentation);
-        return seedRepresentation;
+        return interpreter.deserialize(jsonRepresentation);
     }
 }
