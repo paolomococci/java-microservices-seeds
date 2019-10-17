@@ -35,7 +35,7 @@ public class SushiController {
     private String urlResources = "http://127.0.0.1:9090/api/";    
     
     @GetMapping(path = "/sushi")
-    public String root(
+    public String sushi(
             @RequestParam(
                     name="name", 
                     required=false, 
