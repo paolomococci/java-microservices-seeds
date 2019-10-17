@@ -23,7 +23,6 @@ import local.example.seed.model.Seed;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.ParseException;
 
-
 /**
  * 
  * This class use json-simple
