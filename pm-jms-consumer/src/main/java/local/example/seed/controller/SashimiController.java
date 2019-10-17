@@ -24,7 +24,6 @@ import java.net.ProtocolException;
 import java.time.LocalDateTime;
 import local.example.seed.model.Seed;
 import local.example.seed.util.SachimiJsonInterpreter;
-import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -35,19 +34,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class SashimiController {
     
     private String urlResources = "http://127.0.0.1:9090/api/";
-    private final JSONParser jsonParser = new JSONParser();
-    
     
     @GetMapping(path = "/sashimi")
-    public String root(
+    public String sashimi(
             @RequestParam(
                     name="name", 
                     required=false, 
                     defaultValue = "seeds"
             ) String name, Model model) 
-            throws ProtocolException,
-            IOException,
-            MalformedURLException,
+            throws ProtocolException, 
+            IOException, 
+            MalformedURLException, 
             ParseException {
         urlResources+= name;
         model.addAttribute("name", name);
