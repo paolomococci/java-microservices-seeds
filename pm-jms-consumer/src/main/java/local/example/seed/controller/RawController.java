@@ -33,7 +33,7 @@ public class RawController {
     private String urlResources = "http://127.0.0.1:9090/api/";
     
     @GetMapping(path = "/raw")
-    public String root(
+    public String raw(
             @RequestParam(
                     name="name", 
                     required=false, 
