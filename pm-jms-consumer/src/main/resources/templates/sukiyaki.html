@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <meta content="" name="description"/>
+        <meta content="Paolo Mococci" name="author"/>
+        <title th:text="${name} + ' sukiyaki consumer'"/>
+        <link rel='stylesheet' href='/css/default.css' type='text/css' media='all'/>
+        <link rel='shortcut icon' href='/img/icons/favicon.svg'/>
+    </head>
+    <body>
+        <header>
+            <h1 th:text="${name} + ' sukiyaki consumer'"/>
+        </header>
+        <main>
+            <article>
+                <h2>data retriever</h2>
+                <section>
+                    <h3 th:text="${name}"/>
+                    <pre th:text="'to do retriever sukiyaki data of: ' + ${name}"/>
+                    <pre th:text="${result}"/>
+                </section>
+            </article>
+        </main>
+        <footer>
+            <h6 th:text="${name} + ' sukiyaki consumer'"/>
+        </footer>
+    </body>
+</html>
