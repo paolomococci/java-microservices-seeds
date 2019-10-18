@@ -16,7 +16,7 @@
  *
  */
 
-package local.example.seed.util;
+package local.example.seed.retriever;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
