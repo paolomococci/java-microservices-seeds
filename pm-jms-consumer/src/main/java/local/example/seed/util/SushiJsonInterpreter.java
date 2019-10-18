@@ -16,7 +16,7 @@
  *
  */
 
-package local.example.seed.util;
+package local.example.seed.interpreter;
 
 import com.google.gson.Gson;
 import local.example.seed.model.Seed;
