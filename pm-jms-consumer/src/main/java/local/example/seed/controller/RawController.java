@@ -21,7 +21,7 @@ package local.example.seed.controller;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
-import local.example.seed.util.DataRetriever;
+import local.example.seed.retriever.DataRetriever;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
