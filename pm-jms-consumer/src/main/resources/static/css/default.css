@@ -30,6 +30,20 @@ main article section {
     font-family: monospace;
 }
 
+main article section table {
+    padding-left: 10px;
+    font-family: monospace;
+    background-color: white;
+}
+
+main article section table tbody tr:nth-child(even) {
+    background-color: #fdebcf;
+}
+
+main article section table tbody tr:nth-child(odd) {
+    background-color: #fbd7a1;
+}
+
 main nav {
     padding-left: 30px;
 }
