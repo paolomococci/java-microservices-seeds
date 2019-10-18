@@ -16,7 +16,7 @@
  *
  */
 
-package local.example.seed.util;
+package local.example.seed.interpreter;
 
 import java.time.LocalDateTime;
 import local.example.seed.model.Seed;
