@@ -16,18 +16,26 @@
  *
  */
 
-package local.example.seed.util;
+package local.example.seed.interpreter;
 
 import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import local.example.seed.model.Seeds;
 
 /**
  * 
  * This class use json-path
  */
 public class SukiyakiJsonInterpreter {
+    
+    public List<String> retrieveListOfIds(String dataString) {
+        ReadContext readContext = JsonPath.parse(dataString);
+        List<String> seedIdList = readContext.read("$._embedded.seeds[*].id");
+        return seedIdList;
+    }
     
     public List<String> retrieveListOfNames(String dataString) {
         ReadContext readContext = JsonPath.parse(dataString);
@@ -37,14 +45,14 @@ public class SukiyakiJsonInterpreter {
     
     public List<String> retrieveListOfPercentages(String dataString) {
         ReadContext readContext = JsonPath.parse(dataString);
-        List<String> seedNameList = readContext.read("$._embedded.seeds[*].percentage");
-        return seedNameList;
+        List<String> seedPercentageList = readContext.read("$._embedded.seeds[*].percentage");
+        return seedPercentageList;
     }
     
     public List<String> retrieveListOfCreateDates(String dataString) {
         ReadContext readContext = JsonPath.parse(dataString);
-        List<String> seedNameList = readContext.read("$._embedded.seeds[*].created");
-        return seedNameList;
+        List<String> seedCreatedList = readContext.read("$._embedded.seeds[*].created");
+        return seedCreatedList;
     }
     
     public List<String> deserialize(String dataString) {
@@ -52,7 +60,14 @@ public class SukiyakiJsonInterpreter {
         return readContext.read("$._embedded.seeds[*]");
     }
     
-    public List<Map<String, Object>> map(String dataString) {
+    public static List<Map<String, Object>> map(String dataString) {
         return JsonPath.parse(dataString).read("$._embedded.seeds[*]");
+    }
+    
+    public static Seeds toSeeds(String dataString) {
+        ReadContext readContext = JsonPath.parse(dataString);
+        Seeds seeds = readContext.read("$._embedded.seeds[*]", Seeds.class);
+        System.out.println("at " + LocalDateTime.now() + " seeds is: " + seeds);
+        return seeds;
     }
 }
