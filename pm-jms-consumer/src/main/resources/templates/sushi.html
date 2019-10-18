@@ -4,26 +4,26 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta content="" name="description"/>
         <meta content="Paolo Mococci" name="author"/>
-        <title th:text="${name} + ' sushi consumer'"/>
+        <title data-th-text="${name} + ' sushi consumer'"/>
         <link rel='stylesheet' href='/css/default.css' type='text/css' media='all'/>
         <link rel='shortcut icon' href='/img/icons/favicon.svg'/>
     </head>
     <body>
         <header>
-            <h1 th:text="${name} + ' sushi consumer'"/>
+            <h1 data-th-text="${name} + ' sushi consumer'"/>
         </header>
         <main>
             <article>
                 <h2>data retriever</h2>
                 <section>
-                    <h3 th:text="${name}"/>
-                    <pre th:text="'to do retriever sushi data of: ' + ${name}"/>
-                    <!--pre th:text="${result}"/-->
+                    <h3 data-th-text="${name}"/>
+                    <pre data-th-text="'to do retriever sushi data of: ' + ${name}"/>
+                    <!--pre data-th-text="${result}"/-->
                 </section>
             </article>
         </main>
         <footer>
-            <h6 th:text="${name} + ' sushi consumer'"/>
+            <h6><a href="/">back to home</a></h6>
         </footer>
     </body>
 </html>
