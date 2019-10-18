@@ -1,30 +1,54 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
         <meta content="" name="description"/>
         <meta content="Paolo Mococci" name="author"/>
-        <title th:text="${name} + ' sukiyaki consumer'"/>
+        <title data-th-text="${name} + ' sukiyaki consumer'"></title>
         <link rel='stylesheet' href='/css/default.css' type='text/css' media='all'/>
         <link rel='shortcut icon' href='/img/icons/favicon.svg'/>
     </head>
     <body>
         <header>
-            <h1 th:text="${name} + ' sukiyaki consumer'"/>
+            <h1 data-th-text="${name} + ' sukiyaki consumer'"></h1>
         </header>
         <main>
             <article>
                 <h2>data retriever</h2>
                 <section>
-                    <h3 th:text="${name}"/>
-                    <pre th:text="'to do retriever sukiyaki data of: ' + ${name}"/>
-                    <pre th:text="${result}"/>
+                    <h3 data-th-text="${name} + ' consumer'"></h3>
+                    <pre data-th-text="${name}"></pre>
+                    <pre data-th-text="${result}"></pre>
+                </section>
+            </article>
+            <article>
+                <h2>data table</h2>
+                <section>
+                    <h3 data-th-text="${name} + ' data table'"></h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>id</th>
+                                <th>name</th>
+                                <th>percentage</th>
+                                <th>created</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-th-each="seed: ${seeds}">
+                                <td data-th-text="${seed.id}"></td>
+                                <td data-th-text="${seed.name}"></td>
+                                <td data-th-text="${seed.percentage}"></td>
+                                <td data-th-text="${seed.created}"></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </section>
             </article>
         </main>
         <footer>
-            <h6 th:text="${name} + ' sukiyaki consumer'"/>
+            <h6><a href="/">back to home</a></h6>
         </footer>
     </body>
 </html>
