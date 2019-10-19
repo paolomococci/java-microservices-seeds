@@ -22,7 +22,7 @@ import com.jayway.jsonpath.JsonPath;
 import com.jayway.jsonpath.ReadContext;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
+import local.example.seed.model.Seed;
 import local.example.seed.model.Seeds;
 
 /**
@@ -31,43 +31,46 @@ import local.example.seed.model.Seeds;
  */
 public class SukiyakiJsonInterpreter {
     
-    public List<String> retrieveListOfIds(String dataString) {
-        ReadContext readContext = JsonPath.parse(dataString);
-        List<String> seedIdList = readContext.read("$._embedded.seeds[*].id");
-        return seedIdList;
-    }
-    
-    public List<String> retrieveListOfNames(String dataString) {
-        ReadContext readContext = JsonPath.parse(dataString);
-        List<String> seedNameList = readContext.read("$._embedded.seeds[*].name");
-        return seedNameList;
-    }
-    
-    public List<String> retrieveListOfPercentages(String dataString) {
-        ReadContext readContext = JsonPath.parse(dataString);
-        List<String> seedPercentageList = readContext.read("$._embedded.seeds[*].percentage");
-        return seedPercentageList;
-    }
-    
-    public List<String> retrieveListOfCreateDates(String dataString) {
-        ReadContext readContext = JsonPath.parse(dataString);
-        List<String> seedCreatedList = readContext.read("$._embedded.seeds[*].created");
-        return seedCreatedList;
-    }
-    
     public List<String> deserialize(String dataString) {
         ReadContext readContext = JsonPath.parse(dataString);
         return readContext.read("$._embedded.seeds[*]");
     }
     
-    public static List<Map<String, Object>> map(String dataString) {
-        return JsonPath.parse(dataString).read("$._embedded.seeds[*]");
+    public static String toStrings(String dataString) {
+        Seeds seeds = new Seeds();
+        String jsonDataString = dataString;
+        String jsonPathExpression = "$._embedded.seeds[*]";
+        JsonPath jsonPath = JsonPath.compile(jsonPathExpression);
+        List<Seed> seedList = jsonPath.read(jsonDataString);
+        int sizeOfSeedList = seedList.size();
+        for (int i = 0; i < sizeOfSeedList; i++) {
+            Seed s = new Seed();
+            ReadContext rc = JsonPath.parse(jsonDataString);
+            s.setId(Long.parseLong(rc.read("$._embedded.seeds[" + i + "].id").toString()));
+            s.setName(rc.read("$._embedded.seeds[" + i + "].name"));
+            s.setPercentage(Double.parseDouble(rc.read("$._embedded.seeds[" + i + "].percentage").toString()));
+            s.setCreated(LocalDateTime.parse(rc.read("$._embedded.seeds[" + i + "].created").toString()));
+            seeds.add(s);
+        }
+        return seeds.toString();
     }
     
     public static Seeds toSeeds(String dataString) {
-        ReadContext readContext = JsonPath.parse(dataString);
-        Seeds seeds = readContext.read("$._embedded.seeds[*]", Seeds.class);
-        System.out.println("at " + LocalDateTime.now() + " seeds is: " + seeds);
+        Seeds seeds = new Seeds();
+        String jsonDataString = dataString;
+        String jsonPathExpression = "$._embedded.seeds[*]";
+        JsonPath jsonPath = JsonPath.compile(jsonPathExpression);
+        List<Seed> seedList = jsonPath.read(jsonDataString);
+        int sizeOfSeedList = seedList.size();
+        for (int i = 0; i < sizeOfSeedList; i++) {
+            Seed s = new Seed();
+            ReadContext rc = JsonPath.parse(jsonDataString);
+            s.setId(Long.parseLong(rc.read("$._embedded.seeds[" + i + "].id").toString()));
+            s.setName(rc.read("$._embedded.seeds[" + i + "].name"));
+            s.setPercentage(Double.parseDouble(rc.read("$._embedded.seeds[" + i + "].percentage").toString()));
+            s.setCreated(LocalDateTime.parse(rc.read("$._embedded.seeds[" + i + "].created").toString()));
+            seeds.add(s);
+        }
         return seeds;
     }
 }
