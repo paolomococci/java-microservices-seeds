@@ -18,8 +18,9 @@
                 <h2>data retriever</h2>
                 <section>
                     <h3 data-th-text="${name} + ' consumer'"></h3>
-                    <pre data-th-text="${name}"></pre>
+                    <pre data-th-text="${urlResources}"></pre>
                     <pre data-th-text="${result}"></pre>
+                    <code data-th-text="${nodes}"></code>
                 </section>
             </article>
             <article>
@@ -36,12 +37,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr data-th-each="seed: ${seeds}">
+                            <!--tr data-th-each="seed: ${seeds}">
                                 <td data-th-text="${seed.id}"></td>
                                 <td data-th-text="${seed.name}"></td>
                                 <td data-th-text="${seed.percentage}"></td>
                                 <td data-th-text="${seed.created}"></td>
-                            </tr>
+                            </tr-->
                         </tbody>
                     </table>
                 </section>
