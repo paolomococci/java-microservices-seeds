@@ -19,7 +19,7 @@
 package local.example.seed.controller;
 
 import java.util.List;
-import local.example.seed.util.SukiyakiJsonInterpreter;
+import local.example.seed.interpreter.SukiyakiJsonInterpreter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +39,9 @@ public class SukiyakiController {
             ) String name, Model model) {
         urlResources+= name;
         model.addAttribute("name", name);
+        model.addAttribute("urlResources", urlResources);
         model.addAttribute("result", this.retriever().get(0));
+        model.addAttribute("nodes", SukiyakiJsonInterpreter.toStrings(DATA_EXAMPLE));
         return "sukiyaki";
     }
     
