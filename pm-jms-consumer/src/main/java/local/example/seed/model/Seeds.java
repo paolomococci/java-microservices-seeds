@@ -58,10 +58,8 @@ public class Seeds implements List<Seed> {
     }
 
     @Override
-    public <T> T[] toArray(T[] ts) 
-            throws ArrayStoreException, 
-            NullPointerException {
-        return seeds.toArray(ts);
+    public <T> T[] toArray(T[] a) {
+        throw new UnsupportedOperationException("not supported: toArray(T[] a)");
     }
 
     @Override
