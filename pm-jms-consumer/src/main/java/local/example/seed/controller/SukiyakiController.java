@@ -18,7 +18,6 @@
 
 package local.example.seed.controller;
 
-import java.util.List;
 import local.example.seed.interpreter.SukiyakiJsonInterpreter;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,15 +39,11 @@ public class SukiyakiController {
         urlResources+= name;
         model.addAttribute("name", name);
         model.addAttribute("urlResources", urlResources);
-        model.addAttribute("result", this.retriever().get(0));
-        model.addAttribute("nodes", SukiyakiJsonInterpreter.toStrings(DATA_EXAMPLE));
+        model.addAttribute("seeds", SukiyakiJsonInterpreter.deserialize(DATA_EXAMPLE));
         return "sukiyaki";
     }
-    
-    private List<String> retriever() {
-        var sukiyakiJsonInterpreter = new SukiyakiJsonInterpreter();
-        return sukiyakiJsonInterpreter.deserialize(DATA_EXAMPLE);
-    }
-    
-    private final String DATA_EXAMPLE = "{'_embedded':{'seeds':[{'id':1,'name':'seedOne','percentage':0.14,'created':'2019-10-16T17:40:45.381287','_links':{'self':{'href':'http://127.0.0.1:9090/api/seeds/1'},'seeds':{'href':'http://127.0.0.1:9090/api/seeds'}}},{'id':2,'name':'seedTwo','percentage':0.23,'created':'2019-10-16T17:41:17.718917','_links':{'self':{'href':'http://127.0.0.1:9090/api/seeds/2'},'seeds':{'href':'http://127.0.0.1:9090/api/seeds'}}},{'id':3,'name':'seedThree','percentage':0.42,'created':'2019-10-16T17:42:34.500347','_links':{'self':{'href':'http://127.0.0.1:9090/api/seeds/3'},'seeds':{'href':'http://127.0.0.1:9090/api/seeds'}}},{'id':4,'name':'seedFour','percentage':0.31,'created':'2019-10-16T17:43:05.586839','_links':{'self':{'href':'http://127.0.0.1:9090/api/seeds/4'},'seeds':{'href':'http://127.0.0.1:9090/api/seeds'}}},{'id':5,'name':'seedFive','percentage':0.58,'created':'2019-10-16T17:43:27.943723','_links':{'self':{'href':'http://127.0.0.1:9090/api/seeds/5'},'seeds':{'href':'http://127.0.0.1:9090/api/seeds'}}}]}}";
+
+    /* data strings for off-line verify */
+    //private final String DATA_EXAMPLE = "{'_embedded':{'seeds':[{'id':1,'name':'seedOne','percentage':0.14,'created':'2019-10-16T17:40:45.381287','_links':{'self':{'href':'http://127.0.0.1:9090/api/seeds/1'},'seeds':{'href':'http://127.0.0.1:9090/api/seeds'}}},{'id':2,'name':'seedTwo','percentage':0.23,'created':'2019-10-16T17:41:17.718917','_links':{'self':{'href':'http://127.0.0.1:9090/api/seeds/2'},'seeds':{'href':'http://127.0.0.1:9090/api/seeds'}}},{'id':3,'name':'seedThree','percentage':0.42,'created':'2019-10-16T17:42:34.500347','_links':{'self':{'href':'http://127.0.0.1:9090/api/seeds/3'},'seeds':{'href':'http://127.0.0.1:9090/api/seeds'}}},{'id':4,'name':'seedFour','percentage':0.31,'created':'2019-10-16T17:43:05.586839','_links':{'self':{'href':'http://127.0.0.1:9090/api/seeds/4'},'seeds':{'href':'http://127.0.0.1:9090/api/seeds'}}},{'id':5,'name':'seedFive','percentage':0.58,'created':'2019-10-16T17:43:27.943723','_links':{'self':{'href':'http://127.0.0.1:9090/api/seeds/5'},'seeds':{'href':'http://127.0.0.1:9090/api/seeds'}}}]}}";
+    private final String DATA_EXAMPLE = "{}";
 }
