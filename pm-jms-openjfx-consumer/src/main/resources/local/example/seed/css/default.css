@@ -1,0 +1,15 @@
+VBox {
+    -fx-alignment: center;
+    -fx-padding: 30px;
+    -fx-background-color: aliceblue;
+}
+
+Label {
+    -fx-padding: 10px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 20px;
+}
+
+Button {
+    -fx-padding: 10px;
+}
