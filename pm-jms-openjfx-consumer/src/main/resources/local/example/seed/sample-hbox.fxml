@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.HBox?>
+
+<HBox xmlns="http://javafx.com/javafx/8.0.171" 
+      xmlns:fx="http://javafx.com/fxml/1" 
+      stylesheets="@css/default.css"
+      fx:controller="local.example.seed.controller.SampleHboxController">
+    <children>
+        <Label text="sample view"/>
+        <Button fx:id="backToParent" 
+            text="back to parent" 
+            onAction="#backToParent"/>
+    </children>
+</HBox>
