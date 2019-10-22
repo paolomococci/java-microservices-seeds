@@ -4,6 +4,12 @@ VBox {
     -fx-background-color: aliceblue;
 }
 
+HBox {
+    -fx-alignment: center;
+    -fx-padding: 20px;
+    -fx-background-color: bisque;
+}
+
 Label {
     -fx-padding: 10px;
     -fx-border-insets: 5px;
