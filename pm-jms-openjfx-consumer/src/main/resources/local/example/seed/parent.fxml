@@ -13,5 +13,9 @@
       <Button fx:id="parentButton" 
               text="switch to children view" 
               onAction="#switchToChildren"/>
+      <Label text="go to sample hbox view"/>
+      <Button fx:id="sampletButton" 
+              text="switch to sample view" 
+              onAction="#switchToSampleHbox"/>
    </children>
 </VBox>
