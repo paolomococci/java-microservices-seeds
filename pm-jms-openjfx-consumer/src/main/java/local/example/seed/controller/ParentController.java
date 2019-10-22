@@ -29,4 +29,10 @@ public class ParentController {
             throws IOException {
         App.setRoot("children");
     }
+
+    @FXML
+    private void switchToSampleHbox() 
+            throws IOException {
+        App.setRoot("sample-hbox");
+    }
 }
