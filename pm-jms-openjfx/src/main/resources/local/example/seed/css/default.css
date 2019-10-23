@@ -1,0 +1,9 @@
+BorderPane {
+    -fx-alignment: center;
+    -fx-padding: 5px;
+    -fx-background-color: white;
+}
+
+MenuBar {
+    -fx-alignment: center;
+}
