@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1"
+            stylesheets="@../css/default.css"
+            fx:controller="local.example.seed.controller.RootController">
+    <top>
+        <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="file">
+            <items>
+              <MenuItem mnemonicParsing="false" text="new"/>
+              <MenuItem mnemonicParsing="false" text="open"/>
+              <MenuItem mnemonicParsing="false" text="save"/>
+              <MenuItem mnemonicParsing="false" text="save as.."/>
+              <MenuItem mnemonicParsing="false" text="quit"/>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="edit">
+            <items>
+              <MenuItem mnemonicParsing="false" text="copy"/>
+              <MenuItem mnemonicParsing="false" text="cut"/>
+              <MenuItem mnemonicParsing="false" text="delete"/>
+              <MenuItem mnemonicParsing="false" text="select all"/>
+              <MenuItem mnemonicParsing="false" text="find"/>
+              <MenuItem mnemonicParsing="false" text="replace"/>
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="help">
+            <items>
+              <MenuItem mnemonicParsing="false" text="project site"/>
+              <MenuItem mnemonicParsing="false" text="about"/>
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+    </top>
+</BorderPane>
