@@ -10,7 +10,7 @@
 <AnchorPane id="seedView" 
             xmlns="http://javafx.com/javafx/11.0.1" 
             xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@../css/seed-overview.css"
+            stylesheets="@../css/seed-view.css"
             fx:controller="local.example.seed.controller.SeedViewController">
     <children>
     </children>
