@@ -18,15 +18,58 @@
 
 package local.example.seed.controller;
 
-import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.Initializable;
+import javafx.fxml.FXML;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import local.example.seed.App;
+import local.example.seed.model.Seed;
 
-public class SeedOverviewController 
-        implements Initializable {
+public class SeedViewController {
+    
+    private App app;
+    
+    @FXML
+    private TableView<Seed> seedTableView;
+    
+    @FXML
+    private TableColumn<Seed, Long> idColumn;
+    
+    @FXML
+    private TableColumn<Seed, String> nameColumn;
+    
+    @FXML
+    private TableColumn<Seed, Double> percentageColumn;
+    
+    @FXML
+    private Label idLabel;
+    
+    @FXML
+    private Label nameLabel;
+    
+    @FXML
+    private Label percentageLabel;
+    
+    @FXML
+    private Label createdLabel;
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+    public SeedViewController() {}
+    
+    @FXML
+    private void initialize() {
+        this.idColumn.setCellValueFactory(cellValue -> {
+            return cellValue.getValue().getId().asObject();
+        });
+        this.nameColumn.setCellValueFactory(cellValue -> {
+            return cellValue.getValue().getName();
+        });
+        this.percentageColumn.setCellValueFactory(cellValue -> {
+            return cellValue.getValue().getPercentage().asObject();
+        });
+    }
+    
+    public void setApp(App app) {
+        this.app = app;
+        this.seedTableView.setItems(app.getSeedData());
     }
 }
