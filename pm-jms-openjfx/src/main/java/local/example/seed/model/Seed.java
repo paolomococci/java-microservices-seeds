@@ -24,6 +24,9 @@ import java.util.Objects;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 public class Seed 
@@ -57,6 +60,17 @@ public class Seed
         this.id = id;
         this.name = name;
         this.percentage = null;
+        this.created = null;
+    }
+
+    public Seed(
+            Long id, 
+            String name, 
+            Double percentage
+    ) {
+        this.id = new SimpleLongProperty(id);
+        this.name = new SimpleStringProperty(name);
+        this.percentage = new SimpleDoubleProperty(percentage);
         this.created = null;
     }
 
