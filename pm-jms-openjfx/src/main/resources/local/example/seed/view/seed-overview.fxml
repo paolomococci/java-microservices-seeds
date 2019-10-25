@@ -7,10 +7,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="seedOverview" 
-            prefHeight="400.0" 
-            prefWidth="600.0" 
-            xmlns:fx="http://javafx.com/fxml/1" 
+<AnchorPane id="seedView" 
+            xmlns="http://javafx.com/javafx/11.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1"
             stylesheets="@../css/seed-overview.css"
-            fx:controller="local.example.seed.controller.SeedOverviewController">
+            fx:controller="local.example.seed.controller.SeedViewController">
+    <children>
+    </children>
 </AnchorPane>
