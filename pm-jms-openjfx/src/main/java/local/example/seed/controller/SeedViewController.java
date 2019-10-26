@@ -24,6 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import local.example.seed.App;
 import local.example.seed.model.Seed;
+import local.example.seed.view.NoSelectionAlertView;
 
 public class SeedViewController {
     
@@ -66,6 +67,15 @@ public class SeedViewController {
         this.percentageColumn.setCellValueFactory(cellValue -> {
             return cellValue.getValue().getPercentage().asObject();
         });
+    }
+    
+    public void deleteSeedSelected() {
+        int selected = this.seedTableView.getSelectionModel().getSelectedIndex();
+        if (selected != -1) {
+            this.seedTableView.getItems().remove(selected);
+        } else {
+            NoSelectionAlertView.showAlert(app);
+        }
     }
     
     public void setApp(App app) {
