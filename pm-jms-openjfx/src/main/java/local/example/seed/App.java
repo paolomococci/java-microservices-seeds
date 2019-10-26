@@ -15,9 +15,11 @@
  * limitations under the License.
  *
  */
+
 package local.example.seed;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -29,6 +31,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import local.example.seed.controller.SeedViewController;
 import local.example.seed.model.Seed;
+import local.example.seed.view.ExceptionAlertView;
 
 /**
  * openjfx model-view-controller
@@ -71,7 +74,11 @@ public class App
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
         }
     }
 
@@ -87,7 +94,11 @@ public class App
                     seedViewController = seedViewLoader.getController();
             seedViewController.setApp(this);
         } catch (IOException e) {
-            System.err.println(e.getMessage());
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
         }
     }
 
