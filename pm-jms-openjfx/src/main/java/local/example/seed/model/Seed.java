@@ -28,6 +28,7 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleLongProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
+import local.example.seed.util.DateUtil;
 
 public class Seed 
         implements Serializable {
@@ -99,6 +100,13 @@ public class Seed
     public LongProperty getId() {
         return id;
     }
+    
+    public String getIdValue() {
+        if (this.id != null) {
+            return this.id.toString();
+        }
+        return "";
+    }
 
     public void setId(LongProperty id) {
         this.id = id;
@@ -106,6 +114,13 @@ public class Seed
 
     public StringProperty getName() {
         return name;
+    }
+    
+    public String getNameValue() {
+        if (this.name != null) {
+            return this.name.get();
+        }
+        return "";
     }
 
     public void setName(StringProperty name) {
@@ -115,6 +130,13 @@ public class Seed
     public DoubleProperty getPercentage() {
         return percentage;
     }
+    
+    public String getPercentageValue() {
+        if (this.percentage != null) {
+            return this.percentage.toString();
+        }
+        return "";
+    }
 
     public void setPercentage(DoubleProperty percentage) {
         this.percentage = percentage;
@@ -122,6 +144,13 @@ public class Seed
 
     public ObjectProperty<LocalDateTime> getCreated() {
         return created;
+    }
+    
+    public String getCreatedValue() {
+        if (true) {
+            return DateUtil.format(this.created.get());
+        }
+        return "";
     }
 
     public void setCreated(ObjectProperty<LocalDateTime> created) {
