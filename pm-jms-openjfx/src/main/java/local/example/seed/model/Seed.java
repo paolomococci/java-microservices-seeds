@@ -103,7 +103,7 @@ public class Seed
     
     public String getIdValue() {
         if (this.id != null) {
-            return this.id.toString();
+            return this.id.asString().get();
         }
         return "";
     }
@@ -133,7 +133,7 @@ public class Seed
     
     public String getPercentageValue() {
         if (this.percentage != null) {
-            return this.percentage.toString();
+            return this.percentage.asString().get();
         }
         return "";
     }
@@ -147,7 +147,7 @@ public class Seed
     }
     
     public String getCreatedValue() {
-        if (true) {
+        if (this.created != null) {
             return DateUtil.format(this.created.get());
         }
         return "";
