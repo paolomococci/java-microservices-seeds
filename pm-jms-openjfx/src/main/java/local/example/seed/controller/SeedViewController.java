@@ -89,6 +89,7 @@ public class SeedViewController {
         }
     }
     
+    @FXML
     public void deleteSeedSelected() {
         int selected = this.seedTableView.getSelectionModel().getSelectedIndex();
         if (selected != -1) {
