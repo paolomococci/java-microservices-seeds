@@ -67,6 +67,26 @@ public class SeedViewController {
         this.percentageColumn.setCellValueFactory(cellValue -> {
             return cellValue.getValue().getPercentage().asObject();
         });
+        this.showSeedDetails(null);
+        this.seedTableView
+                .getSelectionModel()
+                .selectedItemProperty()
+                .addListener((observable, old, updated) -> 
+                        this.showSeedDetails(updated));
+    }
+    
+    private void showSeedDetails(Seed seed) {
+        if (seed != null) {
+            this.idLabel.setText(seed.getIdValue());
+            this.nameLabel.setText(seed.getNameValue());
+            this.percentageLabel.setText(seed.getPercentageValue());
+            this.createdLabel.setText(seed.getCreatedValue());
+        } else {
+            this.idLabel.setText("");
+            this.nameLabel.setText("");
+            this.percentageLabel.setText("");
+            this.createdLabel.setText("");
+        }
     }
     
     public void deleteSeedSelected() {
