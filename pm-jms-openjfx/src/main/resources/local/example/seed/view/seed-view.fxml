@@ -67,7 +67,7 @@
                                 <Label text="created" GridPane.rowIndex="3" />
                                 <Label fx:id="idLabel" text="" 
                                        GridPane.columnIndex="1" />
-                                <Label fx:id="nsmeLabel" text="" 
+                                <Label fx:id="nameLabel" text="" 
                                        GridPane.columnIndex="1" 
                                        GridPane.rowIndex="1" />
                                 <Label fx:id="percentageLabel" text="" 
@@ -85,7 +85,9 @@
                             <buttons>
                                 <Button mnemonicParsing="false" text="add" />
                                 <Button mnemonicParsing="false" text="edit" />
-                                <Button mnemonicParsing="false" onAction="#deleteSeedSelected" text="delete" />
+                                <Button mnemonicParsing="false" 
+                                        onAction="#deleteSeedSelected" 
+                                        text="delete" />
                             </buttons>
                         </ButtonBar>
                     </children>
