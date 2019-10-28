@@ -20,12 +20,14 @@ package local.example.seed.model;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.LongProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleLongProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import local.example.seed.util.DateUtil;
@@ -112,6 +114,10 @@ public class Seed
         this.id = id;
     }
 
+    public void setIdValue(String id) {
+        this.id = new SimpleLongProperty(Long.parseLong(id));
+    }
+
     public StringProperty getName() {
         return name;
     }
@@ -125,6 +131,10 @@ public class Seed
 
     public void setName(StringProperty name) {
         this.name = name;
+    }
+
+    public void setNameValue(String name) {
+        this.name = new SimpleStringProperty(name);
     }
 
     public DoubleProperty getPercentage() {
@@ -142,6 +152,10 @@ public class Seed
         this.percentage = percentage;
     }
 
+    public void setPercentageValue(String percentage) {
+        this.percentage = new SimpleDoubleProperty(Double.parseDouble(percentage));
+    }
+
     public ObjectProperty<LocalDateTime> getCreated() {
         return created;
     }
@@ -155,6 +169,18 @@ public class Seed
 
     public void setCreated(ObjectProperty<LocalDateTime> created) {
         this.created = created;
+    }
+
+    public void setCreatedValue(String created) {
+        this.created = new SimpleObjectProperty(DateUtil.parse(created));
+    }
+
+    public void setCreatedValueAlternative(String created) {
+        this.created = new SimpleObjectProperty<>(
+                LocalDateTime.parse(
+                        created, 
+                        DateTimeFormatter.ofPattern("dd/mm/yyyy")
+                ));
     }
 
     @Override
