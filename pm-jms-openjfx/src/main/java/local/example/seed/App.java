@@ -28,7 +28,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
+import local.example.seed.controller.SeedEditorController;
 import local.example.seed.controller.SeedViewController;
 import local.example.seed.model.Seed;
 import local.example.seed.view.ExceptionAlertView;
@@ -45,15 +47,7 @@ public class App
     private final ObservableList<Seed> 
             seedValues = FXCollections.observableArrayList();
 
-    public App() {
-        seedValues.add(new Seed(1L, "seedOne", 0.25));
-        seedValues.add(new Seed(2L, "seedTwo", 0.15));
-        seedValues.add(new Seed(3L, "seedThree", 0.30));
-        seedValues.add(new Seed(4L, "seedFour", 0.10));
-        seedValues.add(new Seed(5L, "seedFive", 0.45));
-        seedValues.add(new Seed(6L, "seedSix", 0.40));
-        seedValues.add(new Seed(7L, "seedSeven", 0.75));
-    }
+    public App() {}
 
     @Override
     public void start(Stage stage)
@@ -94,15 +88,44 @@ public class App
                     seedViewController = seedViewLoader.getController();
             seedViewController.setApp(this);
         } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+            ExceptionAlertView 
+                    alertDialogView = new ExceptionAlertView(
                     e.getMessage(),
                     Arrays.toString(e.getStackTrace())
             );
             alertDialogView.showErrorMessage();
         }
     }
+    
+    public boolean initSeedEditView(Seed seed) {
+        FXMLLoader seedEditorViewLoader = new FXMLLoader();
+        seedEditorViewLoader.setLocation(App.class.getResource("view/seed-editor.fxml"));
+        AnchorPane seedEditorAnchorPane;
+        try {
+            seedEditorAnchorPane = (AnchorPane) seedEditorViewLoader.load();
+            Stage seedEditorStage = new Stage();
+            seedEditorStage.setTitle("seed editor");
+            seedEditorStage.initModality(Modality.WINDOW_MODAL);
+            seedEditorStage.initOwner(this.stage);
+            Scene seedEditorScene = new Scene(seedEditorAnchorPane);
+            seedEditorStage.setScene(seedEditorScene);
+            SeedEditorController seedEditController = seedEditorViewLoader.getController();
+            seedEditController.setEditorStage(seedEditorStage);
+            seedEditController.setSeed(seed);
+            seedEditorStage.showAndWait();
+            return seedEditController.isOnClicked();
+        } catch (IOException e) {
+            ExceptionAlertView 
+                    alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+            return false;
+        }
+    }
 
-    public Stage getPrimaryStage() {
+    public Stage getStage() {
         return stage;
     }
 
