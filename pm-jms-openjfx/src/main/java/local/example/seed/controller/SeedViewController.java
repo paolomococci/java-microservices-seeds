@@ -80,20 +80,41 @@ public class SeedViewController {
             this.idLabel.setText(seed.getIdValue());
             this.nameLabel.setText(seed.getNameValue());
             this.percentageLabel.setText(seed.getPercentageValue());
-            this.createdLabel.setText(seed.getCreatedValue());
         } else {
             this.idLabel.setText("");
             this.nameLabel.setText("");
             this.percentageLabel.setText("");
-            this.createdLabel.setText("");
         }
     }
     
     @FXML
-    public void deleteSeedSelected() {
-        int selected = this.seedTableView.getSelectionModel().getSelectedIndex();
-        if (selected != -1) {
-            this.seedTableView.getItems().remove(selected);
+    public void createNewSeed() {
+        Seed newSeed = new Seed();
+        boolean ok = app.initSeedEditView(newSeed);
+        if(ok) {
+            app.getSeedData().add(newSeed);
+        }
+    }
+    
+    @FXML
+    public void editSelectedSeed() {
+        Seed selectedSeed = this.seedTableView.getSelectionModel().getSelectedItem();
+        if (selectedSeed != null) {
+            boolean ok = app.initSeedEditView(selectedSeed);
+            if (ok) {
+                this.showSeedDetails(selectedSeed);
+                this.seedTableView.refresh();
+            }
+        } else {
+            NoSelectionAlertView.showAlert(app);
+        }
+    }
+    
+    @FXML
+    public void deleteSelectedSeed() {
+        int selectedSeedIndex = this.seedTableView.getSelectionModel().getSelectedIndex();
+        if (selectedSeedIndex != -1) {
+            this.seedTableView.getItems().remove(selectedSeedIndex);
         } else {
             NoSelectionAlertView.showAlert(app);
         }
