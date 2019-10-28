@@ -64,7 +64,6 @@
                                 <Label text="id" />
                                 <Label text="name" GridPane.rowIndex="1" />
                                 <Label text="percentage" GridPane.rowIndex="2" />
-                                <Label text="created" GridPane.rowIndex="3" />
                                 <Label fx:id="idLabel" text="" 
                                        GridPane.columnIndex="1" />
                                 <Label fx:id="nameLabel" text="" 
@@ -73,9 +72,6 @@
                                 <Label fx:id="percentageLabel" text="" 
                                        GridPane.columnIndex="1" 
                                        GridPane.rowIndex="2" />
-                                <Label fx:id="createdLabel" text="" 
-                                       GridPane.columnIndex="1" 
-                                       GridPane.rowIndex="3" />
                             </children>
                         </GridPane>
                         <ButtonBar layoutX="50.0" 
@@ -83,10 +79,14 @@
                                    AnchorPane.bottomAnchor="10.0" 
                                    AnchorPane.rightAnchor="10.0">
                             <buttons>
-                                <Button mnemonicParsing="false" text="add" />
-                                <Button mnemonicParsing="false" text="edit" />
                                 <Button mnemonicParsing="false" 
-                                        onAction="#deleteSeedSelected" 
+                                        onAction="#createNewSeed"
+                                        text="add" />
+                                <Button mnemonicParsing="false" 
+                                        onAction="#editSelectedSeed"
+                                        text="edit" />
+                                <Button mnemonicParsing="false" 
+                                        onAction="#deleteSelectedSeed" 
                                         text="delete" />
                             </buttons>
                         </ButtonBar>
