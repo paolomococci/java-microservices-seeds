@@ -26,7 +26,7 @@ public class NoSelectionAlertView {
     private static final Alert ALERT = new Alert(Alert.AlertType.WARNING);
 
     public static void showAlert(App app) {
-        ALERT.initOwner(app.getPrimaryStage());
+        ALERT.initOwner(app.getStage());
         ALERT.setTitle("no selection warning alert");
         ALERT.setHeaderText("warning no seed selected");
         ALERT.setContentText("please select a seed in the table view");
