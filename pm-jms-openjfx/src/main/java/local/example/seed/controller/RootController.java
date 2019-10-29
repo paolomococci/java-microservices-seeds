@@ -18,7 +18,25 @@
 
 package local.example.seed.controller;
 
+import javafx.fxml.FXML;
+import local.example.seed.App;
+import local.example.seed.view.MenuItemAboutView;
+
 public class RootController {
 
+    private App app;
+
+    public void setApp(App app) {
+        this.app = app;
+    }
     
+    @FXML
+    private void menuItemQuit() {
+        System.exit(0);
+    }
+    
+    @FXML
+    private void menuItemAbout() {
+        MenuItemAboutView.showAlert();
+    }
 }
