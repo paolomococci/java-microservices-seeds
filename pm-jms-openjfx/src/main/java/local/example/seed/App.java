@@ -30,6 +30,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import local.example.seed.controller.RootController;
 import local.example.seed.controller.SeedEditorController;
 import local.example.seed.controller.SeedViewController;
 import local.example.seed.model.Seed;
@@ -66,6 +67,8 @@ public class App
             borderPane = (BorderPane) rootLoader.load();
             scene = new Scene(borderPane, 640, 380);
             stage.setScene(scene);
+            RootController rootController = rootLoader.getController();
+            rootController.setApp(this);
             stage.show();
         } catch (IOException e) {
             ExceptionAlertView alertDialogView = new ExceptionAlertView(
