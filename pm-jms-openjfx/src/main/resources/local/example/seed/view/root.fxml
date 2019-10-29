@@ -12,21 +12,18 @@
     <top>
         <MenuBar>
         <menus>
-          <Menu mnemonicParsing="false" text="file">
+          <Menu mnemonicParsing="false" text="application">
             <items>
-              <MenuItem mnemonicParsing="false" text="quit"/>
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="new"/>
-              <MenuItem mnemonicParsing="false" text="edit"/>
-              <MenuItem mnemonicParsing="false" text="delete"/>
+              <MenuItem mnemonicParsing="false" 
+                        onAction="#menuItemQuit" 
+                        text="quit"/>
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="help">
             <items>
-              <MenuItem mnemonicParsing="false" text="about"/>
+              <MenuItem mnemonicParsing="false" 
+                        onAction="#menuItemAbout" 
+                        text="about"/>
             </items>
           </Menu>
         </menus>
