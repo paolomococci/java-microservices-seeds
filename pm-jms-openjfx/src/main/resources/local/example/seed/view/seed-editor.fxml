@@ -11,7 +11,8 @@
             prefHeight="350.0" 
             prefWidth="400.0"  
             xmlns:fx="http://javafx.com/fxml/1" 
-            stylesheets="@../css/seed-editor.css"
+            styleClass="mainSeedEditorClass" 
+            stylesheets="@../style/seed-editor.css"
             fx:controller="local.example.seed.controller.SeedEditorController">
     <children>
         <Label layoutX="100.0" 
