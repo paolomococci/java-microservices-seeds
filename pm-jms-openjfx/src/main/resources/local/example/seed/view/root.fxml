@@ -7,7 +7,8 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" 
             xmlns:fx="http://javafx.com/fxml/1"
-            stylesheets="@../css/default.css"
+            styleClass="mainRootClass" 
+            stylesheets="@../style/root.css"
             fx:controller="local.example.seed.controller.RootController">
     <top>
         <MenuBar>
