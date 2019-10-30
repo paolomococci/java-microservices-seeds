@@ -1,9 +1,9 @@
-BorderPane {
+.mainRootClass BorderPane {
     -fx-alignment: center;
     -fx-padding: 5px;
     -fx-background-color: white;
 }
 
-MenuBar {
+.mainRootClass MenuBar {
     -fx-alignment: center;
 }
