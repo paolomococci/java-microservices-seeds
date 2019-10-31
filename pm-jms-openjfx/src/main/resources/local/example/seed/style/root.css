@@ -1,9 +1,17 @@
-.mainRootClass BorderPane {
+.main-root {
     -fx-alignment: center;
     -fx-padding: 5px;
     -fx-background-color: white;
 }
 
-.mainRootClass MenuBar {
+.menu-bar {
     -fx-alignment: center;
+}
+
+.menu {
+    -fx-font-size: 1.2em;
+}
+
+.menu-item {
+    -fx-font-size: 1.0em;
 }
