@@ -7,27 +7,32 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1" 
             xmlns:fx="http://javafx.com/fxml/1"
-            styleClass="mainRootClass" 
+            styleClass="main-root" 
             stylesheets="@../style/root.css"
             fx:controller="local.example.seed.controller.RootController">
     <top>
-        <MenuBar>
-        <menus>
-          <Menu mnemonicParsing="false" text="application">
-            <items>
-              <MenuItem mnemonicParsing="false" 
-                        onAction="#menuItemQuit" 
-                        text="quit"/>
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="help">
-            <items>
-              <MenuItem mnemonicParsing="false" 
-                        onAction="#menuItemAbout" 
-                        text="about"/>
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+        <MenuBar styleClass="menu-bar">
+            <menus>
+                <Menu mnemonicParsing="false" 
+                      styleClass="menu" 
+                      text="application">
+                    <items>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemQuit" 
+                                  text="quit"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" 
+                      text="help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemAbout" 
+                                  text="about"/>
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
     </top>
 </BorderPane>
