@@ -11,12 +11,13 @@
             prefHeight="350.0" 
             prefWidth="400.0"  
             xmlns:fx="http://javafx.com/fxml/1" 
-            styleClass="mainSeedEditorClass" 
+            styleClass="main-seed-editor" 
             stylesheets="@../style/seed-editor.css"
             fx:controller="local.example.seed.controller.SeedEditorController">
     <children>
         <Label layoutX="100.0" 
                layoutY="50.0" 
+               styleClass="header-label" 
                text="seed details" 
                AnchorPane.leftAnchor="5.0" 
                AnchorPane.topAnchor="5.0" />
@@ -48,17 +49,22 @@
                                 vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
-                <Label text="id" />
-                <Label text="name" GridPane.rowIndex="1" />
-                <Label text="percentage" GridPane.rowIndex="2" />
-                <TextField fx:id="idField" text="" 
-                       GridPane.columnIndex="1" />
-                <TextField fx:id="nameField" 
-                       GridPane.columnIndex="1" 
+                <Label text="id"  
+                       styleClass="field-label" />
+                <Label text="name"  
+                       styleClass="field-label" 
                        GridPane.rowIndex="1" />
-                <TextField fx:id="percentageField" 
-                       GridPane.columnIndex="1" 
+                <Label text="percentage" 
+                       styleClass="field-label" 
                        GridPane.rowIndex="2" />
+                <TextField fx:id="idField" text="" 
+                           GridPane.columnIndex="1" />
+                <TextField fx:id="nameField" 
+                           GridPane.columnIndex="1" 
+                           GridPane.rowIndex="1" />
+                <TextField fx:id="percentageField" 
+                           GridPane.columnIndex="1" 
+                           GridPane.rowIndex="2" />
             </children>
         </GridPane>
         <ButtonBar layoutX="50.0" 
@@ -67,9 +73,11 @@
                    AnchorPane.rightAnchor="10.0">
             <buttons>
                 <Button mnemonicParsing="false" 
+                        styleClass="button" 
                         onAction="#ok"
                         text="ok" />
                 <Button mnemonicParsing="false" 
+                        styleClass="button" 
                         onAction="#cancel"
                         text="cancel" />
             </buttons>
