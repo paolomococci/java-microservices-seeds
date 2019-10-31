@@ -1,3 +1,19 @@
-.mainSeedEditorClass {
+.main-seed-editor {
 
+}
+
+.header-label {
+    -fx-font-size: 1.2em;
+    -fx-font-style: italic;
+    -fx-border: 5px;
+}
+
+.field-label {
+    -fx-font-size: 0.9em;
+    -fx-font: sans-serif;
+    -fx-border: 2px;
+}
+
+.button {
+    -fx-font-size: 1.1em;
 }
