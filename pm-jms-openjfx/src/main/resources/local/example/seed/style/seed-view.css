@@ -10,14 +10,12 @@
 
 .field-label {
     -fx-font-size: 0.9em;
-    -fx-font: sans-serif;
     -fx-border: 2px;
 }
 
 .data-label {
     -fx-font-size: 1.0em;
     -fx-font-weight: bold;
-    -fx-font: sans-serif;
     -fx-border: 2px;
 }
 
@@ -28,6 +26,5 @@
 .table-column {
     -fx-font-size: 1.2em;
     -fx-font-weight: normal;
-    -fx-font: sans;
     -fx-border: 2px;
 }
