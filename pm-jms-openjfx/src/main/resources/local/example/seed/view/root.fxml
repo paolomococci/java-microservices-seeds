@@ -31,6 +31,24 @@
                                   styleClass="menu-item" 
                                   onAction="#menuItemPieChart" 
                                   text="pie chart"/>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item"
+                                  text="bubble chart"/>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item"
+                                  text="scatter chart"/>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item"
+                                  text="bar chart"/>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item"
+                                  text="stacked bar chart"/>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item"
+                                  text="line chart"/>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item"
+                                  text="area chart"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" 
