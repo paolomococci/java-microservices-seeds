@@ -18,7 +18,30 @@
 
 package local.example.seed.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.scene.chart.PieChart;
+
 public class PieChartViewController {
     
+    private ObservableList<PieChart.Data> 
+            pieChartObservableList;
+
+    public PieChartViewController() {
+        this.pieChartObservableList = FXCollections.observableArrayList(
+                
+        );
+    }
     
+    @FXML
+    private final PieChart pieChart = new PieChart(pieChartObservableList);
+
+    public PieChart getPieChart() {
+        return pieChart;
+    }
+
+    public ObservableList<PieChart.Data> getPieChartObservableList() {
+        return pieChartObservableList;
+    }
 }
