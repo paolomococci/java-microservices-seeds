@@ -24,6 +24,16 @@
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" 
+                      styleClass="menu" 
+                      text="charts">
+                    <items>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemPieChart" 
+                                  text="pie chart"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" 
                       text="help">
                     <items>
                         <MenuItem mnemonicParsing="false" 
