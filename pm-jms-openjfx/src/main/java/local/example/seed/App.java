@@ -127,6 +127,10 @@ public class App
             return false;
         }
     }
+    
+    public void initPieChartView() {
+        // TODO
+    }
 
     public Stage getStage() {
         return stage;
