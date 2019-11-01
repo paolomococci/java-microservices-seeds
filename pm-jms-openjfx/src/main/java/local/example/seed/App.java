@@ -30,6 +30,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import local.example.seed.controller.PieChartViewController;
 import local.example.seed.controller.RootController;
 import local.example.seed.controller.SeedEditorController;
 import local.example.seed.controller.SeedViewController;
@@ -129,7 +130,28 @@ public class App
     }
     
     public void initPieChartView() {
-        // TODO
+        FXMLLoader pieChartViewLoader = new FXMLLoader();
+        pieChartViewLoader.setLocation(App.class.getResource("view/pie-chart-view.fxml"));
+        AnchorPane pieChartAnchorPane;
+        try {
+            pieChartAnchorPane = (AnchorPane) pieChartViewLoader.load();
+            Stage pieChartStage = new Stage();
+            pieChartStage.setTitle("wine pie chart");
+            pieChartStage.initModality(Modality.WINDOW_MODAL);
+            pieChartStage.initOwner(this.stage);
+            Scene pieChartScene = new Scene(pieChartAnchorPane);
+            pieChartStage.setScene(pieChartScene);
+            PieChartViewController pieChartViewController = pieChartViewLoader.getController();
+            pieChartViewController.getPieChart();
+            pieChartStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView 
+                    alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
     }
 
     public Stage getStage() {
