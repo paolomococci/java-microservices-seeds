@@ -1,17 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.layout.AnchorPane?>
+
 
 <AnchorPane id="AnchorPane" 
             prefHeight="400.0" 
             prefWidth="600.0" 
-            xmlns:fx="http://javafx.com/fxml/1" 
             styleClass="main-pie-chart" 
-            stylesheets="@../style/pie-chart-view.css"
+            stylesheets="@../style/pie-chart-view.css" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            xmlns="http://javafx.com/javafx/11.0.1" 
             fx:controller="local.example.seed.controller.PieChartViewController">
+   <children>
+      <PieChart />
+   </children>
 </AnchorPane>
