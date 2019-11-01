@@ -36,6 +36,11 @@ public class RootController {
     }
     
     @FXML
+    private void menuItemPieChart() {
+        
+    }
+    
+    @FXML
     private void menuItemAbout() {
         MenuItemAboutView.showAlert();
     }
