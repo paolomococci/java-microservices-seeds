@@ -37,7 +37,7 @@ public class RootController {
     
     @FXML
     private void menuItemPieChart() {
-        
+        app.initPieChartView();
     }
     
     @FXML
