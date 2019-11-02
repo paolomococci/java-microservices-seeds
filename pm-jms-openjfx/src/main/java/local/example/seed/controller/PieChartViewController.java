@@ -30,7 +30,11 @@ public class PieChartViewController {
 
     public PieChartViewController() {
         this.pieChartObservableList = FXCollections.observableArrayList(
-                
+                new PieChart.Data("sagrantino", 15),
+                new PieChart.Data("colorino", 10),
+                new PieChart.Data("cigliegiolo", 15),
+                new PieChart.Data("sangiovese", 25),
+                new PieChart.Data("trebbiano", 35)
         );
     }
     
