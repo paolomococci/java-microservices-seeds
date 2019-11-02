@@ -30,6 +30,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import local.example.seed.controller.LineChartViewController;
 import local.example.seed.controller.PieChartViewController;
 import local.example.seed.controller.RootController;
 import local.example.seed.controller.SeedEditorController;
@@ -46,10 +47,10 @@ public class App
     private static Scene scene;
     private Stage stage;
     private BorderPane borderPane;
-    private final ObservableList<Seed> 
-            seedValues = FXCollections.observableArrayList();
+    private final ObservableList<Seed> seedValues = FXCollections.observableArrayList();
 
-    public App() {}
+    public App() {
+    }
 
     @Override
     public void start(Stage stage)
@@ -88,19 +89,17 @@ public class App
         try {
             seedAnchorPane = (AnchorPane) seedViewLoader.load();
             borderPane.setCenter(seedAnchorPane);
-            SeedViewController 
-                    seedViewController = seedViewLoader.getController();
+            SeedViewController seedViewController = seedViewLoader.getController();
             seedViewController.setApp(this);
         } catch (IOException e) {
-            ExceptionAlertView 
-                    alertDialogView = new ExceptionAlertView(
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
                     e.getMessage(),
                     Arrays.toString(e.getStackTrace())
             );
             alertDialogView.showErrorMessage();
         }
     }
-    
+
     public boolean initSeedEditView(Seed seed) {
         FXMLLoader seedEditorViewLoader = new FXMLLoader();
         seedEditorViewLoader.setLocation(App.class.getResource("view/seed-editor.fxml"));
@@ -119,8 +118,7 @@ public class App
             seedEditorStage.showAndWait();
             return seedEditController.isOnClicked();
         } catch (IOException e) {
-            ExceptionAlertView 
-                    alertDialogView = new ExceptionAlertView(
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
                     e.getMessage(),
                     Arrays.toString(e.getStackTrace())
             );
@@ -128,7 +126,7 @@ public class App
             return false;
         }
     }
-    
+
     public void initPieChartView() {
         FXMLLoader pieChartViewLoader = new FXMLLoader();
         pieChartViewLoader.setLocation(App.class.getResource("view/pie-chart-view.fxml"));
@@ -136,7 +134,7 @@ public class App
         try {
             pieChartAnchorPane = (AnchorPane) pieChartViewLoader.load();
             Stage pieChartStage = new Stage();
-            pieChartStage.setTitle("wine pie chart");
+            pieChartStage.setTitle("vine pie chart");
             pieChartStage.initModality(Modality.WINDOW_MODAL);
             pieChartStage.initOwner(this.stage);
             Scene pieChartScene = new Scene(pieChartAnchorPane);
@@ -145,8 +143,31 @@ public class App
             pieChartViewController.getPieChart();
             pieChartStage.show();
         } catch (IOException e) {
-            ExceptionAlertView 
-                    alertDialogView = new ExceptionAlertView(
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
+    }
+
+    public void initLineChartView() {
+        FXMLLoader lineChartViewLoader = new FXMLLoader();
+        lineChartViewLoader.setLocation(App.class.getResource("view/line-chart-view.fxml"));
+        AnchorPane lineChartAnchorPane;
+        try {
+            lineChartAnchorPane = (AnchorPane) lineChartViewLoader.load();
+            Stage lineChartStage = new Stage();
+            lineChartStage.setTitle("vine line chart");
+            lineChartStage.initModality(Modality.WINDOW_MODAL);
+            lineChartStage.initOwner(this.stage);
+            Scene lineChartScene = new Scene(lineChartAnchorPane);
+            lineChartStage.setScene(lineChartScene);
+            LineChartViewController lineChartViewController = lineChartViewLoader.getController();
+            //lineChartViewController.getLineChart();
+            lineChartStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
                     e.getMessage(),
                     Arrays.toString(e.getStackTrace())
             );
