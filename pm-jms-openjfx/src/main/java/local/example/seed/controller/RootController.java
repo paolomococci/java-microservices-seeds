@@ -41,6 +41,11 @@ public class RootController {
     }
     
     @FXML
+    private void menuItemLineChart() {
+        app.initLineChartView();
+    }
+    
+    @FXML
     private void menuItemAbout() {
         MenuItemAboutView.showAlert();
     }
