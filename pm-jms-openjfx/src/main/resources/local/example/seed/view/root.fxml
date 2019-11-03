@@ -32,7 +32,8 @@
                                   onAction="#menuItemPieChart" 
                                   text="pie chart"/>
                         <MenuItem mnemonicParsing="false" 
-                                  styleClass="menu-item"
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemBubbleChart" 
                                   text="bubble chart"/>
                         <MenuItem mnemonicParsing="false" 
                                   styleClass="menu-item"
