@@ -169,6 +169,28 @@ public class App
         }
     }
 
+    public void initAreaChartView() {
+        FXMLLoader areaChartViewLoader = new FXMLLoader();
+        areaChartViewLoader.setLocation(App.class.getResource("view/area-chart-view.fxml"));
+        AnchorPane areaChartAnchorPane;
+        try {
+            areaChartAnchorPane = (AnchorPane) areaChartViewLoader.load();
+            Stage areaChartStage = new Stage();
+            areaChartStage.setTitle("pseudo-random native vine area chart");
+            areaChartStage.initModality(Modality.WINDOW_MODAL);
+            areaChartStage.initOwner(this.stage);
+            Scene areaChartScene = new Scene(areaChartAnchorPane);
+            areaChartStage.setScene(areaChartScene);
+            areaChartStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
+    }
+
     public Stage getStage() {
         return stage;
     }
