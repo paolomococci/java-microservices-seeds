@@ -30,8 +30,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import local.example.seed.controller.LineChartViewController;
-import local.example.seed.controller.PieChartViewController;
 import local.example.seed.controller.RootController;
 import local.example.seed.controller.SeedEditorController;
 import local.example.seed.controller.SeedViewController;
@@ -134,13 +132,11 @@ public class App
         try {
             pieChartAnchorPane = (AnchorPane) pieChartViewLoader.load();
             Stage pieChartStage = new Stage();
-            pieChartStage.setTitle("vine pie chart");
+            pieChartStage.setTitle("red wine blend pie chart");
             pieChartStage.initModality(Modality.WINDOW_MODAL);
             pieChartStage.initOwner(this.stage);
             Scene pieChartScene = new Scene(pieChartAnchorPane);
             pieChartStage.setScene(pieChartScene);
-            PieChartViewController pieChartViewController = pieChartViewLoader.getController();
-            pieChartViewController.getPieChart();
             pieChartStage.show();
         } catch (IOException e) {
             ExceptionAlertView alertDialogView = new ExceptionAlertView(
@@ -158,13 +154,11 @@ public class App
         try {
             lineChartAnchorPane = (AnchorPane) lineChartViewLoader.load();
             Stage lineChartStage = new Stage();
-            lineChartStage.setTitle("vine line chart");
+            lineChartStage.setTitle("native vine line chart");
             lineChartStage.initModality(Modality.WINDOW_MODAL);
             lineChartStage.initOwner(this.stage);
             Scene lineChartScene = new Scene(lineChartAnchorPane);
             lineChartStage.setScene(lineChartScene);
-            LineChartViewController lineChartViewController = lineChartViewLoader.getController();
-            //lineChartViewController.getLineChart();
             lineChartStage.show();
         } catch (IOException e) {
             ExceptionAlertView alertDialogView = new ExceptionAlertView(
