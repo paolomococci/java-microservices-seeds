@@ -48,7 +48,8 @@
                                   onAction="#menuItemLineChart" 
                                   text="line chart"/>
                         <MenuItem mnemonicParsing="false" 
-                                  styleClass="menu-item"
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemAreaChart" 
                                   text="area chart"/>
                     </items>
                 </Menu>
