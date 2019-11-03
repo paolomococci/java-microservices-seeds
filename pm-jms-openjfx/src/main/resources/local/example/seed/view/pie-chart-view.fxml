@@ -1,17 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
 <AnchorPane id="AnchorPane" 
             prefHeight="400.0" 
             prefWidth="600.0" 
             styleClass="main-pie-chart" 
             stylesheets="@../style/pie-chart-view.css" 
-            xmlns:fx="http://javafx.com/fxml/1" 
             xmlns="http://javafx.com/javafx/11.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1" 
             fx:controller="local.example.seed.controller.PieChartViewController">
-   <children>
-      <PieChart />
-   </children>
+    <children>
+        <VBox id="main-vertical-box" 
+              maxHeight="-Infinity" 
+              maxWidth="-Infinity" 
+              minHeight="-Infinity" 
+              minWidth="-Infinity" 
+              prefHeight="400.0" 
+              prefWidth="600.0">
+            <children>
+                <PieChart fx:id="vineBlendPieChart" 
+                          title="fantasy typical red wine" />
+                <ButtonBar fx:id="buttonBar" 
+                           prefHeight="40.0" 
+                           prefWidth="200.0" 
+                           styleClass="button-bar">
+                    <buttons>
+                        <Button fx:id="loadData" 
+                                mnemonicParsing="false" 
+                                styleClass="load-button" 
+                                onAction="#loadRedWineBlendData"
+                                text="load data" />
+                    </buttons>
+                </ButtonBar>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>
