@@ -41,6 +41,11 @@ public class RootController {
     }
     
     @FXML
+    private void menuItemBubbleChart() {
+        app.initBubbleChartView();
+    }
+    
+    @FXML
     private void menuItemLineChart() {
         app.initLineChartView();
     }
