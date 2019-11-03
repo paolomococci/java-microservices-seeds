@@ -18,34 +18,25 @@
 
 package local.example.seed.controller;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 
 public class PieChartViewController {
     
-    private ObservableList<PieChart.Data> 
-            pieChartObservableList;
-
-    public PieChartViewController() {
-        this.pieChartObservableList = FXCollections.observableArrayList(
-                new PieChart.Data("sagrantino", 15),
-                new PieChart.Data("colorino", 10),
-                new PieChart.Data("cigliegiolo", 15),
-                new PieChart.Data("sangiovese", 25),
-                new PieChart.Data("trebbiano", 35)
-        );
-    }
+    @FXML
+    private PieChart vineBlendPieChart;
     
     @FXML
-    private final PieChart pieChart = new PieChart(pieChartObservableList);
-
-    public PieChart getPieChart() {
-        return pieChart;
-    }
-
-    public ObservableList<PieChart.Data> getPieChartObservableList() {
-        return pieChartObservableList;
+    private void initialize() {}
+    
+    @FXML
+    public void loadRedWineBlendData() {
+        this.vineBlendPieChart.getData().clear();
+        this.vineBlendPieChart.getData().addAll(
+                new PieChart.Data("sagrantino", 15.0),
+                new PieChart.Data("colorino", 10.0),
+                new PieChart.Data("cigligiolo", 15.0),
+                new PieChart.Data("sangiovese", 55.0)
+        );
     }
 }
