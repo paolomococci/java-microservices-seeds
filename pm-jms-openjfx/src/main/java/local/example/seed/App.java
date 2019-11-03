@@ -191,6 +191,28 @@ public class App
         }
     }
 
+    public void initBubbleChartView() {
+        FXMLLoader bubbleChartViewLoader = new FXMLLoader();
+        bubbleChartViewLoader.setLocation(App.class.getResource("view/bubble-chart-view.fxml"));
+        AnchorPane bubbleChartAnchorPane;
+        try {
+            bubbleChartAnchorPane = (AnchorPane) bubbleChartViewLoader.load();
+            Stage bubbleChartStage = new Stage();
+            bubbleChartStage.setTitle("pseudo-random native vine bubble chart");
+            bubbleChartStage.initModality(Modality.WINDOW_MODAL);
+            bubbleChartStage.initOwner(this.stage);
+            Scene bubbleChartScene = new Scene(bubbleChartAnchorPane);
+            bubbleChartStage.setScene(bubbleChartScene);
+            bubbleChartStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
+    }
+
     public Stage getStage() {
         return stage;
     }
