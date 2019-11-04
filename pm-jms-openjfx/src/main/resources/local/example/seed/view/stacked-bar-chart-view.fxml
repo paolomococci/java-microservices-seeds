@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane id="AnchorPane" 
+            prefHeight="400.0" 
+            prefWidth="600.0" 
+            styleClass="main-stacked-bar-chart" 
+            stylesheets="@../style/stacked-bar-chart-view.css"
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="local.example.seed.controller.StackedBarChartViewController">
+    <children>
+        <VBox id="main-vertical-box" 
+              maxHeight="-Infinity" 
+              maxWidth="-Infinity" 
+              minHeight="-Infinity" 
+              minWidth="-Infinity" 
+              prefHeight="400.0" 
+              prefWidth="600.0">
+            <children>
+                <ButtonBar fx:id="buttonBar" 
+                           prefHeight="40.0" 
+                           prefWidth="200.0" 
+                           styleClass="button-bar">
+                    <buttons>
+                        <Button fx:id="loadData" 
+                                mnemonicParsing="false" 
+                                styleClass="load-button"
+                                text="load data" />
+                    </buttons>
+                </ButtonBar>
+            </children>
+        </VBox>
+    </children>
+</AnchorPane>
