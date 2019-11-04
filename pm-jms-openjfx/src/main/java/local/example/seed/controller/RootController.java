@@ -56,6 +56,11 @@ public class RootController {
     }
     
     @FXML
+    private void menuItemStackedBarChart() {
+        app.initStackedBarChartView();
+    }
+    
+    @FXML
     private void menuItemLineChart() {
         app.initLineChartView();
     }
