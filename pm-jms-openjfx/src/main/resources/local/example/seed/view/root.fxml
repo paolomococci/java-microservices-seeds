@@ -40,7 +40,8 @@
                                   onAction="#menuItemScatterChart" 
                                   text="scatter chart"/>
                         <MenuItem mnemonicParsing="false" 
-                                  styleClass="menu-item"
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemBarChart" 
                                   text="bar chart"/>
                         <MenuItem mnemonicParsing="false" 
                                   styleClass="menu-item"
