@@ -257,6 +257,28 @@ public class App
         }
     }
 
+    public void initStackedBarChartView() {
+        FXMLLoader stackedBarChartViewLoader = new FXMLLoader();
+        stackedBarChartViewLoader.setLocation(App.class.getResource("view/stacked-bar-chart-view.fxml"));
+        AnchorPane stackedBarChartAnchorPane;
+        try {
+            stackedBarChartAnchorPane = (AnchorPane) stackedBarChartViewLoader.load();
+            Stage stackedBarChartStage = new Stage();
+            stackedBarChartStage.setTitle("pseudo-random native vine stacked bar chart");
+            stackedBarChartStage.initModality(Modality.WINDOW_MODAL);
+            stackedBarChartStage.initOwner(this.stage);
+            Scene stackedBarChartScene = new Scene(stackedBarChartAnchorPane);
+            stackedBarChartStage.setScene(stackedBarChartScene);
+            stackedBarChartStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
+    }
+
     public Stage getStage() {
         return stage;
     }
