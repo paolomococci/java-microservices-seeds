@@ -1,0 +1,12 @@
+.main-bar-chart {
+    -fx-background-color: #fff;
+}
+
+.chart {
+    -fx-padding: 5px;
+    -fx-background-color: #fef;
+}
+
+.button-bar {
+    -fx-padding: 10px;
+}
