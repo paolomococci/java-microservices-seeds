@@ -46,6 +46,11 @@ public class RootController {
     }
     
     @FXML
+    private void menuItemScatterChart() {
+        app.initScatterChartView();
+    }
+    
+    @FXML
     private void menuItemLineChart() {
         app.initLineChartView();
     }
