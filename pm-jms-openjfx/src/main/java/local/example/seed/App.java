@@ -235,6 +235,28 @@ public class App
         }
     }
 
+    public void initBarChartView() {
+        FXMLLoader barChartViewLoader = new FXMLLoader();
+        barChartViewLoader.setLocation(App.class.getResource("view/bar-chart-view.fxml"));
+        AnchorPane barChartAnchorPane;
+        try {
+            barChartAnchorPane = (AnchorPane) barChartViewLoader.load();
+            Stage barChartStage = new Stage();
+            barChartStage.setTitle("pseudo-random native vine bar chart");
+            barChartStage.initModality(Modality.WINDOW_MODAL);
+            barChartStage.initOwner(this.stage);
+            Scene barChartScene = new Scene(barChartAnchorPane);
+            barChartStage.setScene(barChartScene);
+            barChartStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
+    }
+
     public Stage getStage() {
         return stage;
     }
