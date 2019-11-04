@@ -18,7 +18,34 @@
 
 package local.example.seed.controller;
 
-public class AreaChartViewController {
+import java.util.Random;
+import javafx.fxml.FXML;
+import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.XYChart;
 
+public class AreaChartViewController {
     
+    @FXML
+    private AreaChart<String, Number> pseudoRandomAreaChart;
+    
+    private XYChart.Series<String, Number> pseudoRandomDataSeries;
+    
+    private final Random random = new Random();
+
+    @FXML
+    private void initialize() {}
+    
+    @FXML
+    public void loadPseudoRandomData() {
+        pseudoRandomAreaChart.getData().clear();
+        pseudoRandomDataSeries = new XYChart.Series<>();
+        pseudoRandomDataSeries.setName("pseudo-random series");
+        for (int i = 1945; i < 2020; i++) {
+            pseudoRandomDataSeries.getData().add(
+                    new XYChart.Data<>(Integer.toString(i), random.nextDouble())
+            );
+        }
+        pseudoRandomAreaChart.setTitle("1945-2019 pseudo random data");
+        pseudoRandomAreaChart.getData().add(pseudoRandomDataSeries);
+    }
 }
