@@ -213,6 +213,28 @@ public class App
         }
     }
 
+    public void initScatterChartView() {
+        FXMLLoader scatterChartViewLoader = new FXMLLoader();
+        scatterChartViewLoader.setLocation(App.class.getResource("view/scatter-chart-view.fxml"));
+        AnchorPane scatterChartAnchorPane;
+        try {
+            scatterChartAnchorPane = (AnchorPane) scatterChartViewLoader.load();
+            Stage scatterChartStage = new Stage();
+            scatterChartStage.setTitle("pseudo-random native vine scatter chart");
+            scatterChartStage.initModality(Modality.WINDOW_MODAL);
+            scatterChartStage.initOwner(this.stage);
+            Scene scatterChartScene = new Scene(scatterChartAnchorPane);
+            scatterChartStage.setScene(scatterChartScene);
+            scatterChartStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
+    }
+
     public Stage getStage() {
         return stage;
     }
