@@ -44,7 +44,8 @@
                                   onAction="#menuItemBarChart" 
                                   text="bar chart"/>
                         <MenuItem mnemonicParsing="false" 
-                                  styleClass="menu-item"
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemStackedBarChart" 
                                   text="stacked bar chart"/>
                         <MenuItem mnemonicParsing="false" 
                                   styleClass="menu-item"
