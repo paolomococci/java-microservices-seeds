@@ -55,6 +55,10 @@
                                   styleClass="menu-item" 
                                   onAction="#menuItemAreaChart" 
                                   text="area chart"/>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemStackedAreaChart" 
+                                  text="stacked area chart"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" 
