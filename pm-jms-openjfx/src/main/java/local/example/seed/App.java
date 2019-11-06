@@ -279,6 +279,28 @@ public class App
         }
     }
 
+    public void initStackedAreaChartView() {
+        FXMLLoader stackedAreaChartViewLoader = new FXMLLoader();
+        stackedAreaChartViewLoader.setLocation(App.class.getResource("view/stacked-area-chart-view.fxml"));
+        AnchorPane stackedAreaChartAnchorPane;
+        try {
+            stackedAreaChartAnchorPane = (AnchorPane) stackedAreaChartViewLoader.load();
+            Stage stackedAreaChartStage = new Stage();
+            stackedAreaChartStage.setTitle("pseudo-random native vine stacked area chart");
+            stackedAreaChartStage.initModality(Modality.WINDOW_MODAL);
+            stackedAreaChartStage.initOwner(this.stage);
+            Scene stackedAreaChartScene = new Scene(stackedAreaChartAnchorPane);
+            stackedAreaChartStage.setScene(stackedAreaChartScene);
+            stackedAreaChartStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
+    }
+
     public Stage getStage() {
         return stage;
     }
