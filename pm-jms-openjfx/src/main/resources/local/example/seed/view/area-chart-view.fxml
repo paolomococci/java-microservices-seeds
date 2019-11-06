@@ -27,10 +27,12 @@
             <children>
                 <AreaChart fx:id="pseudoRandomAreaChart">
                     <xAxis>
-                        <CategoryAxis side="BOTTOM" />
+                        <CategoryAxis side="BOTTOM" 
+                                      fx:id="abscissa" />
                     </xAxis>
                     <yAxis>
-                        <NumberAxis side="LEFT" />
+                        <NumberAxis side="LEFT" 
+                                    fx:id="ordinate" />
                     </yAxis>
                 </AreaChart>
                 <ButtonBar fx:id="buttonBar" 
