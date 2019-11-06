@@ -1,0 +1,30 @@
+.main-stacked-area-chart {
+    -fx-background-color: #fff;
+}
+
+.chart {
+    -fx-padding: 5px;
+    -fx-background-color: #fef;
+}
+
+.chart-plot-background {
+    -fx-background-color: #eef;
+}
+
+.chart-vertical-grid-lines {
+    -fx-stroke: #fab;
+}
+
+.chart-horizontal-grid-lines {
+    -fx-stroke: #e7a;
+}
+
+.chart-alternative-row-fill {
+    -fx-fill: #fcd;
+    -fx-stroke: transparent;
+    -fx-stroke-width: 0;
+}
+
+.button-bar {
+    -fx-padding: 10px;
+}
