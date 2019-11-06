@@ -71,6 +71,11 @@ public class RootController {
     }
     
     @FXML
+    private void menuItemStackedAreaChart() {
+        app.initStackedAreaChartView();
+    }
+    
+    @FXML
     private void menuItemAbout() {
         MenuItemAboutView.showAlert();
     }
