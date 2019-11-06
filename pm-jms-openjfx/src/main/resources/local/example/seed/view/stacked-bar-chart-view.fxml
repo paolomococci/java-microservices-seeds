@@ -27,10 +27,12 @@
             <children>
                 <StackedBarChart fx:id="pseudoRandomStackedBarChart">
                     <xAxis>
-                        <CategoryAxis side="BOTTOM" fx:id="x" />
+                        <CategoryAxis side="BOTTOM" 
+                                      fx:id="x" />
                     </xAxis>
                     <yAxis>
-                        <NumberAxis side="LEFT" fx:id="y" />
+                        <NumberAxis side="LEFT" 
+                                    fx:id="y" />
                     </yAxis>
                 </StackedBarChart>
                 <ButtonBar fx:id="buttonBar" 
