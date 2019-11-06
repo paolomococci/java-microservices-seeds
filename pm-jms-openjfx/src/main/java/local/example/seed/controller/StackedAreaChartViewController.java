@@ -18,7 +18,54 @@
 
 package local.example.seed.controller;
 
-public class StackedAreaChartViewController {
+import java.util.Random;
+import javafx.fxml.FXML;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.StackedAreaChart;
+import javafx.util.StringConverter;
 
+public class StackedAreaChartViewController {
     
+    @FXML
+    private StackedAreaChart<Number, Number> pseudoRandomStackedAreaChart;
+    
+    @FXML
+    private NumberAxis abscissa;
+    
+    @FXML
+    private NumberAxis ordinate;
+    
+    private final Random random = new Random();
+
+    @FXML
+    private void initialize() {}
+    
+    @FXML
+    public void loadPseudoRandomData() {
+        pseudoRandomStackedAreaChart.getData().clear();
+        ordinate.setAutoRanging(false);
+        ordinate.setLowerBound(0.0);
+        ordinate.setUpperBound(110.0);
+        ordinate.setLabel("quantity");
+        abscissa.setAutoRanging(false);
+        abscissa.setLabel("seasonal harvests");
+        abscissa.setTickLabelFormatter(stringConverterNumber());
+        
+        pseudoRandomStackedAreaChart.setTitle("fantasy data series");
+    }
+    
+    private StringConverter<Number> stringConverterNumber() {
+        StringConverter<Number> stringConverterNumber;
+        stringConverterNumber = new StringConverter<Number>() {
+            @Override
+            public String toString(Number object) {
+                return String.valueOf(object.intValue());
+            }
+            @Override
+            public Number fromString(String string) {
+                return Integer.valueOf(string)*10;
+            }
+        };
+        return stringConverterNumber;
+    }
 }
