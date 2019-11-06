@@ -27,10 +27,12 @@
             <children>
                 <ScatterChart fx:id="pseudoRandomScatterChart">
                     <xAxis>
-                        <CategoryAxis side="BOTTOM" />
+                        <CategoryAxis side="BOTTOM" 
+                                      fx:id="x" />
                     </xAxis>
                     <yAxis>
-                        <NumberAxis side="LEFT" />
+                        <NumberAxis side="LEFT" 
+                                    fx:id="y" />
                     </yAxis>
                 </ScatterChart>
                 <ButtonBar fx:id="buttonBar" 
