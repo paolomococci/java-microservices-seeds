@@ -18,14 +18,24 @@
 
 package local.example.seed.controller;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 
 public class LineChartViewController {
     
     @FXML
     private LineChart<String, Number> sagrantinoLineChart;
+    
+    @FXML
+    private CategoryAxis yearAxis;
+    
+    @FXML
+    private NumberAxis quantityAxis;
     
     private XYChart.Series<String, Number> sagrantinoDataSeries;
     
@@ -35,6 +45,12 @@ public class LineChartViewController {
     @FXML
     public void loadSagrantinoData() {
         sagrantinoLineChart.getData().clear();
+        quantityAxis.setAutoRanging(false);
+        quantityAxis.setLowerBound(0.0);
+        quantityAxis.setUpperBound(250.0);
+        yearAxis.setAutoRanging(false);
+        yearAxis.setTickLabelRotation(90.0);
+        yearAxis.setCategories(this.makeStringObservableList());
         sagrantinoDataSeries = new XYChart.Series<>();
         sagrantinoDataSeries.getData().add(new XYChart.Data("1960", 8));
         sagrantinoDataSeries.getData().add(new XYChart.Data("1965", 12));
@@ -51,5 +67,14 @@ public class LineChartViewController {
         sagrantinoDataSeries.getData().add(new XYChart.Data("2019", 215));
         sagrantinoDataSeries.setName("fantasy seasonal harvests");
         sagrantinoLineChart.getData().add(sagrantinoDataSeries);
+    }
+    
+    private ObservableList<String> makeStringObservableList() {
+        ObservableList<String> temp;
+        temp = FXCollections.observableArrayList();
+        for (int i = 1955; i < 2025; i+=5) {
+            temp.add(Integer.toString(i));
+        }
+        return temp;
     }
 }
