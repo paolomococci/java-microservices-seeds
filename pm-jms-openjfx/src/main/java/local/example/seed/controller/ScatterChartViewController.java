@@ -22,6 +22,8 @@ import java.util.Random;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ScatterChart;
 import javafx.scene.chart.XYChart;
 
@@ -29,6 +31,12 @@ public class ScatterChartViewController {
     
     @FXML
     private ScatterChart<String, Double> pseudoRandomScatterChart;
+    
+    @FXML
+    private CategoryAxis x;
+    
+    @FXML
+    private NumberAxis y;
     
     private final Random random = new Random();
     
@@ -38,6 +46,14 @@ public class ScatterChartViewController {
     @FXML
     public void loadPseudoRandomData() {
         pseudoRandomScatterChart.getData().clear();
+        y.setAutoRanging(false);
+        y.setLowerBound(0.0);
+        y.setUpperBound(110.0);
+        y.setLabel("quantity");
+        x.setAutoRanging(true);
+        x.setLabel("seasonal harvests");
+        x.setTickLabelRotation(90.0);
+        x.setCategories(makeStringObservableList());
         pseudoRandomScatterChart.setTitle("pseudo-random wine values");
         pseudoRandomScatterChart.setData(makeSeries());
     }
@@ -58,23 +74,28 @@ public class ScatterChartViewController {
         for (int i = 1960; i < 2020; i += 5) {
             sagrantinoSeries.getData().add(
                             new XYChart.Data<>(
-                                    Integer.toString(i), random.nextDouble()
+                                    Integer.toString(i), 
+                                    random.nextDouble()*100.0
                             ));
             sangioveseSeries.getData().add(
                             new XYChart.Data<>(
-                                    Integer.toString(i), random.nextDouble()
+                                    Integer.toString(i), 
+                                    random.nextDouble()*100.0
                             ));
             colorinoSeries.getData().add(
                             new XYChart.Data<>(
-                                    Integer.toString(i), random.nextDouble()
+                                    Integer.toString(i), 
+                                    random.nextDouble()*100.0
                             ));
             cigliegioloSeries.getData().add(
                             new XYChart.Data<>(
-                                    Integer.toString(i), random.nextDouble()
+                                    Integer.toString(i), 
+                                    random.nextDouble()*100.0
                             ));
             canaioloSeries.getData().add(
                             new XYChart.Data<>(
-                                    Integer.toString(i), random.nextDouble()
+                                    Integer.toString(i), 
+                                    random.nextDouble()*100.0
                             ));
         }
         observableListSeries.addAll(
@@ -85,5 +106,14 @@ public class ScatterChartViewController {
                 canaioloSeries
         );
         return observableListSeries;
+    }
+    
+    private ObservableList<String> makeStringObservableList() {
+        ObservableList<String> temp;
+        temp = FXCollections.observableArrayList();
+        for (int i = 1955; i < 2025; i+=5) {
+            temp.add(Integer.toString(i));
+        }
+        return temp;
     }
 }
