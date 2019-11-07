@@ -24,7 +24,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import local.example.seed.model.Seed;
-import local.example.seed.view.InvalidFormAlertView;
+import local.example.seed.view.alert.InvalidFormAlertView;
 
 public class SeedEditorController {
 
