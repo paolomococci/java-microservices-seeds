@@ -24,7 +24,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import local.example.seed.App;
 import local.example.seed.model.Seed;
-import local.example.seed.view.NoSelectionAlertView;
+import local.example.seed.view.alert.NoSelectionAlertView;
 
 public class SeedViewController {
     
