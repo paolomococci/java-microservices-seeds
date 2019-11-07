@@ -62,6 +62,16 @@
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" 
+                      styleClass="menu" 
+                      text="3d">
+                    <items>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemTemplate3D" 
+                                  text="template"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" 
                       text="help">
                     <items>
                         <MenuItem mnemonicParsing="false" 
