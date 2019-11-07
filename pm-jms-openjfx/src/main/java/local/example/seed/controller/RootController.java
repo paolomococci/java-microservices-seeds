@@ -76,6 +76,11 @@ public class RootController {
     }
     
     @FXML
+    private void menuItemTemplate3D() {
+        app.initTemplate3DView();
+    }
+    
+    @FXML
     private void menuItemAbout() {
         MenuItemAboutView.showAlert();
     }
