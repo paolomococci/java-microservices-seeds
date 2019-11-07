@@ -16,7 +16,7 @@
  *
  */
 
-package local.example.seed.view;
+package local.example.seed.view.alert;
 
 import javafx.scene.control.Alert;
 import local.example.seed.App;
