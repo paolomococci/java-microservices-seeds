@@ -20,7 +20,7 @@ package local.example.seed.controller;
 
 import javafx.fxml.FXML;
 import local.example.seed.App;
-import local.example.seed.view.MenuItemAboutView;
+import local.example.seed.view.alert.MenuItemAboutView;
 
 public class RootController {
 
