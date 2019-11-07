@@ -34,7 +34,7 @@ import local.example.seed.controller.RootController;
 import local.example.seed.controller.SeedEditorController;
 import local.example.seed.controller.SeedViewController;
 import local.example.seed.model.Seed;
-import local.example.seed.view.ExceptionAlertView;
+import local.example.seed.view.alert.ExceptionAlertView;
 
 /**
  * openjfx model-view-controller
