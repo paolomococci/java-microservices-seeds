@@ -19,9 +19,12 @@
 package local.example.seed.controller;
 
 import java.util.Random;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.StackedAreaChart;
+import javafx.scene.chart.XYChart;
 import javafx.util.StringConverter;
 
 public class StackedAreaChartViewController {
@@ -45,13 +48,58 @@ public class StackedAreaChartViewController {
         pseudoRandomStackedAreaChart.getData().clear();
         ordinate.setAutoRanging(false);
         ordinate.setLowerBound(0.0);
-        ordinate.setUpperBound(110.0);
+        ordinate.setUpperBound(45.0);
+        ordinate.setTickUnit(2.5);
         ordinate.setLabel("quantity");
         abscissa.setAutoRanging(false);
+        abscissa.setLowerBound(1980);
+        abscissa.setUpperBound(2020);
+        abscissa.setTickUnit(5.0);
+        abscissa.setTickLabelRotation(30.0);
         abscissa.setLabel("seasonal harvests");
         abscissa.setTickLabelFormatter(stringConverterNumber());
-        
-        pseudoRandomStackedAreaChart.setTitle("fantasy data series");
+        pseudoRandomStackedAreaChart.getData().addAll(makePseudoRandomNumbersSeries());
+        pseudoRandomStackedAreaChart.setTitle("demo data series");
+    }
+    
+    private ObservableList<XYChart.Series<Number, Number>> makePseudoRandomNumbersSeries() {
+        ObservableList<XYChart.Series<Number, Number>> observableListSeries;
+        observableListSeries = FXCollections.observableArrayList();
+        XYChart.Series<Number, Number> sagrantinoSeries = new XYChart.Series<>();
+        XYChart.Series<Number, Number> sangioveseSeries = new XYChart.Series<>();
+        XYChart.Series<Number, Number> colorinoSeries = new XYChart.Series<>();
+        XYChart.Series<Number, Number> cigliegioloSeries = new XYChart.Series<>();
+        XYChart.Series<Number, Number> canaioloSeries = new XYChart.Series<>();
+        sagrantinoSeries.setName("sagrantino");
+        sangioveseSeries.setName("sangiovese");
+        colorinoSeries.setName("colorino");
+        cigliegioloSeries.setName("cigliegiolo");
+        canaioloSeries.setName("canaiolo");
+        for (int i = 1985; i < 2020; i+=5) {
+            sagrantinoSeries.getData().add(new XYChart.Data<>(
+                            i, 
+                            random.nextDouble()*10.0));
+            sangioveseSeries.getData().add(new XYChart.Data<>(
+                            i, 
+                            random.nextDouble()*10.0));
+            colorinoSeries.getData().add(new XYChart.Data<>(
+                            i, 
+                            random.nextDouble()*10.0));
+            cigliegioloSeries.getData().add(new XYChart.Data<>(
+                            i, 
+                            random.nextDouble()*10.0));
+            canaioloSeries.getData().add(new XYChart.Data<>(
+                            i, 
+                            random.nextDouble()*10.0));
+        }
+            observableListSeries.addAll(
+                    sagrantinoSeries,
+                    sangioveseSeries,
+                    colorinoSeries,
+                    cigliegioloSeries,
+                    canaioloSeries
+            );
+        return observableListSeries;
     }
     
     private StringConverter<Number> stringConverterNumber() {
