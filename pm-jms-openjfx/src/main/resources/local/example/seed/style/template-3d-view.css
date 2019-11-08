@@ -1,3 +1,7 @@
 .main-template-3d-view {
 
 }
+
+.button-bar {
+    -fx-padding: 10px;
+}
