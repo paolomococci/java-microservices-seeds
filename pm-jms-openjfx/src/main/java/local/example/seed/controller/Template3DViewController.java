@@ -18,7 +18,60 @@
 
 package local.example.seed.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.AmbientLight;
+import javafx.scene.Group;
+import javafx.scene.ParallelCamera;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Sphere;
+
 public class Template3DViewController {
-    
-    
+
+    @FXML
+    private AnchorPane mainAnchorPane;
+
+    @FXML
+    private Group mainGroup;
+
+    @FXML
+    private AmbientLight ambientLight;
+
+    @FXML
+    private ParallelCamera parallelCamera;
+
+    @FXML
+    private ButtonBar buttonBar;
+
+    @FXML
+    private Button moveButton;
+
+    private Sphere sphere;
+    private Button restoreButton;
+
+    @FXML
+    public void initialize() {
+        sphere = new Sphere(50.0);
+        sphere.setTranslateX(200.0);
+        restoreButton = new Button("restore");
+        mainGroup.getChildren().add(sphere);
+    }
+
+    public void move() {
+        sphere.setTranslateY(-200.0);
+        moveButton.setDisable(true);
+        restoreButton.setOnAction((var actionEvent) -> {
+            try {
+                sphere.setTranslateY(0.0);
+                moveButton.setDisable(false);
+                restoreButton.setDisable(true);
+                buttonBar.getButtons().remove(1);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+        buttonBar.getButtons().add(restoreButton);
+        restoreButton.setDisable(false);
+    }
 }
