@@ -323,6 +323,28 @@ public class App
         }
     }
 
+    public void initSampleOneView() {
+        FXMLLoader sampleOneViewLoader = new FXMLLoader();
+        sampleOneViewLoader.setLocation(App.class.getResource("view/sample-one-view.fxml"));
+        AnchorPane sampleOneAnchorPane;
+        try {
+            sampleOneAnchorPane = (AnchorPane) sampleOneViewLoader.load();
+            Stage sampleOneStage = new Stage();
+            sampleOneStage.setTitle("sample one 3D");
+            sampleOneStage.initModality(Modality.WINDOW_MODAL);
+            sampleOneStage.initOwner(this.stage);
+            Scene sampleOneScene = new Scene(sampleOneAnchorPane);
+            sampleOneStage.setScene(sampleOneScene);
+            sampleOneStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
+    }
+
     public Stage getStage() {
         return stage;
     }
