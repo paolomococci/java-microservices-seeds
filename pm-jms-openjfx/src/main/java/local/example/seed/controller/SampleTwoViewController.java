@@ -18,6 +18,40 @@
 
 package local.example.seed.controller;
 
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
+import javafx.scene.control.Label;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+
 public class SampleTwoViewController {
     
+    @FXML
+    private AnchorPane mainAnchorPane;
+    
+    @FXML
+    private GridPane gridPane;
+    
+    @FXML
+    private Label labelHead;
+    
+    @FXML
+    private Pane mainPane;
+    
+    @FXML
+    private ButtonBar buttonBar;
+    
+    @FXML
+    private Button goButton;
+    
+    @FXML
+    private void initialize() {
+        
+    }
+
+    public void go() {
+        
+    }
 }
