@@ -345,6 +345,28 @@ public class App
         }
     }
 
+    public void initSampleTwoView() {
+        FXMLLoader sampleTwoViewLoader = new FXMLLoader();
+        sampleTwoViewLoader.setLocation(App.class.getResource("view/sample-two-view.fxml"));
+        AnchorPane sampleTwoAnchorPane;
+        try {
+            sampleTwoAnchorPane = (AnchorPane) sampleTwoViewLoader.load();
+            Stage sampleTwoStage = new Stage();
+            sampleTwoStage.setTitle("sample two 3D");
+            sampleTwoStage.initModality(Modality.WINDOW_MODAL);
+            sampleTwoStage.initOwner(this.stage);
+            Scene sampleTwoScene = new Scene(sampleTwoAnchorPane);
+            sampleTwoStage.setScene(sampleTwoScene);
+            sampleTwoStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
+    }
+
     public Stage getStage() {
         return stage;
     }
