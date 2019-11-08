@@ -86,6 +86,11 @@ public class RootController {
     }
     
     @FXML
+    private void menuItemSampleTwo() {
+        app.initSampleTwoView();
+    }
+    
+    @FXML
     private void menuItemAbout() {
         MenuItemAboutView.showAlert();
     }
