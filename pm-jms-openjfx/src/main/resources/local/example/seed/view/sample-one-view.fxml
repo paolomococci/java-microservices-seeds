@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Sphere?>
+
+<AnchorPane fx:id="mainAnchorPane" 
+            maxHeight="-Infinity" 
+            maxWidth="-Infinity" 
+            minHeight="-Infinity" 
+            minWidth="-Infinity" 
+            prefHeight="600.0" 
+            prefWidth="400.0" 
+            styleClass="main-sample-one-view" 
+            stylesheets="@../style/sample-one-view.css" 
+            xmlns="http://javafx.com/javafx/11.0.1" 
+            xmlns:fx="http://javafx.com/fxml/1" 
+            fx:controller="local.example.seed.controller.SampleOneViewController">
+    <children>
+        <GridPane fx:id="gridPaneOne" 
+                  layoutX="-50.0" 
+                  layoutY="-50.0" 
+                  styleClass="main-grid-pane" 
+                  prefHeight="600.0" 
+                  prefWidth="400.0" 
+                  AnchorPane.bottomAnchor="0.0" 
+                  AnchorPane.leftAnchor="0.0" 
+                  AnchorPane.rightAnchor="0.0" 
+                  AnchorPane.topAnchor="0.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="550.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Group fx:id="groupOne" 
+                       styleClass="group-one" 
+                       GridPane.rowIndex="0" />
+                <ButtonBar fx:id="mainButtonBar" 
+                           prefHeight="0.0" 
+                           styleClass="main-button-bar" 
+                           prefWidth="400.0" 
+                           GridPane.rowIndex="1">
+                    <buttons>
+                        <Button fx:id="buttonOne"
+                                mnemonicParsing="false" 
+                                styleClass="button" 
+                                onAction="#sample" 
+                                text="sample" />
+                    </buttons>
+                </ButtonBar>
+            </children>
+        </GridPane>
+    </children>    
+</AnchorPane>
