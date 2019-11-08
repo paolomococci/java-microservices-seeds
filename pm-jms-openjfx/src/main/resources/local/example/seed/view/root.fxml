@@ -69,6 +69,10 @@
                                   styleClass="menu-item" 
                                   onAction="#menuItemTemplate3D" 
                                   text="template"/>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemSampleOne" 
+                                  text="sample one"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" 
