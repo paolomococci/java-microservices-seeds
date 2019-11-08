@@ -1,3 +1,25 @@
 .main-sample-two-view {
 
 }
+
+.header {
+    -fx-background-color: #def;
+}
+
+.label {
+    -fx-padding: 10px;
+    -fx-font-size: 1.2em;
+}
+
+.pane {
+    -fx-background-color: #fff;
+}
+
+.button-bar {
+    -fx-padding: 10px;
+    -fx-background-color: #def;
+}
+
+.button {
+    
+}
