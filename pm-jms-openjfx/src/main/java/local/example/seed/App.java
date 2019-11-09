@@ -367,6 +367,28 @@ public class App
         }
     }
 
+    public void initSampleThreeView() {
+        FXMLLoader sampleThreeViewLoader = new FXMLLoader();
+        sampleThreeViewLoader.setLocation(App.class.getResource("view/sample-three-view.fxml"));
+        AnchorPane sampleThreeAnchorPane;
+        try {
+            sampleThreeAnchorPane = (AnchorPane) sampleThreeViewLoader.load();
+            Stage sampleThreeStage = new Stage();
+            sampleThreeStage.setTitle("sample three 3D");
+            sampleThreeStage.initModality(Modality.WINDOW_MODAL);
+            sampleThreeStage.initOwner(this.stage);
+            Scene sampleThreeScene = new Scene(sampleThreeAnchorPane);
+            sampleThreeStage.setScene(sampleThreeScene);
+            sampleThreeStage.show();
+        } catch (IOException e) {
+            ExceptionAlertView alertDialogView = new ExceptionAlertView(
+                    e.getMessage(),
+                    Arrays.toString(e.getStackTrace())
+            );
+            alertDialogView.showErrorMessage();
+        }
+    }
+
     public Stage getStage() {
         return stage;
     }
