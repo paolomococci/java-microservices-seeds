@@ -24,6 +24,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.shape.DrawMode;
 import javafx.scene.shape.Sphere;
 
 public class SampleOneViewController {
@@ -49,7 +50,9 @@ public class SampleOneViewController {
     }
     
     public void sample() {
-        Sphere sphereOne = new Sphere(40.0);
+        groupOne.getChildren().clear();
+        Sphere sphereOne = new Sphere(200.0);
+        sphereOne.setDrawMode(DrawMode.LINE);
         groupOne.getChildren().add(sphereOne);
     }
 }
