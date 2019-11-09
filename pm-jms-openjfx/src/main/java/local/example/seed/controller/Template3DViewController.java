@@ -25,6 +25,8 @@ import javafx.scene.ParallelCamera;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.CullFace;
+import javafx.scene.shape.DrawMode;
 import javafx.scene.shape.Sphere;
 
 public class Template3DViewController {
@@ -52,7 +54,9 @@ public class Template3DViewController {
 
     @FXML
     public void initialize() {
-        sphere = new Sphere(50.0);
+        sphere = new Sphere(120.0);
+        sphere.setCullFace(CullFace.FRONT);
+        sphere.setDrawMode(DrawMode.LINE);
         sphere.setTranslateX(200.0);
         restoreButton = new Button("restore");
         mainGroup.getChildren().add(sphere);
