@@ -31,6 +31,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.CullFace;
 import javafx.scene.shape.Sphere;
 import javafx.util.Duration;
@@ -63,8 +65,11 @@ public class SampleTwoViewController {
     
     @FXML
     private void initialize() {
+        PhongMaterial phongMaterial;
+        phongMaterial = new PhongMaterial(Color.CORAL);
         Sphere sphere = new Sphere(8.0);
         sphere.setCullFace(CullFace.BACK);
+        sphere.setMaterial(phongMaterial);
         sphere.relocate(
                 350.0*random.nextDouble(), 
                 450.0*random.nextDouble()
