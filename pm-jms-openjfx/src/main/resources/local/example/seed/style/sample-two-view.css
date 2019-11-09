@@ -1,5 +1,5 @@
 .main-sample-two-view {
-
+    -fx-margin: 2px;
 }
 
 .header {
@@ -13,6 +13,7 @@
 
 .pane {
     -fx-background-color: #fff;
+    -fx-margin: 10px;
 }
 
 .button-bar {
@@ -21,5 +22,5 @@
 }
 
 .button {
-    
+    -fx-padding: 5px;
 }
