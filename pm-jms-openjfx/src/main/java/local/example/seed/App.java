@@ -35,6 +35,7 @@ import local.example.seed.controller.SeedEditorController;
 import local.example.seed.controller.SeedViewController;
 import local.example.seed.model.Seed;
 import local.example.seed.view.alert.ExceptionAlertView;
+import local.example.seed.view.init.InitView;
 import local.example.seed.view.init.SampleFourView;
 import local.example.seed.view.init.SampleThreeView;
 
@@ -238,25 +239,11 @@ public class App
     }
 
     public void initBarChartView() {
-        FXMLLoader barChartViewLoader = new FXMLLoader();
-        barChartViewLoader.setLocation(App.class.getResource("view/bar-chart-view.fxml"));
-        AnchorPane barChartAnchorPane;
-        try {
-            barChartAnchorPane = (AnchorPane) barChartViewLoader.load();
-            Stage barChartStage = new Stage();
-            barChartStage.setTitle("pseudo-random native vine bar chart");
-            barChartStage.initModality(Modality.WINDOW_MODAL);
-            barChartStage.initOwner(this.stage);
-            Scene barChartScene = new Scene(barChartAnchorPane);
-            barChartStage.setScene(barChartScene);
-            barChartStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/bar-chart-view.fxml", 
+                "pseudo-random native vine bar chart"
+        );
     }
 
     public void initStackedBarChartView() {
