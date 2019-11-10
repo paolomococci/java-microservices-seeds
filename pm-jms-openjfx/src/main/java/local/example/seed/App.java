@@ -35,6 +35,7 @@ import local.example.seed.controller.SeedEditorController;
 import local.example.seed.controller.SeedViewController;
 import local.example.seed.model.Seed;
 import local.example.seed.view.alert.ExceptionAlertView;
+import local.example.seed.view.init.SampleFourView;
 
 /**
  * openjfx model-view-controller
@@ -387,6 +388,10 @@ public class App
             );
             alertDialogView.showErrorMessage();
         }
+    }
+    
+    public void initSampleFourView() {
+        SampleFourView.init(this);
     }
 
     public Stage getStage() {
