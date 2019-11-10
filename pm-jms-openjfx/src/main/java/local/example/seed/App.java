@@ -36,8 +36,6 @@ import local.example.seed.controller.SeedViewController;
 import local.example.seed.model.Seed;
 import local.example.seed.view.alert.ExceptionAlertView;
 import local.example.seed.view.init.InitView;
-import local.example.seed.view.init.SampleFourView;
-import local.example.seed.view.init.SampleThreeView;
 
 /**
  * openjfx model-view-controller
@@ -129,113 +127,38 @@ public class App
     }
 
     public void initPieChartView() {
-        FXMLLoader pieChartViewLoader = new FXMLLoader();
-        pieChartViewLoader.setLocation(App.class.getResource("view/pie-chart-view.fxml"));
-        AnchorPane pieChartAnchorPane;
-        try {
-            pieChartAnchorPane = (AnchorPane) pieChartViewLoader.load();
-            Stage pieChartStage = new Stage();
-            pieChartStage.setTitle("red wine blend pie chart");
-            pieChartStage.initModality(Modality.WINDOW_MODAL);
-            pieChartStage.initOwner(this.stage);
-            Scene pieChartScene = new Scene(pieChartAnchorPane);
-            pieChartStage.setScene(pieChartScene);
-            pieChartStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/pie-chart-view.fxml", 
+                "red wine blend pie chart");
     }
 
     public void initLineChartView() {
-        FXMLLoader lineChartViewLoader = new FXMLLoader();
-        lineChartViewLoader.setLocation(App.class.getResource("view/line-chart-view.fxml"));
-        AnchorPane lineChartAnchorPane;
-        try {
-            lineChartAnchorPane = (AnchorPane) lineChartViewLoader.load();
-            Stage lineChartStage = new Stage();
-            lineChartStage.setTitle("native vine line chart");
-            lineChartStage.initModality(Modality.WINDOW_MODAL);
-            lineChartStage.initOwner(this.stage);
-            Scene lineChartScene = new Scene(lineChartAnchorPane);
-            lineChartStage.setScene(lineChartScene);
-            lineChartStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/line-chart-view.fxml", 
+                "native vine line chart");
     }
 
     public void initAreaChartView() {
-        FXMLLoader areaChartViewLoader = new FXMLLoader();
-        areaChartViewLoader.setLocation(App.class.getResource("view/area-chart-view.fxml"));
-        AnchorPane areaChartAnchorPane;
-        try {
-            areaChartAnchorPane = (AnchorPane) areaChartViewLoader.load();
-            Stage areaChartStage = new Stage();
-            areaChartStage.setTitle("pseudo-random native vine area chart");
-            areaChartStage.initModality(Modality.WINDOW_MODAL);
-            areaChartStage.initOwner(this.stage);
-            Scene areaChartScene = new Scene(areaChartAnchorPane);
-            areaChartStage.setScene(areaChartScene);
-            areaChartStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/area-chart-view.fxml", 
+                "pseudo-random native vine area chart");
     }
 
     public void initBubbleChartView() {
-        FXMLLoader bubbleChartViewLoader = new FXMLLoader();
-        bubbleChartViewLoader.setLocation(App.class.getResource("view/bubble-chart-view.fxml"));
-        AnchorPane bubbleChartAnchorPane;
-        try {
-            bubbleChartAnchorPane = (AnchorPane) bubbleChartViewLoader.load();
-            Stage bubbleChartStage = new Stage();
-            bubbleChartStage.setTitle("pseudo-random native vine bubble chart");
-            bubbleChartStage.initModality(Modality.WINDOW_MODAL);
-            bubbleChartStage.initOwner(this.stage);
-            Scene bubbleChartScene = new Scene(bubbleChartAnchorPane);
-            bubbleChartStage.setScene(bubbleChartScene);
-            bubbleChartStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/bubble-chart-view.fxml", 
+                "pseudo-random native vine bubble chart");
     }
 
     public void initScatterChartView() {
-        FXMLLoader scatterChartViewLoader = new FXMLLoader();
-        scatterChartViewLoader.setLocation(App.class.getResource("view/scatter-chart-view.fxml"));
-        AnchorPane scatterChartAnchorPane;
-        try {
-            scatterChartAnchorPane = (AnchorPane) scatterChartViewLoader.load();
-            Stage scatterChartStage = new Stage();
-            scatterChartStage.setTitle("pseudo-random native vine scatter chart");
-            scatterChartStage.initModality(Modality.WINDOW_MODAL);
-            scatterChartStage.initOwner(this.stage);
-            Scene scatterChartScene = new Scene(scatterChartAnchorPane);
-            scatterChartStage.setScene(scatterChartScene);
-            scatterChartStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/scatter-chart-view.fxml", 
+                "pseudo-random native vine scatter chart");
     }
 
     public void initBarChartView() {
@@ -247,121 +170,52 @@ public class App
     }
 
     public void initStackedBarChartView() {
-        FXMLLoader stackedBarChartViewLoader = new FXMLLoader();
-        stackedBarChartViewLoader.setLocation(App.class.getResource("view/stacked-bar-chart-view.fxml"));
-        AnchorPane stackedBarChartAnchorPane;
-        try {
-            stackedBarChartAnchorPane = (AnchorPane) stackedBarChartViewLoader.load();
-            Stage stackedBarChartStage = new Stage();
-            stackedBarChartStage.setTitle("pseudo-random native vine stacked bar chart");
-            stackedBarChartStage.initModality(Modality.WINDOW_MODAL);
-            stackedBarChartStage.initOwner(this.stage);
-            Scene stackedBarChartScene = new Scene(stackedBarChartAnchorPane);
-            stackedBarChartStage.setScene(stackedBarChartScene);
-            stackedBarChartStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/stacked-bar-chart-view.fxml", 
+                "pseudo-random native vine stacked bar chart");
     }
 
     public void initStackedAreaChartView() {
-        FXMLLoader stackedAreaChartViewLoader = new FXMLLoader();
-        stackedAreaChartViewLoader.setLocation(App.class.getResource("view/stacked-area-chart-view.fxml"));
-        AnchorPane stackedAreaChartAnchorPane;
-        try {
-            stackedAreaChartAnchorPane = (AnchorPane) stackedAreaChartViewLoader.load();
-            Stage stackedAreaChartStage = new Stage();
-            stackedAreaChartStage.setTitle("pseudo-random native vine stacked area chart");
-            stackedAreaChartStage.initModality(Modality.WINDOW_MODAL);
-            stackedAreaChartStage.initOwner(this.stage);
-            Scene stackedAreaChartScene = new Scene(stackedAreaChartAnchorPane);
-            stackedAreaChartStage.setScene(stackedAreaChartScene);
-            stackedAreaChartStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/stacked-area-chart-view.fxml", 
+                "pseudo-random native vine stacked area chart");
     }
 
     public void initTemplate3DView() {
-        FXMLLoader template3DViewLoader = new FXMLLoader();
-        template3DViewLoader.setLocation(App.class.getResource("view/template-3d-view.fxml"));
-        AnchorPane template3DAnchorPane;
-        try {
-            template3DAnchorPane = (AnchorPane) template3DViewLoader.load();
-            Stage template3DStage = new Stage();
-            template3DStage.setTitle("template3D");
-            template3DStage.initModality(Modality.WINDOW_MODAL);
-            template3DStage.initOwner(this.stage);
-            Scene template3DScene = new Scene(template3DAnchorPane);
-            template3DStage.setScene(template3DScene);
-            template3DStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/template-3d-view.fxml", 
+                "template3D");
     }
 
     public void initSampleOneView() {
-        FXMLLoader sampleOneViewLoader = new FXMLLoader();
-        sampleOneViewLoader.setLocation(App.class.getResource("view/sample-one-view.fxml"));
-        AnchorPane sampleOneAnchorPane;
-        try {
-            sampleOneAnchorPane = (AnchorPane) sampleOneViewLoader.load();
-            Stage sampleOneStage = new Stage();
-            sampleOneStage.setTitle("sample one 3D");
-            sampleOneStage.initModality(Modality.WINDOW_MODAL);
-            sampleOneStage.initOwner(this.stage);
-            Scene sampleOneScene = new Scene(sampleOneAnchorPane);
-            sampleOneStage.setScene(sampleOneScene);
-            sampleOneStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/sample-one-view.fxml", 
+                "sample one 3D");
     }
 
     public void initSampleTwoView() {
-        FXMLLoader sampleTwoViewLoader = new FXMLLoader();
-        sampleTwoViewLoader.setLocation(App.class.getResource("view/sample-two-view.fxml"));
-        AnchorPane sampleTwoAnchorPane;
-        try {
-            sampleTwoAnchorPane = (AnchorPane) sampleTwoViewLoader.load();
-            Stage sampleTwoStage = new Stage();
-            sampleTwoStage.setTitle("sample two 3D");
-            sampleTwoStage.initModality(Modality.WINDOW_MODAL);
-            sampleTwoStage.initOwner(this.stage);
-            Scene sampleTwoScene = new Scene(sampleTwoAnchorPane);
-            sampleTwoStage.setScene(sampleTwoScene);
-            sampleTwoStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        InitView.init(
+                this, 
+                "view/sample-two-view.fxml", 
+                "sample two 3D");
     }
 
     public void initSampleThreeView() {
-        SampleThreeView.init(this);
+        InitView.init(
+                this, 
+                "view/sample-three-view.fxml", 
+                "sample three 3D");
     }
     
     public void initSampleFourView() {
-        SampleFourView.init(this);
+        InitView.init(
+                this, 
+                "view/sample-four-view.fxml", 
+                "sample four 3D");
     }
 
     public Stage getStage() {
