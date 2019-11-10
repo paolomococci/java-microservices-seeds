@@ -31,13 +31,15 @@ import local.example.seed.view.alert.ExceptionAlertView;
 public class SampleFourView {
     
     public static void init(App app) {
+        var uri = "view/sample-four-view.fxml";
+        var title = "sample four 3D";
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(App.class.getResource("view/sample-four-view.fxml"));
+        fxmlLoader.setLocation(App.class.getResource(uri));
         AnchorPane anchorPane;
         try {
             anchorPane = (AnchorPane) fxmlLoader.load();
             Stage stage = new Stage();
-            stage.setTitle("sample four 3D");
+            stage.setTitle(title);
             stage.initModality(Modality.WINDOW_MODAL);
             stage.initOwner(app.getStage());
             Scene scene = new Scene(anchorPane);
