@@ -36,6 +36,7 @@ import local.example.seed.controller.SeedViewController;
 import local.example.seed.model.Seed;
 import local.example.seed.view.alert.ExceptionAlertView;
 import local.example.seed.view.init.SampleFourView;
+import local.example.seed.view.init.SampleThreeView;
 
 /**
  * openjfx model-view-controller
@@ -369,25 +370,7 @@ public class App
     }
 
     public void initSampleThreeView() {
-        FXMLLoader sampleThreeViewLoader = new FXMLLoader();
-        sampleThreeViewLoader.setLocation(App.class.getResource("view/sample-three-view.fxml"));
-        AnchorPane sampleThreeAnchorPane;
-        try {
-            sampleThreeAnchorPane = (AnchorPane) sampleThreeViewLoader.load();
-            Stage sampleThreeStage = new Stage();
-            sampleThreeStage.setTitle("sample three 3D");
-            sampleThreeStage.initModality(Modality.WINDOW_MODAL);
-            sampleThreeStage.initOwner(this.stage);
-            Scene sampleThreeScene = new Scene(sampleThreeAnchorPane);
-            sampleThreeStage.setScene(sampleThreeScene);
-            sampleThreeStage.show();
-        } catch (IOException e) {
-            ExceptionAlertView alertDialogView = new ExceptionAlertView(
-                    e.getMessage(),
-                    Arrays.toString(e.getStackTrace())
-            );
-            alertDialogView.showErrorMessage();
-        }
+        SampleThreeView.init(this);
     }
     
     public void initSampleFourView() {
