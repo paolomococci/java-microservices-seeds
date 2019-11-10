@@ -1,3 +1,7 @@
 .main-sample-three-view {
+    -fx-background-color: #fff;
+}
 
+Label {
+    -fx-padding: 20px;
 }
