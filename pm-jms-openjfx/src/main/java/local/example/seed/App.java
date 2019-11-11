@@ -217,6 +217,13 @@ public class App
                 "view/sample-four-view.fxml", 
                 "sample four 3D");
     }
+    
+    public void initSampleFiveView() {
+        InitView.init(
+                this, 
+                "view/sample-five-view.fxml", 
+                "sample five 3D");
+    }
 
     public Stage getStage() {
         return stage;
