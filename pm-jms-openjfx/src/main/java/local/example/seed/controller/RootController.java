@@ -101,6 +101,11 @@ public class RootController {
     }
     
     @FXML
+    private void menuItemSampleFive() {
+        app.initSampleFiveView();
+    }
+    
+    @FXML
     private void menuItemAbout() {
         MenuItemAboutView.showAlert();
     }
