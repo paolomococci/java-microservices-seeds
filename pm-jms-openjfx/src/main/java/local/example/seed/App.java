@@ -224,6 +224,13 @@ public class App
                 "view/sample-five-view.fxml", 
                 "sample five 3D");
     }
+    
+    public void initCanvasOneView() {
+        InitView.init(
+                this, 
+                "view/canvas-one-view.fxml", 
+                "canvas one view");
+    }
 
     public Stage getStage() {
         return stage;
