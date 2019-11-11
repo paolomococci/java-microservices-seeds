@@ -92,6 +92,15 @@
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" 
+                      text="canvas">
+                    <items>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemCanvasOne" 
+                                  text="canvas one"/>
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" 
                       text="help">
                     <items>
                         <MenuItem mnemonicParsing="false" 
