@@ -32,11 +32,12 @@ public class PieChartViewController {
     @FXML
     public void loadRedWineBlendData() {
         this.vineBlendPieChart.getData().clear();
+        this.vineBlendPieChart.setClockwise(false);
         this.vineBlendPieChart.getData().addAll(
-                new PieChart.Data("sagrantino", 15.0),
-                new PieChart.Data("colorino", 10.0),
-                new PieChart.Data("cigligiolo", 15.0),
-                new PieChart.Data("sangiovese", 55.0)
+                new PieChart.Data("colorino", 15.0),
+                new PieChart.Data("canaiolo", 15.0),
+                new PieChart.Data("cigliegiolo", 70.0)
         );
+        this.vineBlendPieChart.setTitle("red wine fantasy blend");
     }
 }
