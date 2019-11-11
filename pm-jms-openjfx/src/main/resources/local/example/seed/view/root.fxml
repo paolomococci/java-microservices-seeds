@@ -85,6 +85,10 @@
                                   styleClass="menu-item" 
                                   onAction="#menuItemSampleFour" 
                                   text="sample four"/>
+                        <MenuItem mnemonicParsing="false" 
+                                  styleClass="menu-item" 
+                                  onAction="#menuItemSampleFive" 
+                                  text="sample five"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" 
