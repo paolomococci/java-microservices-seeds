@@ -20,7 +20,9 @@ package local.example.seed.controller;
 
 import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.ArcType;
 
 public class CanvasOneViewController {
     
@@ -28,10 +30,21 @@ public class CanvasOneViewController {
     private AnchorPane mainAnchorPane;
     
     private Canvas canvas;
+    private GraphicsContext graphicsContext;
     
     @FXML
     private void initialize() {
         canvas = new Canvas(400.0, 400.0);
+        graphicsContext = canvas.getGraphicsContext2D();
+        graphicsContext.strokeText("sample text on canvas", 30.0, 30.0);
+        graphicsContext.setLineWidth(1.0);
+        graphicsContext.strokeRect(50.0, 50.0, 50.0, 50.0);
+        graphicsContext.strokeRoundRect(150.0, 50.0, 50.0, 50.0, 10.0, 10.0);
+        graphicsContext.strokeOval(50.0, 150.0, 50.0, 80.0);
+        graphicsContext.strokeLine(150.0, 150.0, 300.0, 150.0);
+        graphicsContext.strokeArc(50.0, 250.0, 50.0, 50.0, 50.0, 100.0, ArcType.OPEN);
+        graphicsContext.strokeArc(150.0, 250.0, 50.0, 50.0, 50.0, 100.0, ArcType.CHORD);
+        graphicsContext.strokeArc(250.0, 250.0, 50.0, 50.0, 50.0, 100.0, ArcType.ROUND);
         mainAnchorPane.getChildren().add(canvas);
     }
 }
