@@ -1,6 +1,6 @@
-If you want it to work
+# If you want it to work
 
-How To with Apache NetBeans 11
+## How To with Apache NetBeans 11
 
 Right-click on the project and select the Properties item, then click on the Run item.
 
