@@ -1,0 +1,18 @@
+@charset "UTF-8";
+
+header {
+	margin: 8px;
+	align-items: center;
+	display: flex;
+	font-size: small;
+}
+
+main {
+	padding: 10px;
+	font-size: medium;
+}
+
+h1 {
+	margin: 10px;
+	font-size: large;
+}
