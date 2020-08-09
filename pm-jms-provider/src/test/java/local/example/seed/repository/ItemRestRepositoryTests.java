@@ -19,15 +19,31 @@
 package local.example.seed.repository;
 
 import local.example.seed.model.config.DatabaseConfig;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
+import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @Import(value = DatabaseConfig.class)
 public class ItemRestRepositoryTests {
 
+    @Autowired
+    private MockMvc mockMvc;
+
+    @Autowired
+    private ItemRestRepository itemRestRepository;
+
+    @BeforeEach
+    void deleteAll()
+            throws Exception {
+        this.itemRestRepository.deleteAll();
+    }
+
     @Test
-    void voidTest() {
+    void voidTest()
+            throws Exception {
     }
 }
