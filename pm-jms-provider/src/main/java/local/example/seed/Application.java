@@ -21,12 +21,22 @@ package local.example.seed;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
-@SpringBootApplication(exclude = {
-		MongoAutoConfiguration.class,
-		MongoDataAutoConfiguration.class
-})
+@SpringBootApplication(
+		scanBasePackages = {
+				"local.example.seed"
+		},
+		exclude = {
+				MongoAutoConfiguration.class,
+				MongoDataAutoConfiguration.class}
+		)
+@EnableReactiveMongoRepositories(
+		basePackages = {"local.example.seed.repository"}
+		)
+@EntityScan("local.example.seed.model")
 public class Application {
 
 	public static void main(String[] args) {
