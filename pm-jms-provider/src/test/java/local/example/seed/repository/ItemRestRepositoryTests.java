@@ -18,10 +18,13 @@
 
 package local.example.seed.repository;
 
+import local.example.seed.model.config.DatabaseConfig;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.annotation.Import;
 
 @SpringBootTest
+@Import(value = DatabaseConfig.class)
 public class ItemRestRepositoryTests {
 
     @Test
