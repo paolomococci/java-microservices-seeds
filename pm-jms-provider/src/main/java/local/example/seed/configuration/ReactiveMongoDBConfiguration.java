@@ -16,10 +16,27 @@
  *
  */
 
-package local.example.seed.model.config;
+package local.example.seed.configuration;
 
+import com.mongodb.reactivestreams.client.MongoClient;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
-@EnableMongoRepositories(basePackages = {"local.example.seed.repository"})
-public class DatabaseConfig {
+@Configuration
+@EnableMongoRepositories(basePackages = {
+        "local.example.seed.repository",
+        "local.example.seed.repository.reactive"
+})
+public class ReactiveMongoDBConfiguration {
+
+    @Autowired
+    MongoClient mongoClient;
+
+    @Bean
+    public ReactiveMongoTemplate reactiveMongoTemplate() {
+        return new ReactiveMongoTemplate(mongoClient, "yourdatabasename");
+    }
 }
