@@ -25,15 +25,25 @@ Vary: Access-Control-Request-Headers
 Content-Type: application/hal+json
 < Transfer-Encoding: chunked
 Transfer-Encoding: chunked
-< Date: Sun, 09 Aug 2020 06:41:16 GMT
-Date: Sun, 09 Aug 2020 06:41:16 GMT
+< Date: Tue, 11 Aug 2020 18:12:48 GMT
+Date: Tue, 11 Aug 2020 18:12:48 GMT
 
 < 
 {
   "_links" : {
+    "invoices" : {
+      "href" : "http://127.0.0.1:8080/invoices"
+    },
+    "items" : {
+      "href" : "http://127.0.0.1:8080/items"
+    },
+    "customers" : {
+      "href" : "http://127.0.0.1:8080/customers"
+    },
     "profile" : {
       "href" : "http://127.0.0.1:8080/profile"
     }
   }
 * Connection #0 to host 127.0.0.1 left intact
+}
 ```
