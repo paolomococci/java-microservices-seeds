@@ -19,14 +19,14 @@
 package local.example.seed;
 
 import com.mongodb.reactivestreams.client.MongoClient;
-import com.mongodb.reactivestreams.client.MongoClients;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.data.mongodb.config.AbstractReactiveMongoConfiguration;
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
 import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
 @SpringBootApplication(
@@ -38,23 +38,25 @@ import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRep
 				MongoDataAutoConfiguration.class}
 		)
 @EnableReactiveMongoRepositories(
-		basePackages = {"local.example.seed.repository"}
+		basePackages = {"local.example.seed.repository.reactive"}
 		)
 @EntityScan("local.example.seed.model")
-public class Application
-		extends AbstractReactiveMongoConfiguration {
+public class Application {
+
+	private final String DATABASE_NAME = "sampledb";
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
 
-	@Bean
-	public MongoClient mongoClient() {
-		return MongoClients.create();
-	}
+	@Autowired
+	MongoClient mongoClient;
 
-	@Override
-	protected String getDatabaseName() {
-		return "yourdatabasename";
+	@Bean
+	public ReactiveMongoTemplate reactiveMongoTemplate() {
+		return new ReactiveMongoTemplate(
+				mongoClient,
+				DATABASE_NAME
+		);
 	}
 }
