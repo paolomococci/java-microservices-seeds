@@ -18,5 +18,23 @@
 
 package local.example.seed.assembler;
 
-public class InvoiceRepresentationModelAssembler {
+import local.example.seed.model.Invoice;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.EntityModel;
+import org.springframework.hateoas.server.RepresentationModelAssembler;
+import org.springframework.stereotype.Component;
+
+@Component
+public class InvoiceRepresentationModelAssembler
+        implements RepresentationModelAssembler<Invoice, EntityModel<Invoice>> {
+    @Override
+    public EntityModel<Invoice> toModel(Invoice invoice) {
+        return null;
+    }
+
+    @Override
+    public CollectionModel<EntityModel<Invoice>>
+            toCollectionModel(Iterable<? extends Invoice> invoices) {
+        return null;
+    }
 }
