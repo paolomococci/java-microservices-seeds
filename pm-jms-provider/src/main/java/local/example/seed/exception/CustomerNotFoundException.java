@@ -18,5 +18,10 @@
 
 package local.example.seed.exception;
 
-public class CustomerNotFoundException {
+public class CustomerNotFoundException
+        extends RuntimeException {
+
+    public CustomerNotFoundException(String id) {
+        super("could not find customer with id: " + id);
+    }
 }
