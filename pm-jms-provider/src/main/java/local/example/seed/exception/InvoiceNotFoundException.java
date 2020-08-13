@@ -18,5 +18,10 @@
 
 package local.example.seed.exception;
 
-public class InvoiceNotFoundException {
+public class InvoiceNotFoundException
+        extends RuntimeException {
+
+    public InvoiceNotFoundException(String id) {
+        super("could not find invoice with id: " + id);
+    }
 }
