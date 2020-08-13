@@ -18,5 +18,56 @@
 
 package local.example.seed.controller;
 
+import local.example.seed.assembler.InvoiceRepresentationModelAssembler;
+import local.example.seed.model.Invoice;
+import local.example.seed.repository.reactive.InvoiceReactiveCrudRestRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.net.URISyntaxException;
+
+@RestController
+@RequestMapping(value = "/api/restful/invoices", produces = "application/hal+json")
 public class InvoiceRestController {
+
+    @Autowired
+    InvoiceReactiveCrudRestRepository invoiceReactiveCrudRestRepository;
+
+    @Autowired
+    InvoiceRepresentationModelAssembler invoiceRepresentationModelAssembler;
+
+    @PostMapping
+    public ResponseEntity<?> create(@RequestBody Invoice invoice) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @GetMapping(path = "/{id}")
+    public ResponseEntity<?> read(@PathVariable String id) {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @GetMapping
+    public ResponseEntity<?> readAll() {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<?> putUpdate(@RequestBody Invoice updated, @PathVariable String id)
+            throws URISyntaxException {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<?> patchUpdate(@RequestBody Invoice invoice, @PathVariable String id)
+            throws URISyntaxException {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<?> delete(@PathVariable String id)
+            throws URISyntaxException {
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
 }
