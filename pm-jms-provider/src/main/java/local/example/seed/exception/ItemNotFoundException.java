@@ -18,5 +18,10 @@
 
 package local.example.seed.exception;
 
-public class ItemNotFoundException {
+public class ItemNotFoundException
+        extends RuntimeException {
+
+    public ItemNotFoundException(String id) {
+        super("could not find item with id: " + id);
+    }
 }
