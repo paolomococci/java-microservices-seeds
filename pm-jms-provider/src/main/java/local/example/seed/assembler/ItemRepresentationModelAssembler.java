@@ -18,23 +18,30 @@
 
 package local.example.seed.assembler;
 
+import local.example.seed.controller.ItemRestController;
 import local.example.seed.model.Item;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Component
 public class ItemRepresentationModelAssembler
         implements RepresentationModelAssembler<Item, EntityModel<Item>> {
+
     @Override
     public EntityModel<Item> toModel(Item item) {
-        return null;
+        return EntityModel.of(item,
+                linkTo(methodOn(ItemRestController.class).read(item.getId())).withSelfRel(),
+                linkTo(methodOn(ItemRestController.class).readAll()).withRel("items"));
     }
 
     @Override
     public CollectionModel<EntityModel<Item>>
             toCollectionModel(Iterable<? extends Item> items) {
-        return null;
+        return RepresentationModelAssembler.super.toCollectionModel(items);
     }
 }
