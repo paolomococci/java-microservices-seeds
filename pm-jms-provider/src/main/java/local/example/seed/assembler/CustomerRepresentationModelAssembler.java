@@ -18,23 +18,31 @@
 
 package local.example.seed.assembler;
 
+import local.example.seed.controller.CustomerRestController;
 import local.example.seed.model.Customer;
+import local.example.seed.repository.CustomerRestRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
 import org.springframework.stereotype.Component;
 
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Component
 public class CustomerRepresentationModelAssembler
         implements RepresentationModelAssembler<Customer, EntityModel<Customer>> {
+
     @Override
     public EntityModel<Customer> toModel(Customer customer) {
-        return null;
+        return EntityModel.of(customer,
+                linkTo(methodOn(CustomerRestController.class).read(customer.getId())).withSelfRel(),
+                linkTo(methodOn(CustomerRestController.class).readAll()).withRel("customers"));
     }
 
     @Override
     public CollectionModel<EntityModel<Customer>>
             toCollectionModel(Iterable<? extends Customer> customers) {
-        return null;
+        return RepresentationModelAssembler.super.toCollectionModel(customers);
     }
 }
