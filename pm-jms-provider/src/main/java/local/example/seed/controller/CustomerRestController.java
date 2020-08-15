@@ -22,13 +22,14 @@ import local.example.seed.assembler.CustomerRepresentationModelAssembler;
 import local.example.seed.model.Customer;
 import local.example.seed.repository.reactive.CustomerReactiveCrudRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
 
-@RestController
+@RepositoryRestController
 @RequestMapping(value = "/api/restful/customers", produces = "application/hal+json")
 public class CustomerRestController {
 
