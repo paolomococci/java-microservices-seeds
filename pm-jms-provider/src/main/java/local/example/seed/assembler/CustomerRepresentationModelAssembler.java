@@ -21,6 +21,7 @@ package local.example.seed.assembler;
 import local.example.seed.controller.CustomerRestController;
 import local.example.seed.model.Customer;
 import local.example.seed.repository.CustomerRestRepository;
+import lombok.SneakyThrows;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -34,6 +35,7 @@ public class CustomerRepresentationModelAssembler
         implements RepresentationModelAssembler<Customer, EntityModel<Customer>> {
 
     @Override
+    @SneakyThrows
     public EntityModel<Customer> toModel(Customer customer) {
         return EntityModel.of(customer,
                 linkTo(methodOn(CustomerRestController.class).read(customer.getId())).withSelfRel(),
