@@ -22,13 +22,14 @@ import local.example.seed.assembler.ItemRepresentationModelAssembler;
 import local.example.seed.model.Item;
 import local.example.seed.repository.reactive.ItemReactiveCrudRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
 
-@RestController
+@RepositoryRestController
 @RequestMapping(value = "/api/restful/items", produces = "application/hal+json")
 public class ItemRestController {
 
