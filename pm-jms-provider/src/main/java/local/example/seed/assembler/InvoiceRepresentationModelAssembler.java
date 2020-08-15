@@ -20,6 +20,7 @@ package local.example.seed.assembler;
 
 import local.example.seed.controller.InvoiceRestController;
 import local.example.seed.model.Invoice;
+import lombok.SneakyThrows;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.server.RepresentationModelAssembler;
@@ -33,6 +34,7 @@ public class InvoiceRepresentationModelAssembler
         implements RepresentationModelAssembler<Invoice, EntityModel<Invoice>> {
 
     @Override
+    @SneakyThrows
     public EntityModel<Invoice> toModel(Invoice invoice) {
         return EntityModel.of(invoice,
                 linkTo(methodOn(InvoiceRestController.class).read(invoice.getId())).withSelfRel(),
