@@ -22,13 +22,14 @@ import local.example.seed.assembler.InvoiceRepresentationModelAssembler;
 import local.example.seed.model.Invoice;
 import local.example.seed.repository.reactive.InvoiceReactiveCrudRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
 
-@RestController
+@RepositoryRestController
 @RequestMapping(value = "/api/restful/invoices", produces = "application/hal+json")
 public class InvoiceRestController {
 
