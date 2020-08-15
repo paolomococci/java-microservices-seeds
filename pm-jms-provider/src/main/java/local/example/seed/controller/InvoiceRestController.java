@@ -45,7 +45,8 @@ public class InvoiceRestController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<?> read(@PathVariable String id) {
+    public ResponseEntity<?> read(@PathVariable String id)
+            throws URISyntaxException {
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
