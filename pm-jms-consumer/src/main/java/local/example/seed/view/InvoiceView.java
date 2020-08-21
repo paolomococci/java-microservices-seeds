@@ -19,12 +19,20 @@
 package local.example.seed.view;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
+import local.example.seed.service.InvoiceRestfulRetrieverService;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @PageTitle(value = "invoice view")
 @Route(value = "invoice", layout = MainLayout.class)
@@ -39,6 +47,21 @@ public class InvoiceView
     public InvoiceView() {
         super();
         this.invoiceGrid = new Grid<>();
-        this.retrieveButton = new Button();
+        this.invoiceGrid.addColumn(invoice -> invoice.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.invoiceGrid.addColumn(invoice -> invoice.getDate()).setHeader("date").setSortable(true);
+        this.invoiceGrid.addColumn(invoice -> invoice.getTotal()).setHeader("total").setSortable(true);
+        this.retrieveButton = new Button(
+                "recovers all invoices",
+                VaadinIcon.ARROW_CIRCLE_DOWN_O.create(),
+                listener -> {
+                    try {
+                        this.invoiceGrid.setItems(InvoiceRestfulRetrieverService.getListOfInvoices(new URI(RESTFUL_BASE_URI)));
+                    } catch (
+                            ResponseStatusException | URISyntaxException exception) {
+                        exception.printStackTrace();
+                    }
+                });
+        this.retrieveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.add(this.retrieveButton, this.invoiceGrid);
     }
 }
