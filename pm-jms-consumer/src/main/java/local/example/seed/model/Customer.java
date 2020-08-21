@@ -18,5 +18,26 @@
 
 package local.example.seed.model;
 
-public class Customer {
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.hateoas.RepresentationModel;
+
+public class Customer
+        extends RepresentationModel<Customer> {
+
+    @Getter
+    @Setter
+    private String id;
+
+    @Getter
+    @Setter
+    private String name;
+
+    @Getter
+    @Setter
+    private String surname;
+
+    @Getter
+    @Setter
+    private String email;
 }
