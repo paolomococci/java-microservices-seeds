@@ -19,16 +19,28 @@
 package local.example.seed.service;
 
 import local.example.seed.model.Customer;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.hateoas.CollectionModel;
+import org.springframework.hateoas.MediaTypes;
+import org.springframework.hateoas.client.Traverson;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Service
 public class CustomerRestfulRetrieverService {
 
     public static List<Customer> getListOfCustomers(URI uri) {
-        // TODO
-        return null;
+        Traverson traverson = new Traverson(uri, MediaTypes.HAL_JSON);
+        Traverson.TraversalBuilder traversalBuilder = traverson.follow("customers");
+        ParameterizedTypeReference<CollectionModel<Customer>> parameterizedTypeReference;
+        parameterizedTypeReference = new ParameterizedTypeReference<>() {};
+        CollectionModel<Customer> collectionModelOfCustomers;
+        collectionModelOfCustomers = traversalBuilder.toObject(parameterizedTypeReference);
+        Collection<Customer> collectionOfCustomers = collectionModelOfCustomers.getContent();
+        return new ArrayList<>(collectionOfCustomers);
     }
 }
