@@ -18,5 +18,27 @@
 
 package local.example.seed.view;
 
-public class InvoiceView {
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import local.example.seed.layout.MainLayout;
+import local.example.seed.model.Invoice;
+
+@PageTitle(value = "invoice view")
+@Route(value = "invoice", layout = MainLayout.class)
+public class InvoiceView
+        extends Main {
+
+    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8080";
+
+    private final Grid<Invoice> invoiceGrid;
+    private final Button retrieveButton;
+
+    public InvoiceView() {
+        super();
+        this.invoiceGrid = new Grid<>();
+        this.retrieveButton = new Button();
+    }
 }
