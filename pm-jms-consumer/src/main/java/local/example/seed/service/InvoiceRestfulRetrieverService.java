@@ -18,5 +18,17 @@
 
 package local.example.seed.service;
 
+import local.example.seed.model.Invoice;
+import org.springframework.stereotype.Service;
+
+import java.net.URI;
+import java.util.List;
+
+@Service
 public class InvoiceRestfulRetrieverService {
+
+    public static List<Invoice> getListOfInvoices(URI uri) {
+        // TODO
+        return null;
+    }
 }
