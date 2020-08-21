@@ -18,5 +18,44 @@
 
 package local.example.seed.layout;
 
-public class MainLayout {
+import com.vaadin.flow.component.AttachEvent;
+import com.vaadin.flow.component.ComponentEventListener;
+import com.vaadin.flow.component.DetachEvent;
+import com.vaadin.flow.component.HasElement;
+import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.page.Push;
+import com.vaadin.flow.router.AfterNavigationEvent;
+import com.vaadin.flow.router.AfterNavigationObserver;
+import com.vaadin.flow.shared.Registration;
+
+@Push
+@CssImport(value = "style.css")
+public class MainLayout
+        extends AppLayout
+        implements AfterNavigationObserver {
+
+    @Override
+    public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
+        // TODO
+    }
+
+    @Override
+    public Registration addAttachListener(
+            ComponentEventListener<AttachEvent> attachEventComponentEventListener) {
+        // TODO
+        return null;
+    }
+
+    @Override
+    public Registration addDetachListener(
+            ComponentEventListener<DetachEvent> detachEventComponentEventListener) {
+        // TODO
+        return null;
+    }
+
+    @Override
+    public void removeRouterLayoutContent(HasElement oldContentHasElement) {
+        // TODO
+    }
 }
