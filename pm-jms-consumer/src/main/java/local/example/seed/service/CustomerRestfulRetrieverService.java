@@ -18,5 +18,17 @@
 
 package local.example.seed.service;
 
+import local.example.seed.model.Customer;
+import org.springframework.stereotype.Service;
+
+import java.net.URI;
+import java.util.List;
+
+@Service
 public class CustomerRestfulRetrieverService {
+
+    public static List<Customer> getListOfCustomers(URI uri) {
+        // TODO
+        return null;
+    }
 }
