@@ -19,12 +19,20 @@
 package local.example.seed.view;
 
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
+import local.example.seed.service.ItemRestfulRetrieverService;
+import org.springframework.web.server.ResponseStatusException;
+
+import java.net.URI;
+import java.net.URISyntaxException;
 
 @PageTitle(value = "item view")
 @Route(value = "item", layout = MainLayout.class)
@@ -39,6 +47,21 @@ public class ItemView
     public ItemView() {
         super();
         this.itemGrid = new Grid<>();
-        this.retrieveButton = new Button();
+        this.itemGrid.addColumn(item -> item.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.itemGrid.addColumn(item -> item.getName()).setHeader("name").setSortable(true);
+        this.itemGrid.addColumn(item -> item.getDescription()).setHeader("description").setSortable(false);
+        this.retrieveButton = new Button(
+                "recovers all items",
+                VaadinIcon.ARROW_CIRCLE_DOWN_O.create(),
+                listener -> {
+                    try {
+                        this.itemGrid.setItems(ItemRestfulRetrieverService.getListOfItems(new URI(RESTFUL_BASE_URI)));
+                    } catch (
+                            ResponseStatusException | URISyntaxException exception) {
+                        exception.printStackTrace();
+                    }
+                });
+        this.retrieveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.add(this.retrieveButton, this.itemGrid);
     }
 }
