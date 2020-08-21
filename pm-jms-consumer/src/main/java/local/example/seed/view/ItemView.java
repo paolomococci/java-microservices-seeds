@@ -31,7 +31,7 @@ import local.example.seed.model.Item;
 public class ItemView
         extends Main {
 
-    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8080";
+    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8080/api/restful";
 
     private final Grid<Item> itemGrid;
     private final Button retrieveButton;
