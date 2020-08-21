@@ -18,5 +18,25 @@
 
 package local.example.seed.view;
 
-public class MainView {
+import com.vaadin.flow.component.html.H2;
+import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.html.Paragraph;
+import com.vaadin.flow.component.html.Section;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import local.example.seed.layout.MainLayout;
+
+@PageTitle(value = "main view")
+@Route(value = "", layout = MainLayout.class)
+public class MainView
+        extends Main {
+
+    public MainView() {
+        super();
+        Paragraph paragraph = new Paragraph();
+        H2 subtitle = new H2("access through a RESTful web service");
+        paragraph.add("open the navigation bar and click on the links");
+        Section mainSection = new Section(subtitle, paragraph);
+        this.add(mainSection);
+    }
 }
