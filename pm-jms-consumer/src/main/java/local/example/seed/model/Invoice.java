@@ -18,5 +18,30 @@
 
 package local.example.seed.model;
 
-public class Invoice {
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
+
+import java.sql.Date;
+
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Invoice
+        extends RepresentationModel<Invoice> {
+
+    @Getter
+    @Setter
+    private String id;
+
+    @Getter
+    @Setter
+    private String code;
+
+    @Getter
+    @Setter
+    private Date date;
+
+    @Getter
+    @Setter
+    private Double total;
 }
