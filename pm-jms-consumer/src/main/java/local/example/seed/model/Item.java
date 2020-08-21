@@ -18,5 +18,28 @@
 
 package local.example.seed.model;
 
-public class Item {
+import lombok.*;
+import org.springframework.hateoas.RepresentationModel;
+
+@ToString
+@NoArgsConstructor
+@AllArgsConstructor
+public class Item
+        extends RepresentationModel<Item> {
+
+    @Getter
+    @Setter
+    private String id;
+
+    @Getter
+    @Setter
+    private String code;
+
+    @Getter
+    @Setter
+    private String name;
+
+    @Getter
+    @Setter
+    private String description;
 }
