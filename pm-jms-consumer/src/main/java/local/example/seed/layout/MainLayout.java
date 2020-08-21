@@ -39,23 +39,4 @@ public class MainLayout
     public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
         // TODO
     }
-
-    @Override
-    public Registration addAttachListener(
-            ComponentEventListener<AttachEvent> attachEventComponentEventListener) {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public Registration addDetachListener(
-            ComponentEventListener<DetachEvent> detachEventComponentEventListener) {
-        // TODO
-        return null;
-    }
-
-    @Override
-    public void removeRouterLayoutContent(HasElement oldContentHasElement) {
-        // TODO
-    }
 }
