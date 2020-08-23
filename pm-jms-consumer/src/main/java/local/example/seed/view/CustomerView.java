@@ -34,8 +34,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@PageTitle(value = "customer view")
 @Route(value = "customer", layout = MainLayout.class)
+@PageTitle(value = "customer view")
 public class CustomerView
         extends Main {
 
