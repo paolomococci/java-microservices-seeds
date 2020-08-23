@@ -34,8 +34,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@PageTitle(value = "item view")
 @Route(value = "item", layout = MainLayout.class)
+@PageTitle(value = "item view")
 public class ItemView
         extends Main {
 
