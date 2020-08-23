@@ -20,18 +20,21 @@ package local.example.seed.document;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.sql.Date;
 
 @Data
-@Document
+@Document(value = "invoice")
 public class Invoice {
 
     @Id
     private String id;
 
+    @Indexed(unique = true)
     private String code;
+
     private Date date;
     private Double total;
 }
