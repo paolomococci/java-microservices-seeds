@@ -19,10 +19,17 @@
 package local.example.seed.layout;
 
 import com.vaadin.flow.component.applayout.AppLayout;
+import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.dependency.CssImport;
+import com.vaadin.flow.component.html.*;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
+import com.vaadin.flow.router.RouterLink;
+import local.example.seed.view.CustomerView;
+import local.example.seed.view.InvoiceView;
+import local.example.seed.view.ItemView;
+import local.example.seed.view.MainView;
 
 @Push
 @CssImport(value = "style.css")
@@ -30,8 +37,51 @@ public class MainLayout
         extends AppLayout
         implements AfterNavigationObserver {
 
+    private final H1 title;
+    private final RouterLink mainView;
+    private final RouterLink customerView;
+    private final RouterLink invoiceView;
+    private final RouterLink itemView;
+
+    public MainLayout() {
+        super();
+        this.title = new H1("reactive RESTful web service data accessing");
+        this.mainView = new RouterLink("main view", MainView.class);
+        this.customerView = new RouterLink("customer view", CustomerView.class);
+        this.invoiceView = new RouterLink("invoice view", InvoiceView.class);
+        this.itemView = new RouterLink("item view", ItemView.class);
+
+        OrderedList unorderedList = new OrderedList(
+                new ListItem(this.mainView),
+                new ListItem(this.customerView),
+                new ListItem(this.invoiceView),
+                new ListItem(this.itemView)
+        );
+
+        Header header = new Header(new DrawerToggle(), this.title);
+        Nav nav = new Nav(unorderedList);
+
+        this.addToNavbar(header);
+        this.addToDrawer(nav);
+        this.setPrimarySection(Section.DRAWER);
+        this.setDrawerOpened(false);
+    }
+
+    private RouterLink[] listLinks() {
+        return new RouterLink[] {
+                this.mainView,
+                this.customerView,
+                this.invoiceView,
+                this.itemView
+        };
+    }
+
     @Override
     public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
-        // TODO
+        for (final RouterLink link : this.listLinks()) {
+            if (link.getHighlightCondition().shouldHighlight(link, afterNavigationEvent)) {
+                this.title.setText(link.getText());
+            }
+        }
     }
 }
