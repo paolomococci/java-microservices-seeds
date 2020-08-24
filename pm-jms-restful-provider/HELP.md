@@ -49,3 +49,171 @@ Date: Sun, 23 Aug 2020 15:28:55 GMT
 * Connection #0 to host 127.0.0.1 left intact
 }
 ```
+
+## insertion of some records
+```
+$ curl -v -i -H "Content-Type:application/json" -d '{"name":"John","surname":"Jump","email":"johnjump@example.local"}' http://127.0.0.1:8080/customers
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> POST /customers HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 65
+> 
+* upload completely sent off: 65 out of 65 bytes
+< HTTP/1.1 201 
+HTTP/1.1 201 
+< Vary: Origin
+Vary: Origin
+< Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Method
+< Vary: Access-Control-Request-Headers
+Vary: Access-Control-Request-Headers
+< Location: http://127.0.0.1:8080/customers/5f43558b371ce96b10561c0f
+Location: http://127.0.0.1:8080/customers/5f43558b371ce96b10561c0f
+< Content-Type: application/hal+json
+Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Mon, 24 Aug 2020 05:52:12 GMT
+Date: Mon, 24 Aug 2020 05:52:12 GMT
+
+< 
+{
+  "name" : "John",
+  "surname" : "Jump",
+  "email" : "johnjump@example.local",
+  "_links" : {
+    "self" : {
+      "href" : "http://127.0.0.1:8080/customers/5f43558b371ce96b10561c0f"
+    },
+    "customer" : {
+      "href" : "http://127.0.0.1:8080/customers/5f43558b371ce96b10561c0f"
+    }
+  }
+* Connection #0 to host 127.0.0.1 left intact
+}
+$ curl -v -i -H "Content-Type:application/json" -d '{"name":"James","surname":"Do","email":"jamesdo@example.local"}' http://127.0.0.1:8080/customers
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> POST /customers HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> Content-Type:application/json
+> Content-Length: 63
+> 
+* upload completely sent off: 63 out of 63 bytes
+< HTTP/1.1 201 
+HTTP/1.1 201 
+< Vary: Origin
+Vary: Origin
+< Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Method
+< Vary: Access-Control-Request-Headers
+Vary: Access-Control-Request-Headers
+< Location: http://127.0.0.1:8080/customers/5f4356da7575a25fbb466a95
+Location: http://127.0.0.1:8080/customers/5f4356da7575a25fbb466a95
+< Content-Type: application/hal+json
+Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Mon, 24 Aug 2020 05:57:46 GMT
+Date: Mon, 24 Aug 2020 05:57:46 GMT
+
+< 
+{
+  "name" : "James",
+  "surname" : "Do",
+  "email" : "jamesdo@example.local",
+  "_links" : {
+    "self" : {
+      "href" : "http://127.0.0.1:8080/customers/5f4356da7575a25fbb466a95"
+    },
+    "customer" : {
+      "href" : "http://127.0.0.1:8080/customers/5f4356da7575a25fbb466a95"
+    }
+  }
+* Connection #0 to host 127.0.0.1 left intact
+}
+```
+
+## now we see the newly inserted records
+```
+$ curl -v -i http://127.0.0.1:8080/customers
+*   Trying 127.0.0.1...
+* TCP_NODELAY set
+* Connected to 127.0.0.1 (127.0.0.1) port 8080 (#0)
+> GET /customers HTTP/1.1
+> Host: 127.0.0.1:8080
+> User-Agent: curl/7.58.0
+> Accept: */*
+> 
+< HTTP/1.1 200 
+HTTP/1.1 200 
+< Vary: Origin
+Vary: Origin
+< Vary: Access-Control-Request-Method
+Vary: Access-Control-Request-Method
+< Vary: Access-Control-Request-Headers
+Vary: Access-Control-Request-Headers
+< Content-Type: application/hal+json
+Content-Type: application/hal+json
+< Transfer-Encoding: chunked
+Transfer-Encoding: chunked
+< Date: Mon, 24 Aug 2020 06:00:49 GMT
+Date: Mon, 24 Aug 2020 06:00:49 GMT
+
+< 
+{
+  "_embedded" : {
+    "customers" : [ {
+      "name" : "John",
+      "surname" : "Jump",
+      "email" : "johnjump@example.local",
+      "_links" : {
+        "self" : {
+          "href" : "http://127.0.0.1:8080/customers/5f43558b371ce96b10561c0f"
+        },
+        "customer" : {
+          "href" : "http://127.0.0.1:8080/customers/5f43558b371ce96b10561c0f"
+        }
+      }
+    }, {
+      "name" : "James",
+      "surname" : "Do",
+      "email" : "jamesdo@example.local",
+      "_links" : {
+        "self" : {
+          "href" : "http://127.0.0.1:8080/customers/5f4356da7575a25fbb466a95"
+        },
+        "customer" : {
+          "href" : "http://127.0.0.1:8080/customers/5f4356da7575a25fbb466a95"
+        }
+      }
+    } ]
+  },
+  "_links" : {
+    "self" : {
+      "href" : "http://127.0.0.1:8080/customers"
+    },
+    "profile" : {
+      "href" : "http://127.0.0.1:8080/profile/customers"
+    },
+    "search" : {
+      "href" : "http://127.0.0.1:8080/customers/search"
+    }
+  },
+  "page" : {
+    "size" : 20,
+    "totalElements" : 2,
+    "totalPages" : 1,
+    "number" : 0
+  }
+* Connection #0 to host 127.0.0.1 left intact
+}
+```
