@@ -39,7 +39,7 @@ import java.net.URISyntaxException;
 public class InvoiceView
         extends Main {
 
-    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8080/api/restful";
+    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8080/";
 
     private final Grid<Invoice> invoiceGrid;
     private final Button retrieveButton;
