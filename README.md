@@ -1,2 +1,3 @@
 # java-microservices-seeds
-Application group with Spring Boot 2 and other open source frameworks.
+
+## This is a web application demo distributed on layers.
