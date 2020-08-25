@@ -20,10 +20,12 @@ package local.example.seed.document;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Data
-@Document
+@Document(value = "customer")
 public class Customer {
 
     @Id
@@ -31,5 +33,7 @@ public class Customer {
 
     private String name;
     private String surname;
+
+    @Indexed(unique = true, direction = IndexDirection.DESCENDING)
     private String email;
 }
