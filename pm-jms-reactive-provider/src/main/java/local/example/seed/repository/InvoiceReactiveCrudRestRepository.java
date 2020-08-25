@@ -24,7 +24,7 @@ import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import reactor.core.publisher.Mono;
 
-@RepositoryRestResource
+@RepositoryRestResource(collectionResourceRel = "invoices", path = "invoices")
 public interface InvoiceReactiveCrudRestRepository
         extends ReactiveCrudRepository<Invoice, String> {
 
