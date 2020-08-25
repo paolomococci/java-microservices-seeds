@@ -20,6 +20,7 @@ package local.example.seed.document;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -30,7 +31,7 @@ public class Item {
     @Id
     private String id;
 
-    @Indexed(unique = true)
+    @Indexed(unique = true, direction = IndexDirection.DESCENDING)
     private String code;
 
     private String name;
