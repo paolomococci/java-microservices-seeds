@@ -42,4 +42,8 @@ public class Item
     @Getter
     @Setter
     private String description;
+
+    @Getter
+    @Setter
+    private Double price;
 }
