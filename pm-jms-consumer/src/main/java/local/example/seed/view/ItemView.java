@@ -50,6 +50,7 @@ public class ItemView
         this.itemGrid.addColumn(item -> item.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.itemGrid.addColumn(item -> item.getName()).setHeader("name").setSortable(true);
         this.itemGrid.addColumn(item -> item.getDescription()).setHeader("description").setSortable(false);
+        this.itemGrid.addColumn(item -> item.getPrice()).setHeader("price").setSortable(true);
         this.retrieveButton = new Button(
                 "recovers all items",
                 VaadinIcon.ARROW_CIRCLE_DOWN_O.create(),
