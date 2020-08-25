@@ -20,6 +20,7 @@ package local.example.seed.document;
 
 import lombok.Data;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.IndexDirection;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -33,6 +34,6 @@ public class Customer {
     private String name;
     private String surname;
 
-    @Indexed(unique = true)
+    @Indexed(unique = true, direction = IndexDirection.DESCENDING)
     private String email;
 }
