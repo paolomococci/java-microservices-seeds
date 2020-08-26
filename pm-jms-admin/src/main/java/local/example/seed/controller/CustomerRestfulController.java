@@ -38,14 +38,12 @@ public class CustomerRestfulController {
     public List<Customer> readAll() {
         ResponseEntity<List<Customer>> responseEntity = this.restTemplate
                 .exchange(CUSTOMERS_URI, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
-        List<Customer> customers = responseEntity.getBody();
-        return customers;
+        return responseEntity.getBody();
     }
 
-    public Customer readAll(String id) {
+    public Customer read(String id) {
         ResponseEntity<Customer> responseEntity = this.restTemplate
                 .exchange(CUSTOMERS_URI +"/"+id, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
-        Customer customer = responseEntity.getBody();
-        return customer;
+        return responseEntity.getBody();
     }
 }
