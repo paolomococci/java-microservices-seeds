@@ -25,6 +25,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class ApplicationTests {
 
 	@Test
-	void voidTest() {
+	void voidTest() 
+			throws Exception {
 	}
 }
