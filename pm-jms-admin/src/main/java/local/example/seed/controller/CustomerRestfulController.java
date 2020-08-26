@@ -24,6 +24,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URISyntaxException;
 import java.util.List;
 
 public class CustomerRestfulController {
@@ -35,13 +36,15 @@ public class CustomerRestfulController {
         this.restTemplate = new RestTemplate();
     }
 
-    public List<Customer> readAll() {
+    public List<Customer> readAll()
+            throws URISyntaxException {
         ResponseEntity<List<Customer>> responseEntity = this.restTemplate
                 .exchange(CUSTOMERS_URI, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
         return responseEntity.getBody();
     }
 
-    public Customer read(String id) {
+    public Customer read(String id)
+            throws URISyntaxException {
         ResponseEntity<Customer> responseEntity = this.restTemplate
                 .exchange(CUSTOMERS_URI +"/"+id, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
         return responseEntity.getBody();
