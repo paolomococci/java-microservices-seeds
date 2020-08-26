@@ -19,10 +19,18 @@
 package local.example.seed.repository;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 public class CustomerRestRepositoryTests {
+    
+    @Autowired
+    private MockMvc mockMvc;
+    
+    @Autowired
+    private CustomerRestRepository customerRestRepository;
 
     @Test
     void voidTest()
