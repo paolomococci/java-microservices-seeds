@@ -18,11 +18,39 @@
 
 package local.example.seed.controller.reactive;
 
+import local.example.seed.model.Item;
+import org.springframework.web.reactive.function.client.WebClient;
+
 public class ItemRestfulReactiveController {
 
-    private static final String ITEMS_URI = "http://127.0.0.1:8080/items";
+    private static final String ITEMS_URI = "http://127.0.0.1:8081/items";
+    private final WebClient webClient;
 
     public ItemRestfulReactiveController() {
+        this.webClient = WebClient.builder().build();
+    }
 
+    public void create(Item item) {
+        // TODO
+    }
+
+    public void read(String id) {
+        // TODO
+    }
+
+    public void readAll() {
+        // TODO
+    }
+
+    public void update(Item item, String id) {
+        // TODO
+    }
+
+    public void partialUpdate(Item item, String id) {
+        // TODO
+    }
+
+    public void delete(String id) {
+        this.webClient.mutate().baseUrl(ITEMS_URI+"/"+id).build().delete();
     }
 }
