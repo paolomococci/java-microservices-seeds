@@ -18,5 +18,7 @@
 
 package local.example.seed.handler;
 
-public class CustomerChangeHandler {
+public interface CustomerChangeHandler {
+
+    void onChange();
 }
