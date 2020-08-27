@@ -36,17 +36,39 @@ public class CustomerRestfulController {
         this.restTemplate = new RestTemplate();
     }
 
-    public List<Customer> readAll()
-            throws URISyntaxException {
-        ResponseEntity<List<Customer>> responseEntity = this.restTemplate
-                .exchange(CUSTOMERS_URI, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
-        return responseEntity.getBody();
+    public void create(Customer customer) {
+        // TODO
     }
 
     public Customer read(String id)
             throws URISyntaxException {
         ResponseEntity<Customer> responseEntity = this.restTemplate
-                .exchange(CUSTOMERS_URI +"/"+id, HttpMethod.GET, null, new ParameterizedTypeReference<>() {});
+                .exchange(CUSTOMERS_URI +"/"+id,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<>() {});
         return responseEntity.getBody();
+    }
+
+    public List<Customer> readAll()
+            throws URISyntaxException {
+        ResponseEntity<List<Customer>> responseEntity = this.restTemplate
+                .exchange(CUSTOMERS_URI,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<>() {});
+        return responseEntity.getBody();
+    }
+
+    public void update(Customer customer, String id) {
+        // TODO
+    }
+
+    public void partialUpdate(Customer customer, String id) {
+        // TODO
+    }
+
+    public void delete(String id) {
+        // TODO
     }
 }
