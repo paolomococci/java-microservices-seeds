@@ -18,11 +18,57 @@
 
 package local.example.seed.controller;
 
+import local.example.seed.model.Invoice;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.URISyntaxException;
+import java.util.List;
+
 public class InvoiceRestfulController {
 
     private static final String INVOICES_URI = "http://127.0.0.1:8080/invoices";
+    private final RestTemplate restTemplate;
 
     public InvoiceRestfulController() {
+        this.restTemplate = new RestTemplate();
+    }
 
+    public void create(Invoice invoice) {
+        // TODO
+    }
+
+    public Invoice read(String id)
+            throws URISyntaxException {
+        ResponseEntity<Invoice> responseEntity = this.restTemplate
+                .exchange(INVOICES_URI +"/"+id,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<>() {});
+        return responseEntity.getBody();
+    }
+
+    public List<Invoice> readAll()
+            throws URISyntaxException {
+        ResponseEntity<List<Invoice>> responseEntity = this.restTemplate
+                .exchange(INVOICES_URI,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<>() {});
+        return responseEntity.getBody();
+    }
+
+    public void update(Invoice invoice, String id) {
+        // TODO
+    }
+
+    public void partialUpdate(Invoice invoice, String id) {
+        // TODO
+    }
+
+    public void delete(String id) {
+        // TODO
     }
 }
