@@ -19,7 +19,11 @@
 package local.example.seed.form;
 
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
 
+@UIScope
+@SpringComponent
 public class InvoiceEditorForm
         extends FormLayout {
 }
