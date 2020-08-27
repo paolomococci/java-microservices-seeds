@@ -18,11 +18,57 @@
 
 package local.example.seed.controller;
 
+import local.example.seed.model.Item;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+
+import java.net.URISyntaxException;
+import java.util.List;
+
 public class ItemRestfulController {
 
     private static final String ITEMS_URI = "http://127.0.0.1:8080/items";
+    private final RestTemplate restTemplate;
 
     public ItemRestfulController() {
+        this.restTemplate = new RestTemplate();
+    }
 
+    public void create(Item item) {
+        // TODO
+    }
+
+    public Item read(String id)
+            throws URISyntaxException {
+        ResponseEntity<Item> responseEntity = this.restTemplate
+                .exchange(ITEMS_URI +"/"+id,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<>() {});
+        return responseEntity.getBody();
+    }
+
+    public List<Item> readAll()
+            throws URISyntaxException {
+        ResponseEntity<List<Item>> responseEntity = this.restTemplate
+                .exchange(ITEMS_URI,
+                        HttpMethod.GET,
+                        null,
+                        new ParameterizedTypeReference<>() {});
+        return responseEntity.getBody();
+    }
+
+    public void update(Item item, String id) {
+        // TODO
+    }
+
+    public void partialUpdate(Item item, String id) {
+        // TODO
+    }
+
+    public void delete(String id) {
+        // TODO
     }
 }
