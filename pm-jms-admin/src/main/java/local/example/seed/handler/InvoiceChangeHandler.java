@@ -18,5 +18,7 @@
 
 package local.example.seed.handler;
 
-public class InvoiceChangeHandler {
+public interface InvoiceChangeHandler {
+
+    void onChange();
 }
