@@ -18,5 +18,8 @@
 
 package local.example.seed.form;
 
-public class InvoiceEditorForm {
+import com.vaadin.flow.component.formlayout.FormLayout;
+
+public class InvoiceEditorForm
+        extends FormLayout {
 }
