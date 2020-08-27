@@ -18,11 +18,39 @@
 
 package local.example.seed.controller.reactive;
 
+import local.example.seed.model.Invoice;
+import org.springframework.web.reactive.function.client.WebClient;
+
 public class InvoiceRestfulReactiveController {
 
-    private static final String INVOICES_URI = "http://127.0.0.1:8080/invoices";
+    private static final String INVOICES_URI = "http://127.0.0.1:8081/invoices";
+    private final WebClient webClient;
 
     public InvoiceRestfulReactiveController() {
+        this.webClient = WebClient.create();
+    }
 
+    public void create(Invoice invoice) {
+        // TODO
+    }
+
+    public void read(String id) {
+        // TODO
+    }
+
+    public void readAll() {
+        // TODO
+    }
+
+    public void update(Invoice invoice, String id) {
+        // TODO
+    }
+
+    public void partialUpdate(Invoice invoice, String id) {
+        // TODO
+    }
+
+    public void delete(String id) {
+        // TODO
     }
 }
