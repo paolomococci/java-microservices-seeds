@@ -18,5 +18,7 @@
 
 package local.example.seed.handler;
 
-public class ItemChangeHandler {
+public interface ItemChangeHandler {
+
+    void onChange();
 }
