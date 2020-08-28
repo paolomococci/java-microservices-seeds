@@ -19,11 +19,29 @@
 package local.example.seed.form.reactive;
 
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import local.example.seed.controller.reactive.ItemRestfulReactiveController;
+import local.example.seed.handler.ItemChangeHandler;
+import local.example.seed.model.Item;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @UIScope
 @SpringComponent
 public class ItemEditorFormReactive
         extends FormLayout {
+
+    private final ItemRestfulReactiveController itemRestfulReactiveController;
+    private Item item;
+    private Binder<Item> itemBinder;
+    private ItemChangeHandler itemChangeHandler;
+
+    @Autowired
+    public ItemEditorFormReactive(
+            ItemRestfulReactiveController itemRestfulReactiveController
+    ) {
+        super();
+        this.itemRestfulReactiveController = itemRestfulReactiveController;
+    }
 }
