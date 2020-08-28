@@ -19,11 +19,29 @@
 package local.example.seed.form;
 
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import local.example.seed.controller.InvoiceRestfulController;
+import local.example.seed.handler.InvoiceChangeHandler;
+import local.example.seed.model.Invoice;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @UIScope
 @SpringComponent
 public class InvoiceEditorForm
         extends FormLayout {
+
+    private final InvoiceRestfulController invoiceRestfulController;
+    private Invoice invoice;
+    private Binder<Invoice> invoiceBinder;
+    private InvoiceChangeHandler invoiceChangeHandler;
+
+    @Autowired
+    public InvoiceEditorForm(
+            InvoiceRestfulController invoiceRestfulController
+    ) {
+        super();
+        this.invoiceRestfulController = invoiceRestfulController;
+    }
 }
