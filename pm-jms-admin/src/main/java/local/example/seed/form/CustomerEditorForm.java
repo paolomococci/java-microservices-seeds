@@ -19,11 +19,29 @@
 package local.example.seed.form;
 
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import local.example.seed.controller.CustomerRestfulController;
+import local.example.seed.handler.CustomerChangeHandler;
+import local.example.seed.model.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @UIScope
 @SpringComponent
 public class CustomerEditorForm
         extends FormLayout {
+
+    private final CustomerRestfulController customerRestfulController;
+    private Customer customer;
+    private Binder<Customer> customerBinder;
+    private CustomerChangeHandler customerChangeHandler;
+
+    @Autowired
+    public CustomerEditorForm(
+            CustomerRestfulController customerRestfulController
+    ) {
+        super();
+        this.customerRestfulController = customerRestfulController;
+    }
 }
