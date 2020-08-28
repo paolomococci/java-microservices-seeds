@@ -18,11 +18,17 @@
 
 package local.example.seed.view.editor;
 
+import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 
 @Route(value = "customer-editor", layout = MainLayout.class)
 @PageTitle(value = "customer editor")
-public class CustomerEditorView {
+public class CustomerEditorView
+        extends Main {
+    
+    public CustomerEditorView() {
+        super();
+    }
 }
