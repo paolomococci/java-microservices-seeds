@@ -19,11 +19,29 @@
 package local.example.seed.form.reactive;
 
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import local.example.seed.controller.reactive.InvoiceRestfulReactiveController;
+import local.example.seed.handler.InvoiceChangeHandler;
+import local.example.seed.model.Invoice;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @UIScope
 @SpringComponent
 public class InvoiceEditorFormReactive
         extends FormLayout {
+
+    private final InvoiceRestfulReactiveController invoiceRestfulReactiveController;
+    private Invoice invoice;
+    private Binder<Invoice> invoiceBinder;
+    private InvoiceChangeHandler invoiceChangeHandler;
+
+    @Autowired
+    public InvoiceEditorFormReactive(
+            InvoiceRestfulReactiveController invoiceRestfulReactiveController
+    ) {
+        super();
+        this.invoiceRestfulReactiveController = invoiceRestfulReactiveController;
+    }
 }
