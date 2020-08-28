@@ -26,7 +26,7 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 
-@Route(value = "", layout = MainLayout.class)
+@Route(layout = MainLayout.class)
 @PageTitle(value = "main view")
 public class MainView
         extends Main {
