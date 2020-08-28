@@ -19,11 +19,29 @@
 package local.example.seed.form;
 
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
+import local.example.seed.controller.ItemRestfulController;
+import local.example.seed.handler.ItemChangeHandler;
+import local.example.seed.model.Item;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @UIScope
 @SpringComponent
 public class ItemEditorForm
         extends FormLayout {
+
+    private final ItemRestfulController itemRestfulController;
+    private Item item;
+    private Binder<Item> itemBinder;
+    private ItemChangeHandler itemChangeHandler;
+
+    @Autowired
+    public ItemEditorForm(
+            ItemRestfulController itemRestfulController
+    ) {
+        super();
+        this.itemRestfulController = itemRestfulController;
+    }
 }
