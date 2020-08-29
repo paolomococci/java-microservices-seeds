@@ -24,10 +24,12 @@ import com.vaadin.flow.component.html.Paragraph;
 import com.vaadin.flow.component.html.Section;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.router.RouteAlias;
 import local.example.seed.layout.MainLayout;
 
 @Route(layout = MainLayout.class)
 @PageTitle(value = "main view")
+@RouteAlias(value = "main", layout = MainLayout.class)
 public class MainView
         extends Main {
 
