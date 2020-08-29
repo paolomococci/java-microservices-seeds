@@ -26,6 +26,7 @@ import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.RouterLink;
+import com.vaadin.flow.server.PWA;
 import local.example.seed.view.CustomerView;
 import local.example.seed.view.InvoiceView;
 import local.example.seed.view.ItemView;
@@ -33,6 +34,7 @@ import local.example.seed.view.MainView;
 
 @Push
 @CssImport(value = "style.css")
+@PWA(enableInstallPrompt = false, name = "jms-admin", shortName = "admin", startPath = "/main")
 public class MainLayout
         extends AppLayout
         implements AfterNavigationObserver {
@@ -64,7 +66,7 @@ public class MainLayout
         this.addToNavbar(header);
         this.addToDrawer(nav);
         this.setPrimarySection(Section.DRAWER);
-        this.setDrawerOpened(false);
+        this.setDrawerOpened(true);
     }
 
     private RouterLink[] listLinks() {
@@ -78,9 +80,12 @@ public class MainLayout
 
     @Override
     public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
-        for (final RouterLink link : this.listLinks()) {
-            if (link.getHighlightCondition().shouldHighlight(link, afterNavigationEvent)) {
-                this.title.setText(link.getText());
+        for (final RouterLink routerLink : this.listLinks()) {
+            if (routerLink.getHighlightCondition().shouldHighlight(
+                    routerLink,
+                    afterNavigationEvent
+            )) {
+                this.title.setText(routerLink.getText());
             }
         }
     }
