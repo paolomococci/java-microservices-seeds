@@ -22,7 +22,9 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
+import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.AfterNavigationEvent;
 import com.vaadin.flow.router.AfterNavigationObserver;
 import com.vaadin.flow.router.RouterLink;
@@ -35,6 +37,7 @@ import local.example.seed.view.MainView;
 @Push
 @CssImport(value = "style.css")
 @PWA(enableInstallPrompt = false, name = "jms-admin", shortName = "admin", startPath = "/main")
+@Viewport(value = "width=device-width, minimum-scale=1, initial-scale=1, user-scalable=yes, viewport-fit=cover")
 public class MainLayout
         extends AppLayout
         implements AfterNavigationObserver {
@@ -60,7 +63,7 @@ public class MainLayout
                 new ListItem(this.itemView)
         );
 
-        Header header = new Header(new DrawerToggle(), this.title);
+        Header header = new Header(new DrawerToggle(), this.title, VaadinIcon.ARCHIVES.create());
         Nav nav = new Nav(unorderedList);
 
         this.addToNavbar(header);
