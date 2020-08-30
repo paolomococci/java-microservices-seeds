@@ -98,8 +98,8 @@ public class ItemEditorForm
         // TODO
     }
 
-    public void setItemChangeHandler() {
-        // TODO
+    public void setItemChangeHandler(ItemChangeHandler itemChangeHandler) {
+        this.itemChangeHandler = itemChangeHandler;
     }
 
     public final void editItem(Item temp) {
