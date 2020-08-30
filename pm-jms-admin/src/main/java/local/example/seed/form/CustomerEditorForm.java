@@ -82,4 +82,24 @@ public class CustomerEditorForm
 
         this.form = new VerticalLayout();
     }
+
+    private void save() {
+        // TODO
+    }
+
+    private void delete() {
+        // TODO
+    }
+
+    private void edit(Customer temp) {
+        // TODO
+    }
+
+    public void setCustomerChangeHandler() {
+        // TODO
+    }
+
+    public final void editItem(Customer temp) {
+        // TODO
+    }
 }
