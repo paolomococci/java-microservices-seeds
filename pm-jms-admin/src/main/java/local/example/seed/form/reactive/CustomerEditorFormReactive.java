@@ -20,6 +20,7 @@ package local.example.seed.form.reactive;
 
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -60,14 +61,23 @@ public class CustomerEditorFormReactive
         super();
         this.customerRestfulReactiveController = customerRestfulReactiveController;
 
-        this.name = new TextField();
-        this.surname = new TextField();
-        this.email = new TextField();
+        this.name = new TextField("name");
+        this.surname = new TextField("surname");
+        this.email = new TextField("email");
         this.fields = new VerticalLayout();
 
-        this.save = new Button();
-        this.delete = new Button();
-        this.cancel = new Button();
+        this.save = new Button(
+                "save",
+                VaadinIcon.PLUS_CIRCLE_O.create()
+        );
+        this.delete = new Button(
+                "delete",
+                VaadinIcon.TRASH.create()
+        );
+        this.cancel = new Button(
+                "cancel",
+                VaadinIcon.ASTERISK.create()
+        );
         this.buttons = new HorizontalLayout();
 
         this.form = new VerticalLayout();
