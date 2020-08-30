@@ -83,4 +83,24 @@ public class InvoiceEditorFormReactive
 
         this.form = new VerticalLayout();
     }
+
+    private void save() {
+        // TODO
+    }
+
+    private void delete() {
+        // TODO
+    }
+
+    private void edit(Invoice temp) {
+        // TODO
+    }
+
+    public void setInvoiceChangeHandler() {
+        // TODO
+    }
+
+    public final void editItem(Invoice temp) {
+        // TODO
+    }
 }
