@@ -96,8 +96,8 @@ public class InvoiceEditorForm
         // TODO
     }
 
-    public void setInvoiceChangeHandler() {
-        // TODO
+    public void setInvoiceChangeHandler(InvoiceChangeHandler invoiceChangeHandler) {
+        this.invoiceChangeHandler = invoiceChangeHandler;
     }
 
     public final void editItem(Invoice temp) {
