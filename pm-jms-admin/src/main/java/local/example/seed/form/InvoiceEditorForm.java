@@ -21,6 +21,7 @@ package local.example.seed.form;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.datepicker.DatePicker;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.TextField;
@@ -61,14 +62,23 @@ public class InvoiceEditorForm
         super();
         this.invoiceRestfulController = invoiceRestfulController;
 
-        this.code = new TextField();
-        this.date = new DatePicker();
-        this.total = new TextField();
+        this.code = new TextField("code");
+        this.date = new DatePicker("date");
+        this.total = new TextField("total");
         this.fields = new VerticalLayout();
 
-        this.save = new Button();
-        this.delete = new Button();
-        this.cancel = new Button();
+        this.save = new Button(
+                "save",
+                VaadinIcon.PLUS_CIRCLE_O.create()
+        );
+        this.delete = new Button(
+                "delete",
+                VaadinIcon.TRASH.create()
+        );
+        this.cancel = new Button(
+                "cancel",
+                VaadinIcon.ASTERISK.create()
+        );
         this.buttons = new HorizontalLayout();
 
         this.form = new VerticalLayout();
