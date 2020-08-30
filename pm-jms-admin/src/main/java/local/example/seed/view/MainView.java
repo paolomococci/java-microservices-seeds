@@ -27,9 +27,10 @@ import com.vaadin.flow.router.Route;
 import com.vaadin.flow.router.RouteAlias;
 import local.example.seed.layout.MainLayout;
 
-@Route(layout = MainLayout.class)
 @PageTitle(value = "main view")
+@RouteAlias(value = "", layout = MainLayout.class)
 @RouteAlias(value = "main", layout = MainLayout.class)
+@Route(value = "", absolute = false, registerAtStartup = true, layout = MainLayout.class)
 public class MainView
         extends Main {
 
