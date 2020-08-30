@@ -47,23 +47,35 @@ public class MainLayout
     private final RouterLink invoiceView;
     private final RouterLink itemView;
 
+    private final RouterLink customerEditorView;
+    private final RouterLink invoiceEditorView;
+    private final RouterLink itemEditorView;
+
     public MainLayout() {
         super();
+        
         this.title = new H1("reactive RESTful web service data accessing");
         this.mainView = new RouterLink("main view", MainView.class);
         this.customerView = new RouterLink("customer view", CustomerView.class);
         this.invoiceView = new RouterLink("invoice view", InvoiceView.class);
         this.itemView = new RouterLink("item view", ItemView.class);
+        
+        this.customerEditorView = new RouterLink("customer editor", null);
+        this.invoiceEditorView = new RouterLink("invoice editor", null);
+        this.itemEditorView = new RouterLink("item editor", null);
 
-        OrderedList unorderedList = new OrderedList(
+        OrderedList orderedList = new OrderedList(
                 new ListItem(this.mainView),
                 new ListItem(this.customerView),
                 new ListItem(this.invoiceView),
-                new ListItem(this.itemView)
+                new ListItem(this.itemView), 
+                new ListItem(this.customerEditorView), 
+                new ListItem(this.invoiceEditorView), 
+                new ListItem(this.itemEditorView)
         );
 
         Header header = new Header(new DrawerToggle(), this.title);
-        Nav nav = new Nav(unorderedList);
+        Nav nav = new Nav(orderedList);
 
         this.addToNavbar(header);
         this.addToDrawer(nav);
@@ -76,7 +88,10 @@ public class MainLayout
                 this.mainView,
                 this.customerView,
                 this.invoiceView,
-                this.itemView
+                this.itemView, 
+                this.customerEditorView, 
+                this.invoiceEditorView, 
+                this.itemEditorView
         };
     }
 
