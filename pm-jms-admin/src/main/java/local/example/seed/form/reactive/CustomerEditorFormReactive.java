@@ -18,7 +18,11 @@
 
 package local.example.seed.form.reactive;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -37,11 +41,35 @@ public class CustomerEditorFormReactive
     private Binder<Customer> customerBinder;
     private CustomerChangeHandler customerChangeHandler;
 
+    private final TextField name;
+    private final TextField surname;
+    private final TextField email;
+    private final VerticalLayout fields;
+
+    private final Button save;
+    private final Button delete;
+    private final Button cancel;
+    private final HorizontalLayout buttons;
+
+    private final VerticalLayout form;
+
     @Autowired
     public CustomerEditorFormReactive(
             CustomerRestfulReactiveController customerRestfulReactiveController
     ) {
         super();
         this.customerRestfulReactiveController = customerRestfulReactiveController;
+
+        this.name = new TextField();
+        this.surname = new TextField();
+        this.email = new TextField();
+        this.fields = new VerticalLayout();
+
+        this.save = new Button();
+        this.delete = new Button();
+        this.cancel = new Button();
+        this.buttons = new HorizontalLayout();
+
+        this.form = new VerticalLayout();
     }
 }
