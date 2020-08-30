@@ -34,8 +34,8 @@ import org.springframework.web.server.ResponseStatusException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-@Route(value = "invoice", layout = MainLayout.class)
 @PageTitle(value = "invoice view")
+@Route(value = "invoice", layout = MainLayout.class)
 public class InvoiceView
         extends Main {
 
