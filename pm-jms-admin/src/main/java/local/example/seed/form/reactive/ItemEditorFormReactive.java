@@ -18,7 +18,12 @@
 
 package local.example.seed.form.reactive;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextArea;
+import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
@@ -37,11 +42,37 @@ public class ItemEditorFormReactive
     private Binder<Item> itemBinder;
     private ItemChangeHandler itemChangeHandler;
 
+    private final TextField code;
+    private final TextField name;
+    private final TextArea description;
+    private final TextField price;
+    private final VerticalLayout fields;
+
+    private final Button save;
+    private final Button delete;
+    private final Button cancel;
+    private final HorizontalLayout buttons;
+
+    private final VerticalLayout form;
+
     @Autowired
     public ItemEditorFormReactive(
             ItemRestfulReactiveController itemRestfulReactiveController
     ) {
         super();
         this.itemRestfulReactiveController = itemRestfulReactiveController;
+
+        this.code = new TextField();
+        this.name = new TextField();
+        this.description = new TextArea();
+        this.price = new TextField();
+        this.fields = new VerticalLayout();
+
+        this.save = new Button();
+        this.delete = new Button();
+        this.cancel = new Button();
+        this.buttons = new HorizontalLayout();
+
+        this.form = new VerticalLayout();
     }
 }
