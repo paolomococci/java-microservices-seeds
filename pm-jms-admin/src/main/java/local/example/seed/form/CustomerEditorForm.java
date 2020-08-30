@@ -95,8 +95,8 @@ public class CustomerEditorForm
         // TODO
     }
 
-    public void setCustomerChangeHandler() {
-        // TODO
+    public void setCustomerChangeHandler(CustomerChangeHandler customerChangeHandler) {
+        this.customerChangeHandler = customerChangeHandler;
     }
 
     public final void editItem(Customer temp) {
