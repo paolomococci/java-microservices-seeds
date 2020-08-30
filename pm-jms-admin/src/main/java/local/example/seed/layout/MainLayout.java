@@ -22,7 +22,6 @@ import com.vaadin.flow.component.applayout.AppLayout;
 import com.vaadin.flow.component.applayout.DrawerToggle;
 import com.vaadin.flow.component.dependency.CssImport;
 import com.vaadin.flow.component.html.*;
-import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.page.Push;
 import com.vaadin.flow.component.page.Viewport;
 import com.vaadin.flow.router.AfterNavigationEvent;
@@ -63,7 +62,7 @@ public class MainLayout
                 new ListItem(this.itemView)
         );
 
-        Header header = new Header(new DrawerToggle(), this.title, VaadinIcon.ARCHIVES.create());
+        Header header = new Header(new DrawerToggle(), this.title);
         Nav nav = new Nav(unorderedList);
 
         this.addToNavbar(header);
