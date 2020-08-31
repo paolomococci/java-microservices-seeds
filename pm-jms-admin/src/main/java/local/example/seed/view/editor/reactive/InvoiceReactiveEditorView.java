@@ -18,5 +18,17 @@
 
 package local.example.seed.view.editor.reactive;
 
-public class InvoiceReactiveEditorView {
+import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import local.example.seed.layout.MainLayout;
+
+@PageTitle(value = "invoice reactive editor")
+@Route(value = "invoice-reactive-editor", layout = MainLayout.class)
+public class InvoiceReactiveEditorView
+        extends Main {
+
+    public InvoiceReactiveEditorView() {
+        super();
+    }
 }
