@@ -75,14 +75,20 @@ public class ItemEditorForm
                 "save",
                 VaadinIcon.PLUS_CIRCLE_O.create()
         );
+        // TODO: add theme variant, click listener and click shortcut
+
         this.delete = new Button(
                 "delete",
                 VaadinIcon.TRASH.create()
         );
+        // TODO: add theme variant, click listener and click shortcut
+
         this.cancel = new Button(
                 "cancel",
                 VaadinIcon.ASTERISK.create()
         );
+        // TODO: add theme variant, click listener and click shortcut
+
         this.buttons = new HorizontalLayout();
 
         this.form = new VerticalLayout();
