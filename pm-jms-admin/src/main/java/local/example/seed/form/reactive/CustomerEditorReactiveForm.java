@@ -84,11 +84,17 @@ public class CustomerEditorReactiveForm
     }
 
     private void save() {
-        // TODO
+        if (this.customer != null) {
+            this.customerRestfulReactiveController.create(this.customer);
+            this.customerChangeHandler.onChange();
+        }
     }
 
     private void delete() {
-        // TODO
+        if (this.customer.getId() != null) {
+            this.customerRestfulReactiveController.delete(this.customer.getId());
+            this.customerChangeHandler.onChange();
+        }
     }
 
     private void edit(Customer temp) {
@@ -100,6 +106,10 @@ public class CustomerEditorReactiveForm
     }
 
     public final void editItem(Customer temp) {
-        // TODO
+        if (temp != null) {
+            this.edit(temp);
+        } else {
+            this.setVisible(false);
+        }
     }
 }
