@@ -51,27 +51,38 @@ public class MainLayout
     private final RouterLink invoiceEditorView;
     private final RouterLink itemEditorView;
 
+    private final RouterLink customerReactiveEditorView;
+    private final RouterLink invoiceReactiveEditorView;
+    private final RouterLink itemReactiveEditorView;
+
     public MainLayout() {
         super();
-        
+
         this.title = new H1("reactive RESTful web service data accessing");
         this.mainView = new RouterLink("main view", MainView.class);
         this.customerView = new RouterLink("customer view", CustomerView.class);
         this.invoiceView = new RouterLink("invoice view", InvoiceView.class);
         this.itemView = new RouterLink("item view", ItemView.class);
-        
+
         this.customerEditorView = new RouterLink("customer editor", null);
         this.invoiceEditorView = new RouterLink("invoice editor", null);
         this.itemEditorView = new RouterLink("item editor", null);
+
+        this.customerReactiveEditorView = new RouterLink("customer reactive editor", null);
+        this.invoiceReactiveEditorView = new RouterLink("invoice reactive editor", null);
+        this.itemReactiveEditorView = new RouterLink("item reactive editor", null);
 
         OrderedList orderedList = new OrderedList(
                 new ListItem(this.mainView),
                 new ListItem(this.customerView),
                 new ListItem(this.invoiceView),
-                new ListItem(this.itemView), 
-                new ListItem(this.customerEditorView), 
-                new ListItem(this.invoiceEditorView), 
-                new ListItem(this.itemEditorView)
+                new ListItem(this.itemView),
+                new ListItem(this.customerEditorView),
+                new ListItem(this.invoiceEditorView),
+                new ListItem(this.itemEditorView),
+                new ListItem(this.customerReactiveEditorView),
+                new ListItem(this.invoiceReactiveEditorView),
+                new ListItem(this.itemReactiveEditorView)
         );
 
         Header header = new Header(new DrawerToggle(), this.title);
@@ -88,10 +99,13 @@ public class MainLayout
                 this.mainView,
                 this.customerView,
                 this.invoiceView,
-                this.itemView, 
-                this.customerEditorView, 
-                this.invoiceEditorView, 
-                this.itemEditorView
+                this.itemView,
+                this.customerEditorView,
+                this.invoiceEditorView,
+                this.itemEditorView,
+                this.customerReactiveEditorView,
+                this.invoiceReactiveEditorView,
+                this.itemReactiveEditorView
         };
     }
 
