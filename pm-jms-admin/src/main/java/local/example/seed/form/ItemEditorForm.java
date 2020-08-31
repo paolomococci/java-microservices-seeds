@@ -33,6 +33,8 @@ import local.example.seed.handler.ItemChangeHandler;
 import local.example.seed.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.net.URISyntaxException;
+
 @UIScope
 @SpringComponent
 public class ItemEditorForm
@@ -104,11 +106,18 @@ public class ItemEditorForm
         String id = temp.getId();
         final boolean alreadyExisting = temp.getId() != null;
         if (alreadyExisting) {
-            // TODO
+            try {
+                this.item = this.itemRestfulController.read(id);
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }
         } else {
-            // TODO
+            this.item = temp;
         }
-        // TODO
+        this.cancel.setVisible(alreadyExisting);
+        this.itemBinder.setBean(this.item);
+        this.setVisible(true);
+        this.code.focus();
     }
 
     public void setItemChangeHandler(ItemChangeHandler itemChangeHandler) {
