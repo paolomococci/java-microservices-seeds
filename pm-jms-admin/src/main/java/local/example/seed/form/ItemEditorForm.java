@@ -87,14 +87,27 @@ public class ItemEditorForm
     }
 
     private void save() {
-        // TODO
+        if (this.item != null) {
+            this.itemRestfulController.create(this.item);
+            this.itemChangeHandler.onChange();
+        }
     }
 
     private void delete() {
-        // TODO
+        if (this.item.getId() != null) {
+            this.itemRestfulController.delete(this.item.getId());
+            this.itemChangeHandler.onChange();
+        }
     }
 
     private void edit(Item temp) {
+        String id = temp.getId();
+        final boolean alreadyExist = temp.getId() != null;
+        if (alreadyExist) {
+            // TODO
+        } else {
+            // TODO
+        }
         // TODO
     }
 
@@ -103,6 +116,10 @@ public class ItemEditorForm
     }
 
     public final void editItem(Item temp) {
-        // TODO
+        if (temp != null) {
+            this.edit(temp);
+        } else {
+            this.setVisible(false);
+        }
     }
 }
