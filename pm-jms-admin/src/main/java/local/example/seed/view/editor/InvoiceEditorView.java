@@ -23,8 +23,8 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 
-@Route(value = "invoice-editor", layout = MainLayout.class)
 @PageTitle(value = "invoice editor")
+@Route(value = "invoice-editor", layout = MainLayout.class)
 public class InvoiceEditorView
         extends Main {
 
