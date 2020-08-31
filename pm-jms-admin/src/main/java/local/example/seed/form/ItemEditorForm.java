@@ -102,8 +102,8 @@ public class ItemEditorForm
 
     private void edit(Item temp) {
         String id = temp.getId();
-        final boolean alreadyExist = temp.getId() != null;
-        if (alreadyExist) {
+        final boolean alreadyExisting = temp.getId() != null;
+        if (alreadyExisting) {
             // TODO
         } else {
             // TODO
