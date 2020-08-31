@@ -35,7 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @UIScope
 @SpringComponent
-public class InvoiceEditorFormReactive
+public class InvoiceEditorReactiveForm
         extends FormLayout {
 
     private final InvoiceRestfulReactiveController invoiceRestfulReactiveController;
@@ -56,7 +56,7 @@ public class InvoiceEditorFormReactive
     private final VerticalLayout form;
 
     @Autowired
-    public InvoiceEditorFormReactive(
+    public InvoiceEditorReactiveForm(
             InvoiceRestfulReactiveController invoiceRestfulReactiveController
     ) {
         super();
