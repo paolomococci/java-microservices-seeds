@@ -85,11 +85,17 @@ public class InvoiceEditorForm
     }
 
     private void save() {
-        // TODO
+        if (this.invoice != null) {
+            this.invoiceRestfulController.create(this.invoice);
+            this.invoiceChangeHandler.onChange();
+        }
     }
 
     private void delete() {
-        // TODO
+        if (this.invoice.getId() != null) {
+            this.invoiceRestfulController.delete(this.invoice.getId());
+            this.invoiceChangeHandler.onChange();
+        }
     }
 
     private void edit(Invoice temp) {
@@ -101,6 +107,10 @@ public class InvoiceEditorForm
     }
 
     public final void editItem(Invoice temp) {
-        // TODO
+        if (temp != null) {
+            this.edit(temp);
+        } else {
+            this.setVisible(false);
+        }
     }
 }
