@@ -18,5 +18,17 @@
 
 package local.example.seed.view.editor.reactive;
 
-public class CustomerReactiveEditorView {
+import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import local.example.seed.layout.MainLayout;
+
+@PageTitle(value = "customer reactive editor")
+@Route(value = "customer-reactive-editor", layout = MainLayout.class)
+public class CustomerReactiveEditorView
+        extends Main {
+
+    public CustomerReactiveEditorView() {
+        super();
+    }
 }
