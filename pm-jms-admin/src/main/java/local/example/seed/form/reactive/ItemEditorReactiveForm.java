@@ -87,11 +87,17 @@ public class ItemEditorReactiveForm
     }
 
     private void save() {
-        // TODO
+        if (this.item != null) {
+            this.itemRestfulReactiveController.create(this.item);
+            this.itemChangeHandler.onChange();
+        }
     }
 
     private void delete() {
-        // TODO
+        if (this.item.getId() != null) {
+            this.itemRestfulReactiveController.delete(this.item.getId());
+            this.itemChangeHandler.onChange();
+        }
     }
 
     private void edit(Item temp) {
@@ -103,6 +109,10 @@ public class ItemEditorReactiveForm
     }
 
     public final void editItem(Item temp) {
-        // TODO
+        if (temp != null) {
+            this.edit(temp);
+        } else {
+            this.setVisible(false);
+        }
     }
 }
