@@ -18,5 +18,17 @@
 
 package local.example.seed.view.editor.reactive;
 
-public class ItemReactiveEditorView {
+import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.router.PageTitle;
+import com.vaadin.flow.router.Route;
+import local.example.seed.layout.MainLayout;
+
+@PageTitle(value = "item reactive editor")
+@Route(value = "item-reactive-editor", layout = MainLayout.class)
+public class ItemReactiveEditorView
+        extends Main {
+
+    public ItemReactiveEditorView() {
+        super();
+    }
 }
