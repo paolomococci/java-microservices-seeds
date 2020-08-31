@@ -101,6 +101,13 @@ public class ItemEditorReactiveForm
     }
 
     private void edit(Item temp) {
+        String id = temp.getId();
+        final boolean alreadyExisting = temp.getId() != null;
+        if (alreadyExisting) {
+            // TODO
+        } else {
+            // TODO
+        }
         // TODO
     }
 
