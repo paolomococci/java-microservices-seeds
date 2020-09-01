@@ -18,7 +18,10 @@
 
 package local.example.seed.form.reactive;
 
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -70,14 +73,39 @@ public class CustomerEditorReactiveForm
                 "save",
                 VaadinIcon.PLUS_CIRCLE_O.create()
         );
+        this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.save.addClickListener(
+                listener -> {
+                    this.save();
+                }
+        );
+        this.save.addClickShortcut(Key.ENTER);
+
         this.delete = new Button(
                 "delete",
                 VaadinIcon.TRASH.create()
         );
+        this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        this.delete.addClickListener(
+                listener -> {
+                    this.delete();
+                }
+        );
+        this.delete.addClickShortcut(Key.DELETE, KeyModifier.SHIFT);
+
         this.cancel = new Button(
                 "cancel",
                 VaadinIcon.ASTERISK.create()
         );
+        this.cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        this.cancel.addClickListener(
+                listener -> {
+                    this.editItem(this.customer);
+                    this.setVisible(false);
+                }
+        );
+        this.cancel.addClickShortcut(Key.ESCAPE);
+
         this.buttons = new HorizontalLayout();
 
         this.form = new VerticalLayout();
