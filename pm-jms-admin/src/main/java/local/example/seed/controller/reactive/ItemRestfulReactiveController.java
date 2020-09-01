@@ -34,8 +34,9 @@ public class ItemRestfulReactiveController {
         // TODO
     }
 
-    public void read(String id) {
+    public Item read(String id) {
         // TODO
+        return null;
     }
 
     public void readAll() {
