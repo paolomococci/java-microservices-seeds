@@ -128,15 +128,12 @@ public class InvoiceEditorReactiveForm
         }
     }
 
-    private void edit(Invoice temp) {
+    private void edit(Invoice temp)
+            throws URISyntaxException {
         String id = temp.getId();
         final boolean alreadyExisting = temp.getId() != null;
         if (alreadyExisting) {
-            /*try {
-                this.invoice = this.invoiceRestfulReactiveController.read(id);
-            } catch (URISyntaxException uriSyntaxException) {
-                uriSyntaxException.printStackTrace();
-            }*/
+            this.invoice = this.invoiceRestfulReactiveController.read(id);
         } else {
             this.invoice = temp;
         }
@@ -152,7 +149,11 @@ public class InvoiceEditorReactiveForm
 
     public final void editItem(Invoice temp) {
         if (temp != null) {
-            this.edit(temp);
+            try {
+                this.edit(temp);
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }
         } else {
             this.setVisible(false);
         }
