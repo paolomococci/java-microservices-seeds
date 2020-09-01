@@ -134,9 +134,12 @@ public class ItemEditorReactiveForm
         if (alreadyExisting) {
             // TODO
         } else {
-            // TODO
+            this.item = temp;
         }
-        // TODO
+        this.cancel.setVisible(alreadyExisting);
+        this.itemBinder.setBean(this.item);
+        this.setVisible(true);
+        this.code.focus();
     }
 
     public void setItemChangeHandler(ItemChangeHandler itemChangeHandler) {
