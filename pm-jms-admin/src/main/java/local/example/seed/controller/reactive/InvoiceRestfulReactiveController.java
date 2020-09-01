@@ -34,8 +34,9 @@ public class InvoiceRestfulReactiveController {
         // TODO
     }
 
-    public void read(String id) {
+    public Invoice read(String id) {
         // TODO
+        return null;
     }
 
     public void readAll() {
