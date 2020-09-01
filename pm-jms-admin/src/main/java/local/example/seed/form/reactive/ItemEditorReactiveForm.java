@@ -36,6 +36,8 @@ import local.example.seed.handler.ItemChangeHandler;
 import local.example.seed.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.net.URISyntaxException;
+
 @UIScope
 @SpringComponent
 public class ItemEditorReactiveForm
@@ -132,7 +134,11 @@ public class ItemEditorReactiveForm
         String id = temp.getId();
         final boolean alreadyExisting = temp.getId() != null;
         if (alreadyExisting) {
-            // TODO
+            /*try {
+                this.item = this.itemRestfulReactiveController.read(id);
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }*/
         } else {
             this.item = temp;
         }
