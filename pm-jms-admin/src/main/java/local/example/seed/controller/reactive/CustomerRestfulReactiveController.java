@@ -34,8 +34,9 @@ public class CustomerRestfulReactiveController {
         // TODO
     }
 
-    public void read(String id) {
+    public Customer read(String id) {
         // TODO
+        return null;
     }
 
     public void readAll() {
