@@ -130,15 +130,12 @@ public class ItemEditorReactiveForm
         }
     }
 
-    private void edit(Item temp) {
+    private void edit(Item temp)
+            throws URISyntaxException {
         String id = temp.getId();
         final boolean alreadyExisting = temp.getId() != null;
         if (alreadyExisting) {
-            /*try {
-                this.item = this.itemRestfulReactiveController.read(id);
-            } catch (URISyntaxException uriSyntaxException) {
-                uriSyntaxException.printStackTrace();
-            }*/
+            this.item = this.itemRestfulReactiveController.read(id);
         } else {
             this.item = temp;
         }
@@ -154,7 +151,11 @@ public class ItemEditorReactiveForm
 
     public final void editItem(Item temp) {
         if (temp != null) {
-            this.edit(temp);
+            try {
+                this.edit(temp);
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }
         } else {
             this.setVisible(false);
         }
