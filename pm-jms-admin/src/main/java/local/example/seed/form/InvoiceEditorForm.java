@@ -132,9 +132,12 @@ public class InvoiceEditorForm
         if (alreadyExisting) {
             // TODO
         } else {
-            // TODO
+            this.invoice = temp;
         }
-        // TODO
+        this.cancel.setVisible(alreadyExisting);
+        this.invoiceBinder.setBean(this.invoice);
+        this.setVisible(true);
+        this.code.focus();
     }
 
     public void setInvoiceChangeHandler(InvoiceChangeHandler invoiceChangeHandler) {
