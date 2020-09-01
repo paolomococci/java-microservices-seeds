@@ -36,6 +36,8 @@ import local.example.seed.handler.InvoiceChangeHandler;
 import local.example.seed.model.Invoice;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.net.URISyntaxException;
+
 @UIScope
 @SpringComponent
 public class InvoiceEditorReactiveForm
@@ -130,7 +132,11 @@ public class InvoiceEditorReactiveForm
         String id = temp.getId();
         final boolean alreadyExisting = temp.getId() != null;
         if (alreadyExisting) {
-            // TODO
+            /*try {
+                this.invoice = this.invoiceRestfulReactiveController.read(id);
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }*/
         } else {
             this.invoice = temp;
         }
