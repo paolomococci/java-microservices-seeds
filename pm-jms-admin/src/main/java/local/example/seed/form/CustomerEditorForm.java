@@ -35,6 +35,8 @@ import local.example.seed.handler.CustomerChangeHandler;
 import local.example.seed.model.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.net.URISyntaxException;
+
 @UIScope
 @SpringComponent
 public class CustomerEditorForm
@@ -129,7 +131,11 @@ public class CustomerEditorForm
         String id = temp.getId();
         final boolean alreadyExisting = temp.getId() != null;
         if (alreadyExisting) {
-            // TODO
+            try {
+                this.customer = this.customerRestfulController.read(id);
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }
         } else {
             this.customer = temp;
         }
