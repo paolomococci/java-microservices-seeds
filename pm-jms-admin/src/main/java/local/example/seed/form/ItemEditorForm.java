@@ -18,7 +18,10 @@
 
 package local.example.seed.form;
 
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -31,6 +34,7 @@ import com.vaadin.flow.spring.annotation.UIScope;
 import local.example.seed.controller.ItemRestfulController;
 import local.example.seed.handler.ItemChangeHandler;
 import local.example.seed.model.Item;
+import org.atmosphere.annotation.AnnotationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URISyntaxException;
@@ -75,19 +79,38 @@ public class ItemEditorForm
                 "save",
                 VaadinIcon.PLUS_CIRCLE_O.create()
         );
-        // TODO: add theme variant, click listener and click shortcut
+        this.save.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.save.addClickListener(
+                listener -> {
+                    this.save();
+                }
+        );
+        this.save.addClickShortcut(Key.ENTER);
 
         this.delete = new Button(
                 "delete",
                 VaadinIcon.TRASH.create()
         );
-        // TODO: add theme variant, click listener and click shortcut
+        this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        this.delete.addClickListener(
+                listener -> {
+                    this.delete();
+                }
+        );
+        this.delete.addClickShortcut(Key.DELETE, KeyModifier.SHIFT);
 
         this.cancel = new Button(
                 "cancel",
                 VaadinIcon.ASTERISK.create()
         );
-        // TODO: add theme variant, click listener and click shortcut
+        this.cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        this.cancel.addClickListener(
+                listener -> {
+                    this.editItem(this.item);
+                    this.setVisible(false);
+                }
+        );
+        this.cancel.addClickShortcut(Key.ESCAPE);
 
         this.buttons = new HorizontalLayout();
 
