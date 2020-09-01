@@ -127,15 +127,12 @@ public class CustomerEditorReactiveForm
         }
     }
 
-    private void edit(Customer temp) {
+    private void edit(Customer temp)
+            throws URISyntaxException {
         String id = temp.getId();
         final boolean alreadyExisting = temp.getId() != null;
         if (alreadyExisting) {
-            /*try {
-                this.customer = this.customerRestfulReactiveController.read(id);
-            } catch (URISyntaxException uriSyntaxException) {
-                uriSyntaxException.printStackTrace();
-            }*/
+            this.customer = this.customerRestfulReactiveController.read(id);
         } else {
             this.customer = temp;
         }
@@ -151,7 +148,11 @@ public class CustomerEditorReactiveForm
 
     public final void editItem(Customer temp) {
         if (temp != null) {
-            this.edit(temp);
+            try {
+                this.edit(temp);
+            } catch (URISyntaxException uriSyntaxException) {
+                uriSyntaxException.printStackTrace();
+            }
         } else {
             this.setVisible(false);
         }
