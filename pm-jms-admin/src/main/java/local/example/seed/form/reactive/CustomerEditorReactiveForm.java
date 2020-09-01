@@ -131,9 +131,12 @@ public class CustomerEditorReactiveForm
         if (alreadyExisting) {
             // TODO
         } else {
-            // TODO
+            this.customer = temp;
         }
-        // TODO
+        this.cancel.setVisible(alreadyExisting);
+        this.customerBinder.setBean(this.customer);
+        this.setVisible(true);
+        this.name.focus();
     }
 
     public void setCustomerChangeHandler(CustomerChangeHandler customerChangeHandler) {
