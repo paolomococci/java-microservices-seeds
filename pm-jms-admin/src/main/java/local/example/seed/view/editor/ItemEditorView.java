@@ -18,10 +18,13 @@
 
 package local.example.seed.view.editor;
 
+import com.vaadin.flow.component.grid.ColumnTextAlign;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
+import local.example.seed.model.Item;
 
 @PageTitle(value = "item editor")
 @Route(value = "item-editor", layout = MainLayout.class)
@@ -30,7 +33,15 @@ public class ItemEditorView
 
     private static final String ITEM_RESTFUL_BASE_URI = "http://127.0.0.1:8080/items";
 
+    private final Grid<Item> itemGrid;
+
     public ItemEditorView() {
         super();
+        this.itemGrid = new Grid<>();
+        this.itemGrid.addColumn(item -> item.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.itemGrid.addColumn(item -> item.getName()).setHeader("name").setSortable(true);
+        this.itemGrid.addColumn(item -> item.getDescription()).setHeader("description").setSortable(false);
+
+        this.add(this.itemGrid);
     }
 }
