@@ -18,10 +18,13 @@
 
 package local.example.seed.view.editor.reactive;
 
+import com.vaadin.flow.component.grid.ColumnTextAlign;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
+import local.example.seed.model.Invoice;
 
 @PageTitle(value = "invoice reactive editor")
 @Route(value = "invoice-reactive-editor", layout = MainLayout.class)
@@ -30,7 +33,15 @@ public class InvoiceReactiveEditorView
 
     private static final String INVOICE_REACTIVE_BASE_URI = "http://127.0.0.1:8080/api/restful/invoices";
 
+    private final Grid<Invoice> invoiceGrid;
+
     public InvoiceReactiveEditorView() {
         super();
+        this.invoiceGrid = new Grid<>();
+        this.invoiceGrid.addColumn(invoice -> invoice.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.invoiceGrid.addColumn(invoice -> invoice.getDate()).setHeader("date").setSortable(true);
+        this.invoiceGrid.addColumn(invoice -> invoice.getTotal()).setHeader("total").setSortable(true);
+
+        this.add(this.invoiceGrid);
     }
 }
