@@ -18,10 +18,13 @@
 
 package local.example.seed.view.editor;
 
+import com.vaadin.flow.component.grid.ColumnTextAlign;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
+import local.example.seed.model.Customer;
 
 @PageTitle(value = "customer editor")
 @Route(value = "customer-editor", layout = MainLayout.class)
@@ -30,7 +33,15 @@ public class CustomerEditorView
 
     private static final String CUSTOMER_RESTFUL_BASE_URI = "http://127.0.0.1:8080/customers";
 
+    private final Grid<Customer> customerGrid;
+
     public CustomerEditorView() {
         super();
+        this.customerGrid = new Grid<>();
+        this.customerGrid.addColumn(customer -> customer.getName()).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.customerGrid.addColumn(customer -> customer.getSurname()).setHeader("surname").setSortable(true);
+        this.customerGrid.addColumn(customer -> customer.getEmail()).setHeader("email").setSortable(true);
+
+        this.add(this.customerGrid);
     }
 }
