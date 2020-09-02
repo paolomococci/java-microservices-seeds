@@ -28,6 +28,8 @@ import local.example.seed.layout.MainLayout;
 public class ItemEditorView
         extends Main {
 
+    private static final String ITEM_RESTFUL_BASE_URI = "http://127.0.0.1:8080/items";
+
     public ItemEditorView() {
         super();
     }
