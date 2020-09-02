@@ -28,6 +28,8 @@ import local.example.seed.layout.MainLayout;
 public class CustomerEditorView
         extends Main {
 
+    private static final String CUSTOMER_RESTFUL_BASE_URI = "http://127.0.0.1:8080/customers";
+
     public CustomerEditorView() {
         super();
     }
