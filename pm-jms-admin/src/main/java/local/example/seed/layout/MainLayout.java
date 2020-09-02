@@ -33,7 +33,9 @@ import local.example.seed.view.InvoiceView;
 import local.example.seed.view.ItemView;
 import local.example.seed.view.MainView;
 import local.example.seed.view.editor.CustomerEditorView;
+import local.example.seed.view.editor.InvoiceEditorView;
 import local.example.seed.view.editor.reactive.CustomerReactiveEditorView;
+import local.example.seed.view.editor.reactive.InvoiceReactiveEditorView;
 
 @Push
 @CssImport(value = "style.css")
@@ -67,11 +69,11 @@ public class MainLayout
         this.itemView = new RouterLink("item view", ItemView.class);
 
         this.customerEditorView = new RouterLink("customer editor", CustomerEditorView.class);
-        this.invoiceEditorView = new RouterLink("invoice editor", null);
+        this.invoiceEditorView = new RouterLink("invoice editor", InvoiceEditorView.class);
         this.itemEditorView = new RouterLink("item editor", null);
 
         this.customerReactiveEditorView = new RouterLink("customer reactive editor", CustomerReactiveEditorView.class);
-        this.invoiceReactiveEditorView = new RouterLink("invoice reactive editor", null);
+        this.invoiceReactiveEditorView = new RouterLink("invoice reactive editor", InvoiceReactiveEditorView.class);
         this.itemReactiveEditorView = new RouterLink("item reactive editor", null);
 
         OrderedList orderedList = new OrderedList(
