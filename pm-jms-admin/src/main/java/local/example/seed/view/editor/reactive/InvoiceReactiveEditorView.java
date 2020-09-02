@@ -28,6 +28,8 @@ import local.example.seed.layout.MainLayout;
 public class InvoiceReactiveEditorView
         extends Main {
 
+    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8080/api/restful/invoices";
+
     public InvoiceReactiveEditorView() {
         super();
     }
