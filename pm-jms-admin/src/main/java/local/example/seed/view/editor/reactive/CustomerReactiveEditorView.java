@@ -28,6 +28,8 @@ import local.example.seed.layout.MainLayout;
 public class CustomerReactiveEditorView
         extends Main {
 
+    private static final String CUSTOMER_REACTIVE_BASE_URI = "http://127.0.0.1:8081/api/restful/customers";
+
     public CustomerReactiveEditorView() {
         super();
     }
