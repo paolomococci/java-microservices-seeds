@@ -28,6 +28,8 @@ import local.example.seed.layout.MainLayout;
 public class ItemReactiveEditorView
         extends Main {
 
+    private static final String ITEM_REACTIVE_BASE_URI = "http://127.0.0.1:8080/api/restful/items";
+
     public ItemReactiveEditorView() {
         super();
     }
