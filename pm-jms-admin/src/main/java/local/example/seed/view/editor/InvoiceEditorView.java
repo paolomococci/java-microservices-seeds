@@ -28,7 +28,7 @@ import local.example.seed.layout.MainLayout;
 public class InvoiceEditorView
         extends Main {
 
-    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8080/invoices";
+    private static final String INVOICE_RESTFUL_BASE_URI = "http://127.0.0.1:8080/invoices";
 
     public InvoiceEditorView() {
         super();
