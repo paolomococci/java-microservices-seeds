@@ -31,8 +31,6 @@ import local.example.seed.model.Invoice;
 public class InvoiceEditorView
         extends Main {
 
-    private static final String INVOICE_RESTFUL_BASE_URI = "http://127.0.0.1:8080/invoices";
-
     private final Grid<Invoice> invoiceGrid;
 
     public InvoiceEditorView() {
