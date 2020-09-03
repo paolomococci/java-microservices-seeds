@@ -29,7 +29,7 @@ import java.util.List;
 
 public class ItemRestfulController {
 
-    private static final String ITEMS_URI = "http://127.0.0.1:8080/items";
+    private static final String ITEM_RESTFUL_BASE_URI = "http://127.0.0.1:8080/items";
     private final RestTemplate restTemplate;
 
     public ItemRestfulController() {
@@ -43,7 +43,7 @@ public class ItemRestfulController {
     public Item read(String id)
             throws URISyntaxException {
         ResponseEntity<Item> responseEntity = this.restTemplate
-                .exchange(ITEMS_URI +"/"+id,
+                .exchange(ITEM_RESTFUL_BASE_URI +"/"+id,
                         HttpMethod.GET,
                         null,
                         new ParameterizedTypeReference<>() {});
@@ -53,7 +53,7 @@ public class ItemRestfulController {
     public List<Item> readAll()
             throws URISyntaxException {
         ResponseEntity<List<Item>> responseEntity = this.restTemplate
-                .exchange(ITEMS_URI,
+                .exchange(ITEM_RESTFUL_BASE_URI,
                         HttpMethod.GET,
                         null,
                         new ParameterizedTypeReference<>() {});
