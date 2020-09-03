@@ -31,8 +31,6 @@ import local.example.seed.model.Item;
 public class ItemEditorView
         extends Main {
 
-    private static final String ITEM_RESTFUL_BASE_URI = "http://127.0.0.1:8080/items";
-
     private final Grid<Item> itemGrid;
 
     public ItemEditorView() {
