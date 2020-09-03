@@ -23,7 +23,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 public class CustomerRestfulReactiveController {
 
-    private static final String CUSTOMERS_URI = "http://127.0.0.1:8081/customers";
+    private static final String CUSTOMER_REACTIVE_BASE_URI = "http://127.0.0.1:8081/api/restful/customers";
     private final WebClient webClient;
 
     public CustomerRestfulReactiveController() {
