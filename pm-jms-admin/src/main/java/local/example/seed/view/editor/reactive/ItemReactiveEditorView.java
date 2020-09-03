@@ -23,6 +23,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.form.reactive.ItemEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
 
@@ -32,9 +33,15 @@ public class ItemReactiveEditorView
         extends Main {
 
     private final Grid<Item> itemGrid;
+    private final ItemEditorReactiveForm itemEditorReactiveForm;
 
-    public ItemReactiveEditorView() {
+    public ItemReactiveEditorView(
+            ItemEditorReactiveForm itemEditorReactiveForm
+    ) {
         super();
+
+        this.itemEditorReactiveForm = itemEditorReactiveForm;
+
         this.itemGrid = new Grid<>();
         this.itemGrid.addColumn(item -> item.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.itemGrid.addColumn(item -> item.getName()).setHeader("name").setSortable(true);
