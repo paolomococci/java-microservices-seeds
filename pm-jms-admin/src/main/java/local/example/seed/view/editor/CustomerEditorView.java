@@ -31,8 +31,6 @@ import local.example.seed.model.Customer;
 public class CustomerEditorView
         extends Main {
 
-    private static final String CUSTOMER_RESTFUL_BASE_URI = "http://127.0.0.1:8080/customers";
-
     private final Grid<Customer> customerGrid;
 
     public CustomerEditorView() {
