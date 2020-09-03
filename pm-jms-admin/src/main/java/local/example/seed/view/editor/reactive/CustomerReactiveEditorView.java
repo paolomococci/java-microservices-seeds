@@ -26,6 +26,7 @@ import com.vaadin.flow.router.Route;
 import local.example.seed.form.reactive.CustomerEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle(value = "customer reactive editor")
 @Route(value = "customer-reactive-editor", layout = MainLayout.class)
@@ -35,6 +36,7 @@ public class CustomerReactiveEditorView
     private final Grid<Customer> customerGrid;
     private final CustomerEditorReactiveForm customerEditorReactiveForm;
 
+    @Autowired
     public CustomerReactiveEditorView(
             CustomerEditorReactiveForm customerEditorReactiveForm
     ) {
