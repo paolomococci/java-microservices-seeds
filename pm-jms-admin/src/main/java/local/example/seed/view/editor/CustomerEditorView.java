@@ -49,6 +49,12 @@ public class CustomerEditorView
         this.customerGrid.addColumn(customer -> customer.getSurname()).setHeader("surname").setSortable(true);
         this.customerGrid.addColumn(customer -> customer.getEmail()).setHeader("email").setSortable(true);
 
+        this.customerGrid.asSingleSelect().addValueChangeListener(
+                listener -> {
+
+                }
+        );
+
         this.add(this.customerGrid);
     }
 }
