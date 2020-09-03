@@ -49,6 +49,12 @@ public class ItemEditorView
         this.itemGrid.addColumn(item -> item.getName()).setHeader("name").setSortable(true);
         this.itemGrid.addColumn(item -> item.getDescription()).setHeader("description").setSortable(false);
 
+        this.itemGrid.asSingleSelect().addValueChangeListener(
+                listener -> {
+
+                }
+        );
+
         this.add(this.itemGrid);
     }
 }
