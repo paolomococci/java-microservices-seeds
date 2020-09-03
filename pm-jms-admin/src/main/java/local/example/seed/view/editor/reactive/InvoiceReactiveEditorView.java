@@ -23,6 +23,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.form.reactive.InvoiceEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
 
@@ -32,9 +33,15 @@ public class InvoiceReactiveEditorView
         extends Main {
 
     private final Grid<Invoice> invoiceGrid;
+    private final InvoiceEditorReactiveForm invoiceEditorReactiveForm;
 
-    public InvoiceReactiveEditorView() {
+    public InvoiceReactiveEditorView(
+            InvoiceEditorReactiveForm invoiceEditorReactiveForm
+    ) {
         super();
+
+        this.invoiceEditorReactiveForm = invoiceEditorReactiveForm;
+
         this.invoiceGrid = new Grid<>();
         this.invoiceGrid.addColumn(invoice -> invoice.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.invoiceGrid.addColumn(invoice -> invoice.getDate()).setHeader("date").setSortable(true);
