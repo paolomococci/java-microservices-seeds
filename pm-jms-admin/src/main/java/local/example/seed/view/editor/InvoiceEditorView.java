@@ -26,6 +26,7 @@ import com.vaadin.flow.router.Route;
 import local.example.seed.form.InvoiceEditorForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle(value = "invoice editor")
 @Route(value = "invoice-editor", layout = MainLayout.class)
@@ -35,6 +36,7 @@ public class InvoiceEditorView
     private final Grid<Invoice> invoiceGrid;
     private final InvoiceEditorForm invoiceEditorForm;
 
+    @Autowired
     public InvoiceEditorView(
             InvoiceEditorForm invoiceEditorForm
     ) {
