@@ -31,8 +31,6 @@ import local.example.seed.model.Customer;
 public class CustomerReactiveEditorView
         extends Main {
 
-    private static final String CUSTOMER_REACTIVE_BASE_URI = "http://127.0.0.1:8081/api/restful/customers";
-
     private final Grid<Customer> customerGrid;
 
     public CustomerReactiveEditorView() {
