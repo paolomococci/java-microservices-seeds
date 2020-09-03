@@ -23,6 +23,7 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.form.reactive.CustomerEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
 
@@ -32,9 +33,15 @@ public class CustomerReactiveEditorView
         extends Main {
 
     private final Grid<Customer> customerGrid;
+    private final CustomerEditorReactiveForm customerEditorReactiveForm;
 
-    public CustomerReactiveEditorView() {
+    public CustomerReactiveEditorView(
+            CustomerEditorReactiveForm customerEditorReactiveForm
+    ) {
         super();
+
+        this.customerEditorReactiveForm = customerEditorReactiveForm;
+
         this.customerGrid = new Grid<>();
         this.customerGrid.addColumn(customer -> customer.getName()).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.customerGrid.addColumn(customer -> customer.getSurname()).setHeader("surname").setSortable(true);
