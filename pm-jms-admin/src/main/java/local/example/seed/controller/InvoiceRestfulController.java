@@ -29,7 +29,7 @@ import java.util.List;
 
 public class InvoiceRestfulController {
 
-    private static final String INVOICES_URI = "http://127.0.0.1:8080/invoices";
+    private static final String INVOICE_RESTFUL_BASE_URI = "http://127.0.0.1:8080/invoices";
     private final RestTemplate restTemplate;
 
     public InvoiceRestfulController() {
@@ -43,7 +43,7 @@ public class InvoiceRestfulController {
     public Invoice read(String id)
             throws URISyntaxException {
         ResponseEntity<Invoice> responseEntity = this.restTemplate
-                .exchange(INVOICES_URI +"/"+id,
+                .exchange(INVOICE_RESTFUL_BASE_URI +"/"+id,
                         HttpMethod.GET,
                         null,
                         new ParameterizedTypeReference<>() {});
@@ -53,7 +53,7 @@ public class InvoiceRestfulController {
     public List<Invoice> readAll()
             throws URISyntaxException {
         ResponseEntity<List<Invoice>> responseEntity = this.restTemplate
-                .exchange(INVOICES_URI,
+                .exchange(INVOICE_RESTFUL_BASE_URI,
                         HttpMethod.GET,
                         null,
                         new ParameterizedTypeReference<>() {});
