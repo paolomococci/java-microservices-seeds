@@ -26,6 +26,7 @@ import com.vaadin.flow.router.Route;
 import local.example.seed.form.CustomerEditorForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle(value = "customer editor")
 @Route(value = "customer-editor", layout = MainLayout.class)
@@ -35,13 +36,14 @@ public class CustomerEditorView
     private final Grid<Customer> customerGrid;
     private final CustomerEditorForm customerEditorForm;
 
+    @Autowired
     public CustomerEditorView(
             CustomerEditorForm customerEditorForm
     ) {
         super();
 
         this.customerEditorForm = customerEditorForm;
-        
+
         this.customerGrid = new Grid<>();
         this.customerGrid.addColumn(customer -> customer.getName()).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.customerGrid.addColumn(customer -> customer.getSurname()).setHeader("surname").setSortable(true);
