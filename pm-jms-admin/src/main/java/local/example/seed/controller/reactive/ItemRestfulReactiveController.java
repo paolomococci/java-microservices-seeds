@@ -23,7 +23,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 public class ItemRestfulReactiveController {
 
-    private static final String ITEMS_URI = "http://127.0.0.1:8081/items";
+    private static final String ITEM_REACTIVE_BASE_URI = "http://127.0.0.1:8080/api/restful/items";
     private final WebClient webClient;
 
     public ItemRestfulReactiveController() {
@@ -52,6 +52,9 @@ public class ItemRestfulReactiveController {
     }
 
     public void delete(String id) {
-        this.webClient.mutate().baseUrl(ITEMS_URI+"/"+id).build().delete();
+        this.webClient.mutate()
+                .baseUrl(ITEM_REACTIVE_BASE_URI+"/"+id)
+                .build()
+                .delete();
     }
 }
