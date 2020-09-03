@@ -23,7 +23,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 public class InvoiceRestfulReactiveController {
 
-    private static final String INVOICES_URI = "http://127.0.0.1:8081/invoices";
+    private static final String INVOICE_REACTIVE_BASE_URI = "http://127.0.0.1:8080/api/restful/invoices";
     private final WebClient webClient;
 
     public InvoiceRestfulReactiveController() {
