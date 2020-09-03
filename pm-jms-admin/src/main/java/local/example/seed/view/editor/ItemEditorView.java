@@ -26,6 +26,7 @@ import com.vaadin.flow.router.Route;
 import local.example.seed.form.ItemEditorForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle(value = "item editor")
 @Route(value = "item-editor", layout = MainLayout.class)
@@ -35,6 +36,7 @@ public class ItemEditorView
     private final Grid<Item> itemGrid;
     private final ItemEditorForm itemEditorForm;
 
+    @Autowired
     public ItemEditorView(
             ItemEditorForm itemEditorForm
     ) {
