@@ -26,6 +26,7 @@ import com.vaadin.flow.router.Route;
 import local.example.seed.form.reactive.ItemEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle(value = "item reactive editor")
 @Route(value = "item-reactive-editor", layout = MainLayout.class)
@@ -35,6 +36,7 @@ public class ItemReactiveEditorView
     private final Grid<Item> itemGrid;
     private final ItemEditorReactiveForm itemEditorReactiveForm;
 
+    @Autowired
     public ItemReactiveEditorView(
             ItemEditorReactiveForm itemEditorReactiveForm
     ) {
