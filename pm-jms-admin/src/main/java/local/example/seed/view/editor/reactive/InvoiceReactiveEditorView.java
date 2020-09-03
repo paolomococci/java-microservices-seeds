@@ -26,6 +26,7 @@ import com.vaadin.flow.router.Route;
 import local.example.seed.form.reactive.InvoiceEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle(value = "invoice reactive editor")
 @Route(value = "invoice-reactive-editor", layout = MainLayout.class)
@@ -35,6 +36,7 @@ public class InvoiceReactiveEditorView
     private final Grid<Invoice> invoiceGrid;
     private final InvoiceEditorReactiveForm invoiceEditorReactiveForm;
 
+    @Autowired
     public InvoiceReactiveEditorView(
             InvoiceEditorReactiveForm invoiceEditorReactiveForm
     ) {
