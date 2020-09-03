@@ -49,6 +49,12 @@ public class InvoiceReactiveEditorView
         this.invoiceGrid.addColumn(invoice -> invoice.getDate()).setHeader("date").setSortable(true);
         this.invoiceGrid.addColumn(invoice -> invoice.getTotal()).setHeader("total").setSortable(true);
 
+        this.invoiceGrid.asSingleSelect().addValueChangeListener(
+                listener -> {
+
+                }
+        );
+
         this.add(this.invoiceGrid);
     }
 }
