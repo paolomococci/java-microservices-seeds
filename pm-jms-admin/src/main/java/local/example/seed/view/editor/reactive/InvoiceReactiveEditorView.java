@@ -31,8 +31,6 @@ import local.example.seed.model.Invoice;
 public class InvoiceReactiveEditorView
         extends Main {
 
-    private static final String INVOICE_REACTIVE_BASE_URI = "http://127.0.0.1:8080/api/restful/invoices";
-
     private final Grid<Invoice> invoiceGrid;
 
     public InvoiceReactiveEditorView() {
