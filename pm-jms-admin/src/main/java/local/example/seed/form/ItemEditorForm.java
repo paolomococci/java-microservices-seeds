@@ -73,7 +73,12 @@ public class ItemEditorForm
         this.name = new TextField("name");
         this.description = new TextArea("description");
         this.price = new TextField("price");
-        this.fields = new VerticalLayout();
+        this.fields = new VerticalLayout(
+                this.code,
+                this.name,
+                this.description,
+                this.price
+        );
 
         this.save = new Button(
                 "save",
