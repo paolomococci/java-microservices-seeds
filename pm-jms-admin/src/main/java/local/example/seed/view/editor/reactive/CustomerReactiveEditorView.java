@@ -18,10 +18,13 @@
 
 package local.example.seed.view.editor.reactive;
 
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -59,10 +62,16 @@ public class CustomerReactiveEditorView
                 }
         );
 
-        this.addCustomer = new Button();
+        this.addCustomer = new Button("add customer", VaadinIcon.PLUS_CIRCLE_O.create());
+        this.addCustomer.addClickListener(
+                listener -> {
+                    // TODO
+                }
+        );
+        this.addCustomer.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
 
-        this.tools = new HorizontalLayout();
+        this.tools = new HorizontalLayout(this.addCustomer);
 
-        this.add(this.customerGrid);
+        this.add(this.customerGrid, this.tools, this.customerEditorReactiveForm);
     }
 }
