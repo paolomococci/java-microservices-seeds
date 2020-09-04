@@ -72,6 +72,6 @@ public class InvoiceEditorView
 
         this.tools = new HorizontalLayout(this.addInvoice);
 
-        this.add(this.invoiceGrid);
+        this.add(this.invoiceGrid, this.tools, this.invoiceEditorForm);
     }
 }
