@@ -20,7 +20,11 @@ package local.example.seed.document.status;
 
 public enum CustomerStatus {
 
-    ; // TODO
+    IMPORTED("Imported"),
+    NOT_CONTACTED("NotContacted"),
+    CONTACTED("Contacted"),
+    ACTIVE("Active"),
+    LOST("Lost");
 
     private final String status;
 
