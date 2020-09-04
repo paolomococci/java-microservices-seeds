@@ -124,7 +124,10 @@ public class InvoiceEditorForm
                 this.buttons
         );
 
-        // TODO
+        this.add(this.form);
+        this.setSizeFull();
+        this.invoiceBinder.bindInstanceFields(this);
+        this.setVisible(false);
     }
 
     private void save() {
