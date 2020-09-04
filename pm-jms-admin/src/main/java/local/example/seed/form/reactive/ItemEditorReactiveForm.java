@@ -111,9 +111,18 @@ public class ItemEditorReactiveForm
         );
         this.cancel.addClickShortcut(Key.ESCAPE);
 
-        this.buttons = new HorizontalLayout();
+        this.buttons = new HorizontalLayout(
+                this.save,
+                this.delete,
+                this.cancel
+        );
 
-        this.form = new VerticalLayout();
+        this.form = new VerticalLayout(
+                this.fields,
+                this.buttons
+        );
+
+        // TODO
     }
 
     private void save() {
