@@ -18,9 +18,11 @@
 
 package local.example.seed.view.editor;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.form.ItemEditorForm;
@@ -35,6 +37,8 @@ public class ItemEditorView
 
     private final Grid<Item> itemGrid;
     private final ItemEditorForm itemEditorForm;
+    private final Button addItem;
+    private final HorizontalLayout tools;
 
     @Autowired
     public ItemEditorView(
@@ -54,6 +58,10 @@ public class ItemEditorView
 
                 }
         );
+
+        this.addItem = new Button();
+
+        this.tools = new HorizontalLayout();
 
         this.add(this.itemGrid);
     }
