@@ -70,7 +70,11 @@ public class InvoiceEditorReactiveForm
         this.code = new TextField("code");
         this.date = new DatePicker("date");
         this.total = new TextField("total");
-        this.fields = new VerticalLayout();
+        this.fields = new VerticalLayout(
+                this.code,
+                this.date,
+                this.total
+        );
 
         this.save = new Button(
                 "save",
@@ -109,9 +113,21 @@ public class InvoiceEditorReactiveForm
         );
         this.cancel.addClickShortcut(Key.ESCAPE);
 
-        this.buttons = new HorizontalLayout();
+        this.buttons = new HorizontalLayout(
+                this.save,
+                this.delete,
+                this.cancel
+        );
 
-        this.form = new VerticalLayout();
+        this.form = new VerticalLayout(
+                this.fields,
+                this.buttons
+        );
+
+        this.add(this.form);
+        this.setSizeFull();
+        this.invoiceBinder.bindInstanceFields(this);
+        this.setVisible(false);
     }
 
     private void save() {
