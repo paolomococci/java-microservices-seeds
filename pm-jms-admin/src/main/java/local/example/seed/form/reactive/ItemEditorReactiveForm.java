@@ -127,7 +127,10 @@ public class ItemEditorReactiveForm
                 this.buttons
         );
 
-        // TODO
+        this.add(this.form);
+        this.setSizeFull();
+        this.itemBinder.bindInstanceFields(this);
+        this.setVisible(false);
     }
 
     private void save() {
