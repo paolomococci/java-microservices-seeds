@@ -18,9 +18,11 @@
 
 package local.example.seed.view.editor;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.form.CustomerEditorForm;
@@ -35,6 +37,8 @@ public class CustomerEditorView
 
     private final Grid<Customer> customerGrid;
     private final CustomerEditorForm customerEditorForm;
+    private final Button addCustomer;
+    private final HorizontalLayout tools;
 
     @Autowired
     public CustomerEditorView(
@@ -54,6 +58,10 @@ public class CustomerEditorView
 
                 }
         );
+
+        this.addCustomer = new Button();
+
+        this.tools = new HorizontalLayout();
 
         this.add(this.customerGrid);
     }
