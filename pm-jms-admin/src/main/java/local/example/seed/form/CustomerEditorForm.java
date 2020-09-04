@@ -69,7 +69,11 @@ public class CustomerEditorForm
         this.name = new TextField("name");
         this.surname = new TextField("surname");
         this.email = new TextField("email");
-        this.fields = new VerticalLayout();
+        this.fields = new VerticalLayout(
+                this.name,
+                this.surname,
+                this.email
+        );
 
         this.save = new Button(
                 "save",
@@ -108,9 +112,18 @@ public class CustomerEditorForm
         );
         this.cancel.addClickShortcut(Key.ESCAPE);
 
-        this.buttons = new HorizontalLayout();
+        this.buttons = new HorizontalLayout(
+                this.save,
+                this.delete,
+                this.cancel
+        );
 
-        this.form = new VerticalLayout();
+        this.form = new VerticalLayout(
+                this.fields,
+                this.buttons
+        );
+
+        // TODO
     }
 
     private void save() {
