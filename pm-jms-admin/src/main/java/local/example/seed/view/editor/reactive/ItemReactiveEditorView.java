@@ -18,9 +18,11 @@
 
 package local.example.seed.view.editor.reactive;
 
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.form.reactive.ItemEditorReactiveForm;
@@ -35,6 +37,8 @@ public class ItemReactiveEditorView
 
     private final Grid<Item> itemGrid;
     private final ItemEditorReactiveForm itemEditorReactiveForm;
+    private final Button addItem;
+    private final HorizontalLayout tools;
 
     @Autowired
     public ItemReactiveEditorView(
@@ -54,6 +58,10 @@ public class ItemReactiveEditorView
 
                 }
         );
+
+        this.addItem = new Button();
+
+        this.tools = new HorizontalLayout();
 
         this.add(this.itemGrid);
     }
