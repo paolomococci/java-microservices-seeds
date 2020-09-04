@@ -123,7 +123,10 @@ public class CustomerEditorForm
                 this.buttons
         );
 
-        // TODO
+        this.add(this.form);
+        this.setSizeFull();
+        this.customerBinder.bindInstanceFields(this);
+        this.setVisible(false);
     }
 
     private void save() {
