@@ -72,6 +72,6 @@ public class ItemReactiveEditorView
 
         this.tools = new HorizontalLayout(this.addItem);
 
-        this.add(this.itemGrid);
+        this.add(this.itemGrid, this.tools, this.itemEditorReactiveForm);
     }
 }
