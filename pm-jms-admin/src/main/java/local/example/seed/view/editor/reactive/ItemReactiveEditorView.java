@@ -18,10 +18,13 @@
 
 package local.example.seed.view.editor.reactive;
 
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
@@ -59,9 +62,15 @@ public class ItemReactiveEditorView
                 }
         );
 
-        this.addItem = new Button();
+        this.addItem = new Button("add item", VaadinIcon.PLUS_CIRCLE_O.create());
+        this.addItem.addClickListener(
+                listener -> {
+                    // TODO
+                }
+        );
+        this.addItem.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
 
-        this.tools = new HorizontalLayout();
+        this.tools = new HorizontalLayout(this.addItem);
 
         this.add(this.itemGrid);
     }
