@@ -62,7 +62,7 @@ public class InvoiceReactiveEditorView
 
         this.invoiceGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-                    // TODO
+                    this.invoiceEditorReactiveForm.editItem(listener.getValue());
                 }
         );
 
