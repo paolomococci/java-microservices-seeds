@@ -62,7 +62,7 @@ public class CustomerReactiveEditorView
 
         this.customerGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-
+                    // TODO
                 }
         );
 
@@ -77,6 +77,14 @@ public class CustomerReactiveEditorView
         this.tools = new HorizontalLayout(this.addCustomer);
 
         this.add(this.customerGrid, this.tools, this.customerEditorReactiveForm);
+
+        this.customerEditorReactiveForm.setCustomerChangeHandler(
+                () -> {
+                    this.customerEditorReactiveForm.setVisible(false);
+                }
+        );
+
+        this.showCustomerList();
     }
 
     private void showCustomerList() {
