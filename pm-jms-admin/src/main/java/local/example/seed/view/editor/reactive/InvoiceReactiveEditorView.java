@@ -28,6 +28,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.controller.reactive.InvoiceRestfulReactiveController;
 import local.example.seed.form.reactive.InvoiceEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
@@ -40,16 +41,19 @@ public class InvoiceReactiveEditorView
 
     private final Grid<Invoice> invoiceGrid;
     private final InvoiceEditorReactiveForm invoiceEditorReactiveForm;
+    private final InvoiceRestfulReactiveController invoiceRestfulReactiveController;
     private final Button addInvoice;
     private final HorizontalLayout tools;
 
     @Autowired
     public InvoiceReactiveEditorView(
-            InvoiceEditorReactiveForm invoiceEditorReactiveForm
+            InvoiceEditorReactiveForm invoiceEditorReactiveForm,
+            InvoiceRestfulReactiveController invoiceRestfulReactiveController
     ) {
         super();
 
         this.invoiceEditorReactiveForm = invoiceEditorReactiveForm;
+        this.invoiceRestfulReactiveController = invoiceRestfulReactiveController;
 
         this.invoiceGrid = new Grid<>();
         this.invoiceGrid.addColumn(invoice -> invoice.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
@@ -77,7 +81,7 @@ public class InvoiceReactiveEditorView
 
     private void showInvoiceList() {
         this.invoiceGrid.setItems(
-                // Collection<Invoice> invoices
+                this.invoiceRestfulReactiveController.collectionOfAllInvoices()
         );
     }
 }
