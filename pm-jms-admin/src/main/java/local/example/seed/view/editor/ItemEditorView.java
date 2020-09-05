@@ -62,7 +62,7 @@ public class ItemEditorView
 
         this.itemGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-                    // TODO
+                    this.itemEditorForm.editItem(listener.getValue());
                 }
         );
 
