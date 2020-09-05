@@ -74,4 +74,10 @@ public class InvoiceReactiveEditorView
 
         this.add(this.invoiceGrid, this.tools, this.invoiceEditorReactiveForm);
     }
+
+    private void showInvoiceList() {
+        this.invoiceGrid.setItems(
+                // Collection<Invoice> invoices
+        );
+    }
 }
