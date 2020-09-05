@@ -28,6 +28,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.controller.CustomerRestfulController;
 import local.example.seed.form.CustomerEditorForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
@@ -40,16 +41,19 @@ public class CustomerEditorView
 
     private final Grid<Customer> customerGrid;
     private final CustomerEditorForm customerEditorForm;
+    private final CustomerRestfulController customerRestfulController;
     private final Button addCustomer;
     private final HorizontalLayout tools;
 
     @Autowired
     public CustomerEditorView(
-            CustomerEditorForm customerEditorForm
+            CustomerEditorForm customerEditorForm,
+            CustomerRestfulController customerRestfulController
     ) {
         super();
 
         this.customerEditorForm = customerEditorForm;
+        this.customerRestfulController = customerRestfulController;
 
         this.customerGrid = new Grid<>();
         this.customerGrid.addColumn(customer -> customer.getName()).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
@@ -77,7 +81,7 @@ public class CustomerEditorView
 
     private void showCustomerList() {
         this.customerGrid.setItems(
-                // Collection<Customer> customers
+                this.customerRestfulController.collectionOfAllCustomers()
         );
     }
 }
