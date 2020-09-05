@@ -75,7 +75,7 @@ public class ItemEditorView
         this.add(this.itemGrid, this.tools, this.itemEditorForm);
     }
 
-    private void showCustomerList() {
+    private void showItemList() {
         this.itemGrid.setItems(
                 // Collection<Item> items
         );
