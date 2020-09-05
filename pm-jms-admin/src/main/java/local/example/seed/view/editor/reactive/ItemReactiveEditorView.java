@@ -62,7 +62,7 @@ public class ItemReactiveEditorView
 
         this.itemGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-
+                    // TODO
                 }
         );
 
@@ -77,6 +77,14 @@ public class ItemReactiveEditorView
         this.tools = new HorizontalLayout(this.addItem);
 
         this.add(this.itemGrid, this.tools, this.itemEditorReactiveForm);
+
+        this.itemEditorReactiveForm.setItemChangeHandler(
+                () -> {
+                    this.itemEditorReactiveForm.setVisible(false);
+                }
+        );
+
+        this.showItemList();
     }
 
     private void showItemList() {
