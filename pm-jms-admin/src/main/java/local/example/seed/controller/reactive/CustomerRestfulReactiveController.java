@@ -21,6 +21,9 @@ package local.example.seed.controller.reactive;
 import local.example.seed.model.Customer;
 import org.springframework.web.reactive.function.client.WebClient;
 
+import java.util.Collection;
+import java.util.stream.Stream;
+
 public class CustomerRestfulReactiveController {
 
     private static final String CUSTOMER_REACTIVE_BASE_URI = "http://127.0.0.1:8081/api/restful/customers";
@@ -41,6 +44,16 @@ public class CustomerRestfulReactiveController {
 
     public void readAll() {
         // TODO
+    }
+
+    public Collection<Customer> collectionOfAllCustomers() {
+        // TODO
+        return null;
+    }
+
+    public Stream<Customer> streamOfAllCustomers() {
+        // TODO
+        return null;
     }
 
     public void update(Customer customer, String id) {
