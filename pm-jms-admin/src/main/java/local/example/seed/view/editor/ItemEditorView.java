@@ -62,7 +62,7 @@ public class ItemEditorView
 
         this.itemGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-
+                    // TODO
                 }
         );
 
@@ -77,6 +77,14 @@ public class ItemEditorView
         this.tools = new HorizontalLayout(this.addItem);
 
         this.add(this.itemGrid, this.tools, this.itemEditorForm);
+
+        this.itemEditorForm.setItemChangeHandler(
+                () -> {
+                    this.itemEditorForm.setVisible(false);
+                }
+        );
+
+        this.showItemList();
     }
 
     private void showItemList() {
