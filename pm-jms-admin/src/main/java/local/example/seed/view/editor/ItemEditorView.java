@@ -69,7 +69,8 @@ public class ItemEditorView
         this.addItem = new Button("add item", VaadinIcon.PLUS_CIRCLE_O.create());
         this.addItem.addClickListener(
                 listener -> {
-                    // TODO
+                    this.itemGrid.asSingleSelect().clear();
+                    this.itemEditorForm.editItem(new Item());
                 }
         );
         this.addItem.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
