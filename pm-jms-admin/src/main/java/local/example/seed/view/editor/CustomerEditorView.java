@@ -69,7 +69,8 @@ public class CustomerEditorView
         this.addCustomer = new Button("add customer", VaadinIcon.PLUS_CIRCLE_O.create());
         this.addCustomer.addClickListener(
                 listener -> {
-                    // TODO
+                    this.customerGrid.asSingleSelect().clear();
+                    this.customerEditorForm.editCustomer(new Customer());
                 }
         );
         this.addCustomer.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
