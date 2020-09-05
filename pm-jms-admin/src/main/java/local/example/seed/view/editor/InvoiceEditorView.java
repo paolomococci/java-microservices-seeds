@@ -62,7 +62,7 @@ public class InvoiceEditorView
 
         this.invoiceGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-
+                    // TODO
                 }
         );
 
@@ -77,6 +77,14 @@ public class InvoiceEditorView
         this.tools = new HorizontalLayout(this.addInvoice);
 
         this.add(this.invoiceGrid, this.tools, this.invoiceEditorForm);
+
+        this.invoiceEditorForm.setInvoiceChangeHandler(
+                () -> {
+                    this.invoiceEditorForm.setVisible(false);
+                }
+        );
+
+        this.showInvoiceList();
     }
 
     private void showInvoiceList() {
