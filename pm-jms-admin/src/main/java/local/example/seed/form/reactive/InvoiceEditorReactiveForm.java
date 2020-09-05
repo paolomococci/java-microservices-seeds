@@ -107,7 +107,7 @@ public class InvoiceEditorReactiveForm
         this.cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
         this.cancel.addClickListener(
                 listener -> {
-                    this.editItem(this.invoice);
+                    this.editInvoice(this.invoice);
                     this.setVisible(false);
                 }
         );
@@ -163,7 +163,7 @@ public class InvoiceEditorReactiveForm
         this.invoiceChangeHandler = invoiceChangeHandler;
     }
 
-    public final void editItem(Invoice temp) {
+    public final void editInvoice(Invoice temp) {
         if (temp != null) {
             try {
                 this.edit(temp);
