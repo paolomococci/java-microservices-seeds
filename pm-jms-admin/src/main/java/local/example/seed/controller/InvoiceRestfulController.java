@@ -25,7 +25,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class InvoiceRestfulController {
 
@@ -58,6 +60,16 @@ public class InvoiceRestfulController {
                         null,
                         new ParameterizedTypeReference<>() {});
         return responseEntity.getBody();
+    }
+
+    public Collection<Invoice> collectionOfAllInvoices() {
+        // TODO
+        return null;
+    }
+
+    public Stream<Invoice> streamOfAllInvoices() {
+        // TODO
+        return null;
     }
 
     public void update(Invoice invoice, String id) {
