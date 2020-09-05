@@ -74,4 +74,10 @@ public class InvoiceEditorView
 
         this.add(this.invoiceGrid, this.tools, this.invoiceEditorForm);
     }
+
+    private void showCustomerList() {
+        this.invoiceGrid.setItems(
+                // Collection<Invoice> invoices
+        );
+    }
 }
