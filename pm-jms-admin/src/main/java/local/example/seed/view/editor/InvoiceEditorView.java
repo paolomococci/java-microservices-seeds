@@ -62,7 +62,7 @@ public class InvoiceEditorView
 
         this.invoiceGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-                    this.invoiceEditorForm.editItem(listener.getValue());
+                    this.invoiceEditorForm.editInvoice(listener.getValue());
                 }
         );
 
