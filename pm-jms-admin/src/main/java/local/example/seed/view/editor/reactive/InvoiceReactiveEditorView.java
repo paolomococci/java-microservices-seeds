@@ -32,6 +32,7 @@ import local.example.seed.controller.reactive.InvoiceRestfulReactiveController;
 import local.example.seed.form.reactive.InvoiceEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
+import local.example.seed.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle(value = "invoice reactive editor")
@@ -69,7 +70,8 @@ public class InvoiceReactiveEditorView
         this.addInvoice = new Button("add invoice", VaadinIcon.PLUS_CIRCLE_O.create());
         this.addInvoice.addClickListener(
                 listener -> {
-                    // TODO
+                    this.invoiceGrid.asSingleSelect().clear();
+                    this.invoiceEditorReactiveForm.editInvoice(new Invoice());
                 }
         );
         this.addInvoice.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
