@@ -69,7 +69,8 @@ public class InvoiceEditorView
         this.addInvoice = new Button("add invoice", VaadinIcon.PLUS_CIRCLE_O.create());
         this.addInvoice.addClickListener(
                 listener -> {
-                    // TODO
+                    this.invoiceGrid.asSingleSelect().clear();
+                    this.invoiceEditorForm.editInvoice(new Invoice());
                 }
         );
         this.addInvoice.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
