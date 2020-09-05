@@ -74,4 +74,10 @@ public class CustomerReactiveEditorView
 
         this.add(this.customerGrid, this.tools, this.customerEditorReactiveForm);
     }
+
+    private void showCustomerList() {
+        this.customerGrid.setItems(
+                // Collection<Customer> customers
+        );
+    }
 }
