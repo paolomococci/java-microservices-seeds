@@ -28,6 +28,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.controller.InvoiceRestfulController;
 import local.example.seed.form.InvoiceEditorForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
@@ -40,16 +41,19 @@ public class InvoiceEditorView
 
     private final Grid<Invoice> invoiceGrid;
     private final InvoiceEditorForm invoiceEditorForm;
+    private final InvoiceRestfulController invoiceRestfulController;
     private final Button addInvoice;
     private final HorizontalLayout tools;
 
     @Autowired
     public InvoiceEditorView(
-            InvoiceEditorForm invoiceEditorForm
+            InvoiceEditorForm invoiceEditorForm,
+            InvoiceRestfulController invoiceRestfulController
     ) {
         super();
 
         this.invoiceEditorForm = invoiceEditorForm;
+        this.invoiceRestfulController = invoiceRestfulController;
 
         this.invoiceGrid = new Grid<>();
         this.invoiceGrid.addColumn(invoice -> invoice.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
@@ -77,7 +81,7 @@ public class InvoiceEditorView
 
     private void showInvoiceList() {
         this.invoiceGrid.setItems(
-                // Collection<Invoice> invoices
+                this.invoiceRestfulController.collectionOfAllInvoices()
         );
     }
 }
