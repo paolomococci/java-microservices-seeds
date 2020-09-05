@@ -62,7 +62,7 @@ public class CustomerEditorView
 
         this.customerGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-                    this.customerEditorForm.editItem(listener.getValue());
+                    this.customerEditorForm.editCustomer(listener.getValue());
                 }
         );
 
