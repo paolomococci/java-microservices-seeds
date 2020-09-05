@@ -69,7 +69,8 @@ public class ItemReactiveEditorView
         this.addItem = new Button("add item", VaadinIcon.PLUS_CIRCLE_O.create());
         this.addItem.addClickListener(
                 listener -> {
-                    // TODO
+                    this.itemGrid.asSingleSelect().clear();
+                    this.itemEditorReactiveForm.editItem(new Item());
                 }
         );
         this.addItem.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
