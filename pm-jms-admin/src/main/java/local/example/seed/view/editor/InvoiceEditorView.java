@@ -75,7 +75,7 @@ public class InvoiceEditorView
         this.add(this.invoiceGrid, this.tools, this.invoiceEditorForm);
     }
 
-    private void showCustomerList() {
+    private void showInvoiceList() {
         this.invoiceGrid.setItems(
                 // Collection<Invoice> invoices
         );
