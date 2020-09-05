@@ -62,7 +62,7 @@ public class CustomerEditorView
 
         this.customerGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-
+                    // TODO
                 }
         );
 
@@ -77,6 +77,14 @@ public class CustomerEditorView
         this.tools = new HorizontalLayout(this.addCustomer);
 
         this.add(this.customerGrid, this.tools, this.customerEditorForm);
+
+        this.customerEditorForm.setCustomerChangeHandler(
+                () -> {
+                    this.customerEditorForm.setVisible(false);
+                }
+        );
+
+        this.showCustomerList();
     }
 
     private void showCustomerList() {
