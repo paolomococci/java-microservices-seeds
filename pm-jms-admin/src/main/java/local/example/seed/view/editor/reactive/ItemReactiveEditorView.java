@@ -62,7 +62,7 @@ public class ItemReactiveEditorView
 
         this.itemGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-                    // TODO
+                    this.itemEditorReactiveForm.editItem(listener.getValue());
                 }
         );
 
