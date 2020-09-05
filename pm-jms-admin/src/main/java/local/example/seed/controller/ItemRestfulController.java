@@ -25,7 +25,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class ItemRestfulController {
 
@@ -58,6 +60,16 @@ public class ItemRestfulController {
                         null,
                         new ParameterizedTypeReference<>() {});
         return responseEntity.getBody();
+    }
+
+    public Collection<Item> collectionOfAllItems() {
+        // TODO
+        return null;
+    }
+
+    public Stream<Item> streamOfAllItems() {
+        // TODO
+        return null;
     }
 
     public void update(Item item, String id) {
