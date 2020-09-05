@@ -28,6 +28,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.controller.reactive.ItemRestfulReactiveController;
 import local.example.seed.form.reactive.ItemEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
@@ -40,16 +41,19 @@ public class ItemReactiveEditorView
 
     private final Grid<Item> itemGrid;
     private final ItemEditorReactiveForm itemEditorReactiveForm;
+    private final ItemRestfulReactiveController itemRestfulReactiveController;
     private final Button addItem;
     private final HorizontalLayout tools;
 
     @Autowired
     public ItemReactiveEditorView(
-            ItemEditorReactiveForm itemEditorReactiveForm
+            ItemEditorReactiveForm itemEditorReactiveForm,
+            ItemRestfulReactiveController itemRestfulReactiveController
     ) {
         super();
 
         this.itemEditorReactiveForm = itemEditorReactiveForm;
+        this.itemRestfulReactiveController = itemRestfulReactiveController;
 
         this.itemGrid = new Grid<>();
         this.itemGrid.addColumn(item -> item.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
@@ -77,7 +81,7 @@ public class ItemReactiveEditorView
 
     private void showItemList() {
         this.itemGrid.setItems(
-                // Collection<Item> items
+                this.itemRestfulReactiveController.collectionOfAllItems()
         );
     }
 }
