@@ -28,6 +28,7 @@ import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.controller.ItemRestfulController;
 import local.example.seed.form.ItemEditorForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
@@ -40,16 +41,19 @@ public class ItemEditorView
 
     private final Grid<Item> itemGrid;
     private final ItemEditorForm itemEditorForm;
+    private final ItemRestfulController itemRestfulController;
     private final Button addItem;
     private final HorizontalLayout tools;
 
     @Autowired
     public ItemEditorView(
-            ItemEditorForm itemEditorForm
+            ItemEditorForm itemEditorForm,
+            ItemRestfulController itemRestfulController
     ) {
         super();
 
         this.itemEditorForm = itemEditorForm;
+        this.itemRestfulController = itemRestfulController;
 
         this.itemGrid = new Grid<>();
         this.itemGrid.addColumn(item -> item.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
@@ -77,7 +81,7 @@ public class ItemEditorView
 
     private void showItemList() {
         this.itemGrid.setItems(
-                // Collection<Item> items
+                this.itemRestfulController.collectionOfAllItems()
         );
     }
 }
