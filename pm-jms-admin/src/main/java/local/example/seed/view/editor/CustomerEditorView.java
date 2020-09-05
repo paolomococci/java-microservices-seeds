@@ -74,4 +74,10 @@ public class CustomerEditorView
 
         this.add(this.customerGrid, this.tools, this.customerEditorForm);
     }
+
+    private void showCustomerList() {
+        this.customerGrid.setItems(
+                // Collection<Customer> customers
+        );
+    }
 }
