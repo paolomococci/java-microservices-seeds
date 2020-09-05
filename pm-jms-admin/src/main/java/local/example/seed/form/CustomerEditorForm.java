@@ -106,7 +106,7 @@ public class CustomerEditorForm
         this.cancel.addThemeVariants(ButtonVariant.LUMO_ERROR);
         this.cancel.addClickListener(
                 listener -> {
-                    this.editItem(this.customer);
+                    this.editCustomer(this.customer);
                     this.setVisible(false);
                 }
         );
@@ -165,7 +165,7 @@ public class CustomerEditorForm
         this.customerChangeHandler = customerChangeHandler;
     }
 
-    public final void editItem(Customer temp) {
+    public final void editCustomer(Customer temp) {
         if (temp != null) {
             this.edit(temp);
         } else {
