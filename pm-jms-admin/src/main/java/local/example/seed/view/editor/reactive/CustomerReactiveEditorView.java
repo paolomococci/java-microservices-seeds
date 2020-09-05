@@ -62,7 +62,7 @@ public class CustomerReactiveEditorView
 
         this.customerGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-                    this.customerEditorReactiveForm.editItem(listener.getValue());
+                    this.customerEditorReactiveForm.editCustomer(listener.getValue());
                 }
         );
 
