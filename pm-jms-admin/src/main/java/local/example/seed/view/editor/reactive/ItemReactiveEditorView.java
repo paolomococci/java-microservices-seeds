@@ -74,4 +74,10 @@ public class ItemReactiveEditorView
 
         this.add(this.itemGrid, this.tools, this.itemEditorReactiveForm);
     }
+
+    private void showItemList() {
+        this.itemGrid.setItems(
+                // Collection<Item> items
+        );
+    }
 }
