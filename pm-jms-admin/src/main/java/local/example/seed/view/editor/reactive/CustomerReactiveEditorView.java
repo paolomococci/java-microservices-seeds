@@ -32,6 +32,7 @@ import local.example.seed.controller.reactive.CustomerRestfulReactiveController;
 import local.example.seed.form.reactive.CustomerEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
+import local.example.seed.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle(value = "customer reactive editor")
@@ -69,7 +70,8 @@ public class CustomerReactiveEditorView
         this.addCustomer = new Button("add customer", VaadinIcon.PLUS_CIRCLE_O.create());
         this.addCustomer.addClickListener(
                 listener -> {
-                    // TODO
+                    this.customerGrid.asSingleSelect().clear();
+                    this.customerEditorReactiveForm.editCustomer(new Customer());
                 }
         );
         this.addCustomer.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
