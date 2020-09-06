@@ -78,7 +78,7 @@ public class ItemReactiveEditorView
         );
         this.filterCodeField.addValueChangeListener(
                 listener -> {
-                    // TODO
+                    this.showItemList(listener.getValue());
                 }
         );
 
@@ -101,10 +101,10 @@ public class ItemReactiveEditorView
                 }
         );
 
-        this.showItemList();
+        this.showItemList("");
     }
 
-    private void showItemList() {
+    private void showItemList(String code) {
         this.itemGrid.setItems(
                 this.itemRestfulReactiveController.collectionOfAllItems()
         );
