@@ -26,7 +26,9 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class ItemRestfulController {
@@ -50,12 +52,13 @@ public class ItemRestfulController {
 
     public Item read(String id)
             throws RestClientException {
-        ResponseEntity<Item> responseEntity = this.restTemplate
-                .exchange(ITEM_RESTFUL_BASE_URI +"/"+id,
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<>() {});
-        return responseEntity.getBody();
+        Map<String, String> param = new HashMap<>();
+        param.put("id", id);
+        return this.restTemplate.getForObject(
+                ITEM_RESTFUL_BASE_URI,
+                Item.class,
+                param
+        );
     }
 
     public List<Item> readAll()
