@@ -39,7 +39,8 @@ public class CustomerRestfulController {
         this.restTemplate = new RestTemplate();
     }
 
-    public void create(Customer customer) {
+    public void create(Customer customer) 
+            throws URISyntaxException {
         this.restTemplate.postForObject(
                 CUSTOMER_RESTFUL_BASE_URI,
                 customer,
