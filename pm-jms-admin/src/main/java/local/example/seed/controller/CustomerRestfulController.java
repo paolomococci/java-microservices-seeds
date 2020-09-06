@@ -79,8 +79,7 @@ public class CustomerRestfulController {
 
     public Stream<Customer> streamOfAllCustomers() {
         List<Customer> customers = this.readAll();
-        // TODO
-        return null;
+        return customers.stream();
     }
 
     public Customer findByEmail(String email)
