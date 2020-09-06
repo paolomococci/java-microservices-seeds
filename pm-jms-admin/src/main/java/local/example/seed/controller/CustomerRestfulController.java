@@ -22,9 +22,9 @@ import local.example.seed.model.Customer;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +42,7 @@ public class CustomerRestfulController {
     }
 
     public void create(Customer customer)
-            throws URISyntaxException {
+            throws RestClientException {
         this.restTemplate.postForObject(
                 CUSTOMER_RESTFUL_BASE_URI,
                 customer,
@@ -51,7 +51,7 @@ public class CustomerRestfulController {
     }
 
     public Customer read(String id)
-            throws URISyntaxException {
+            throws RestClientException {
         Map<String, String> param = new HashMap<>();
         param.put("id", id);
         return this.restTemplate.getForObject(
@@ -62,12 +62,12 @@ public class CustomerRestfulController {
     }
 
     public List<Customer> readAll()
-            throws URISyntaxException {
-        ResponseEntity<List<Customer>> responseEntity = this.restTemplate
-                .exchange(CUSTOMER_RESTFUL_BASE_URI,
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<>() {});
+            throws RestClientException {
+        ResponseEntity<List<Customer>> responseEntity = this.restTemplate.exchange(
+                CUSTOMER_RESTFUL_BASE_URI,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<>() {});
         return responseEntity.getBody();
     }
 
