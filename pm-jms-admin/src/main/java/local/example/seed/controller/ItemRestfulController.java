@@ -52,7 +52,7 @@ public class ItemRestfulController {
         Map<String, String> param = new HashMap<>();
         param.put("id", id);
         return this.restTemplate.getForObject(
-                ITEM_RESTFUL_BASE_URI,
+                ITEM_RESTFUL_BASE_URI+"/{id}",
                 Item.class,
                 param
         );
@@ -95,7 +95,7 @@ public class ItemRestfulController {
         Map<String, String> param = new HashMap<>();
         param.put("id", id);
         this.restTemplate.put(
-                ITEM_RESTFUL_BASE_URI,
+                ITEM_RESTFUL_BASE_URI+"/{id}",
                 item,
                 param
         );
@@ -113,7 +113,7 @@ public class ItemRestfulController {
         Map<String, String> param = new HashMap<>();
         param.put("id", id);
         this.restTemplate.delete(
-                ITEM_RESTFUL_BASE_URI,
+                ITEM_RESTFUL_BASE_URI+"/{id}",
                 param
         );
     }
