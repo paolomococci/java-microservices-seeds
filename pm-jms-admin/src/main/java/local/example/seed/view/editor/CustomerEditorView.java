@@ -26,6 +26,8 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.CustomerRestfulController;
@@ -42,6 +44,7 @@ public class CustomerEditorView
     private final Grid<Customer> customerGrid;
     private final CustomerEditorForm customerEditorForm;
     private final CustomerRestfulController customerRestfulController;
+    private final TextField filterEmailField;
     private final Button addCustomer;
     private final HorizontalLayout tools;
 
@@ -63,6 +66,19 @@ public class CustomerEditorView
         this.customerGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
                     this.customerEditorForm.editCustomer(listener.getValue());
+                }
+        );
+
+        this.filterEmailField = new TextField();
+        this.filterEmailField.setPlaceholder("filter by email");
+        this.filterEmailField.setClearButtonVisible(true);
+        this.filterEmailField.setValueChangeMode(ValueChangeMode.LAZY);
+        this.filterEmailField.addFocusShortcut(
+                Key.KEY_F, KeyModifier.ALT
+        );
+        this.filterEmailField.addValueChangeListener(
+                listener -> {
+                    // TODO
                 }
         );
 
