@@ -78,6 +78,7 @@ public class CustomerRestfulController {
     }
 
     public Stream<Customer> streamOfAllCustomers() {
+        List<Customer> customers = this.readAll();
         // TODO
         return null;
     }
