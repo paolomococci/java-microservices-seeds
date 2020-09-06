@@ -91,7 +91,13 @@ public class ItemRestfulController {
 
     public void update(Item item, String id)
             throws RestClientException {
-        // TODO
+        Map<String, String> param = new HashMap<>();
+        param.put("id", id);
+        this.restTemplate.put(
+                ITEM_RESTFUL_BASE_URI, 
+                item, 
+                param
+        );
     }
 
     public void partialUpdate(Item item, String id)
