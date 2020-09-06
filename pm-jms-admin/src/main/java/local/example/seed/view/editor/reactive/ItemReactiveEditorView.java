@@ -105,8 +105,14 @@ public class ItemReactiveEditorView
     }
 
     private void showItemList(String code) {
-        this.itemGrid.setItems(
-                this.itemRestfulReactiveController.collectionOfAllItems()
-        );
+        if (code.isEmpty() || code.isBlank()) {
+            this.itemGrid.setItems(
+                    this.itemRestfulReactiveController.collectionOfAllItems()
+            );
+        } else {
+            this.itemGrid.setItems(
+                    this.itemRestfulReactiveController.findByCode(code)
+            );
+        }
     }
 }
