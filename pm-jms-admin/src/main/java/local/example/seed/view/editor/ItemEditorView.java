@@ -26,6 +26,8 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.ItemRestfulController;
@@ -42,6 +44,7 @@ public class ItemEditorView
     private final Grid<Item> itemGrid;
     private final ItemEditorForm itemEditorForm;
     private final ItemRestfulController itemRestfulController;
+    private final TextField filterCodeField;
     private final Button addItem;
     private final HorizontalLayout tools;
 
@@ -63,6 +66,19 @@ public class ItemEditorView
         this.itemGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
                     this.itemEditorForm.editItem(listener.getValue());
+                }
+        );
+
+        this.filterCodeField = new TextField();
+        this.filterCodeField.setPlaceholder("filter by code");
+        this.filterCodeField.setClearButtonVisible(true);
+        this.filterCodeField.setValueChangeMode(ValueChangeMode.LAZY);
+        this.filterCodeField.addFocusShortcut(
+                Key.KEY_F, KeyModifier.ALT
+        );
+        this.filterCodeField.addValueChangeListener(
+                listener -> {
+                    // TODO
                 }
         );
 
