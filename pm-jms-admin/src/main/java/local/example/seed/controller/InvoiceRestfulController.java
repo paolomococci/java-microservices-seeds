@@ -79,8 +79,7 @@ public class InvoiceRestfulController {
 
     public Stream<Invoice> streamOfAllInvoices() {
         List<Invoice> invoices = this.readAll();
-        // TODO
-        return null;
+        return invoices.stream();
     }
 
     public Invoice findByCode(String code)
