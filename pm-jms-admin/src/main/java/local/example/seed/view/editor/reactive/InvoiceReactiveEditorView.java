@@ -34,7 +34,6 @@ import local.example.seed.controller.reactive.InvoiceRestfulReactiveController;
 import local.example.seed.form.reactive.InvoiceEditorReactiveForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
-import local.example.seed.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle(value = "invoice reactive editor")
@@ -79,7 +78,7 @@ public class InvoiceReactiveEditorView
         );
         this.filterCodeField.addValueChangeListener(
                 listener -> {
-                    // TODO
+                    this.showInvoiceList(listener.getValue());
                 }
         );
 
@@ -102,10 +101,10 @@ public class InvoiceReactiveEditorView
                 }
         );
 
-        this.showInvoiceList();
+        this.showInvoiceList("");
     }
 
-    private void showInvoiceList() {
+    private void showInvoiceList(String code) {
         this.invoiceGrid.setItems(
                 this.invoiceRestfulReactiveController.collectionOfAllInvoices()
         );
