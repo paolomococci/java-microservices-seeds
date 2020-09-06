@@ -32,14 +32,20 @@ import java.util.stream.Stream;
 public class InvoiceRestfulController {
 
     private static final String INVOICE_RESTFUL_BASE_URI = "http://127.0.0.1:8080/invoices";
+
     private final RestTemplate restTemplate;
 
     public InvoiceRestfulController() {
         this.restTemplate = new RestTemplate();
     }
 
-    public void create(Invoice invoice) {
-        // TODO
+    public void create(Invoice invoice)
+            throws URISyntaxException {
+        this.restTemplate.postForObject(
+                INVOICE_RESTFUL_BASE_URI,
+                invoice,
+                Invoice.class
+        );
     }
 
     public Invoice read(String id)
