@@ -72,6 +72,10 @@ public class CustomerRestfulController {
         return null;
     }
 
+    public Customer findByEmail(String email) {
+        return null;
+    }
+
     public void update(Customer customer, String id) {
         // TODO
     }
