@@ -94,8 +94,8 @@ public class InvoiceRestfulController {
         Map<String, String> param = new HashMap<>();
         param.put("id", id);
         this.restTemplate.put(
-                INVOICE_RESTFUL_BASE_URI, 
-                invoice, 
+                INVOICE_RESTFUL_BASE_URI,
+                invoice,
                 param
         );
     }
@@ -107,6 +107,11 @@ public class InvoiceRestfulController {
 
     public void delete(String id)
             throws RestClientException {
-        // TODO
+        Map<String, String> param = new HashMap<>();
+        param.put("id", id);
+        this.restTemplate.delete(
+                INVOICE_RESTFUL_BASE_URI,
+                param
+        );
     }
 }
