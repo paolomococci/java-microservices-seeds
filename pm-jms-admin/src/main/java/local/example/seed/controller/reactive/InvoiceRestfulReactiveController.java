@@ -20,6 +20,7 @@ package local.example.seed.controller.reactive;
 
 import local.example.seed.model.Invoice;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.Collection;
 import java.util.stream.Stream;
@@ -33,16 +34,19 @@ public class InvoiceRestfulReactiveController {
         this.webClient = WebClient.create();
     }
 
-    public void create(Invoice invoice) {
+    public void create(Invoice invoice)
+            throws WebClientResponseException {
         // TODO
     }
 
-    public Invoice read(String id) {
+    public Invoice read(String id)
+            throws WebClientResponseException {
         // TODO
         return null;
     }
 
-    public void readAll() {
+    public void readAll()
+            throws WebClientResponseException {
         // TODO
     }
 
@@ -56,20 +60,24 @@ public class InvoiceRestfulReactiveController {
         return null;
     }
 
-    public Invoice findByCode(String code) {
+    public Invoice findByCode(String code)
+            throws WebClientResponseException {
         // TODO
         return null;
     }
 
-    public void update(Invoice invoice, String id) {
+    public void update(Invoice invoice, String id)
+            throws WebClientResponseException {
         // TODO
     }
 
-    public void partialUpdate(Invoice invoice, String id) {
+    public void partialUpdate(Invoice invoice, String id)
+            throws WebClientResponseException {
         // TODO
     }
 
-    public void delete(String id) {
+    public void delete(String id)
+            throws WebClientResponseException {
         // TODO
     }
 }
