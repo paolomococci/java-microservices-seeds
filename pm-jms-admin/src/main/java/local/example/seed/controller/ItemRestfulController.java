@@ -79,8 +79,7 @@ public class ItemRestfulController {
 
     public Stream<Item> streamOfAllItems() {
         List<Item> items = this.readAll();
-        // TODO
-        return null;
+        return items.stream();
     }
 
     public Item findByCode(String code)
