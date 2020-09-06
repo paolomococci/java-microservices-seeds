@@ -25,10 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class CustomerRestfulController {
@@ -72,8 +69,12 @@ public class CustomerRestfulController {
     }
 
     public Collection<Customer> collectionOfAllCustomers() {
-        // TODO
-        return null;
+        List<Customer> customers = this.readAll();
+        Collection<Customer> collectionOfCustomer = new ArrayList<>();
+        for (Customer customer:customers) {
+            collectionOfCustomer.add(customer);
+        }
+        return collectionOfCustomer;
     }
 
     public Stream<Customer> streamOfAllCustomers() {
