@@ -56,6 +56,11 @@ public class InvoiceRestfulReactiveController {
         return null;
     }
 
+    public Invoice findByCode(String code) {
+        // TODO
+        return null;
+    }
+
     public void update(Invoice invoice, String id) {
         // TODO
     }
