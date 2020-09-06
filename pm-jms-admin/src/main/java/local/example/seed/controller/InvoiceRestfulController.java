@@ -84,6 +84,8 @@ public class InvoiceRestfulController {
 
     public Invoice findByCode(String code)
             throws RestClientException {
+        Map<String, String> param = new HashMap<>();
+        param.put("code", code);
         // TODO
         return null;
     }
