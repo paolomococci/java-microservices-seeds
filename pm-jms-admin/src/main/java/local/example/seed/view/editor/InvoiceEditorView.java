@@ -78,7 +78,7 @@ public class InvoiceEditorView
         );
         this.filterCodeField.addValueChangeListener(
                 listener -> {
-                    // TODO
+                    this.showInvoiceList(listener.getValue());
                 }
         );
 
@@ -101,10 +101,10 @@ public class InvoiceEditorView
                 }
         );
 
-        this.showInvoiceList();
+        this.showInvoiceList("");
     }
 
-    private void showInvoiceList() {
+    private void showInvoiceList(String code) {
         this.invoiceGrid.setItems(
                 this.invoiceRestfulController.collectionOfAllInvoices()
         );
