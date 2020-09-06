@@ -32,6 +32,7 @@ import java.util.stream.Stream;
 public class CustomerRestfulController {
 
     private static final String CUSTOMER_RESTFUL_BASE_URI = "http://127.0.0.1:8080/customers";
+
     private final RestTemplate restTemplate;
 
     public CustomerRestfulController() {
@@ -39,7 +40,11 @@ public class CustomerRestfulController {
     }
 
     public void create(Customer customer) {
-        // TODO
+        this.restTemplate.postForObject(
+                CUSTOMER_RESTFUL_BASE_URI,
+                customer,
+                Customer.class
+        );
     }
 
     public Customer read(String id)
