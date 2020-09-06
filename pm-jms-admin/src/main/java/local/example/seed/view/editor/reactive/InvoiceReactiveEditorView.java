@@ -26,6 +26,8 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.reactive.InvoiceRestfulReactiveController;
@@ -43,6 +45,7 @@ public class InvoiceReactiveEditorView
     private final Grid<Invoice> invoiceGrid;
     private final InvoiceEditorReactiveForm invoiceEditorReactiveForm;
     private final InvoiceRestfulReactiveController invoiceRestfulReactiveController;
+    private final TextField filterCodeField;
     private final Button addInvoice;
     private final HorizontalLayout tools;
 
@@ -64,6 +67,19 @@ public class InvoiceReactiveEditorView
         this.invoiceGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
                     this.invoiceEditorReactiveForm.editInvoice(listener.getValue());
+                }
+        );
+
+        this.filterCodeField = new TextField();
+        this.filterCodeField.setPlaceholder("filter by code");
+        this.filterCodeField.setClearButtonVisible(true);
+        this.filterCodeField.setValueChangeMode(ValueChangeMode.LAZY);
+        this.filterCodeField.addFocusShortcut(
+                Key.KEY_F, KeyModifier.ALT
+        );
+        this.filterCodeField.addValueChangeListener(
+                listener -> {
+                    // TODO
                 }
         );
 
