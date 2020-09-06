@@ -20,6 +20,7 @@ package local.example.seed.controller.reactive;
 
 import local.example.seed.model.Item;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.Collection;
 import java.util.stream.Stream;
@@ -33,16 +34,19 @@ public class ItemRestfulReactiveController {
         this.webClient = WebClient.builder().build();
     }
 
-    public void create(Item item) {
+    public void create(Item item)
+            throws WebClientResponseException {
         // TODO
     }
 
-    public Item read(String id) {
+    public Item read(String id)
+            throws WebClientResponseException {
         // TODO
         return null;
     }
 
-    public void readAll() {
+    public void readAll()
+            throws WebClientResponseException {
         // TODO
     }
 
@@ -56,23 +60,24 @@ public class ItemRestfulReactiveController {
         return null;
     }
 
-    public Item findByCode(String code) {
+    public Item findByCode(String code)
+            throws WebClientResponseException {
         // TODO
         return null;
     }
 
-    public void update(Item item, String id) {
+    public void update(Item item, String id)
+            throws WebClientResponseException {
         // TODO
     }
 
-    public void partialUpdate(Item item, String id) {
+    public void partialUpdate(Item item, String id)
+            throws WebClientResponseException {
         // TODO
     }
 
-    public void delete(String id) {
-        this.webClient.mutate()
-                .baseUrl(ITEM_REACTIVE_BASE_URI+"/"+id)
-                .build()
-                .delete();
+    public void delete(String id)
+            throws WebClientResponseException {
+        // TODO
     }
 }
