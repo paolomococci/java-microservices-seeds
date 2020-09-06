@@ -84,6 +84,8 @@ public class CustomerRestfulController {
 
     public Customer findByEmail(String email)
             throws RestClientException {
+        Map<String, String> param = new HashMap<>();
+        param.put("email", email);
         // TODO
         return null;
     }
