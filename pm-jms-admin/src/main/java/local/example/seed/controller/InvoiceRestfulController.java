@@ -26,7 +26,9 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class InvoiceRestfulController {
@@ -50,12 +52,13 @@ public class InvoiceRestfulController {
 
     public Invoice read(String id)
             throws RestClientException {
-        ResponseEntity<Invoice> responseEntity = this.restTemplate
-                .exchange(INVOICE_RESTFUL_BASE_URI +"/"+id,
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<>() {});
-        return responseEntity.getBody();
+        Map<String, String> param = new HashMap<>();
+        param.put("id", id);
+        return this.restTemplate.getForObject(
+                INVOICE_RESTFUL_BASE_URI,
+                Invoice.class,
+                param
+        );
     }
 
     public List<Invoice> readAll()
