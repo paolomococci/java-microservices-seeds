@@ -52,7 +52,7 @@ public class InvoiceRestfulController {
         Map<String, String> param = new HashMap<>();
         param.put("id", id);
         return this.restTemplate.getForObject(
-                INVOICE_RESTFUL_BASE_URI,
+                INVOICE_RESTFUL_BASE_URI+"/{id}",
                 Invoice.class,
                 param
         );
@@ -95,7 +95,7 @@ public class InvoiceRestfulController {
         Map<String, String> param = new HashMap<>();
         param.put("id", id);
         this.restTemplate.put(
-                INVOICE_RESTFUL_BASE_URI,
+                INVOICE_RESTFUL_BASE_URI+"/{id}",
                 invoice,
                 param
         );
@@ -113,7 +113,7 @@ public class InvoiceRestfulController {
         Map<String, String> param = new HashMap<>();
         param.put("id", id);
         this.restTemplate.delete(
-                INVOICE_RESTFUL_BASE_URI,
+                INVOICE_RESTFUL_BASE_URI+"/{id}",
                 param
         );
     }
