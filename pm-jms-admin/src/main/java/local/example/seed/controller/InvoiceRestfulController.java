@@ -83,20 +83,24 @@ public class InvoiceRestfulController {
         return null;
     }
 
-    public Invoice findByCode(String code) {
+    public Invoice findByCode(String code)
+            throws RestClientException {
         // TODO
         return null;
     }
 
-    public void update(Invoice invoice, String id) {
+    public void update(Invoice invoice, String id)
+            throws RestClientException {
         // TODO
     }
 
-    public void partialUpdate(Invoice invoice, String id) {
+    public void partialUpdate(Invoice invoice, String id)
+            throws RestClientException {
         // TODO
     }
 
-    public void delete(String id) {
+    public void delete(String id)
+            throws RestClientException {
         // TODO
     }
 }
