@@ -26,7 +26,9 @@ import org.springframework.web.client.RestTemplate;
 
 import java.net.URISyntaxException;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 
 public class CustomerRestfulController {
@@ -39,7 +41,7 @@ public class CustomerRestfulController {
         this.restTemplate = new RestTemplate();
     }
 
-    public void create(Customer customer) 
+    public void create(Customer customer)
             throws URISyntaxException {
         this.restTemplate.postForObject(
                 CUSTOMER_RESTFUL_BASE_URI,
@@ -50,12 +52,13 @@ public class CustomerRestfulController {
 
     public Customer read(String id)
             throws URISyntaxException {
-        ResponseEntity<Customer> responseEntity = this.restTemplate
-                .exchange(CUSTOMER_RESTFUL_BASE_URI +"/"+id,
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<>() {});
-        return responseEntity.getBody();
+        Map<String, String> param = new HashMap<>();
+        param.put("id", id);
+        return this.restTemplate.getForObject(
+                CUSTOMER_RESTFUL_BASE_URI,
+                Customer.class,
+                param
+        );
     }
 
     public List<Customer> readAll()
