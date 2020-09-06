@@ -83,20 +83,24 @@ public class ItemRestfulController {
         return null;
     }
 
-    public Item findByCode(String code) {
+    public Item findByCode(String code)
+            throws RestClientException {
         // TODO
         return null;
     }
 
-    public void update(Item item, String id) {
+    public void update(Item item, String id)
+            throws RestClientException {
         // TODO
     }
 
-    public void partialUpdate(Item item, String id) {
+    public void partialUpdate(Item item, String id)
+            throws RestClientException {
         // TODO
     }
 
-    public void delete(String id) {
+    public void delete(String id)
+            throws RestClientException {
         // TODO
     }
 }
