@@ -105,8 +105,14 @@ public class ItemEditorView
     }
 
     private void showItemList(String code) {
-        this.itemGrid.setItems(
-                this.itemRestfulController.collectionOfAllItems()
-        );
+        if (code.isEmpty() || code.isBlank()) {
+            this.itemGrid.setItems(
+                    this.itemRestfulController.collectionOfAllItems()
+            );
+        } else {
+            this.itemGrid.setItems(
+                    this.itemRestfulController.findByCode(code)
+            );
+        }
     }
 }
