@@ -101,6 +101,8 @@ public class CustomerRestfulController {
 
     public void partialUpdate(Customer customer, String id)
             throws RestClientException {
+        Map<String, String> param = new HashMap<>();
+        param.put("id", id);
         // TODO
     }
 
