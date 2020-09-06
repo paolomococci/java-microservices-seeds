@@ -105,8 +105,14 @@ public class CustomerEditorView
     }
 
     private void showCustomerList(String email) {
-        this.customerGrid.setItems(
-                this.customerRestfulController.collectionOfAllCustomers()
-        );
+        if (email.isEmpty() || email.isBlank()) {
+            this.customerGrid.setItems(
+                    this.customerRestfulController.collectionOfAllCustomers()
+            );
+        } else {
+            this.customerGrid.setItems(
+                    this.customerRestfulController.findByEmail(email)
+            );
+        }
     }
 }
