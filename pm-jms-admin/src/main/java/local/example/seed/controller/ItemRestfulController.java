@@ -72,6 +72,11 @@ public class ItemRestfulController {
         return null;
     }
 
+    public Item findByCode(String code) {
+        // TODO
+        return null;
+    }
+
     public void update(Item item, String id) {
         // TODO
     }
