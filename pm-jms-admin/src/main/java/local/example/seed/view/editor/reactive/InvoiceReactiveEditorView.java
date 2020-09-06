@@ -105,8 +105,14 @@ public class InvoiceReactiveEditorView
     }
 
     private void showInvoiceList(String code) {
-        this.invoiceGrid.setItems(
-                this.invoiceRestfulReactiveController.collectionOfAllInvoices()
-        );
+        if (code.isEmpty() || code.isBlank()) {
+            this.invoiceGrid.setItems(
+                    this.invoiceRestfulReactiveController.collectionOfAllInvoices()
+            );
+        } else {
+            this.invoiceGrid.setItems(
+                    this.invoiceRestfulReactiveController.findByCode(code)
+            );
+        }
     }
 }
