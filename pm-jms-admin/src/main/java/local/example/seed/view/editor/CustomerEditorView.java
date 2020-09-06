@@ -78,7 +78,7 @@ public class CustomerEditorView
         );
         this.filterEmailField.addValueChangeListener(
                 listener -> {
-                    // TODO
+                    this.showCustomerList(listener.getValue());
                 }
         );
 
@@ -101,10 +101,10 @@ public class CustomerEditorView
                 }
         );
 
-        this.showCustomerList();
+        this.showCustomerList("");
     }
 
-    private void showCustomerList() {
+    private void showCustomerList(String email) {
         this.customerGrid.setItems(
                 this.customerRestfulController.collectionOfAllCustomers()
         );
