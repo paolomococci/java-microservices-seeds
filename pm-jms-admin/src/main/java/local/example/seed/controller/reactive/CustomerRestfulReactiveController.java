@@ -20,6 +20,7 @@ package local.example.seed.controller.reactive;
 
 import local.example.seed.model.Customer;
 import org.springframework.web.reactive.function.client.WebClient;
+import org.springframework.web.reactive.function.client.WebClientResponseException;
 
 import java.util.Collection;
 import java.util.stream.Stream;
@@ -37,12 +38,14 @@ public class CustomerRestfulReactiveController {
         // TODO
     }
 
-    public Customer read(String id) {
+    public Customer read(String id)
+            throws WebClientResponseException {
         // TODO
         return null;
     }
 
-    public void readAll() {
+    public void readAll()
+            throws WebClientResponseException {
         // TODO
     }
 
@@ -56,20 +59,24 @@ public class CustomerRestfulReactiveController {
         return null;
     }
 
-    public Customer findByEmail(String email) {
+    public Customer findByEmail(String email)
+            throws WebClientResponseException {
         // TODO
         return null;
     }
 
-    public void update(Customer customer, String id) {
+    public void update(Customer customer, String id)
+            throws WebClientResponseException {
         // TODO
     }
 
-    public void partialUpdate(Customer customer, String id) {
+    public void partialUpdate(Customer customer, String id)
+            throws WebClientResponseException {
         // TODO
     }
 
-    public void delete(String id) {
+    public void delete(String id)
+            throws WebClientResponseException {
         // TODO
     }
 }
