@@ -91,7 +91,13 @@ public class InvoiceRestfulController {
 
     public void update(Invoice invoice, String id)
             throws RestClientException {
-        // TODO
+        Map<String, String> param = new HashMap<>();
+        param.put("id", id);
+        this.restTemplate.put(
+                INVOICE_RESTFUL_BASE_URI, 
+                invoice, 
+                param
+        );
     }
 
     public void partialUpdate(Invoice invoice, String id)
