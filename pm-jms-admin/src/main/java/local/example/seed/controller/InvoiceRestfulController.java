@@ -22,9 +22,9 @@ import local.example.seed.model.Invoice;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.net.URISyntaxException;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Stream;
@@ -40,7 +40,7 @@ public class InvoiceRestfulController {
     }
 
     public void create(Invoice invoice)
-            throws URISyntaxException {
+            throws RestClientException {
         this.restTemplate.postForObject(
                 INVOICE_RESTFUL_BASE_URI,
                 invoice,
@@ -49,7 +49,7 @@ public class InvoiceRestfulController {
     }
 
     public Invoice read(String id)
-            throws URISyntaxException {
+            throws RestClientException {
         ResponseEntity<Invoice> responseEntity = this.restTemplate
                 .exchange(INVOICE_RESTFUL_BASE_URI +"/"+id,
                         HttpMethod.GET,
@@ -59,7 +59,7 @@ public class InvoiceRestfulController {
     }
 
     public List<Invoice> readAll()
-            throws URISyntaxException {
+            throws RestClientException {
         ResponseEntity<List<Invoice>> responseEntity = this.restTemplate
                 .exchange(INVOICE_RESTFUL_BASE_URI,
                         HttpMethod.GET,
