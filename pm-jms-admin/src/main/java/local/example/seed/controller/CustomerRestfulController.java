@@ -83,20 +83,24 @@ public class CustomerRestfulController {
         return null;
     }
 
-    public Customer findByEmail(String email) {
+    public Customer findByEmail(String email)
+            throws RestClientException {
         // TODO
         return null;
     }
 
-    public void update(Customer customer, String id) {
+    public void update(Customer customer, String id)
+            throws RestClientException {
         // TODO
     }
 
-    public void partialUpdate(Customer customer, String id) {
+    public void partialUpdate(Customer customer, String id)
+            throws RestClientException {
         // TODO
     }
 
-    public void delete(String id) {
+    public void delete(String id)
+            throws RestClientException {
         // TODO
     }
 }
