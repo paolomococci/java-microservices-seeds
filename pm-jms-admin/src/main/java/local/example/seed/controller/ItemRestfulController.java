@@ -32,14 +32,20 @@ import java.util.stream.Stream;
 public class ItemRestfulController {
 
     private static final String ITEM_RESTFUL_BASE_URI = "http://127.0.0.1:8080/items";
+
     private final RestTemplate restTemplate;
 
     public ItemRestfulController() {
         this.restTemplate = new RestTemplate();
     }
 
-    public void create(Item item) {
-        // TODO
+    public void create(Item item)
+            throws URISyntaxException {
+        this.restTemplate.postForObject(
+                ITEM_RESTFUL_BASE_URI,
+                item,
+                Item.class
+        );
     }
 
     public Item read(String id)
