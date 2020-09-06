@@ -56,6 +56,11 @@ public class CustomerRestfulReactiveController {
         return null;
     }
 
+    public Customer findByEmail(String email) {
+        // TODO
+        return null;
+    }
+
     public void update(Customer customer, String id) {
         // TODO
     }
