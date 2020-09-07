@@ -117,12 +117,17 @@ public class ItemRestfulReactiveController {
 
     public void update(Item item, String id)
             throws WebClientResponseException {
-        // TODO
+        this.webClient.put()
+                .uri("/"+id)
+                .body(
+                        Mono.justOrEmpty(item),
+                        Item.class
+                );
     }
 
     public void partialUpdate(Item item, String id)
             throws WebClientResponseException {
-        this.webClient.put()
+        this.webClient.patch()
                 .uri("/"+id)
                 .body(
                         Mono.justOrEmpty(item),
