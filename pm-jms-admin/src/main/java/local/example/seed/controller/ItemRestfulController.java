@@ -78,8 +78,7 @@ public class ItemRestfulController {
     }
 
     public Stream<Item> streamOfAllItems() {
-        List<Item> items = this.readAll();
-        return items.stream();
+        return this.readAll().stream();
     }
 
     public Item findByCode(String code)
