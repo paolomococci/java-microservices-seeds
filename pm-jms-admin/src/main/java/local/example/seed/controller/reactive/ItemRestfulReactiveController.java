@@ -22,8 +22,10 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Item;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
 
 import java.util.Collection;
@@ -44,7 +46,12 @@ public class ItemRestfulReactiveController {
                             connection.addHandlerLast(new WriteTimeoutHandler(6000, TimeUnit.MILLISECONDS));
                         }
                 );
-        this.webClient = WebClient.builder().build();
+
+        this.webClient = WebClient
+                .builder()
+                .baseUrl(ITEM_REACTIVE_BASE_URI)
+                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
+                .build();
     }
 
     public void create(Item item)
