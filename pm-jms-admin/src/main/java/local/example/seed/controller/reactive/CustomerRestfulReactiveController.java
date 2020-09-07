@@ -64,10 +64,11 @@ public class CustomerRestfulReactiveController {
 
     public void create(Customer customer)
             throws WebClientResponseException {
-        this.webClient.post().body(
-                Mono.justOrEmpty(customer),
-                Customer.class
-        );
+        this.webClient.post()
+                .body(
+                        Mono.justOrEmpty(customer),
+                        Customer.class
+                );
     }
 
     public Customer read(String id)
@@ -117,7 +118,12 @@ public class CustomerRestfulReactiveController {
 
     public void update(Customer customer, String id)
             throws WebClientResponseException {
-        // TODO
+        this.webClient.put()
+                .uri("/"+id)
+                .body(
+                        Mono.justOrEmpty(customer),
+                        Customer.class
+                );
     }
 
     public void partialUpdate(Customer customer, String id)
