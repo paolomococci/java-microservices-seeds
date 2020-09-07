@@ -97,8 +97,12 @@ public class CustomerRestfulReactiveController {
     }
 
     public Collection<Customer> collectionOfAllCustomers() {
-        // TODO
-        return null;
+        Collection<Customer> collectionOfCustomers = new ArrayList<>();
+        List<Customer> customers = this.readAll();
+        for (Customer customer:customers) {
+            collectionOfCustomers.add(customer);
+        }
+        return collectionOfCustomers;
     }
 
     public Stream<Customer> streamOfAllCustomers() {
