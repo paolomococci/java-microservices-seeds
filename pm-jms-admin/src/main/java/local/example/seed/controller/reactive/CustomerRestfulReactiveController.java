@@ -106,8 +106,7 @@ public class CustomerRestfulReactiveController {
     }
 
     public Stream<Customer> streamOfAllCustomers() {
-        // TODO
-        return null;
+        return this.readAll().stream();
     }
 
     public Customer findByEmail(String email)
