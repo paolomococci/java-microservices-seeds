@@ -106,8 +106,7 @@ public class ItemRestfulReactiveController {
     }
 
     public Stream<Item> streamOfAllItems() {
-        // TODO
-        return null;
+        return this.readAll().stream();
     }
 
     public Item findByCode(String code)
