@@ -22,6 +22,8 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Item;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
@@ -51,6 +53,7 @@ public class ItemRestfulReactiveController {
                 .builder()
                 .baseUrl(ITEM_REACTIVE_BASE_URI)
                 .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
+                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
                 .build();
     }
 
