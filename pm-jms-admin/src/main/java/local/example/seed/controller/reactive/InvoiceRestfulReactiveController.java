@@ -22,8 +22,10 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Invoice;
+import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
 
 import java.util.Collection;
@@ -44,7 +46,12 @@ public class InvoiceRestfulReactiveController {
                             connection.addHandlerLast(new WriteTimeoutHandler(6000, TimeUnit.MILLISECONDS));
                         }
                 );
-        this.webClient = WebClient.create();
+
+        this.webClient = WebClient
+                .builder()
+                .baseUrl(INVOICE_REACTIVE_BASE_URI)
+                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
+                .build();
     }
 
     public void create(Invoice invoice)
