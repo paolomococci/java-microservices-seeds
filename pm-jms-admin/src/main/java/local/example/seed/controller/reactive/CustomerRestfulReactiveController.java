@@ -138,6 +138,6 @@ public class CustomerRestfulReactiveController {
 
     public void delete(String id)
             throws WebClientResponseException {
-        // TODO
+        this.webClient.delete().uri("/"+id);
     }
 }
