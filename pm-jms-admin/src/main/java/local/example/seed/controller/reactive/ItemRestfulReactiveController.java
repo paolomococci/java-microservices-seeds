@@ -76,7 +76,7 @@ public class ItemRestfulReactiveController {
                 .uri("/"+id)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> Mono.empty()
                 )
                 .bodyToMono(Item.class)
