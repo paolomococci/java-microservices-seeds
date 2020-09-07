@@ -18,19 +18,33 @@
 
 package local.example.seed.controller.reactive;
 
+import io.netty.channel.ChannelOption;
+import io.netty.handler.timeout.ReadTimeoutHandler;
+import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Customer;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.netty.tcp.TcpClient;
 
 import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 public class CustomerRestfulReactiveController {
 
     private static final String CUSTOMER_REACTIVE_BASE_URI = "http://127.0.0.1:8081/api/restful/customers";
+
     private final WebClient webClient;
 
     public CustomerRestfulReactiveController() {
+        TcpClient tcpClient = TcpClient.create()
+                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 6000)
+                .doOnConnected(
+                        connection -> {
+                            connection.addHandlerLast(new ReadTimeoutHandler(6000, TimeUnit.MILLISECONDS));
+                            connection.addHandlerLast(new WriteTimeoutHandler(6000, TimeUnit.MILLISECONDS));
+                        }
+                );
         this.webClient = WebClient.create();
     }
 
