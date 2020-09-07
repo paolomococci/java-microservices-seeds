@@ -97,8 +97,12 @@ public class ItemRestfulReactiveController {
     }
 
     public Collection<Item> collectionOfAllItems() {
-        // TODO
-        return null;
+        Collection<Item> collectionOfItems = new ArrayList<>();
+        List<Item> items = this.readAll();
+        for (Item item:items) {
+            collectionOfItems.add(item);
+        }
+        return collectionOfItems;
     }
 
     public Stream<Item> streamOfAllItems() {
