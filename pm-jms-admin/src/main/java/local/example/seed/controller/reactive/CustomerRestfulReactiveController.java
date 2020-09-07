@@ -57,7 +57,8 @@ public class CustomerRestfulReactiveController {
                 .build();
     }
 
-    public void create(Customer customer) {
+    public void create(Customer customer)
+            throws WebClientResponseException {
         // TODO
     }
 
