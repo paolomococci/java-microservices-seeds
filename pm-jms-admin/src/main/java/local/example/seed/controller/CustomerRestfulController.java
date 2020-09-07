@@ -70,16 +70,15 @@ public class CustomerRestfulController {
 
     public Collection<Customer> collectionOfAllCustomers() {
         List<Customer> customers = this.readAll();
-        Collection<Customer> collectionOfCustomer = new ArrayList<>();
+        Collection<Customer> collectionOfCustomers = new ArrayList<>();
         for (Customer customer:customers) {
-            collectionOfCustomer.add(customer);
+            collectionOfCustomers.add(customer);
         }
-        return collectionOfCustomer;
+        return collectionOfCustomers;
     }
 
     public Stream<Customer> streamOfAllCustomers() {
-        List<Customer> customers = this.readAll();
-        return customers.stream();
+        return this.readAll().stream();
     }
 
     public Customer findByEmail(String email)
