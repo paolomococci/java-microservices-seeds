@@ -64,10 +64,11 @@ public class ItemRestfulReactiveController {
 
     public void create(Item item)
             throws WebClientResponseException {
-        this.webClient.post().body(
-                Mono.justOrEmpty(item),
-                Item.class
-        );
+        this.webClient.post()
+                .body(
+                        Mono.justOrEmpty(item),
+                        Item.class
+                );
     }
 
     public Item read(String id)
@@ -137,6 +138,6 @@ public class ItemRestfulReactiveController {
 
     public void delete(String id)
             throws WebClientResponseException {
-        // TODO
+        this.webClient.delete().uri("/"+id);
     }
 }
