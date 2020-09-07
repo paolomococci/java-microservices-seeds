@@ -128,7 +128,12 @@ public class CustomerRestfulReactiveController {
 
     public void partialUpdate(Customer customer, String id)
             throws WebClientResponseException {
-        // TODO
+        this.webClient.patch()
+                .uri("/"+id)
+                .body(
+                        Mono.justOrEmpty(customer),
+                        Customer.class
+                );
     }
 
     public void delete(String id)
