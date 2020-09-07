@@ -70,16 +70,15 @@ public class InvoiceRestfulController {
 
     public Collection<Invoice> collectionOfAllInvoices() {
         List<Invoice> invoices = this.readAll();
-        Collection<Invoice> collectionOfInvoice = new ArrayList<>();
+        Collection<Invoice> collectionOfInvoices = new ArrayList<>();
         for (Invoice invoice:invoices) {
-            collectionOfInvoice.add(invoice);
+            collectionOfInvoices.add(invoice);
         }
-        return collectionOfInvoice;
+        return collectionOfInvoices;
     }
 
     public Stream<Invoice> streamOfAllInvoices() {
-        List<Invoice> invoices = this.readAll();
-        return invoices.stream();
+        return this.readAll().stream();
     }
 
     public Invoice findByCode(String code)
