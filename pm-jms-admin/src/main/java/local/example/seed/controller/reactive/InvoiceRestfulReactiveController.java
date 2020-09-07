@@ -97,8 +97,12 @@ public class InvoiceRestfulReactiveController {
     }
 
     public Collection<Invoice> collectionOfAllInvoices() {
-        // TODO
-        return null;
+        Collection<Invoice> collectionOfInvoices = new ArrayList<>();
+        List<Invoice> invoices = this.readAll();
+        for (Invoice invoice:invoices) {
+            collectionOfInvoices.add(invoice);
+        }
+        return collectionOfInvoices;
     }
 
     public Stream<Invoice> streamOfAllInvoices() {
