@@ -106,8 +106,7 @@ public class InvoiceRestfulReactiveController {
     }
 
     public Stream<Invoice> streamOfAllInvoices() {
-        // TODO
-        return null;
+        return this.readAll().stream();
     }
 
     public Invoice findByCode(String code)
