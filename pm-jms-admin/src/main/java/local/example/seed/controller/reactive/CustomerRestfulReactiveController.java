@@ -28,11 +28,14 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
@@ -80,9 +83,17 @@ public class CustomerRestfulReactiveController {
                 .block();
     }
 
-    public void readAll()
+    public List<Customer> readAll()
             throws WebClientResponseException {
-        // TODO
+        List<Customer> listOfCustomers = new ArrayList<>();
+        Flux<Customer> fluxOfCustomers = this.webClient.get()
+                .retrieve()
+                .bodyToFlux(Customer.class);
+        Iterable<Customer> fluxOfCustomersIterable = fluxOfCustomers.toIterable();
+        for (Customer customer:fluxOfCustomersIterable) {
+            listOfCustomers.add(customer);
+        }
+        return listOfCustomers;
     }
 
     public Collection<Customer> collectionOfAllCustomers() {
