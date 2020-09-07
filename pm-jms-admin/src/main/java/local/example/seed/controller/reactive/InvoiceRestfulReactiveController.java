@@ -128,7 +128,12 @@ public class InvoiceRestfulReactiveController {
 
     public void partialUpdate(Invoice invoice, String id)
             throws WebClientResponseException {
-        // TODO
+        this.webClient.patch()
+                .uri("/"+id)
+                .body(
+                        Mono.justOrEmpty(invoice),
+                        Invoice.class
+                );
     }
 
     public void delete(String id)
