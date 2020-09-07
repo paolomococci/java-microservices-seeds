@@ -27,6 +27,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
+import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
 
@@ -59,7 +60,10 @@ public class InvoiceRestfulReactiveController {
 
     public void create(Invoice invoice)
             throws WebClientResponseException {
-        // TODO
+        this.webClient.post().body(
+                Mono.justOrEmpty(invoice),
+                Invoice.class
+        );
     }
 
     public Invoice read(String id)
