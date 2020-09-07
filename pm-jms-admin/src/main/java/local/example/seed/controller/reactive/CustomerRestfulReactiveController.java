@@ -23,6 +23,7 @@ import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Customer;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -68,8 +69,15 @@ public class CustomerRestfulReactiveController {
 
     public Customer read(String id)
             throws WebClientResponseException {
-        // TODO
-        return null;
+        return this.webClient.get()
+                .uri("/"+id)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> Mono.empty()
+                )
+                .bodyToMono(Customer.class)
+                .block();
     }
 
     public void readAll()
