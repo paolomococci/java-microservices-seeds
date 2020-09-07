@@ -64,10 +64,11 @@ public class InvoiceRestfulReactiveController {
 
     public void create(Invoice invoice)
             throws WebClientResponseException {
-        this.webClient.post().body(
-                Mono.justOrEmpty(invoice),
-                Invoice.class
-        );
+        this.webClient.post()
+                .body(
+                        Mono.justOrEmpty(invoice),
+                        Invoice.class
+                );
     }
 
     public Invoice read(String id)
@@ -117,7 +118,12 @@ public class InvoiceRestfulReactiveController {
 
     public void update(Invoice invoice, String id)
             throws WebClientResponseException {
-        // TODO
+        this.webClient.put()
+                .uri("/"+id)
+                .body(
+                        Mono.justOrEmpty(invoice),
+                        Invoice.class
+                );
     }
 
     public void partialUpdate(Invoice invoice, String id)
