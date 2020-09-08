@@ -43,10 +43,14 @@ public class ItemReactiveRestController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Item item) {
         var result = this.itemReactiveCrudRestRepository.save(item);
-        var entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
-                Objects.requireNonNull(result.block())
-        );
-        return new ResponseEntity<>(entityModelOfItem, HttpStatus.CREATED);
+        if (result != null) {
+            var entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
+                    Objects.requireNonNull(result.block())
+            );
+            return new ResponseEntity<>(entityModelOfItem, HttpStatus.CREATED);
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
     }
 
     @GetMapping(path = "/{id}")
