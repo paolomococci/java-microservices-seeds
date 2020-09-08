@@ -45,10 +45,13 @@ public class CustomerReactiveRestController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Customer customer) {
         Mono<Customer> result = this.customerReactiveCrudRestRepository.save(customer);
-        EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
-                Objects.requireNonNull(result.block())
-        );
-        return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.CREATED);
+        if (result != null) {
+            EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
+                    Objects.requireNonNull(result.block())
+            );
+            return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.CREATED);
+        }
+        return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
     }
 
     @GetMapping(path = "/{id}")
