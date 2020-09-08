@@ -23,10 +23,12 @@ import local.example.seed.document.Item;
 import local.example.seed.repository.ItemReactiveCrudRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
 
 import java.util.Objects;
 
@@ -42,9 +44,9 @@ public class ItemReactiveRestController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Item item) {
-        var result = this.itemReactiveCrudRestRepository.save(item);
+        Mono<Item> result = this.itemReactiveCrudRestRepository.save(item);
         if (result != null) {
-            var entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
+            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
                     Objects.requireNonNull(result.block())
             );
             return new ResponseEntity<>(entityModelOfItem, HttpStatus.CREATED);
@@ -55,8 +57,15 @@ public class ItemReactiveRestController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> read(@PathVariable String id) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Mono<Item> result = this.itemReactiveCrudRestRepository.findById(id);
+        if (result != null) {
+            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
+                    Objects.requireNonNull(result.block())
+            );
+            return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping(path = "/code/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
