@@ -100,7 +100,12 @@ public class CustomerReactiveRestController {
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Mono<Customer> result = this.customerReactiveCrudRestRepository.findById(id);
+        if (result != null) {
+            this.customerReactiveCrudRestRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
