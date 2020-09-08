@@ -25,11 +25,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-import java.net.URISyntaxException;
+import java.util.Objects;
 
 @RepositoryRestController
 @RequestMapping(value = "/api/reactive/invoices", produces = "application/hal+json")
@@ -44,13 +45,21 @@ public class InvoiceReactiveRestController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Invoice invoice) {
         Mono<Invoice> result = this.invoiceReactiveCrudRestRepository.save(invoice);
-        EntityModel<Invoice> entityModelOfInvoice = this.invoiceRepresentationModelAssembler.toModel(result.block());
+        EntityModel<Invoice> entityModelOfInvoice = this.invoiceRepresentationModelAssembler.toModel(
+                Objects.requireNonNull(result.block())
+        );
         return new ResponseEntity<>(entityModelOfInvoice, HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<?> read(@PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> read(@PathVariable String id) {
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @GetMapping(path = "/code/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> readByCode(@PathVariable String code) {
+        // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
@@ -60,20 +69,20 @@ public class InvoiceReactiveRestController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> putUpdate(@RequestBody Invoice updated, @PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> putUpdate(@RequestBody Invoice updated, @PathVariable String id) {
+        // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity<?> patchUpdate(@RequestBody Invoice invoice, @PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> patchUpdate(@RequestBody Invoice invoice, @PathVariable String id) {
+        // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> delete(@PathVariable String id) {
+        // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }
