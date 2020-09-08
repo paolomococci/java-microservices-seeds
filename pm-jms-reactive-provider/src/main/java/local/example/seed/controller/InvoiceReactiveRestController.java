@@ -93,7 +93,12 @@ public class InvoiceReactiveRestController {
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Mono<Invoice> result = this.invoiceReactiveCrudRestRepository.findById(id);
+        if (result != null) {
+            this.invoiceReactiveCrudRestRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }
