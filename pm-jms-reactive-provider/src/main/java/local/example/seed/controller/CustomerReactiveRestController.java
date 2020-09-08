@@ -25,11 +25,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
-import java.net.URISyntaxException;
+import java.util.Objects;
 
 @RepositoryRestController
 @RequestMapping(value = "/api/reactive/customers", produces = "application/hal+json")
@@ -44,36 +45,52 @@ public class CustomerReactiveRestController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Customer customer) {
         Mono<Customer> result = this.customerReactiveCrudRestRepository.save(customer);
-        EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(result.block());
+        EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
+                Objects.requireNonNull(result.block())
+        );
         return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<?> read(@PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> read(@PathVariable String id) {
+        // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    }
+
+    @GetMapping(path = "/email/{email}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> readByCode(@PathVariable String email) {
+        Mono<Customer> result = this.customerReactiveCrudRestRepository.findByEmail(email);
+        if (result != null) {
+            EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
+                    Objects.requireNonNull(result.block())
+            );
+            return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping
     public ResponseEntity<?> readAll() {
+        // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> putUpdate(@RequestBody Customer updated, @PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> putUpdate(@RequestBody Customer updated, @PathVariable String id) {
+        // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PatchMapping(path = "/{id}")
-    public ResponseEntity<?> patchUpdate(@RequestBody Customer customer, @PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> patchUpdate(@RequestBody Customer customer, @PathVariable String id) {
+        // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable String id)
-            throws URISyntaxException {
+    public ResponseEntity<?> delete(@PathVariable String id) {
+        // TODO
         return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }
