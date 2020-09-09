@@ -21,6 +21,7 @@ package local.example.seed.controller;
 import local.example.seed.assembler.CustomerRepresentationModelAssembler;
 import local.example.seed.document.Customer;
 import local.example.seed.repository.CustomerReactiveCrudRestRepository;
+import local.example.seed.service.CustomerReactiveMongoDBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.CollectionModel;
@@ -39,6 +40,9 @@ public class CustomerReactiveRestController { // TODO: totally to be reviewed
 
     @Autowired
     CustomerReactiveCrudRestRepository customerReactiveCrudRestRepository;
+    
+    @Autowired
+    CustomerReactiveMongoDBService customerReactiveMongoDBService;
 
     @Autowired
     CustomerRepresentationModelAssembler customerRepresentationModelAssembler;
