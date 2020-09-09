@@ -26,7 +26,6 @@ import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
@@ -36,7 +35,7 @@ import java.util.Objects;
 
 @RepositoryRestController
 @RequestMapping(value = "/api/reactive/invoices", produces = "application/hal+json")
-public class InvoiceReactiveRestController {
+public class InvoiceReactiveRestController { // TODO: totally to be reviewed
 
     @Autowired
     InvoiceReactiveCrudRestRepository invoiceReactiveCrudRestRepository;
@@ -70,7 +69,7 @@ public class InvoiceReactiveRestController {
         }
     }
 
-    @GetMapping(path = "/code/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/code/{code}")
     public ResponseEntity<?> readByCode(@PathVariable String code) {
         Mono<Invoice> result = this.invoiceReactiveCrudRestRepository.findByCode(code);
         if (result != null) {
