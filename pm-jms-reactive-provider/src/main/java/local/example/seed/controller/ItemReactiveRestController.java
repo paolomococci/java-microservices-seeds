@@ -21,6 +21,7 @@ package local.example.seed.controller;
 import local.example.seed.assembler.ItemRepresentationModelAssembler;
 import local.example.seed.document.Item;
 import local.example.seed.repository.ItemReactiveCrudRestRepository;
+import local.example.seed.service.ItemReactiveMongoDBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
 import org.springframework.hateoas.CollectionModel;
@@ -39,6 +40,9 @@ public class ItemReactiveRestController { // TODO: totally to be reviewed
 
     @Autowired
     ItemReactiveCrudRestRepository itemReactiveCrudRestRepository;
+
+    @Autowired
+    ItemReactiveMongoDBService itemReactiveMongoDBService;
 
     @Autowired
     ItemRepresentationModelAssembler itemRepresentationModelAssembler;
