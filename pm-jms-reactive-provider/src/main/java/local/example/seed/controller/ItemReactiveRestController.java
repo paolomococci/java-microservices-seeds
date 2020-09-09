@@ -23,11 +23,13 @@ import local.example.seed.document.Item;
 import local.example.seed.repository.ItemReactiveCrudRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
@@ -76,8 +78,14 @@ public class ItemReactiveRestController {
 
     @GetMapping
     public ResponseEntity<?> readAll() {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Flux<Item> results = this.itemReactiveCrudRestRepository.findAll();
+        if (results != null) {
+            CollectionModel<EntityModel<Item>> collectionModelOfItems = this.itemRepresentationModelAssembler
+                    .toCollectionModel((Iterable<? extends Item>) results);
+            return new ResponseEntity<>(collectionModelOfItems, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping(path = "/{id}")
