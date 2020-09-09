@@ -23,11 +23,13 @@ import local.example.seed.document.Invoice;
 import local.example.seed.repository.InvoiceReactiveCrudRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
@@ -76,7 +78,14 @@ public class InvoiceReactiveRestController {
 
     @GetMapping
     public ResponseEntity<?> readAll() {
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Flux<Invoice> results = this.invoiceReactiveCrudRestRepository.findAll();
+        if (results != null) {
+            CollectionModel<EntityModel<Invoice>> collectionModelOfInvoices = this.invoiceRepresentationModelAssembler
+                    .toCollectionModel((Iterable<? extends Invoice>) results);
+            return new ResponseEntity<>(collectionModelOfInvoices, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PutMapping(path = "/{id}")
