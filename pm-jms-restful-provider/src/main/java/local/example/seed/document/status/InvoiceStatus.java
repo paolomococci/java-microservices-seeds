@@ -20,7 +20,9 @@ package local.example.seed.document.status;
 
 public enum InvoiceStatus {
 
-    ; // TODO
+    TO_PAY("ToPay"),
+    IN_PAYMENT("InPayment"),
+    PAID_OFF("PaidOff");
 
     private final String status;
 
