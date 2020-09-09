@@ -72,8 +72,15 @@ public class ItemReactiveRestController {
 
     @GetMapping(path = "/code/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> readByCode(@PathVariable String code) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Mono<Item> result = this.itemReactiveCrudRestRepository.findByCode(code);
+        if (result != null) {
+            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
+                    Objects.requireNonNull(result.block())
+            );
+            return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping
