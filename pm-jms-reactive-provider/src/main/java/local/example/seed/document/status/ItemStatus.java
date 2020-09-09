@@ -20,7 +20,10 @@ package local.example.seed.document.status;
 
 public enum ItemStatus {
 
-    ; // TODO
+    AVAILABLE("Available"),
+    TO_ORDER("ToOrder"),
+    DELIVERING("Delivering"),
+    OBSOLETE("Obsolete");
 
     private final String status;
 
