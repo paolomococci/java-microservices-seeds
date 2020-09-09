@@ -72,8 +72,15 @@ public class InvoiceReactiveRestController {
 
     @GetMapping(path = "/code/{code}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> readByCode(@PathVariable String code) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Mono<Invoice> result = this.invoiceReactiveCrudRestRepository.findByCode(code);
+        if (result != null) {
+            EntityModel<Invoice> entityModelOfInvoice = this.invoiceRepresentationModelAssembler.toModel(
+                    Objects.requireNonNull(result.block())
+            );
+            return new ResponseEntity<>(entityModelOfInvoice, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @GetMapping
