@@ -34,6 +34,7 @@ import com.vaadin.flow.spring.annotation.UIScope;
 import local.example.seed.controller.ItemRestfulController;
 import local.example.seed.handler.ItemChangeHandler;
 import local.example.seed.model.Item;
+import lombok.SneakyThrows;
 import org.atmosphere.annotation.AnnotationUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -148,15 +149,12 @@ public class ItemEditorForm
         }
     }
 
-    private void edit(Item temp) {
+    private void edit(Item temp)
+            throws URISyntaxException {
         String id = temp.getId();
         final boolean alreadyExisting = temp.getId() != null;
         if (alreadyExisting) {
-            try {
-                this.item = this.itemRestfulController.read(id);
-            } catch (URISyntaxException uriSyntaxException) {
-                uriSyntaxException.printStackTrace();
-            }
+            this.item = this.itemRestfulController.read(id);
         } else {
             this.item = temp;
         }
@@ -170,6 +168,7 @@ public class ItemEditorForm
         this.itemChangeHandler = itemChangeHandler;
     }
 
+    @SneakyThrows
     public final void editItem(Item temp) {
         if (temp != null) {
             this.edit(temp);
