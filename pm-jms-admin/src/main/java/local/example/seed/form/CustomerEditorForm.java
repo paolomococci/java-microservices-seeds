@@ -33,6 +33,7 @@ import com.vaadin.flow.spring.annotation.UIScope;
 import local.example.seed.controller.CustomerRestfulController;
 import local.example.seed.handler.CustomerChangeHandler;
 import local.example.seed.model.Customer;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URISyntaxException;
@@ -143,15 +144,12 @@ public class CustomerEditorForm
         }
     }
 
-    private void edit(Customer temp) {
+    private void edit(Customer temp)
+            throws URISyntaxException {
         String id = temp.getId();
         final boolean alreadyExisting = temp.getId() != null;
         if (alreadyExisting) {
-            try {
-                this.customer = this.customerRestfulController.read(id);
-            } catch (URISyntaxException uriSyntaxException) {
-                uriSyntaxException.printStackTrace();
-            }
+            this.customer = this.customerRestfulController.read(id);
         } else {
             this.customer = temp;
         }
@@ -165,6 +163,7 @@ public class CustomerEditorForm
         this.customerChangeHandler = customerChangeHandler;
     }
 
+    @SneakyThrows
     public final void editCustomer(Customer temp) {
         if (temp != null) {
             this.edit(temp);
