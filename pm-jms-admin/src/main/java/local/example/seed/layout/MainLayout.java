@@ -35,9 +35,6 @@ import local.example.seed.view.MainView;
 import local.example.seed.view.editor.CustomerEditorView;
 import local.example.seed.view.editor.InvoiceEditorView;
 import local.example.seed.view.editor.ItemEditorView;
-import local.example.seed.view.editor.reactive.CustomerReactiveEditorView;
-import local.example.seed.view.editor.reactive.InvoiceReactiveEditorView;
-import local.example.seed.view.editor.reactive.ItemReactiveEditorView;
 
 @Push
 @CssImport(value = "style.css")
@@ -57,10 +54,6 @@ public class MainLayout
     private final RouterLink invoiceEditorView;
     private final RouterLink itemEditorView;
 
-    private final RouterLink customerReactiveEditorView;
-    private final RouterLink invoiceReactiveEditorView;
-    private final RouterLink itemReactiveEditorView;
-
     public MainLayout() {
         super();
 
@@ -74,10 +67,6 @@ public class MainLayout
         this.invoiceEditorView = new RouterLink("invoice editor", InvoiceEditorView.class);
         this.itemEditorView = new RouterLink("item editor", ItemEditorView.class);
 
-        this.customerReactiveEditorView = new RouterLink("customer reactive editor", CustomerReactiveEditorView.class);
-        this.invoiceReactiveEditorView = new RouterLink("invoice reactive editor", InvoiceReactiveEditorView.class);
-        this.itemReactiveEditorView = new RouterLink("item reactive editor", ItemReactiveEditorView.class);
-
         OrderedList orderedList = new OrderedList(
                 new ListItem(this.mainView),
                 new ListItem(this.customerView),
@@ -85,10 +74,7 @@ public class MainLayout
                 new ListItem(this.itemView),
                 new ListItem(this.customerEditorView),
                 new ListItem(this.invoiceEditorView),
-                new ListItem(this.itemEditorView),
-                new ListItem(this.customerReactiveEditorView),
-                new ListItem(this.invoiceReactiveEditorView),
-                new ListItem(this.itemReactiveEditorView)
+                new ListItem(this.itemEditorView)
         );
 
         Header header = new Header(new DrawerToggle(), this.title);
@@ -108,10 +94,7 @@ public class MainLayout
                 this.itemView,
                 this.customerEditorView,
                 this.invoiceEditorView,
-                this.itemEditorView,
-                this.customerReactiveEditorView,
-                this.invoiceReactiveEditorView,
-                this.itemReactiveEditorView
+                this.itemEditorView
         };
     }
 
