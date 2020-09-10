@@ -34,6 +34,7 @@ import com.vaadin.flow.spring.annotation.UIScope;
 import local.example.seed.controller.InvoiceRestfulController;
 import local.example.seed.handler.InvoiceChangeHandler;
 import local.example.seed.model.Invoice;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.net.URISyntaxException;
@@ -144,15 +145,12 @@ public class InvoiceEditorForm
         }
     }
 
-    private void edit(Invoice temp) {
+    private void edit(Invoice temp)
+            throws URISyntaxException {
         String id = temp.getId();
         final boolean alreadyExisting = temp.getId() != null;
         if (alreadyExisting) {
-            try {
-                this.invoice = this.invoiceRestfulController.read(id);
-            } catch (URISyntaxException uriSyntaxException) {
-                uriSyntaxException.printStackTrace();
-            }
+            this.invoice = this.invoiceRestfulController.read(id);
         } else {
             this.invoice = temp;
         }
@@ -166,6 +164,7 @@ public class InvoiceEditorForm
         this.invoiceChangeHandler = invoiceChangeHandler;
     }
 
+    @SneakyThrows
     public final void editInvoice(Invoice temp) {
         if (temp != null) {
             this.edit(temp);
