@@ -36,66 +36,36 @@ import java.util.Objects;
 
 @RepositoryRestController
 @RequestMapping(value = "/api/reactive/items", produces = "application/hal+json")
-public class ItemReactiveRestController { // TODO: totally to be reviewed
+public class ItemReactiveRestController {
 
     @Autowired
     ItemReactiveCrudRestRepository itemReactiveCrudRestRepository;
-
-    @Autowired
-    ItemReactiveMongoDBService itemReactiveMongoDBService;
 
     @Autowired
     ItemRepresentationModelAssembler itemRepresentationModelAssembler;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Item item) {
-        Mono<Item> result = this.itemReactiveCrudRestRepository.save(item);
-        if (result != null) {
-            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
-                    Objects.requireNonNull(result.block())
-            );
-            return new ResponseEntity<>(entityModelOfItem, HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
-        }
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> read(@PathVariable String id) {
-        Mono<Item> result = this.itemReactiveCrudRestRepository.findById(id);
-        if (result != null) {
-            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
-                    Objects.requireNonNull(result.block())
-            );
-            return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @GetMapping(path = "/code/{code}")
     public ResponseEntity<?> readByCode(@PathVariable String code) {
-        Mono<Item> result = this.itemReactiveCrudRestRepository.findByCode(code);
-        if (result != null) {
-            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
-                    Objects.requireNonNull(result.block())
-            );
-            return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @GetMapping
     public ResponseEntity<?> readAll() {
-        Flux<Item> results = this.itemReactiveCrudRestRepository.findAll();
-        if (results != null) {
-            CollectionModel<EntityModel<Item>> collectionModelOfItems = this.itemRepresentationModelAssembler
-                    .toCollectionModel((Iterable<? extends Item>) results);
-            return new ResponseEntity<>(collectionModelOfItems, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PutMapping(path = "/{id}")
@@ -112,12 +82,7 @@ public class ItemReactiveRestController { // TODO: totally to be reviewed
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
-        Mono<Item> result = this.itemReactiveCrudRestRepository.findById(id);
-        if (result != null) {
-            this.itemReactiveCrudRestRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }
