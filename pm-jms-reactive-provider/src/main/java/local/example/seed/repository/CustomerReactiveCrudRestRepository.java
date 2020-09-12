@@ -19,15 +19,15 @@
 package local.example.seed.repository;
 
 import local.example.seed.document.Customer;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RepositoryRestResource(collectionResourceRel = "customers", path = "customers")
 public interface CustomerReactiveCrudRestRepository
-        extends ReactiveCrudRepository<Customer, String> {
+        extends ReactiveMongoRepository<Customer, String> {
 
     Mono<Customer> findByEmail(@Param("email") String email);
     Flux<Customer> findAllByName(@Param("name") String name);
