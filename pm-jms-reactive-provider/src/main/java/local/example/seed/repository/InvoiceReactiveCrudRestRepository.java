@@ -19,6 +19,7 @@
 package local.example.seed.repository;
 
 import local.example.seed.document.Invoice;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
@@ -26,7 +27,7 @@ import reactor.core.publisher.Mono;
 
 @RepositoryRestResource(collectionResourceRel = "invoices", path = "invoices")
 public interface InvoiceReactiveCrudRestRepository
-        extends ReactiveCrudRepository<Invoice, String> {
+        extends ReactiveMongoRepository<Invoice, String> {
 
     Mono<Invoice> findByCode(@Param("code") String code);
 }
