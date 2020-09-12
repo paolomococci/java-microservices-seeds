@@ -21,80 +21,44 @@ package local.example.seed.controller;
 import local.example.seed.assembler.CustomerRepresentationModelAssembler;
 import local.example.seed.document.Customer;
 import local.example.seed.repository.CustomerReactiveCrudRestRepository;
-import local.example.seed.service.CustomerReactiveMongoDBService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
-import org.springframework.hateoas.CollectionModel;
-import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import reactor.core.publisher.Flux;
-import reactor.core.publisher.Mono;
-
-import java.util.Objects;
 
 @RepositoryRestController
 @RequestMapping(value = "/api/reactive/customers", produces = "application/hal+json")
-public class CustomerReactiveRestController { // TODO: totally to be reviewed
+public class CustomerReactiveRestController {
 
     @Autowired
     CustomerReactiveCrudRestRepository customerReactiveCrudRestRepository;
-    
-    @Autowired
-    CustomerReactiveMongoDBService customerReactiveMongoDBService;
 
     @Autowired
     CustomerRepresentationModelAssembler customerRepresentationModelAssembler;
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Customer customer) {
-        Mono<Customer> result = this.customerReactiveCrudRestRepository.save(customer);
-        if (result != null) {
-            EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
-                    Objects.requireNonNull(result.block())
-            );
-            return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.CREATED);
-        }
-        return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> read(@PathVariable String id) {
-        Mono<Customer> result = this.customerReactiveCrudRestRepository.findById(id);
-        if (result != null) {
-            EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
-                    Objects.requireNonNull(result.block())
-            );
-            return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @GetMapping(path = "/email/{email}")
     public ResponseEntity<?> readByCode(@PathVariable String email) {
-        Mono<Customer> result = this.customerReactiveCrudRestRepository.findByEmail(email);
-        if (result != null) {
-            EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
-                    Objects.requireNonNull(result.block())
-            );
-            return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @GetMapping
     public ResponseEntity<?> readAll() {
-        Flux<Customer> results = this.customerReactiveCrudRestRepository.findAll();
-        if (results != null) {
-            CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
-                    .toCollectionModel((Iterable<? extends Customer>) results);
-            return new ResponseEntity<>(collectionModelOfCustomers, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 
     @PutMapping(path = "/{id}")
@@ -111,12 +75,7 @@ public class CustomerReactiveRestController { // TODO: totally to be reviewed
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
-        Mono<Customer> result = this.customerReactiveCrudRestRepository.findById(id);
-        if (result != null) {
-            this.customerReactiveCrudRestRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        // TODO
+        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
     }
 }
