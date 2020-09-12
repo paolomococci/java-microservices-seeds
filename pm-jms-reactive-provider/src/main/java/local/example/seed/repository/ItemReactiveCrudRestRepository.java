@@ -19,15 +19,15 @@
 package local.example.seed.repository;
 
 import local.example.seed.document.Item;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
 import org.springframework.data.repository.query.Param;
-import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 @RepositoryRestResource(collectionResourceRel = "items", path = "items")
 public interface ItemReactiveCrudRestRepository
-        extends ReactiveCrudRepository<Item, String> {
+        extends ReactiveMongoRepository<Item, String> {
 
     Mono<Item> findByCode(@Param("code") String code);
     Flux<Item> findAllByName(@Param("name") String name);
