@@ -52,8 +52,14 @@ public class CustomerReactiveRestController {
 
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> read(@PathVariable String id) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Mono<Customer> result = this.customerReactiveCrudRestRepository.findById(id);
+        if (result == null || result == Mono.empty().block()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
+                result.block()
+        );
+        return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
     }
 
     @GetMapping(path = "/email/{email}")
