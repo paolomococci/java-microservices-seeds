@@ -66,8 +66,13 @@ public class CustomerReactiveRestController {
 
     @GetMapping(path = "/email/{email}")
     public ResponseEntity<?> readByCode(@PathVariable String email) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Flux<Customer> results = this.customerReactiveCrudRestRepository.findByEmail(email);
+        if (results == null || null == results.empty().blockFirst()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
+                .toCollectionModel(results.toIterable());
+        return new ResponseEntity<>(collectionModelOfCustomers, HttpStatus.OK);
     }
 
     @GetMapping
