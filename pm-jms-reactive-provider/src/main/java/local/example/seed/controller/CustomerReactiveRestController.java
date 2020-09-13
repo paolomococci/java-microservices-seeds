@@ -84,8 +84,9 @@ public class CustomerReactiveRestController {
         updatable.setName(customer.getName());
         updatable.setSurname(customer.getSurname());
         updatable.setEmail(customer.getEmail());
+        Mono<Customer> updated = this.customerReactiveCrudRestRepository.save(updatable);
         EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
-                result.block()
+                updated.block()
         );
         return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
     }
@@ -96,9 +97,13 @@ public class CustomerReactiveRestController {
         if (result == null || result == Mono.empty().block()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        // TODO
+        Customer updatable = result.block();
+        if (customer.getName() != null) updatable.setName(customer.getName());
+        if (customer.getSurname() != null) updatable.setSurname(customer.getSurname());
+        if (customer.getEmail() != null) updatable.setEmail(customer.getEmail());
+        Mono<Customer> updated = this.customerReactiveCrudRestRepository.save(updatable);
         EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
-                result.block()
+                updated.block()
         );
         return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
     }
