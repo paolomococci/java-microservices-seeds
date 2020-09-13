@@ -23,10 +23,12 @@ import local.example.seed.document.Customer;
 import local.example.seed.repository.CustomerReactiveCrudRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
@@ -70,8 +72,13 @@ public class CustomerReactiveRestController {
 
     @GetMapping
     public ResponseEntity<?> readAll() {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Flux<Customer> results = this.customerReactiveCrudRestRepository.findAll();
+        if (results == null || null == results.empty().blockFirst()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
+                .toCollectionModel(results.toIterable());
+        return new ResponseEntity<>(collectionModelOfCustomers, HttpStatus.OK);
     }
 
     @PutMapping(path = "/{id}")
