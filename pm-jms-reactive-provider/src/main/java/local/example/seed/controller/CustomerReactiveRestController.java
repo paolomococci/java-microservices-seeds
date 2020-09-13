@@ -23,9 +23,13 @@ import local.example.seed.document.Customer;
 import local.example.seed.repository.CustomerReactiveCrudRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
+
+import java.util.Objects;
 
 @RepositoryRestController
 @RequestMapping(value = "/api/reactive/customers", produces = "application/hal+json")
@@ -39,8 +43,11 @@ public class CustomerReactiveRestController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Customer customer) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Mono<Customer> result = this.customerReactiveCrudRestRepository.save(customer);
+        EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
+                Objects.requireNonNull(result.block())
+        );
+        return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")
