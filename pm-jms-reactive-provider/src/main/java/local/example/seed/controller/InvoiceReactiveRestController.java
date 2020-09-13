@@ -23,9 +23,13 @@ import local.example.seed.document.Invoice;
 import local.example.seed.repository.InvoiceReactiveCrudRestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.rest.webmvc.RepositoryRestController;
+import org.springframework.hateoas.EntityModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
+
+import java.util.Objects;
 
 @RepositoryRestController
 @RequestMapping(value = "/api/reactive/invoices", produces = "application/hal+json")
@@ -39,8 +43,11 @@ public class InvoiceReactiveRestController {
 
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Invoice invoice) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Mono<Invoice> result = this.invoiceReactiveCrudRestRepository.save(invoice);
+        EntityModel<Invoice> entityModelOfInvoice = this.invoiceRepresentationModelAssembler.toModel(
+                Objects.requireNonNull(result.block())
+        );
+        return new ResponseEntity<>(entityModelOfInvoice, HttpStatus.CREATED);
     }
 
     @GetMapping(path = "/{id}")
