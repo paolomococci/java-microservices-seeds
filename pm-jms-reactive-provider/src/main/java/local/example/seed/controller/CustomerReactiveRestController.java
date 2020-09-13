@@ -66,7 +66,7 @@ public class CustomerReactiveRestController {
 
     @GetMapping(path = "/email/{email}")
     public ResponseEntity<?> readByCode(@PathVariable String email) {
-        Flux<Customer> results = this.customerReactiveCrudRestRepository.findByEmail(email);
+        Flux<Customer> results = this.customerReactiveCrudRestRepository.findAllByEmail(email);
         if (results == null || null == results.empty().blockFirst()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
