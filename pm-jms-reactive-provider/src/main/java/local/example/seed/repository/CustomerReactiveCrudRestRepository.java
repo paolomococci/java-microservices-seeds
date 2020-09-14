@@ -30,7 +30,6 @@ public interface CustomerReactiveCrudRestRepository
         extends ReactiveMongoRepository<Customer, String> {
 
     Mono<Customer> findByEmail(@Param("email") String email);
-    Flux<Customer> findAllByEmail(@Param("email") String email);
     Flux<Customer> findAllByName(@Param("name") String name);
     Flux<Customer> findAllBySurname(@Param("surname") String surname);
 }
