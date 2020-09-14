@@ -44,6 +44,9 @@ public class ItemReactiveRestController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Item item) {
         Mono<Item> result = this.itemReactiveCrudRestRepository.save(item);
+        if (result.block() == null) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
                 Objects.requireNonNull(result.block())
         );
@@ -53,7 +56,7 @@ public class ItemReactiveRestController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> read(@PathVariable String id) {
         Mono<Item> result = this.itemReactiveCrudRestRepository.findById(id);
-        if (result == null || result == Mono.empty().block()) {
+        if (result.block() == null || result == Mono.empty().block()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
@@ -89,7 +92,7 @@ public class ItemReactiveRestController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
         Mono<Item> result = this.itemReactiveCrudRestRepository.findById(id);
-        if (result == null || result == Mono.empty().block()) {
+        if (result.block() == null || result == Mono.empty().block()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         this.itemReactiveCrudRestRepository.deleteById(id).subscribe();
