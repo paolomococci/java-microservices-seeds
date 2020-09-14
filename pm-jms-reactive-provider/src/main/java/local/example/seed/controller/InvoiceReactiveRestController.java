@@ -85,8 +85,19 @@ public class InvoiceReactiveRestController {
 
     @PatchMapping(path = "/{id}")
     public ResponseEntity<?> patchUpdate(@RequestBody Invoice invoice, @PathVariable String id) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        Mono<Invoice> result = this.invoiceReactiveCrudRestRepository.findById(id);
+        if (result.block() == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Invoice updatable = result.block();
+        if (invoice.getCode() != null) updatable.setCode(invoice.getCode());
+        if (invoice.getDate() != null) updatable.setDate(invoice.getDate());
+        if (invoice.getTotal() != null) updatable.setTotal(invoice.getTotal());
+        Mono<Invoice> updated = this.invoiceReactiveCrudRestRepository.save(updatable);
+        EntityModel<Invoice> entityModelOfInvoice = this.invoiceRepresentationModelAssembler.toModel(
+                updated.block()
+        );
+        return new ResponseEntity<>(entityModelOfInvoice, HttpStatus.OK);
     }
 
     @DeleteMapping(path = "/{id}")
