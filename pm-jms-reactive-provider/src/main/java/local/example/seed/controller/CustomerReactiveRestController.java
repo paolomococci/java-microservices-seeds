@@ -31,8 +31,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Objects;
-
 @RepositoryRestController
 @RequestMapping(value = "/api/reactive/customers", produces = "application/hal+json")
 public class CustomerReactiveRestController {
@@ -46,8 +44,11 @@ public class CustomerReactiveRestController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Customer customer) {
         Mono<Customer> result = this.customerReactiveCrudRestRepository.save(customer);
+        if (result.block() == null) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
-                Objects.requireNonNull(result.block())
+                result.block()
         );
         return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.CREATED);
     }
@@ -55,7 +56,7 @@ public class CustomerReactiveRestController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> read(@PathVariable String id) {
         Mono<Customer> result = this.customerReactiveCrudRestRepository.findById(id);
-        if (result == null || result == Mono.empty().block()) {
+        if (result.block() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
@@ -64,21 +65,46 @@ public class CustomerReactiveRestController {
         return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
     }
 
-    @GetMapping(path = "/email/{email}")
-    public ResponseEntity<?> readAllByEmail(@PathVariable String email) {
-        Flux<Customer> results = this.customerReactiveCrudRestRepository.findAllByEmail(email);
-        if (results == null || null == results.empty().blockFirst()) {
+    @GetMapping(path = "/name/{name}")
+    public ResponseEntity<?> readAllByName(@PathVariable String name) {
+        Flux<Customer> results = this.customerReactiveCrudRestRepository.findAllByName(name);
+        if (results.toIterable() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
-                .toCollectionModel(results.toIterable());
+        CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler.toCollectionModel(
+                results.toIterable()
+        );
         return new ResponseEntity<>(collectionModelOfCustomers, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/surname/{surname}")
+    public ResponseEntity<?> readAllBySurname(@PathVariable String surname) {
+        Flux<Customer> results = this.customerReactiveCrudRestRepository.findAllBySurname(surname);
+        if (results.toIterable() == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler.toCollectionModel(
+                results.toIterable()
+        );
+        return new ResponseEntity<>(collectionModelOfCustomers, HttpStatus.OK);
+    }
+
+    @GetMapping(path = "/email/{email}")
+    public ResponseEntity<?> readByEmail(@PathVariable String email) {
+        Mono<Customer> result = this.customerReactiveCrudRestRepository.findByEmail(email);
+        if (result.block() == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
+                result.block()
+        );
+        return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
     }
 
     @GetMapping
     public ResponseEntity<?> readAll() {
         Flux<Customer> results = this.customerReactiveCrudRestRepository.findAll();
-        if (results == null || null == results.empty().blockFirst()) {
+        if (results == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
@@ -89,7 +115,7 @@ public class CustomerReactiveRestController {
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> putUpdate(@RequestBody Customer customer, @PathVariable String id) {
         Mono<Customer> result = this.customerReactiveCrudRestRepository.findById(id);
-        if (result == null || result == Mono.empty().block()) {
+        if (result.block() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         Customer updatable = result.block();
@@ -106,7 +132,7 @@ public class CustomerReactiveRestController {
     @PatchMapping(path = "/{id}")
     public ResponseEntity<?> patchUpdate(@RequestBody Customer customer, @PathVariable String id) {
         Mono<Customer> result = this.customerReactiveCrudRestRepository.findById(id);
-        if (result == null || result == Mono.empty().block()) {
+        if (result.block() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         Customer updatable = result.block();
@@ -123,7 +149,7 @@ public class CustomerReactiveRestController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
         Mono<Customer> result = this.customerReactiveCrudRestRepository.findById(id);
-        if (result == null || result == Mono.empty().block()) {
+        if (result.block() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         this.customerReactiveCrudRestRepository.deleteById(id).subscribe();
