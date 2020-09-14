@@ -44,6 +44,9 @@ public class InvoiceReactiveRestController {
     @PostMapping
     public ResponseEntity<?> create(@RequestBody Invoice invoice) {
         Mono<Invoice> result = this.invoiceReactiveCrudRestRepository.save(invoice);
+        if (result.block() == null) {
+            return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+        }
         EntityModel<Invoice> entityModelOfInvoice = this.invoiceRepresentationModelAssembler.toModel(
                 Objects.requireNonNull(result.block())
         );
@@ -53,7 +56,7 @@ public class InvoiceReactiveRestController {
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> read(@PathVariable String id) {
         Mono<Invoice> result = this.invoiceReactiveCrudRestRepository.findById(id);
-        if (result == null || result == Mono.empty().block()) {
+        if (result.block() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         EntityModel<Invoice> entityModelOfInvoice = this.invoiceRepresentationModelAssembler.toModel(
@@ -89,7 +92,7 @@ public class InvoiceReactiveRestController {
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<?> delete(@PathVariable String id) {
         Mono<Invoice> result = this.invoiceReactiveCrudRestRepository.findById(id);
-        if (result == null || result == Mono.empty().block()) {
+        if (result.block() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         this.invoiceReactiveCrudRestRepository.deleteById(id).subscribe();
