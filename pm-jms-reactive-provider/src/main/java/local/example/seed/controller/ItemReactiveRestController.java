@@ -78,9 +78,21 @@ public class ItemReactiveRestController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> putUpdate(@RequestBody Item updated, @PathVariable String id) {
-        // TODO
-        return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+    public ResponseEntity<?> putUpdate(@RequestBody Item item, @PathVariable String id) {
+        Mono<Item> result = this.itemReactiveCrudRestRepository.findById(id);
+        if (result.block() == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Item updatable = result.block();
+        updatable.setCode(item.getCode());
+        updatable.setName(item.getName());
+        updatable.setDescription(item.getDescription());
+        updatable.setPrice(item.getPrice());
+        Mono<Item> updated = this.itemReactiveCrudRestRepository.save(updatable);
+        EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
+                updated.block()
+        );
+        return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
     }
 
     @PatchMapping(path = "/{id}")
