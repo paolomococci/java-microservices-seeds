@@ -71,9 +71,10 @@ public class CustomerReactiveRestController {
         if (results.toIterable() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler.toCollectionModel(
-                results.toIterable()
-        );
+        CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
+                .toCollectionModel(
+                    results.toIterable()
+                );
         return new ResponseEntity<>(collectionModelOfCustomers, HttpStatus.OK);
     }
 
@@ -83,9 +84,10 @@ public class CustomerReactiveRestController {
         if (results.toIterable() == null) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler.toCollectionModel(
-                results.toIterable()
-        );
+        CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
+                .toCollectionModel(
+                    results.toIterable()
+                );
         return new ResponseEntity<>(collectionModelOfCustomers, HttpStatus.OK);
     }
 
@@ -108,7 +110,9 @@ public class CustomerReactiveRestController {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
-                .toCollectionModel(results.toIterable());
+                .toCollectionModel(
+                        results.toIterable()
+                );
         return new ResponseEntity<>(collectionModelOfCustomers, HttpStatus.OK);
     }
 
