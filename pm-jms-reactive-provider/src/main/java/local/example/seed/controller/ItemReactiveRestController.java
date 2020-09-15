@@ -82,7 +82,7 @@ public class ItemReactiveRestController {
     @GetMapping
     public ResponseEntity<?> readAll() {
         Flux<Item> results = this.itemReactiveCrudRestRepository.findAll();
-        if (results == null) {
+        if (results.count().block() < 1) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         CollectionModel<EntityModel<Item>> collectionModelOfItems = this.itemRepresentationModelAssembler
@@ -94,20 +94,23 @@ public class ItemReactiveRestController {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> putUpdate(@RequestBody Item item, @PathVariable String id) {
-        Mono<Item> result = this.itemReactiveCrudRestRepository.findById(id);
-        if (result.block() == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        Item updatable = result.block();
-        updatable.setCode(item.getCode());
-        updatable.setName(item.getName());
-        updatable.setDescription(item.getDescription());
-        updatable.setPrice(item.getPrice());
-        Mono<Item> updated = this.itemReactiveCrudRestRepository.save(updatable);
-        EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
-                updated.block()
+        Mono<Item> updated = this.itemReactiveCrudRestRepository.findById(id).map(
+                updatable -> {
+                    updatable.setCode(item.getCode());
+                    updatable.setName(item.getName());
+                    updatable.setDescription(item.getDescription());
+                    updatable.setPrice(item.getPrice());
+                    this.itemReactiveCrudRestRepository.save(updatable);
+                    return updatable;
+                }
         );
-        return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
+        if (updated.block() == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler
+                    .toModel(updated.block());
+            return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
+        }
     }
 
     @PatchMapping(path = "/{id}")
