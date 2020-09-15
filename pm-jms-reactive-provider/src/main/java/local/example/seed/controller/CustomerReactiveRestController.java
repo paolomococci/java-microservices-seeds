@@ -68,7 +68,7 @@ public class CustomerReactiveRestController {
     @GetMapping(path = "/name/{name}")
     public ResponseEntity<?> readAllByName(@PathVariable String name) {
         Flux<Customer> results = this.customerReactiveCrudRestRepository.findAllByName(name);
-        if (results.toIterable() == null) {
+        if (results.count().block() < 1) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
@@ -81,7 +81,7 @@ public class CustomerReactiveRestController {
     @GetMapping(path = "/surname/{surname}")
     public ResponseEntity<?> readAllBySurname(@PathVariable String surname) {
         Flux<Customer> results = this.customerReactiveCrudRestRepository.findAllBySurname(surname);
-        if (results.toIterable() == null) {
+        if (results.count().block() < 1) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
@@ -106,7 +106,7 @@ public class CustomerReactiveRestController {
     @GetMapping
     public ResponseEntity<?> readAll() {
         Flux<Customer> results = this.customerReactiveCrudRestRepository.findAll();
-        if (results == null) {
+        if (results.count().block() < 1) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         CollectionModel<EntityModel<Customer>> collectionModelOfCustomers = this.customerRepresentationModelAssembler
