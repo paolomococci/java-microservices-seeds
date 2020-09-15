@@ -82,7 +82,7 @@ public class InvoiceReactiveRestController {
     @GetMapping
     public ResponseEntity<?> readAll() {
         Flux<Invoice> results = this.invoiceReactiveCrudRestRepository.findAll();
-        if (results == null) {
+        if (results.count().block() < 1) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         CollectionModel<EntityModel<Invoice>> collectionModelOfInvoices = this.invoiceRepresentationModelAssembler
