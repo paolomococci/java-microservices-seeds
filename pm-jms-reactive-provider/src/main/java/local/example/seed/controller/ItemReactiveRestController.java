@@ -31,8 +31,6 @@ import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.util.Objects;
-
 @RepositoryRestController
 @RequestMapping(value = "/api/reactive/items", produces = "application/hal+json")
 public class ItemReactiveRestController {
@@ -50,7 +48,7 @@ public class ItemReactiveRestController {
             return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
         }
         EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
-                Objects.requireNonNull(result.block())
+                result.block()
         );
         return new ResponseEntity<>(entityModelOfItem, HttpStatus.CREATED);
     }
