@@ -314,7 +314,7 @@ Date: Sun, 13 Sep 2020 15:31:11 GMT
 }
 ```
 
-## now I change only e-mail field:
+## now I change only email field:
 ```
 $ curl -v -i -H "Content-Type:application/json" -X PATCH  -d '{"email":"sharon.bow@example.local"}' http://127.0.0.1:8081/api/reactive/customers/5f5e39d5bf16687d57b5d878
 *   Trying 127.0.0.1...
@@ -494,7 +494,7 @@ Date: Sun, 13 Sep 2020 16:14:17 GMT
 }
 ```
 
-## I search by surname:
+## I search by the surname:
 
 ```
 $ curl -v -i http://127.0.0.1:8081/api/reactive/customers/surname/Do
