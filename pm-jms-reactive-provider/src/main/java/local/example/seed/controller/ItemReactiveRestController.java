@@ -113,20 +113,23 @@ public class ItemReactiveRestController {
 
     @PatchMapping(path = "/{id}")
     public ResponseEntity<?> patchUpdate(@RequestBody Item item, @PathVariable String id) {
-        Mono<Item> result = this.itemReactiveCrudRestRepository.findById(id);
-        if (result.block() == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        Item updatable = result.block();
-        if (item.getCode() != null) updatable.setCode(item.getCode());
-        if (item.getName() != null) updatable.setName(item.getName());
-        if (item.getDescription() != null) updatable.setDescription(item.getDescription());
-        if (item.getPrice() != null) updatable.setPrice(item.getPrice());
-        Mono<Item> updated = this.itemReactiveCrudRestRepository.save(updatable);
-        EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler.toModel(
-                updated.block()
+        Mono<Item> updated = this.itemReactiveCrudRestRepository.findById(id).map(
+                updatable -> {
+                    if (item.getCode() != null) updatable.setCode(item.getCode());
+                    if (item.getName() != null) updatable.setName(item.getName());
+                    if (item.getDescription() != null) updatable.setDescription(item.getDescription());
+                    if (item.getPrice() != null) updatable.setPrice(item.getPrice());
+                    this.itemReactiveCrudRestRepository.save(updatable);
+                    return updatable;
+                }
         );
-        return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
+        if (updated.block() == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            EntityModel<Item> entityModelOfItem = this.itemRepresentationModelAssembler
+                    .toModel(updated.block());
+            return new ResponseEntity<>(entityModelOfItem, HttpStatus.OK);
+        }
     }
 
     @DeleteMapping(path = "/{id}")
