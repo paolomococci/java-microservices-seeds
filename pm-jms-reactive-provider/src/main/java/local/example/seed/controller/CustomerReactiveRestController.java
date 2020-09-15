@@ -118,19 +118,22 @@ public class CustomerReactiveRestController {
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<?> putUpdate(@RequestBody Customer customer, @PathVariable String id) {
-        Mono<Customer> result = this.customerReactiveCrudRestRepository.findById(id);
-        if (result.block() == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        Customer updatable = result.block();
-        updatable.setName(customer.getName());
-        updatable.setSurname(customer.getSurname());
-        updatable.setEmail(customer.getEmail());
-        Mono<Customer> updated = this.customerReactiveCrudRestRepository.save(updatable);
-        EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler.toModel(
-                updated.block()
+        Mono<Customer> updated = this.customerReactiveCrudRestRepository.findById(id).map(
+                updatable -> {
+                    updatable.setName(customer.getName());
+                    updatable.setSurname(customer.getSurname());
+                    updatable.setEmail(customer.getEmail());
+                    this.customerReactiveCrudRestRepository.save(updatable);
+                    return updatable;
+                }
         );
-        return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
+        if (updated.block() == null) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            EntityModel<Customer> entityModelOfCustomer = this.customerRepresentationModelAssembler
+                    .toModel(updated.block());
+            return new ResponseEntity<>(entityModelOfCustomer, HttpStatus.OK);
+        }
     }
 
     @PatchMapping(path = "/{id}")
