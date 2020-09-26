@@ -31,5 +31,5 @@ public interface CustomerRestRepository
 
     List<Customer> findByName(@Param("name") String name);
     List<Customer> findBySurname(@Param("surname") String surname);
-    List<Customer> findByEmail(@Param("email") String email);
+    Customer findByEmail(@Param("email") String email);
 }
