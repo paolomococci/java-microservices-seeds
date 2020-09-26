@@ -1,4 +1,3 @@
-
 # Example of use
 
 ## How to built:
