@@ -24,13 +24,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
-public class InvoiceRestRepositoryTests {
+public class InvoiceRestRepositoryParametrizedTests {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private InvoiceRestRepository invoiceRestRepository;
 
     @Test
     void voidTest()
