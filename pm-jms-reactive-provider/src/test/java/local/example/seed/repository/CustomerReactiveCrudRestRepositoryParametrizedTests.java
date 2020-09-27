@@ -24,16 +24,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
-public class CustomerReactiveCrudRestRepositoryTests {
+public class CustomerReactiveCrudRestRepositoryParametrizedTests {
 
     @Autowired
     private MockMvc mockMvc;
 
-    @Autowired
-    private CustomerReactiveCrudRestRepository customerReactiveCrudRestRepository;
-
     @Test
-    void voidTest() 
+    void voidTest()
             throws Exception {
     }
 }
