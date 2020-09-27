@@ -24,13 +24,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
-public class ItemRestRepositoryTests {
+public class ItemRestRepositoryParametrizedTests {
 
     @Autowired
     private MockMvc mockMvc;
-
-    @Autowired
-    private ItemRestRepository itemRestRepository;
 
     @Test
     void voidTest()
