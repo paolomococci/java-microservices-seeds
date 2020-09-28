@@ -31,8 +31,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.net.URI;
 import java.util.stream.Stream;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -82,7 +81,12 @@ public class InvoiceRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(put(this.getUri())
+                .content("{\"code\":\"00987654\",\"date\":\"\",\"total\":\"\"}"))
+                .andExpect(status().isNoContent());
+        this.mockMvc.perform(get(this.getUri()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value("00987654"));
     }
 
     @Disabled
