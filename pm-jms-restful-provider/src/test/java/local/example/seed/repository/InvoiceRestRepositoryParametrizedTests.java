@@ -26,9 +26,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.net.URI;
 import java.util.stream.Stream;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 public class InvoiceRestRepositoryParametrizedTests {
@@ -37,14 +41,18 @@ public class InvoiceRestRepositoryParametrizedTests {
     private MockMvc mockMvc;
 
     private static String INVOICE_TEST_STRING =
-            "{\"code\":\"\",\"date\":\"\",\"total\":\"\"}";
+            "{\"code\":\"00123456\",\"date\":\"\",\"total\":\"\"}";
     private static URI uri;
 
     @Disabled
     @Test
     @Order(1)
     void createTest() throws Exception {
-        // TODO
+        MvcResult mvcResult = this.mockMvc
+                .perform(post("/invoices").content(INVOICE_TEST_STRING))
+                .andExpect(status().isCreated())
+                .andReturn();
+        this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
     }
 
     @Disabled
