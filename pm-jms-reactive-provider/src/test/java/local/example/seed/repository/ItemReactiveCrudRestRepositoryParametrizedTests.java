@@ -72,7 +72,9 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void readAllTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(get("/items"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$._embedded").exists());
     }
 
     @Disabled
