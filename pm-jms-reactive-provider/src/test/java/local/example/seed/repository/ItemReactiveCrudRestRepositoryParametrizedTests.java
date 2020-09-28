@@ -107,7 +107,8 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void deleteTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(delete(this.getUri()))
+                .andExpect(status().isNoContent());
     }
 
     private static void setUri(URI uri) {
