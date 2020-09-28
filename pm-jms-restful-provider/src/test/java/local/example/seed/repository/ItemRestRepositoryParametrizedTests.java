@@ -26,9 +26,13 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 
 import java.net.URI;
 import java.util.stream.Stream;
+
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 public class ItemRestRepositoryParametrizedTests {
@@ -37,14 +41,18 @@ public class ItemRestRepositoryParametrizedTests {
     private MockMvc mockMvc;
 
     private static String ITEM_TEST_STRING =
-            "{\"code\":\"\",\"name\":\"\",\"description\":\"\",\"price\":\"\"}";
+            "{\"code\":\"00112233\",\"name\":\"\",\"description\":\"\",\"price\":\"\"}";
     private static URI uri;
 
     @Disabled
     @Test
     @Order(1)
     void createTest() throws Exception {
-        // TODO
+        MvcResult mvcResult = this.mockMvc
+                .perform(post("/items").content(ITEM_TEST_STRING))
+                .andExpect(status().isCreated())
+                .andReturn();
+        this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
     }
 
     @Disabled
