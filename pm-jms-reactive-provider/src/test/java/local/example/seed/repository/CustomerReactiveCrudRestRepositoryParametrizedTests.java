@@ -98,7 +98,12 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(patch(this.getUri())
+                .content("{\"email\":\"james.painter@example.local\"}"))
+                .andExpect(status().isNoContent());
+        this.mockMvc.perform(get(this.getUri()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.email").value("james.painter@example.local"));
     }
 
     @Disabled
