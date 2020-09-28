@@ -94,7 +94,12 @@ public class InvoiceRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(patch(this.getUri())
+                .content("{\"code\":\"00541236\"}"))
+                .andExpect(status().isNoContent());
+        this.mockMvc.perform(get(this.getUri()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value("00541236"));
     }
 
     @Disabled
