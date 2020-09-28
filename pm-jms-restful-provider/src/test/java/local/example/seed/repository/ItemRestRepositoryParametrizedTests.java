@@ -111,6 +111,15 @@ public class ItemRestRepositoryParametrizedTests {
                 .andExpect(status().isNoContent());
     }
 
+    @Disabled
+    @Order(7)
+    @ParameterizedTest
+    @MethodSource("initUri")
+    void notFoundTest() throws Exception {
+        this.mockMvc.perform(get(this.getUri()))
+                .andExpect(status().isNotFound());
+    }
+
     private static void setUri(URI uri) {
         ItemRestRepositoryParametrizedTests.uri = uri;
     }
