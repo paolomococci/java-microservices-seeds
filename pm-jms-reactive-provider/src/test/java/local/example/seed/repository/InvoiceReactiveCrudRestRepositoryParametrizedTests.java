@@ -87,11 +87,11 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
         // TODO
     }
 
-    public static void setUri(URI uri) {
+    private static void setUri(URI uri) {
         InvoiceReactiveCrudRestRepositoryParametrizedTests.uri = uri;
     }
 
-    public static URI getUri() {
+    private static URI getUri() {
         return uri;
     }
 
