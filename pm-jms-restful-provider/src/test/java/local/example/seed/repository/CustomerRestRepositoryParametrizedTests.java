@@ -31,8 +31,7 @@ import org.springframework.test.web.servlet.MvcResult;
 import java.net.URI;
 import java.util.stream.Stream;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -84,7 +83,14 @@ public class CustomerRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(put(this.getUri())
+                .content("{\"name\":\"James\",\"surname\":\"Painter\",\"email\":\"jamespainter@example.local\"}"))
+                .andExpect(status().isNoContent());
+        this.mockMvc.perform(get(this.getUri()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name").value("James"))
+                .andExpect(jsonPath("$.surname").value("Painter"))
+                .andExpect(jsonPath("$.email").value("jamespainter@example.local"));
     }
 
     @Disabled
