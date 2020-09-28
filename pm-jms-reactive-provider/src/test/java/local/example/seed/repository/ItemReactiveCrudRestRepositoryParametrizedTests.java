@@ -94,7 +94,12 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        // TODO
+        this.mockMvc.perform(patch(this.getUri())
+                .content("{\"code\":\"00554466\"}"))
+                .andExpect(status().isNoContent());
+        this.mockMvc.perform(get(this.getUri()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.code").value("00554466"));
     }
 
     @Disabled
