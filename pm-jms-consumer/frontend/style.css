@@ -7,6 +7,13 @@
 	font-size: small;
 }
 
+.nav-view {
+	margin: 8px;
+	align-items: left;
+	display: flex;
+	font-size: small;
+}
+
 .main-view {
 	padding: 10px;
 	font-size: medium;
