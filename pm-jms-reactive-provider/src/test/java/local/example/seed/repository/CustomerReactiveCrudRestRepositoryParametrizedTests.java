@@ -45,7 +45,7 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
     @Autowired
     private MockMvc mockMvc;
 
-    private static String CUSTOMER_TEST_STRING =
+    private static final String CUSTOMER_TEST_STRING =
             "{\"name\":\"John\",\"surname\":\"Jumper\",\"email\":\"johnjumper@example.local\"}";
     private static URI uri;
 
@@ -56,14 +56,14 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
                 .perform(post("/api/reactive/customers").content(CUSTOMER_TEST_STRING))
                 .andExpect(status().isCreated())
                 .andReturn();
-        this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
+        setUri(new URI(mvcResult.getResponse().getHeader("Location")));
     }
 
     @Order(2)
     @ParameterizedTest
     @MethodSource("initUri")
     void readTest() throws Exception {
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("John"))
                 .andExpect(jsonPath("$.surname").value("Jumper"))
@@ -83,10 +83,10 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
-        this.mockMvc.perform(put(this.getUri())
+        this.mockMvc.perform(put(getUri())
                 .content("{\"name\":\"James\",\"surname\":\"Painter\",\"email\":\"jamespainter@example.local\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.name").value("James"))
                 .andExpect(jsonPath("$.surname").value("Painter"))
@@ -97,10 +97,10 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        this.mockMvc.perform(patch(this.getUri())
+        this.mockMvc.perform(patch(getUri())
                 .content("{\"email\":\"james.painter@example.local\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.email").value("james.painter@example.local"));
     }
@@ -109,7 +109,7 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void deleteTest() throws Exception {
-        this.mockMvc.perform(delete(this.getUri()))
+        this.mockMvc.perform(delete(getUri()))
                 .andExpect(status().isNoContent());
     }
 
@@ -117,7 +117,7 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void notFoundTest() throws Exception {
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isNotFound());
     }
 
