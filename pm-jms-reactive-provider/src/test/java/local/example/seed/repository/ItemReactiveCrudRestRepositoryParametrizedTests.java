@@ -51,7 +51,7 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
     @Order(1)
     void createTest() throws Exception {
         MvcResult mvcResult = this.mockMvc
-                .perform(post("/items").content(ITEM_TEST_STRING))
+                .perform(post("/api/reactive/items").content(ITEM_TEST_STRING))
                 .andExpect(status().isCreated())
                 .andReturn();
         this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
@@ -72,7 +72,7 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void readAllTest() throws Exception {
-        this.mockMvc.perform(get("/items"))
+        this.mockMvc.perform(get("/api/reactive/items"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$._embedded").exists());
     }
