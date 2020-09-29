@@ -31,6 +31,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.net.URI;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -56,7 +57,9 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
                 .perform(post("/api/reactive/customers").content(CUSTOMER_TEST_STRING))
                 .andExpect(status().isCreated())
                 .andReturn();
-        setUri(new URI(mvcResult.getResponse().getHeader("Location")));
+        setUri(new URI(
+                Objects.requireNonNull(mvcResult.getResponse().getHeader("Location"))
+        ));
     }
 
     @Order(2)
