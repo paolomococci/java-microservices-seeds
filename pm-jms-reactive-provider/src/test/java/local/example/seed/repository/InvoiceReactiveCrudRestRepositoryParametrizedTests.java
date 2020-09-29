@@ -45,7 +45,7 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
     @Autowired
     private MockMvc mockMvc;
 
-    private static String INVOICE_TEST_STRING =
+    private static final String INVOICE_TEST_STRING =
             "{\"code\":\"00123456\",\"date\":\"\",\"total\":\"\"}";
     private static URI uri;
 
@@ -56,14 +56,14 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
                 .perform(post("/api/reactive/invoices").content(INVOICE_TEST_STRING))
                 .andExpect(status().isCreated())
                 .andReturn();
-        this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
+        setUri(new URI(mvcResult.getResponse().getHeader("Location")));
     }
 
     @Order(2)
     @ParameterizedTest
     @MethodSource("initUri")
     void readTest() throws Exception {
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("00123456"));
     }
@@ -81,10 +81,10 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
-        this.mockMvc.perform(put(this.getUri())
+        this.mockMvc.perform(put(getUri())
                 .content("{\"code\":\"00987654\",\"date\":\"\",\"total\":\"\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("00987654"));
     }
@@ -93,10 +93,10 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        this.mockMvc.perform(patch(this.getUri())
+        this.mockMvc.perform(patch(getUri())
                 .content("{\"code\":\"00541236\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("00541236"));
     }
@@ -105,7 +105,7 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void deleteTest() throws Exception {
-        this.mockMvc.perform(delete(this.getUri()))
+        this.mockMvc.perform(delete(getUri()))
                 .andExpect(status().isNoContent());
     }
 
@@ -113,7 +113,7 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void notFoundTest() throws Exception {
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isNotFound());
     }
 
