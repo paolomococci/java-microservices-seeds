@@ -31,6 +31,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 
 import java.net.URI;
+import java.util.Objects;
 import java.util.stream.Stream;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -45,7 +46,7 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
     @Autowired
     private MockMvc mockMvc;
 
-    private static String ITEM_TEST_STRING =
+    private static final String ITEM_TEST_STRING =
             "{\"code\":\"00112233\",\"name\":\"\",\"description\":\"\",\"price\":\"\"}";
     private static URI uri;
 
@@ -56,14 +57,16 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
                 .perform(post("/api/reactive/items").content(ITEM_TEST_STRING))
                 .andExpect(status().isCreated())
                 .andReturn();
-        this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
+        setUri(new URI(
+                Objects.requireNonNull(mvcResult.getResponse().getHeader("Location"))
+        ));
     }
 
     @Order(2)
     @ParameterizedTest
     @MethodSource("initUri")
     void readTest() throws Exception {
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("00112233"));
     }
@@ -81,10 +84,10 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void updateTest() throws Exception {
-        this.mockMvc.perform(put(this.getUri())
+        this.mockMvc.perform(put(getUri())
                 .content("{\"code\":\"00998877\",\"name\":\"\",\"description\":\"\",\"price\":\"\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("00998877"));
     }
@@ -93,10 +96,10 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void partialUpdateTest() throws Exception {
-        this.mockMvc.perform(patch(this.getUri())
+        this.mockMvc.perform(patch(getUri())
                 .content("{\"code\":\"00554466\"}"))
                 .andExpect(status().isNoContent());
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value("00554466"));
     }
@@ -105,7 +108,7 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void deleteTest() throws Exception {
-        this.mockMvc.perform(delete(this.getUri()))
+        this.mockMvc.perform(delete(getUri()))
                 .andExpect(status().isNoContent());
     }
 
@@ -113,7 +116,7 @@ public class ItemReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void notFoundTest() throws Exception {
-        this.mockMvc.perform(get(this.getUri()))
+        this.mockMvc.perform(get(getUri()))
                 .andExpect(status().isNotFound());
     }
 
