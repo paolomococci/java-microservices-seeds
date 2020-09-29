@@ -18,7 +18,10 @@
 
 package local.example.seed.repository;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +49,6 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
             "{\"name\":\"John\",\"surname\":\"Jumper\",\"email\":\"johnjumper@example.local\"}";
     private static URI uri;
 
-    @Disabled
     @Test
     @Order(1)
     void createTest() throws Exception {
@@ -57,7 +59,6 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
         this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
     }
 
-    @Disabled
     @Order(2)
     @ParameterizedTest
     @MethodSource("initUri")
@@ -69,7 +70,6 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
                 .andExpect(jsonPath("$.email").value("johnjumper@example.local"));
     }
 
-    @Disabled
     @Order(3)
     @ParameterizedTest
     @MethodSource("initUri")
@@ -79,7 +79,6 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
                 .andExpect(jsonPath("$._embedded").exists());
     }
 
-    @Disabled
     @Order(4)
     @ParameterizedTest
     @MethodSource("initUri")
@@ -94,7 +93,6 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
                 .andExpect(jsonPath("$.email").value("jamespainter@example.local"));
     }
 
-    @Disabled
     @Order(5)
     @ParameterizedTest
     @MethodSource("initUri")
@@ -107,7 +105,6 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
                 .andExpect(jsonPath("$.email").value("james.painter@example.local"));
     }
 
-    @Disabled
     @Order(6)
     @ParameterizedTest
     @MethodSource("initUri")
@@ -116,7 +113,6 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
                 .andExpect(status().isNoContent());
     }
 
-    @Disabled
     @Order(7)
     @ParameterizedTest
     @MethodSource("initUri")
