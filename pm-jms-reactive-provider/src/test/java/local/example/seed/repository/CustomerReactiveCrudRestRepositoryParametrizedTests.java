@@ -51,7 +51,7 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
     @Order(1)
     void createTest() throws Exception {
         MvcResult mvcResult = this.mockMvc
-                .perform(post("/customers").content(CUSTOMER_TEST_STRING))
+                .perform(post("/api/reactive/customers").content(CUSTOMER_TEST_STRING))
                 .andExpect(status().isCreated())
                 .andReturn();
         this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
@@ -74,7 +74,7 @@ public class CustomerReactiveCrudRestRepositoryParametrizedTests {
     @ParameterizedTest
     @MethodSource("initUri")
     void readAllTest() throws Exception {
-        this.mockMvc.perform(get("/customers"))
+        this.mockMvc.perform(get("/api/reactive/customers"))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$._embedded").exists());
     }
