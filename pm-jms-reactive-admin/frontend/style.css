@@ -1,18 +1,13 @@
 @charset "UTF-8";
 
-header {
+.header-view {
 	margin: 8px;
 	align-items: center;
 	display: flex;
 	font-size: small;
 }
 
-main {
+.main-view {
 	padding: 10px;
 	font-size: medium;
-}
-
-h1 {
-	margin: 10px;
-	font-size: large;
 }
