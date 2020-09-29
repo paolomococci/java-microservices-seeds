@@ -18,7 +18,10 @@
 
 package local.example.seed.repository;
 
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +49,6 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
             "{\"code\":\"00123456\",\"date\":\"\",\"total\":\"\"}";
     private static URI uri;
 
-    @Disabled
     @Test
     @Order(1)
     void createTest() throws Exception {
@@ -57,7 +59,6 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
         this.setUri(new URI(mvcResult.getResponse().getHeader("Location")));
     }
 
-    @Disabled
     @Order(2)
     @ParameterizedTest
     @MethodSource("initUri")
@@ -67,7 +68,6 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
                 .andExpect(jsonPath("$.code").value("00123456"));
     }
 
-    @Disabled
     @Order(3)
     @ParameterizedTest
     @MethodSource("initUri")
@@ -77,7 +77,6 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
                 .andExpect(jsonPath("$._embedded").exists());
     }
 
-    @Disabled
     @Order(4)
     @ParameterizedTest
     @MethodSource("initUri")
@@ -90,7 +89,6 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
                 .andExpect(jsonPath("$.code").value("00987654"));
     }
 
-    @Disabled
     @Order(5)
     @ParameterizedTest
     @MethodSource("initUri")
@@ -103,7 +101,6 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
                 .andExpect(jsonPath("$.code").value("00541236"));
     }
 
-    @Disabled
     @Order(6)
     @ParameterizedTest
     @MethodSource("initUri")
@@ -112,7 +109,6 @@ public class InvoiceReactiveCrudRestRepositoryParametrizedTests {
                 .andExpect(status().isNoContent());
     }
 
-    @Disabled
     @Order(7)
     @ParameterizedTest
     @MethodSource("initUri")
