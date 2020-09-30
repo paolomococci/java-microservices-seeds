@@ -1,20 +1,27 @@
 @charset "UTF-8";
 
-.header-view {
-	margin: 8px;
-	align-items: center;
+.header-view h1 {
+	padding-left: 10px;
 	display: flex;
 	font-size: small;
-}
-
-.nav-view {
-	margin: 8px;
-	align-items: left;
-	display: flex;
-	font-size: small;
+	font-weight: bold;
 }
 
 .main-view {
+    margin-left: 5px;
 	padding: 10px;
 	font-size: medium;
+}
+
+.nav-view h1 {
+	margin: 7px;
+	padding: 10px;
+	font-size: x-large;
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+.nav-view a {
+	font-size: small;
+	font-weight: normal;
 }
