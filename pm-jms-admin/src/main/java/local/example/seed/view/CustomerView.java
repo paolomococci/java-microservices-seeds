@@ -39,7 +39,7 @@ import java.net.URISyntaxException;
 public class CustomerView
         extends Main {
 
-    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8080/";
+    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8081/";
 
     private final Grid<Customer> customerGrid;
     private final Button retrieveButton;
