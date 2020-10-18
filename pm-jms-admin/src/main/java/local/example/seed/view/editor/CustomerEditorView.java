@@ -33,9 +33,6 @@ import com.vaadin.flow.router.Route;
 import local.example.seed.controller.CustomerRestfulController;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
-import local.example.seed.service.CustomerRestfulRetrieverService;
-
-import java.net.URI;
 
 @PageTitle(value = "customer editor")
 @Route(value = "customer-editor", layout = MainLayout.class)
@@ -58,10 +55,7 @@ public class CustomerEditorView
         this.customerGrid.addColumn(customer -> customer.getName()).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.customerGrid.addColumn(customer -> customer.getSurname()).setHeader("surname").setSortable(true);
         this.customerGrid.addColumn(customer -> customer.getEmail()).setHeader("email").setSortable(true);
-        this.customerGrid.setItems(
-                CustomerRestfulRetrieverService.getListOfCustomers(URI.create(RESTFUL_BASE_URI))
-                //this.customerRestfulController.readAll()
-        );
+        this.customerGrid.setItems(this.customerRestfulController.readAll());
 
         this.customerGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
