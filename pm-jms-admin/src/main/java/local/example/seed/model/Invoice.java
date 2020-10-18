@@ -31,10 +31,6 @@ public class Invoice
 
     @Getter
     @Setter
-    private String id;
-
-    @Getter
-    @Setter
     private String code;
 
     @Getter
@@ -48,4 +44,8 @@ public class Invoice
     @Getter
     @Setter
     private String customerId;
+
+    @Getter
+    @Setter
+    private Link _links;
 }
