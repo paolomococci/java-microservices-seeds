@@ -19,24 +19,23 @@
 package local.example.seed.controller;
 
 import local.example.seed.model.Customer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.util.*;
 import java.util.stream.Stream;
 
 public class CustomerRestfulController {
 
-    private static final String CUSTOMER_RESTFUL_BASE_URI = "http://127.0.0.1:8080/customers";
+    @Autowired
+    private final RestTemplate restTemplate = new RestTemplate();
 
-    private final RestTemplate restTemplate;
-
-    public CustomerRestfulController() {
-        this.restTemplate = new RestTemplate();
-    }
+    private static final URI CUSTOMER_RESTFUL_BASE_URI = URI.create("http://127.0.0.1:8081/customers");
 
     public void create(Customer customer)
             throws RestClientException {
@@ -47,38 +46,18 @@ public class CustomerRestfulController {
         );
     }
 
-    public Customer read(String id)
+    public Customer read(String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
         return this.restTemplate.getForObject(
-                CUSTOMER_RESTFUL_BASE_URI+"/{id}",
-                Customer.class,
-                param
+                uri,
+                Customer.class
         );
     }
 
     public List<Customer> readAll()
             throws RestClientException {
-        ResponseEntity<List<Customer>> responseEntity = this.restTemplate.exchange(
-                CUSTOMER_RESTFUL_BASE_URI,
-                HttpMethod.GET,
-                null,
-                new ParameterizedTypeReference<>() {});
-        return responseEntity.getBody();
-    }
-
-    public Collection<Customer> collectionOfAllCustomers() {
-        List<Customer> customers = this.readAll();
-        Collection<Customer> collectionOfCustomers = new ArrayList<>();
-        for (Customer customer:customers) {
-            collectionOfCustomers.add(customer);
-        }
-        return collectionOfCustomers;
-    }
-
-    public Stream<Customer> streamOfAllCustomers() {
-        return this.readAll().stream();
+        // TODO
+        return new ArrayList<>();
     }
 
     public Customer findByEmail(String email)
@@ -86,34 +65,21 @@ public class CustomerRestfulController {
         Map<String, String> param = new HashMap<>();
         param.put("email", email);
         // TODO
-        return null;
+        return new Customer();
     }
 
-    public void update(Customer customer, String id)
+    public void update(Customer customer, String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
-        this.restTemplate.put(
-                CUSTOMER_RESTFUL_BASE_URI+"/{id}",
-                customer,
-                param
-        );
+        this.restTemplate.put(uri, customer);
     }
 
-    public void partialUpdate(Customer customer, String id)
+    public void partialUpdate(Customer customer, String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
-        // TODO
+        this.restTemplate.patchForObject(uri, customer, Customer.class);
     }
 
-    public void delete(String id)
+    public void delete(String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
-        this.restTemplate.delete(
-                CUSTOMER_RESTFUL_BASE_URI+"/{id}",
-                param
-        );
+        this.restTemplate.delete(uri);
     }
 }
