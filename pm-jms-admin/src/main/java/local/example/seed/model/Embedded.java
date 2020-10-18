@@ -27,8 +27,6 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Embedded {
-    List<Customer> customers;
-    List<Invoice> invoices;
-    List<Item> items;
+public class Embedded<T> {
+    List<T> elements;
 }
