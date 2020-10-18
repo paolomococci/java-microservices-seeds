@@ -143,25 +143,12 @@ public class ItemEditorForm
     }
 
     private void delete() {
-        if (this.item.getId() != null) {
-            this.itemRestfulController.delete(this.item.getId());
-            this.itemChangeHandler.onChange();
-        }
+        // TODO
     }
 
     private void edit(Item temp)
             throws URISyntaxException {
-        String id = temp.getId();
-        final boolean alreadyExisting = temp.getId() != null;
-        if (alreadyExisting) {
-            this.item = this.itemRestfulController.read(id);
-        } else {
-            this.item = temp;
-        }
-        this.cancel.setVisible(alreadyExisting);
-        this.itemBinder.setBean(this.item);
-        this.setVisible(true);
-        this.code.focus();
+        // TODO
     }
 
     public void setItemChangeHandler(ItemChangeHandler itemChangeHandler) {
