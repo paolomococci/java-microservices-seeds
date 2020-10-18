@@ -31,41 +31,41 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.CustomerRestfulController;
-import local.example.seed.form.CustomerEditorForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
-import org.springframework.beans.factory.annotation.Autowired;
+import local.example.seed.service.CustomerRestfulRetrieverService;
+
+import java.net.URI;
 
 @PageTitle(value = "customer editor")
 @Route(value = "customer-editor", layout = MainLayout.class)
 public class CustomerEditorView
         extends Main {
 
-    private final Grid<Customer> customerGrid;
-    private final CustomerEditorForm customerEditorForm;
+    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8081/";
+
     private final CustomerRestfulController customerRestfulController;
+
+    private final Grid<Customer> customerGrid;
     private final TextField filterEmailField;
     private final Button addCustomer;
     private final HorizontalLayout tools;
 
-    @Autowired
-    public CustomerEditorView(
-            CustomerEditorForm customerEditorForm,
-            CustomerRestfulController customerRestfulController
-    ) {
-        super();
-
-        this.customerEditorForm = customerEditorForm;
-        this.customerRestfulController = customerRestfulController;
+    public CustomerEditorView() {
+        customerRestfulController = new CustomerRestfulController();
 
         this.customerGrid = new Grid<>();
         this.customerGrid.addColumn(customer -> customer.getName()).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.customerGrid.addColumn(customer -> customer.getSurname()).setHeader("surname").setSortable(true);
         this.customerGrid.addColumn(customer -> customer.getEmail()).setHeader("email").setSortable(true);
+        this.customerGrid.setItems(
+                CustomerRestfulRetrieverService.getListOfCustomers(URI.create(RESTFUL_BASE_URI))
+                //this.customerRestfulController.readAll()
+        );
 
         this.customerGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-                    this.customerEditorForm.editCustomer(listener.getValue());
+                    // TODO
                 }
         );
 
@@ -85,34 +85,22 @@ public class CustomerEditorView
         this.addCustomer = new Button("add customer", VaadinIcon.PLUS_CIRCLE_O.create());
         this.addCustomer.addClickListener(
                 listener -> {
-                    this.customerGrid.asSingleSelect().clear();
-                    this.customerEditorForm.editCustomer(new Customer());
+                    // TODO
                 }
         );
         this.addCustomer.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
 
         this.tools = new HorizontalLayout(this.addCustomer);
 
-        this.add(this.customerGrid, this.tools, this.customerEditorForm);
-
-        this.customerEditorForm.setCustomerChangeHandler(
-                () -> {
-                    this.customerEditorForm.setVisible(false);
-                }
+        this.add(
+                this.customerGrid,
+                this.tools
         );
 
         this.showCustomerList("");
     }
 
     private void showCustomerList(String email) {
-        if (email.isEmpty() || email.isBlank()) {
-            this.customerGrid.setItems(
-                    this.customerRestfulController.collectionOfAllCustomers()
-            );
-        } else {
-            this.customerGrid.setItems(
-                    this.customerRestfulController.findByEmail(email)
-            );
-        }
+        // TODO
     }
 }
