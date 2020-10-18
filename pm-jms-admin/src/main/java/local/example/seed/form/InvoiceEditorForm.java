@@ -139,25 +139,12 @@ public class InvoiceEditorForm
     }
 
     private void delete() {
-        if (this.invoice.getId() != null) {
-            this.invoiceRestfulController.delete(this.invoice.getId());
-            this.invoiceChangeHandler.onChange();
-        }
+        // TODO
     }
 
     private void edit(Invoice temp)
             throws URISyntaxException {
-        String id = temp.getId();
-        final boolean alreadyExisting = temp.getId() != null;
-        if (alreadyExisting) {
-            this.invoice = this.invoiceRestfulController.read(id);
-        } else {
-            this.invoice = temp;
-        }
-        this.cancel.setVisible(alreadyExisting);
-        this.invoiceBinder.setBean(this.invoice);
-        this.setVisible(true);
-        this.code.focus();
+        // TODO
     }
 
     public void setInvoiceChangeHandler(InvoiceChangeHandler invoiceChangeHandler) {
