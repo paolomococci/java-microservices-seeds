@@ -47,38 +47,18 @@ public class ItemRestfulController {
         );
     }
 
-    public Item read(String id)
+    public Item read(String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
         return this.restTemplate.getForObject(
-                ITEM_RESTFUL_BASE_URI+"/{id}",
-                Item.class,
-                param
+                uri,
+                Item.class
         );
     }
 
     public List<Item> readAll()
             throws RestClientException {
-        ResponseEntity<List<Item>> responseEntity = this.restTemplate
-                .exchange(ITEM_RESTFUL_BASE_URI,
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<>() {});
-        return responseEntity.getBody();
-    }
-
-    public Collection<Item> collectionOfAllItems() {
-        List<Item> items = this.readAll();
-        Collection<Item> collectionOfItems = new ArrayList<>();
-        for (Item item:items) {
-            collectionOfItems.add(item);
-        }
-        return collectionOfItems;
-    }
-
-    public Stream<Item> streamOfAllItems() {
-        return this.readAll().stream();
+        // TODO
+        return new ArrayList<>();
     }
 
     public Item findByCode(String code)
@@ -86,34 +66,21 @@ public class ItemRestfulController {
         Map<String, String> param = new HashMap<>();
         param.put("code", code);
         // TODO
-        return null;
+        return new Item();
     }
 
-    public void update(Item item, String id)
+    public void update(Item item, String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
-        this.restTemplate.put(
-                ITEM_RESTFUL_BASE_URI+"/{id}",
-                item,
-                param
-        );
+        this.restTemplate.put(uri, item);
     }
 
-    public void partialUpdate(Item item, String id)
+    public void partialUpdate(Item item, String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
-        // TODO
+        this.restTemplate.patchForObject(uri, item, Item.class);
     }
 
-    public void delete(String id)
+    public void delete(String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
-        this.restTemplate.delete(
-                ITEM_RESTFUL_BASE_URI+"/{id}",
-                param
-        );
+        this.restTemplate.delete(uri);
     }
 }
