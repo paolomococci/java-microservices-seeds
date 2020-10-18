@@ -32,9 +32,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
-import local.example.seed.service.ItemRestfulRetrieverService;
-
-import java.net.URI;
 
 @PageTitle(value = "item editor")
 @Route(value = "item-editor", layout = MainLayout.class)
@@ -55,7 +52,7 @@ public class ItemEditorView
         this.itemGrid.addColumn(item -> item.getName()).setHeader("name").setSortable(true);
         this.itemGrid.addColumn(item -> item.getDescription()).setHeader("description").setSortable(false);
         this.itemGrid.setItems(
-                ItemRestfulRetrieverService.getListOfItems(URI.create(RESTFUL_BASE_URI))
+
         );
 
         this.itemGrid.asSingleSelect().addValueChangeListener(
