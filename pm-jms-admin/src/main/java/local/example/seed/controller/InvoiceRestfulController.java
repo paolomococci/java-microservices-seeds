@@ -18,13 +18,16 @@
 
 package local.example.seed.controller;
 
+import local.example.seed.model.Embedded;
 import local.example.seed.model.Invoice;
+import local.example.seed.model.Response;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class InvoiceRestfulController {
@@ -54,8 +57,13 @@ public class InvoiceRestfulController {
         );
     }
 
-    public List<Invoice> readAll()
+    public Collection<Invoice> readAll()
             throws RestClientException {
+        ResponseEntity<Response> responseEntity = this.restTemplate.getForEntity(
+                INVOICE_RESTFUL_BASE_URI,
+                Response.class
+        );
+        Embedded<Invoice> embedded = responseEntity.getBody().get_embedded();
         // TODO
         return new ArrayList<>();
     }
