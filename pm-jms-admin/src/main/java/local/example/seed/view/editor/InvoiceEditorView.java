@@ -30,42 +30,36 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
-import local.example.seed.controller.InvoiceRestfulController;
-import local.example.seed.form.InvoiceEditorForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
-import org.springframework.beans.factory.annotation.Autowired;
+import local.example.seed.service.InvoiceRestfulRetrieverService;
+
+import java.net.URI;
 
 @PageTitle(value = "invoice editor")
 @Route(value = "invoice-editor", layout = MainLayout.class)
 public class InvoiceEditorView
         extends Main {
 
+    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8081/";
+
     private final Grid<Invoice> invoiceGrid;
-    private final InvoiceEditorForm invoiceEditorForm;
-    private final InvoiceRestfulController invoiceRestfulController;
     private final TextField filterCodeField;
     private final Button addInvoice;
     private final HorizontalLayout tools;
 
-    @Autowired
-    public InvoiceEditorView(
-            InvoiceEditorForm invoiceEditorForm,
-            InvoiceRestfulController invoiceRestfulController
-    ) {
-        super();
-
-        this.invoiceEditorForm = invoiceEditorForm;
-        this.invoiceRestfulController = invoiceRestfulController;
-
+    public InvoiceEditorView() {
         this.invoiceGrid = new Grid<>();
         this.invoiceGrid.addColumn(invoice -> invoice.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.invoiceGrid.addColumn(invoice -> invoice.getDate()).setHeader("date").setSortable(true);
         this.invoiceGrid.addColumn(invoice -> invoice.getTotal()).setHeader("total").setSortable(true);
+        this.invoiceGrid.setItems(
+                InvoiceRestfulRetrieverService.getListOfInvoices(URI.create(RESTFUL_BASE_URI))
+        );
 
         this.invoiceGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-                    this.invoiceEditorForm.editInvoice(listener.getValue());
+                    // TODO
                 }
         );
 
@@ -85,34 +79,22 @@ public class InvoiceEditorView
         this.addInvoice = new Button("add invoice", VaadinIcon.PLUS_CIRCLE_O.create());
         this.addInvoice.addClickListener(
                 listener -> {
-                    this.invoiceGrid.asSingleSelect().clear();
-                    this.invoiceEditorForm.editInvoice(new Invoice());
+                    // TODO
                 }
         );
         this.addInvoice.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
 
         this.tools = new HorizontalLayout(this.addInvoice);
 
-        this.add(this.invoiceGrid, this.tools, this.invoiceEditorForm);
-
-        this.invoiceEditorForm.setInvoiceChangeHandler(
-                () -> {
-                    this.invoiceEditorForm.setVisible(false);
-                }
+        this.add(
+                this.invoiceGrid,
+                this.tools
         );
 
         this.showInvoiceList("");
     }
 
     private void showInvoiceList(String code) {
-        if (code.isEmpty() || code.isBlank()) {
-            this.invoiceGrid.setItems(
-                    this.invoiceRestfulController.collectionOfAllInvoices()
-            );
-        } else {
-            this.invoiceGrid.setItems(
-                    this.invoiceRestfulController.findByCode(code)
-            );
-        }
+        // TODO
     }
 }
