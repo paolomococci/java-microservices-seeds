@@ -47,38 +47,18 @@ public class InvoiceRestfulController {
         );
     }
 
-    public Invoice read(String id)
+    public Invoice read(String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
         return this.restTemplate.getForObject(
-                INVOICE_RESTFUL_BASE_URI+"/{id}",
-                Invoice.class,
-                param
+                uri,
+                Invoice.class
         );
     }
 
     public List<Invoice> readAll()
             throws RestClientException {
-        ResponseEntity<List<Invoice>> responseEntity = this.restTemplate
-                .exchange(INVOICE_RESTFUL_BASE_URI,
-                        HttpMethod.GET,
-                        null,
-                        new ParameterizedTypeReference<>() {});
-        return responseEntity.getBody();
-    }
-
-    public Collection<Invoice> collectionOfAllInvoices() {
-        List<Invoice> invoices = this.readAll();
-        Collection<Invoice> collectionOfInvoices = new ArrayList<>();
-        for (Invoice invoice:invoices) {
-            collectionOfInvoices.add(invoice);
-        }
-        return collectionOfInvoices;
-    }
-
-    public Stream<Invoice> streamOfAllInvoices() {
-        return this.readAll().stream();
+        // TODO
+        return new ArrayList<>();
     }
 
     public Invoice findByCode(String code)
@@ -86,34 +66,21 @@ public class InvoiceRestfulController {
         Map<String, String> param = new HashMap<>();
         param.put("code", code);
         // TODO
-        return null;
+        return new Invoice();
     }
 
-    public void update(Invoice invoice, String id)
+    public void update(Invoice invoice, String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
-        this.restTemplate.put(
-                INVOICE_RESTFUL_BASE_URI+"/{id}",
-                invoice,
-                param
-        );
+        this.restTemplate.put(uri, invoice);
     }
 
-    public void partialUpdate(Invoice invoice, String id)
+    public void partialUpdate(Invoice invoice, String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
-        // TODO
+        this.restTemplate.patchForObject(uri, invoice, Invoice.class);
     }
 
-    public void delete(String id)
+    public void delete(String uri)
             throws RestClientException {
-        Map<String, String> param = new HashMap<>();
-        param.put("id", id);
-        this.restTemplate.delete(
-                INVOICE_RESTFUL_BASE_URI+"/{id}",
-                param
-        );
+        this.restTemplate.delete(uri);
     }
 }
