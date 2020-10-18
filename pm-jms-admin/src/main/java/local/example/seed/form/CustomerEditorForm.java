@@ -138,25 +138,12 @@ public class CustomerEditorForm
     }
 
     private void delete() {
-        if (this.customer.getId() != null) {
-            this.customerRestfulController.delete(this.customer.getId());
-            this.customerChangeHandler.onChange();
-        }
+        // TODO
     }
 
     private void edit(Customer temp)
             throws URISyntaxException {
-        String id = temp.getId();
-        final boolean alreadyExisting = temp.getId() != null;
-        if (alreadyExisting) {
-            this.customer = this.customerRestfulController.read(id);
-        } else {
-            this.customer = temp;
-        }
-        this.cancel.setVisible(alreadyExisting);
-        this.customerBinder.setBean(this.customer);
-        this.setVisible(true);
-        this.name.focus();
+        // TODO
     }
 
     public void setCustomerChangeHandler(CustomerChangeHandler customerChangeHandler) {
