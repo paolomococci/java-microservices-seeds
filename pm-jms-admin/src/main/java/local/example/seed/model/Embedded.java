@@ -29,4 +29,6 @@ import java.util.List;
 @AllArgsConstructor
 public class Embedded {
     List<Customer> customers;
+    List<Invoice> invoices;
+    List<Item> items;
 }
