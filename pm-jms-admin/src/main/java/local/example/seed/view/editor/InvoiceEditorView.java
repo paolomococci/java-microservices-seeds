@@ -32,9 +32,6 @@ import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
-import local.example.seed.service.InvoiceRestfulRetrieverService;
-
-import java.net.URI;
 
 @PageTitle(value = "invoice editor")
 @Route(value = "invoice-editor", layout = MainLayout.class)
@@ -54,7 +51,7 @@ public class InvoiceEditorView
         this.invoiceGrid.addColumn(invoice -> invoice.getDate()).setHeader("date").setSortable(true);
         this.invoiceGrid.addColumn(invoice -> invoice.getTotal()).setHeader("total").setSortable(true);
         this.invoiceGrid.setItems(
-                InvoiceRestfulRetrieverService.getListOfInvoices(URI.create(RESTFUL_BASE_URI))
+
         );
 
         this.invoiceGrid.asSingleSelect().addValueChangeListener(
