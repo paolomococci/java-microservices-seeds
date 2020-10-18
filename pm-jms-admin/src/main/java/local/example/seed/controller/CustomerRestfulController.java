@@ -19,14 +19,17 @@
 package local.example.seed.controller;
 
 import local.example.seed.model.Customer;
+import local.example.seed.model.Embedded;
+import local.example.seed.model.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class CustomerRestfulController {
@@ -53,10 +56,18 @@ public class CustomerRestfulController {
         );
     }
 
-    public List<Customer> readAll()
+    public Collection<Customer> readAll()
             throws RestClientException {
-        // TODO
-        return new ArrayList<>();
+        Collection<Customer> customers = new ArrayList<>();
+        ResponseEntity<Response> responseEntity = this.restTemplate.getForEntity(
+                CUSTOMER_RESTFUL_BASE_URI,
+                Response.class
+        );
+        Embedded<Customer> embedded = responseEntity.getBody().get_embedded();
+        for (Customer customer: embedded.getElements()) {
+            customers.add(customer);
+        }
+        return customers;
     }
 
     public Customer findByEmail(String email)
