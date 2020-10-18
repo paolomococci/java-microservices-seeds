@@ -29,10 +29,6 @@ public class Customer
 
     @Getter
     @Setter
-    private String id;
-
-    @Getter
-    @Setter
     private String name;
 
     @Getter
@@ -42,4 +38,8 @@ public class Customer
     @Getter
     @Setter
     private String email;
+
+    @Getter
+    @Setter
+    private Link _links;
 }
