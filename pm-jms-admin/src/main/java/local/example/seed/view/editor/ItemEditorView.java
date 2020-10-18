@@ -34,38 +34,36 @@ import local.example.seed.controller.ItemRestfulController;
 import local.example.seed.form.ItemEditorForm;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
+import local.example.seed.service.ItemRestfulRetrieverService;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.net.URI;
 
 @PageTitle(value = "item editor")
 @Route(value = "item-editor", layout = MainLayout.class)
 public class ItemEditorView
         extends Main {
 
+    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8081/";
+
     private final Grid<Item> itemGrid;
-    private final ItemEditorForm itemEditorForm;
-    private final ItemRestfulController itemRestfulController;
     private final TextField filterCodeField;
     private final Button addItem;
     private final HorizontalLayout tools;
 
-    @Autowired
-    public ItemEditorView(
-            ItemEditorForm itemEditorForm,
-            ItemRestfulController itemRestfulController
-    ) {
-        super();
-
-        this.itemEditorForm = itemEditorForm;
-        this.itemRestfulController = itemRestfulController;
+    public ItemEditorView() {
 
         this.itemGrid = new Grid<>();
         this.itemGrid.addColumn(item -> item.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.itemGrid.addColumn(item -> item.getName()).setHeader("name").setSortable(true);
         this.itemGrid.addColumn(item -> item.getDescription()).setHeader("description").setSortable(false);
+        this.itemGrid.setItems(
+                ItemRestfulRetrieverService.getListOfItems(URI.create(RESTFUL_BASE_URI))
+        );
 
         this.itemGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
-                    this.itemEditorForm.editItem(listener.getValue());
+                    // TODO
                 }
         );
 
@@ -85,34 +83,22 @@ public class ItemEditorView
         this.addItem = new Button("add item", VaadinIcon.PLUS_CIRCLE_O.create());
         this.addItem.addClickListener(
                 listener -> {
-                    this.itemGrid.asSingleSelect().clear();
-                    this.itemEditorForm.editItem(new Item());
+                    // TODO
                 }
         );
         this.addItem.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
 
         this.tools = new HorizontalLayout(this.addItem);
 
-        this.add(this.itemGrid, this.tools, this.itemEditorForm);
-
-        this.itemEditorForm.setItemChangeHandler(
-                () -> {
-                    this.itemEditorForm.setVisible(false);
-                }
+        this.add(
+                this.itemGrid,
+                this.tools
         );
 
         this.showItemList("");
     }
 
     private void showItemList(String code) {
-        if (code.isEmpty() || code.isBlank()) {
-            this.itemGrid.setItems(
-                    this.itemRestfulController.collectionOfAllItems()
-            );
-        } else {
-            this.itemGrid.setItems(
-                    this.itemRestfulController.findByCode(code)
-            );
-        }
+        // TODO
     }
 }
