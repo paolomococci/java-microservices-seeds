@@ -18,9 +18,9 @@
 
 package local.example.seed.controller;
 
-import local.example.seed.model.Embedded;
+import local.example.seed.embedded.InvoiceEmbedded;
 import local.example.seed.model.Invoice;
-import local.example.seed.model.Response;
+import local.example.seed.response.InvoiceResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
@@ -59,12 +59,12 @@ public class InvoiceRestfulController {
     public Collection<Invoice> readAll()
             throws RestClientException {
         Collection<Invoice> invoices = new ArrayList<>();
-        ResponseEntity<Response> responseEntity = this.restTemplate.getForEntity(
+        ResponseEntity<InvoiceResponse> responseEntity = this.restTemplate.getForEntity(
                 INVOICE_RESTFUL_BASE_URI,
-                Response.class
+                InvoiceResponse.class
         );
-        Embedded<Invoice> embedded = responseEntity.getBody().get_embedded();
-        for (Invoice invoice:embedded.getElements()) {
+        InvoiceEmbedded embedded = responseEntity.getBody().get_embedded();
+        for (Invoice invoice:embedded.getInvoices()) {
             invoices.add(invoice);
         }
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
