@@ -21,6 +21,7 @@ package local.example.seed.controller;
 import local.example.seed.model.Embedded;
 import local.example.seed.model.Invoice;
 import local.example.seed.model.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -33,13 +34,10 @@ import java.util.Map;
 
 public class InvoiceRestfulController {
 
+    @Autowired
+    private final RestTemplate restTemplate = new RestTemplate();
+
     private static final String INVOICE_RESTFUL_BASE_URI = "http://127.0.0.1:8081/invoices";
-
-    private final RestTemplate restTemplate;
-
-    public InvoiceRestfulController() {
-        this.restTemplate = new RestTemplate();
-    }
 
     public void create(Invoice invoice)
             throws RestClientException {
