@@ -30,6 +30,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.controller.InvoiceRestfulController;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
 
@@ -40,19 +41,21 @@ public class InvoiceEditorView
 
     private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8081/";
 
+    private final InvoiceRestfulController invoiceRestfulController;
+
     private final Grid<Invoice> invoiceGrid;
     private final TextField filterCodeField;
     private final Button addInvoice;
     private final HorizontalLayout tools;
 
     public InvoiceEditorView() {
-        this.invoiceGrid = new Grid<>();
-        this.invoiceGrid.addColumn(invoice -> invoice.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
-        this.invoiceGrid.addColumn(invoice -> invoice.getDate()).setHeader("date").setSortable(true);
-        this.invoiceGrid.addColumn(invoice -> invoice.getTotal()).setHeader("total").setSortable(true);
-        this.invoiceGrid.setItems(
+        this.invoiceRestfulController = new InvoiceRestfulController();
 
-        );
+        this.invoiceGrid = new Grid<>();
+        this.invoiceGrid.setItems(this.invoiceRestfulController.readAll());
+        this.invoiceGrid.addColumn(Invoice::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.invoiceGrid.addColumn(Invoice::getDate).setHeader("date").setSortable(true);
+        this.invoiceGrid.addColumn(Invoice::getTotal).setHeader("total").setSortable(true);
 
         this.invoiceGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
