@@ -32,7 +32,7 @@ import java.util.Map;
 
 public class InvoiceRestfulController {
 
-    private static final String INVOICE_RESTFUL_BASE_URI = "http://127.0.0.1:8080/invoices";
+    private static final String INVOICE_RESTFUL_BASE_URI = "http://127.0.0.1:8081/invoices";
 
     private final RestTemplate restTemplate;
 
