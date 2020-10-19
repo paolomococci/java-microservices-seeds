@@ -51,7 +51,9 @@ public class CustomerEditorView
         customerRestfulController = new CustomerRestfulController();
 
         this.customerGrid = new Grid<>();
-        this.customerGrid.setItems(this.customerRestfulController.readAll());
+        this.customerGrid.setItems(
+                this.customerRestfulController.readAll()
+        );
         this.customerGrid.addColumn(Customer::getName).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.customerGrid.addColumn(Customer::getSurname).setHeader("surname").setSortable(true);
         this.customerGrid.addColumn(Customer::getEmail).setHeader("email").setSortable(true);
