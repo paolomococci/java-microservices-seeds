@@ -30,6 +30,7 @@ import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import local.example.seed.controller.ItemRestfulController;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
 
@@ -40,20 +41,21 @@ public class ItemEditorView
 
     private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8081/";
 
+    private final ItemRestfulController itemRestfulController;
+
     private final Grid<Item> itemGrid;
     private final TextField filterCodeField;
     private final Button addItem;
     private final HorizontalLayout tools;
 
     public ItemEditorView() {
+        this.itemRestfulController = new ItemRestfulController();
 
         this.itemGrid = new Grid<>();
-        this.itemGrid.addColumn(item -> item.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
-        this.itemGrid.addColumn(item -> item.getName()).setHeader("name").setSortable(true);
-        this.itemGrid.addColumn(item -> item.getDescription()).setHeader("description").setSortable(false);
-        this.itemGrid.setItems(
-
-        );
+        this.itemGrid.setItems(this.itemRestfulController.readAll());
+        this.itemGrid.addColumn(Item::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.itemGrid.addColumn(Item::getName).setHeader("name").setSortable(true);
+        this.itemGrid.addColumn(Item::getDescription).setHeader("description").setSortable(false);
 
         this.itemGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
