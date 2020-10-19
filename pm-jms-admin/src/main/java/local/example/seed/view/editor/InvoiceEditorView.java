@@ -40,8 +40,6 @@ import local.example.seed.model.Invoice;
 public class InvoiceEditorView
         extends Main {
 
-    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8081/";
-
     private final InvoiceRestfulController invoiceRestfulController;
 
     private final Grid<Invoice> invoiceGrid;
