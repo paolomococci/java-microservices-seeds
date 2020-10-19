@@ -23,6 +23,7 @@ import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -56,6 +57,11 @@ public class CustomerEditorView
         this.customerGrid.addColumn(Customer::getName).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.customerGrid.addColumn(Customer::getSurname).setHeader("surname").setSortable(true);
         this.customerGrid.addColumn(Customer::getEmail).setHeader("email").setSortable(true);
+        this.customerGrid.addThemeVariants(
+                GridVariant.LUMO_NO_BORDER,
+                GridVariant.LUMO_NO_ROW_BORDERS,
+                GridVariant.LUMO_ROW_STRIPES
+        );
 
         this.customerGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
