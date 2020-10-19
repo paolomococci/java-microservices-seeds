@@ -59,13 +59,18 @@ public class InvoiceRestfulController {
 
     public Collection<Invoice> readAll()
             throws RestClientException {
+        Collection<Invoice> invoices = new ArrayList<>();
         ResponseEntity<Response> responseEntity = this.restTemplate.getForEntity(
                 INVOICE_RESTFUL_BASE_URI,
                 Response.class
         );
         Embedded<Invoice> embedded = responseEntity.getBody().get_embedded();
-        // TODO
-        return new ArrayList<>();
+        for (Invoice invoice:embedded.getElements()) {
+            invoices.add(invoice);
+        }
+        System.out.println(" --- INFO --- invoices: " + invoices.size());
+        invoices.forEach(System.out::println);
+        return invoices;
     }
 
     public Invoice findByCode(String code)
