@@ -25,6 +25,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -68,7 +69,8 @@ public class InvoiceRestfulController {
         for (Invoice invoice:embedded.getElements()) {
             invoices.add(invoice);
         }
-        System.out.println(" --- INFO --- invoices: " + invoices.size());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println(timestamp + " --- INFO --- number of invoices: " + invoices.size());
         invoices.forEach(System.out::println);
         return invoices;
     }
