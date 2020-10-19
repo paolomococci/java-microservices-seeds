@@ -47,9 +47,9 @@ public class CustomerView
     public CustomerView() {
         super();
         this.customerGrid = new Grid<>();
-        this.customerGrid.addColumn(customer -> customer.getName()).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
-        this.customerGrid.addColumn(customer -> customer.getSurname()).setHeader("surname").setSortable(true);
-        this.customerGrid.addColumn(customer -> customer.getEmail()).setHeader("email").setSortable(true);
+        this.customerGrid.addColumn(Customer::getName).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.customerGrid.addColumn(Customer::getSurname).setHeader("surname").setSortable(true);
+        this.customerGrid.addColumn(Customer::getEmail).setHeader("email").setSortable(true);
         this.retrieveButton = new Button(
                 "recovers all customers",
                 VaadinIcon.ARROW_CIRCLE_DOWN_O.create(),
