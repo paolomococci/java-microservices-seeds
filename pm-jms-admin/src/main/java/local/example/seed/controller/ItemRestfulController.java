@@ -18,9 +18,9 @@
 
 package local.example.seed.controller;
 
-import local.example.seed.model.Embedded;
+import local.example.seed.embedded.ItemEmbedded;
 import local.example.seed.model.Item;
-import local.example.seed.model.Response;
+import local.example.seed.response.ItemResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
@@ -59,12 +59,12 @@ public class ItemRestfulController {
     public Collection<Item> readAll()
             throws RestClientException {
         Collection<Item> items = new ArrayList<>();
-        ResponseEntity<Response> responseEntity = this.restTemplate.getForEntity(
+        ResponseEntity<ItemResponse> responseEntity = this.restTemplate.getForEntity(
                 ITEM_RESTFUL_BASE_URI,
-                Response.class
+                ItemResponse.class
         );
-        Embedded<Item> embedded = responseEntity.getBody().get_embedded();
-        for (Item item:embedded.getElements()) {
+        ItemEmbedded embedded = responseEntity.getBody().get_embedded();
+        for (Item item:embedded.getItems()) {
             items.add(item);
         }
         Timestamp timestamp = new Timestamp(System.currentTimeMillis());
