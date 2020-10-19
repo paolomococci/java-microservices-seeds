@@ -23,6 +23,7 @@ import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.icon.VaadinIcon;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -56,6 +57,11 @@ public class InvoiceEditorView
         this.invoiceGrid.addColumn(Invoice::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.invoiceGrid.addColumn(Invoice::getDate).setHeader("date").setSortable(true);
         this.invoiceGrid.addColumn(Invoice::getTotal).setHeader("total").setSortable(true);
+        this.invoiceGrid.addThemeVariants(
+                GridVariant.LUMO_NO_BORDER,
+                GridVariant.LUMO_NO_ROW_BORDERS,
+                GridVariant.LUMO_ROW_STRIPES
+        );
 
         this.invoiceGrid.asSingleSelect().addValueChangeListener(
                 listener -> {
