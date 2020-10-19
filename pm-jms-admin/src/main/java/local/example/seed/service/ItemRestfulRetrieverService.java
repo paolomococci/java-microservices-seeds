@@ -26,6 +26,7 @@ import org.springframework.hateoas.client.Traverson;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -41,6 +42,9 @@ public class ItemRestfulRetrieverService {
         CollectionModel<Item> collectionModelOfItems;
         collectionModelOfItems = traversalBuilder.toObject(parameterizedTypeReference);
         Collection<Item> collectionOfItems = collectionModelOfItems.getContent();
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println(timestamp + " --- INFO --- number of customers: " + collectionOfItems.size());
+        collectionOfItems.forEach(System.out::println);
         return new ArrayList<>(collectionOfItems);
     }
 }
