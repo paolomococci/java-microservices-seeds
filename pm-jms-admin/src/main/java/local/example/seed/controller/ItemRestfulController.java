@@ -59,13 +59,18 @@ public class ItemRestfulController {
 
     public Collection<Item> readAll()
             throws RestClientException {
+        Collection<Item> items = new ArrayList<>();
         ResponseEntity<Response> responseEntity = this.restTemplate.getForEntity(
                 ITEM_RESTFUL_BASE_URI,
                 Response.class
         );
         Embedded<Item> embedded = responseEntity.getBody().get_embedded();
-        // TODO
-        return new ArrayList<>();
+        for (Item item:embedded.getElements()) {
+            items.add(item);
+        }
+        System.out.println(" --- INFO --- items: " + items.size());
+        items.forEach(System.out::println);
+        return items;
     }
 
     public Item findByCode(String code)
