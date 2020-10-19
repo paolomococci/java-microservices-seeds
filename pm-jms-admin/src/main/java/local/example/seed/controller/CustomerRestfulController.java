@@ -27,6 +27,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -67,7 +68,8 @@ public class CustomerRestfulController {
         for (Customer customer: embedded.getElements()) {
             customers.add(customer);
         }
-        System.out.println(" --- INFO --- customers: " + customers.size());
+        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+        System.out.println(timestamp + " --- INFO --- number of customers: " + customers.size());
         customers.forEach(System.out::println);
         return customers;
     }
