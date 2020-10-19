@@ -18,14 +18,13 @@
 
 package local.example.seed.model;
 
+import local.example.seed.model.util.Link;
 import lombok.*;
-import org.springframework.hateoas.RepresentationModel;
 
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Item
-        extends RepresentationModel<Item> {
+public class Item {
 
     @Getter
     @Setter
