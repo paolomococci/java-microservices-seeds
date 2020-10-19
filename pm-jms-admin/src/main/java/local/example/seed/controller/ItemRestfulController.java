@@ -21,6 +21,7 @@ package local.example.seed.controller;
 import local.example.seed.model.Embedded;
 import local.example.seed.model.Item;
 import local.example.seed.model.Response;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
@@ -33,13 +34,10 @@ import java.util.Map;
 
 public class ItemRestfulController {
 
+    @Autowired
+    private final RestTemplate restTemplate = new RestTemplate();
+
     private static final String ITEM_RESTFUL_BASE_URI = "http://127.0.0.1:8081/items";
-
-    private final RestTemplate restTemplate;
-
-    public ItemRestfulController() {
-        this.restTemplate = new RestTemplate();
-    }
 
     public void create(Item item)
             throws RestClientException {
