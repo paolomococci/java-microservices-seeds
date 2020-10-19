@@ -47,9 +47,9 @@ public class InvoiceView
     public InvoiceView() {
         super();
         this.invoiceGrid = new Grid<>();
-        this.invoiceGrid.addColumn(invoice -> invoice.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
-        this.invoiceGrid.addColumn(invoice -> invoice.getDate()).setHeader("date").setSortable(true);
-        this.invoiceGrid.addColumn(invoice -> invoice.getTotal()).setHeader("total").setSortable(true);
+        this.invoiceGrid.addColumn(Invoice::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.invoiceGrid.addColumn(Invoice::getDate).setHeader("date").setSortable(true);
+        this.invoiceGrid.addColumn(Invoice::getTotal).setHeader("total").setSortable(true);
         this.retrieveButton = new Button(
                 "recovers all invoices",
                 VaadinIcon.ARROW_CIRCLE_DOWN_O.create(),
