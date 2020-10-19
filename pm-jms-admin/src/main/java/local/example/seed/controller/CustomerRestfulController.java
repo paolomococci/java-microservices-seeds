@@ -67,6 +67,8 @@ public class CustomerRestfulController {
         for (Customer customer: embedded.getElements()) {
             customers.add(customer);
         }
+        System.out.println(" --- INFO --- customers: " + customers.size());
+        customers.forEach(System.out::println);
         return customers;
     }
 
