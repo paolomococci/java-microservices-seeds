@@ -40,8 +40,6 @@ import local.example.seed.model.Customer;
 public class CustomerEditorView
         extends Main {
 
-    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8081/";
-
     private final CustomerRestfulController customerRestfulController;
 
     private final Grid<Customer> customerGrid;
