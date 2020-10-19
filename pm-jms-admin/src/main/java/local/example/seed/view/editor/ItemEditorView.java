@@ -51,9 +51,12 @@ public class ItemEditorView
         this.itemRestfulController = new ItemRestfulController();
 
         this.itemGrid = new Grid<>();
-        this.itemGrid.setItems(this.itemRestfulController.readAll());
+        this.itemGrid.setItems(
+                this.itemRestfulController.readAll()
+        );
         this.itemGrid.addColumn(Item::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.itemGrid.addColumn(Item::getName).setHeader("name").setSortable(true);
+        this.itemGrid.addColumn(Item::getPrice).setHeader("price").setSortable(true);
         this.itemGrid.addColumn(Item::getDescription).setHeader("description").setSortable(false);
         this.itemGrid.addThemeVariants(
                 GridVariant.LUMO_NO_BORDER,
