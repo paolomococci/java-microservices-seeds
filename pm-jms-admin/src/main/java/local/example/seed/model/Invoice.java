@@ -18,16 +18,15 @@
 
 package local.example.seed.model;
 
+import local.example.seed.model.util.Link;
 import lombok.*;
-import org.springframework.hateoas.RepresentationModel;
 
 import java.sql.Date;
 
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Invoice
-        extends RepresentationModel<Invoice> {
+public class Invoice {
 
     @Getter
     @Setter
