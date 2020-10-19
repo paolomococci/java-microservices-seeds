@@ -51,7 +51,9 @@ public class InvoiceEditorView
         this.invoiceRestfulController = new InvoiceRestfulController();
 
         this.invoiceGrid = new Grid<>();
-        this.invoiceGrid.setItems(this.invoiceRestfulController.readAll());
+        this.invoiceGrid.setItems(
+                this.invoiceRestfulController.readAll()
+        );
         this.invoiceGrid.addColumn(Invoice::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.invoiceGrid.addColumn(Invoice::getDate).setHeader("date").setSortable(true);
         this.invoiceGrid.addColumn(Invoice::getTotal).setHeader("total").setSortable(true);
