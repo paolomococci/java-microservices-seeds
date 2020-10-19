@@ -40,8 +40,6 @@ import local.example.seed.model.Item;
 public class ItemEditorView
         extends Main {
 
-    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8081/";
-
     private final ItemRestfulController itemRestfulController;
 
     private final Grid<Item> itemGrid;
