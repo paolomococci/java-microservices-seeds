@@ -18,22 +18,33 @@
 
 package local.example.seed.view.editor;
 
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
-import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
+import com.vaadin.flow.component.splitlayout.SplitLayout;
+import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.CustomerRestfulController;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
+import local.example.seed.model.util.Link;
+
+import java.util.Optional;
 
 @PageTitle(value = "customer editor")
 @Route(value = "customer-editor", layout = MainLayout.class)
@@ -43,12 +54,24 @@ public class CustomerEditorView
     private final CustomerRestfulController customerRestfulController;
 
     private final Grid<Customer> customerGrid;
-    private final TextField filterEmailField;
-    private final Button addCustomer;
-    private final HorizontalLayout tools;
+    private final Binder<Customer> customerBinder;
+    private Customer customer;
+
+    private TextField name;
+    private TextField surname;
+    private EmailField email;
+
+    private final Button cancel;
+    private final Button update;
+    private final Button create;
+    private final Button delete;
 
     public CustomerEditorView() {
-        customerRestfulController = new CustomerRestfulController();
+        this.customerRestfulController = new CustomerRestfulController();
+        this.customer = new Customer();
+
+        this.customerBinder = new Binder<>(Customer.class);
+        this.customerBinder.bindInstanceFields(this);
 
         this.customerGrid = new Grid<>();
         this.customerGrid.setItems(
@@ -63,41 +86,183 @@ public class CustomerEditorView
                 GridVariant.LUMO_ROW_STRIPES
         );
 
-        this.customerGrid.asSingleSelect().addValueChangeListener(
-                listener -> {
-                    // TODO
+        this.customerGrid.asSingleSelect().addValueChangeListener(listener -> {
+            if (listener.getValue() != null) {
+                Optional<Customer> customerFromBackend = Optional.ofNullable(
+                        this.customerRestfulController.read(
+                                listener.getValue().get_links().getSelf().getHref()
+                        ));
+                if (customerFromBackend.isPresent()) {
+                    this.populate(customerFromBackend.get());
+                } else {
+                    this.refresh();
                 }
-        );
+            } else {
+                this.clear();
+            }
+        });
 
-        this.filterEmailField = new TextField();
-        this.filterEmailField.setPlaceholder("filter by email");
-        this.filterEmailField.setClearButtonVisible(true);
-        this.filterEmailField.setValueChangeMode(ValueChangeMode.LAZY);
-        this.filterEmailField.addFocusShortcut(
+        this.cancel = new Button("cancel");
+        this.cancel.addClickListener(listener -> {
+            this.clear();
+            this.refresh();
+        });
+        this.update = new Button("update");
+        this.update.addClickListener(listener -> {
+            try {
+                if (this.customer != null) {
+                    this.customerBinder.writeBean(this.customer);
+                    this.customerRestfulController.update(
+                            this.customer,
+                            this.customer.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("customer details have been updated");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the customer details have not been updated");
+                validationException.printStackTrace();
+            }
+        });
+        this.create = new Button("create");
+        this.create.addClickListener(listener -> {
+            try {
+                if (
+                        !this.name.getValue().isEmpty() &
+                        !this.surname.getValue().isEmpty() &
+                        !this.email.getValue().isEmpty()
+                ) {
+                    this.customer = new Customer(
+                            this.name.getValue(),
+                            this.surname.getValue(),
+                            this.email.getValue(),
+                            new Link()
+                    );
+                    this.customerBinder.writeBean(this.customer);
+                    this.customerRestfulController.create(
+                            this.customer
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("new customer's details have been created");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the customer details have not been created");
+                validationException.printStackTrace();
+            }
+        });
+        this.delete = new Button("delete");
+        this.delete.addClickListener(listener -> {
+            try {
+                if (this.customer != null) {
+                    this.customerBinder.writeBean(this.customer);
+                    this.customerRestfulController.delete(
+                            this.customer.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("the selected customer has been deleted");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the selected customer has not been deleted");
+                validationException.printStackTrace();
+            }
+        });
+
+        SplitLayout splitLayout = new SplitLayout();
+        splitLayout.setSizeFull();
+
+        TextField filterEmailField = new TextField();
+        filterEmailField.setPlaceholder("filter by email");
+        filterEmailField.setClearButtonVisible(true);
+        filterEmailField.setValueChangeMode(ValueChangeMode.LAZY);
+        filterEmailField.addFocusShortcut(
                 Key.KEY_F, KeyModifier.ALT
         );
-        this.filterEmailField.addValueChangeListener(
-                listener -> {
-                    this.showCustomerList(listener.getValue());
-                }
-        );
-
-        this.addCustomer = new Button("add customer", VaadinIcon.PLUS_CIRCLE_O.create());
-        this.addCustomer.addClickListener(
-                listener -> {
-                    // TODO
-                }
-        );
-        this.addCustomer.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
-
-        this.tools = new HorizontalLayout(this.addCustomer);
-
-        this.add(
-                this.customerGrid,
-                this.tools
+        filterEmailField.addValueChangeListener(
+                listener -> this.showCustomerList(listener.getValue())
         );
 
         this.showCustomerList("");
+
+        this.createGridLayout(splitLayout);
+        this.createEditorLayout(splitLayout);
+        this.add(splitLayout);
+    }
+
+    private void createGridLayout(
+            SplitLayout splitLayout
+    ) {
+        Div divWrapper = new Div();
+        divWrapper.setWidthFull();
+        splitLayout.addToPrimary(divWrapper);
+        divWrapper.add(this.customerGrid);
+    }
+
+    private void createEditorLayout(
+            SplitLayout splitLayout
+    ) {
+        Div divEditorLayout = new Div();
+        Div divEditor = new Div();
+        divEditorLayout.add(divEditor);
+        FormLayout formLayout = new FormLayout();
+        this.name.setAutofocus(true);
+        this.email.setClearButtonVisible(true);
+        addFormItem(divEditor, formLayout, this.name, "name");
+        addFormItem(divEditor, formLayout, this.surname, "surname");
+        addFormItem(divEditor, formLayout, this.email, "email");
+        createButtonLayout(divEditorLayout);
+        splitLayout.addToSecondary(divEditorLayout);
+    }
+
+    private void addFormItem(
+            Div divWrapper,
+            FormLayout formLayout,
+            AbstractField abstractField,
+            String fieldName
+    ) {
+        formLayout.addFormItem(abstractField, fieldName);
+        divWrapper.add(formLayout);
+    }
+
+    private void createButtonLayout(
+            Div divEditorLayout
+    ) {
+        HorizontalLayout buttonHorizontalLayout = new HorizontalLayout();
+        buttonHorizontalLayout.setWidthFull();
+        buttonHorizontalLayout.setSpacing(true);
+        this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        this.update.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.create.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+        this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        buttonHorizontalLayout.add(
+                this.cancel, this.update, this.create, this.delete
+        );
+        buttonHorizontalLayout.setSpacing(true);
+        buttonHorizontalLayout.setMargin(true);
+        divEditorLayout.add(buttonHorizontalLayout);
+    }
+
+    private void refresh() {
+        this.customerGrid.select(null);
+        this.customerGrid.getDataProvider().refreshAll();
+    }
+
+    private void clear() {
+        this.populate(null);
+    }
+
+    private void populate(Customer customer) {
+        this.customer = customer;
+        this.customerBinder.readBean(this.customer);
+    }
+
+    private void reload() {
+        this.customerGrid.setItems(customerRestfulController.readAll());
     }
 
     private void showCustomerList(String email) {
