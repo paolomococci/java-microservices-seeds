@@ -21,23 +21,32 @@ package local.example.seed.serializer;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.ser.std.StdSerializer;
+import local.example.seed.model.Invoice;
 
 import java.io.IOException;
-import java.sql.Date;
+import java.time.format.DateTimeFormatter;
 
-public class DateSerializer
-        extends StdSerializer<Date> {
+public class InvoiceSerializer
+        extends StdSerializer<Invoice> {
 
-    protected DateSerializer(StdSerializer<?> src) {
-        super(src);
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    protected InvoiceSerializer(Class<Invoice> t) {
+        super(t);
     }
 
     @Override
     public void serialize(
-            Date date,
+            Invoice invoice,
             JsonGenerator jsonGenerator,
             SerializerProvider serializerProvider
     ) throws IOException {
-        // TODO
+        jsonGenerator.writeStartObject();
+        jsonGenerator.writeStringField("code", invoice.getCode());
+        jsonGenerator.writeStringField("date", invoice.getDate().format(this.dateTimeFormatter));
+        jsonGenerator.writeNumberField("total", invoice.getTotal());
+        jsonGenerator.writeStringField("customerId", invoice.getCustomerId());
+        jsonGenerator.writeStringField("_links", invoice.get_links().getSelf().getHref());
+        jsonGenerator.writeEndObject();
     }
 }
