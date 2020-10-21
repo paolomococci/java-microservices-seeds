@@ -19,25 +19,37 @@
 package local.example.seed.deserializer;
 
 import com.fasterxml.jackson.core.JsonParser;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.ObjectCodec;
 import com.fasterxml.jackson.databind.DeserializationContext;
-import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
+import com.fasterxml.jackson.databind.JsonDeserializer;
+import com.fasterxml.jackson.databind.JsonNode;
+import local.example.seed.model.Invoice;
+import local.example.seed.model.util.Link;
+import local.example.seed.model.util.Self;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
-public class DateDeserializer
-        extends StdDeserializer<LocalDate> {
+public class InvoiceDeserializer
+        extends JsonDeserializer<Invoice> {
 
-    protected DateDeserializer(StdDeserializer<?> src) {
-        super(src);
-    }
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     @Override
-    public LocalDate deserialize(
+    public Invoice deserialize(
             JsonParser jsonParser,
             DeserializationContext deserializationContext
-    ) throws IOException {
-        // TODO
-        return null;
+    ) throws IOException, JsonProcessingException {
+        ObjectCodec objectCodec = jsonParser.getCodec();
+        JsonNode jsonNode = objectCodec.readTree(jsonParser);
+        final String code = jsonNode.get("code").asText();
+        final LocalDate date = LocalDate.parse(jsonNode.get("date").asText(), this.dateTimeFormatter);
+        final Double total = jsonNode.get("total").asDouble();
+        final String customerId = jsonNode.get("customerId").asText();
+        final Link link = new Link(new Self(jsonNode.get("_links").asText()));
+
+        return new Invoice(code, date, total, customerId, link);
     }
 }
