@@ -19,6 +19,8 @@
 package local.example.seed.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import local.example.seed.deserializer.DateDeserializer;
 import local.example.seed.model.util.Link;
 import lombok.*;
 
@@ -35,6 +37,7 @@ public class Invoice {
 
     @Getter
     @Setter
+    @JsonDeserialize(using = DateDeserializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private LocalDate date;
 
