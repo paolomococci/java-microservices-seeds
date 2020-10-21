@@ -18,22 +18,39 @@
 
 package local.example.seed.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import local.example.seed.model.util.Link;
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 @ToString
 @NoArgsConstructor
-@AllArgsConstructor
 public class Invoice {
+
+    public Invoice(
+            String code,
+            LocalDate date,
+            Double total,
+            String customerId,
+            Link links
+    ) {
+        this.code = code;
+        this.date = Date.valueOf(date);
+        this.total = total;
+        this.customerId = customerId;
+        this._links = links;
+    }
 
     @Getter
     @Setter
     private String code;
 
-    @Getter
-    @Setter
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     private Date date;
 
     @Getter
@@ -47,4 +64,12 @@ public class Invoice {
     @Getter
     @Setter
     private Link _links;
+
+    public LocalDate getDate() {
+        return date.toLocalDate();
+    }
+
+    public void setDate(LocalDate localDate) {
+        this.date = Date.valueOf(localDate);
+    }
 }
