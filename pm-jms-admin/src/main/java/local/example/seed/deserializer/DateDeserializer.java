@@ -23,29 +23,21 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
-import java.sql.Date;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 
 public class DateDeserializer
-        extends StdDeserializer<Date> {
-
-    private final SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        extends StdDeserializer<LocalDate> {
 
     protected DateDeserializer(StdDeserializer<?> src) {
         super(src);
     }
 
     @Override
-    public Date deserialize(
+    public LocalDate deserialize(
             JsonParser jsonParser,
             DeserializationContext deserializationContext
     ) throws IOException {
-        String date = jsonParser.getText();
-        try {
-            return (Date) this.simpleDateFormat.parse(date);
-        } catch (ParseException parseException) {
-            throw new RuntimeException(parseException);
-        }
+        // TODO
+        return null;
     }
 }
