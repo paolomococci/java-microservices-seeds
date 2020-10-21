@@ -19,7 +19,11 @@
 package local.example.seed.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import local.example.seed.deserializer.InvoiceDeserializer;
 import local.example.seed.model.util.Link;
+import local.example.seed.serializer.InvoiceSerializer;
 import lombok.*;
 
 import java.time.LocalDate;
@@ -27,6 +31,8 @@ import java.time.LocalDate;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonSerialize(using = InvoiceSerializer.class)
+@JsonDeserialize(using = InvoiceDeserializer.class)
 public class Invoice {
 
     @Getter
