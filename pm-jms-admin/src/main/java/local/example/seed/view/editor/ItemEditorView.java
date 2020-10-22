@@ -252,12 +252,13 @@ public class ItemEditorView
     }
 
     private void clear() {
-        this.populate(null);
+        this.populate(new Item("", "", "", Double.NaN, null));
     }
 
     private void populate(Item item) {
         this.item = item;
         this.itemBinder.readBean(this.item);
+        this.price.setValue(this.item.getPrice());
     }
 
     private void reload() {
