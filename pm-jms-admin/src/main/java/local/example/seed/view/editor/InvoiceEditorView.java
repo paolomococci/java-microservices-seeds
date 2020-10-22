@@ -40,6 +40,7 @@ import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.InvoiceRestfulController;
+import local.example.seed.field.DateField;
 import local.example.seed.field.TotalField;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
@@ -59,7 +60,7 @@ public class InvoiceEditorView
     private Invoice invoice;
 
     private TextField code;
-    private DatePicker date;
+    private DateField date;
     private TotalField total;
 
     private final Button cancel;
