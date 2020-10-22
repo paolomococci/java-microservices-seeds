@@ -32,10 +32,18 @@ public class DateField
     private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     public DateField() {
-        this.setLabel("date");
-        this.datePicker.setMin(LocalDate.now());
         HorizontalLayout horizontalLayout = new HorizontalLayout(this.datePicker);
+        horizontalLayout.setSpacing(false);
         this.add(horizontalLayout);
+    }
+
+    @Override
+    public void setValue(String value) {
+        if (value.isEmpty()) {
+            this.datePicker.setValue(null);
+        } else {
+            this.datePicker.setValue(LocalDate.parse(value, this.dateTimeFormatter));
+        }
     }
 
     @Override
@@ -45,9 +53,5 @@ public class DateField
     }
 
     @Override
-    protected void setPresentationValue(String newPresentationValue) {
-        if (newPresentationValue == null) {
-            this.datePicker.setValue(LocalDate.now());
-        }
-    }
+    protected void setPresentationValue(String newPresentationValue) {}
 }
