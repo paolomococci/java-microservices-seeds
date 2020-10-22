@@ -26,7 +26,6 @@ import org.springframework.hateoas.client.Traverson;
 import org.springframework.stereotype.Service;
 
 import java.net.URI;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -42,9 +41,6 @@ public class CustomerRestfulRetrieverService {
         CollectionModel<Customer> collectionModelOfCustomers;
         collectionModelOfCustomers = traversalBuilder.toObject(parameterizedTypeReference);
         Collection<Customer> collectionOfCustomers = collectionModelOfCustomers.getContent();
-        Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-        System.out.println(timestamp + " --- INFO --- number of customers: " + collectionOfCustomers.size());
-        collectionOfCustomers.forEach(System.out::println);
         return new ArrayList<>(collectionOfCustomers);
     }
 }
