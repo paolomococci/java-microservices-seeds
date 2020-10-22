@@ -28,13 +28,18 @@ public class TotalField
     private final TextField doubleValueField = new TextField();
 
     public TotalField() {
-        this.setLabel("total");
-        this.doubleValueField.setPattern("[0-9]{0,3}\\.[0-9]{0,2}");
+        this.doubleValueField.setLabel("accepted format: nnn.nn");
+        this.doubleValueField.setPattern("^([0-9]{0,3}([.][0-9]{0,2})?|[.][0-9]{0,2})$");
         this.doubleValueField.setPreventInvalidInput(true);
         this.doubleValueField.setMaxLength(6);
-        this.doubleValueField.setPlaceholder("000.00");
         HorizontalLayout horizontalLayout = new HorizontalLayout(this.doubleValueField);
+        horizontalLayout.setSpacing(false);
         this.add(horizontalLayout);
+    }
+
+    @Override
+    public void setValue(Double value) {
+        this.doubleValueField.setValue(value.toString());
     }
 
     @Override
@@ -44,8 +49,8 @@ public class TotalField
 
     @Override
     protected void setPresentationValue(Double newPresentationValue) {
-        if (newPresentationValue == null) {
-            this.doubleValueField.setValue("0.0");
+        if (newPresentationValue.isNaN()) {
+            this.doubleValueField.setValue("");
         }
     }
 }
