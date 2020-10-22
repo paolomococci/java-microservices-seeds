@@ -250,12 +250,14 @@ public class InvoiceEditorView
     }
 
     private void clear() {
-        this.populate(null);
+        this.populate(new Invoice("", "", Double.NaN, "", null));
     }
 
     private void populate(Invoice invoice) {
         this.invoice = invoice;
         this.invoiceBinder.readBean(this.invoice);
+        this.date.setValue(this.invoice.getDate());
+        this.total.setValue(this.invoice.getTotal());
     }
 
     private void reload() {
