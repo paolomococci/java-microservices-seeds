@@ -19,13 +19,11 @@
 package local.example.seed.model;
 
 import lombok.*;
-import org.springframework.hateoas.RepresentationModel;
 
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class Customer
-        extends RepresentationModel<Customer> {
+public class Customer {
 
     @Getter
     @Setter
