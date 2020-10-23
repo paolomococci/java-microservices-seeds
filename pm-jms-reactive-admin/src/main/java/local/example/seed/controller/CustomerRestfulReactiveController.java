@@ -139,10 +139,35 @@ public class CustomerRestfulReactiveController {
         return this.readAll().stream();
     }
 
-    public Customer findByEmail(String email)
+    public Mono<Customer> findByEmail(String email)
             throws WebClientResponseException {
-        // TODO
-        return null;
+        return this.webClient
+                .get()
+                .uri("http://127.0.0.1:8082/api/restful/customers/search/findByEmail?email={email}", email)
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a search request for the customer's email: %s ---",
+                                    email
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToMono(Customer.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a search request for the customer's email: %s, probably the host is down! ---",
+                            email
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
+                .onErrorResume(exception -> Mono.empty());
     }
 
     public void update(Customer customer, String uri)
