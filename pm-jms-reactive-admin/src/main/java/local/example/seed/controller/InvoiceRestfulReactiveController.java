@@ -41,7 +41,7 @@ import java.util.stream.Stream;
 
 public class InvoiceRestfulReactiveController {
 
-    private static final String INVOICE_REACTIVE_BASE_URI = "http://127.0.0.1:8080/api/restful/invoices";
+    private static final String INVOICE_REACTIVE_BASE_URI = "http://127.0.0.1:8082/api/restful/invoices";
     private final WebClient webClient;
 
     public InvoiceRestfulReactiveController() {
