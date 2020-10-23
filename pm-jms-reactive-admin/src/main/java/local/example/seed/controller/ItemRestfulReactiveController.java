@@ -41,7 +41,7 @@ import java.util.stream.Stream;
 
 public class ItemRestfulReactiveController {
 
-    private static final String ITEM_REACTIVE_BASE_URI = "http://127.0.0.1:8080/api/restful/items";
+    private static final String ITEM_REACTIVE_BASE_URI = "http://127.0.0.1:8082/api/restful/items";
     private final WebClient webClient;
 
     public ItemRestfulReactiveController() {
