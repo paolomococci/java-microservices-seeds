@@ -22,6 +22,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Customer;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,6 +34,7 @@ import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -64,11 +66,24 @@ public class CustomerRestfulReactiveController {
 
     public void create(Customer customer)
             throws WebClientResponseException {
-        this.webClient.post()
-                .body(
-                        Mono.justOrEmpty(customer),
-                        Customer.class
-                );
+        this.webClient
+                .post()
+                .uri(CUSTOMER_REACTIVE_BASE_URI)
+                .body(Mono.just(customer), Customer.class)
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> !HttpStatus.CREATED.equals(httpStatus),
+                        clientResponse -> Mono.empty()
+                )
+                .bodyToMono(Void.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    System.out.println(timestamp +
+                            " ERROR: --- Connection refused occurred during a request create customer, probably the host is down! ---\n" +
+                            customer.toString());
+                })
+                .block();
     }
 
     public Customer read(String id)
