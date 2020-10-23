@@ -41,7 +41,7 @@ import java.util.stream.Stream;
 
 public class CustomerRestfulReactiveController {
 
-    private static final String CUSTOMER_REACTIVE_BASE_URI = "http://127.0.0.1:8081/api/restful/customers";
+    private static final String CUSTOMER_REACTIVE_BASE_URI = "http://127.0.0.1:8082/api/restful/customers";
 
     private final WebClient webClient;
 
