@@ -19,30 +19,22 @@
 package local.example.seed.model;
 
 import local.example.seed.model.util.Link;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Invoice {
 
-    @Getter
-    @Setter
     private String code;
 
-    @Getter
-    @Setter
     private String date;
 
-    @Getter
-    @Setter
     private Double total;
 
-    @Getter
-    @Setter
     private String customerId;
 
-    @Getter
-    @Setter
     private Link _links;
 }
