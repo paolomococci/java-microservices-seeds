@@ -177,16 +177,6 @@ public class CustomerRestfulReactiveController {
                 .block();
     }
 
-    public void partialUpdate(Customer customer, String id)
-            throws WebClientResponseException {
-        this.webClient.patch()
-                .uri("/"+id)
-                .body(
-                        Mono.justOrEmpty(customer),
-                        Customer.class
-                );
-    }
-
     public void delete(String id)
             throws WebClientResponseException {
         this.webClient.delete().uri("/"+id);
