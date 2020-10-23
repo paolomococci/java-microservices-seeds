@@ -22,6 +22,7 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Customer;
+import local.example.seed.response.CustomerResponse;
 import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -172,5 +173,34 @@ public class CustomerRestfulReactiveController {
     public void delete(String id)
             throws WebClientResponseException {
         this.webClient.delete().uri("/"+id);
+    }
+    
+    private Flux<CustomerResponse> getResponseFlux(int size)
+            throws WebClientResponseException {
+        return this.webClient.get()
+                .uri(CUSTOMER_REACTIVE_BASE_URI+"?page=0&size={size}", size)
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customers uri: %s ---",
+                                    CUSTOMER_REACTIVE_BASE_URI.toString()
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToFlux(CustomerResponse.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the customers uri: %s, probably the host is down! ---",
+                            CUSTOMER_REACTIVE_BASE_URI.toString()
+                    );
+                    System.out.println(timestamp + errorMessage);
+                });
     }
 }
