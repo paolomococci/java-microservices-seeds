@@ -18,16 +18,13 @@
 
 package local.example.seed.model;
 
+import local.example.seed.model.util.Link;
 import lombok.*;
 
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Item {
-
-    @Getter
-    @Setter
-    private String id;
 
     @Getter
     @Setter
@@ -44,4 +41,8 @@ public class Item {
     @Getter
     @Setter
     private Double price;
+
+    @Getter
+    @Setter
+    private Link _links;
 }
