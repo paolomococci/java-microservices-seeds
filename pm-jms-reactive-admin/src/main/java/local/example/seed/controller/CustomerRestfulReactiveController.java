@@ -39,6 +39,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
@@ -118,17 +119,11 @@ public class CustomerRestfulReactiveController {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    public List<Customer> readAll()
-            throws WebClientResponseException {
-        List<Customer> listOfCustomers = new ArrayList<>();
-        Flux<Customer> fluxOfCustomers = this.webClient.get()
-                .retrieve()
-                .bodyToFlux(Customer.class);
-        Iterable<Customer> fluxOfCustomersIterable = fluxOfCustomers.toIterable();
-        for (Customer customer:fluxOfCustomersIterable) {
-            listOfCustomers.add(customer);
-        }
-        return listOfCustomers;
+    public List<Customer> readAll(){
+        return Objects.requireNonNull(this.getResponseFlux(
+                Objects.requireNonNull(
+                        this.getResponseFlux(0).blockFirst()).getPage().getTotalElements()
+        ).blockFirst()).get_embedded().getCustomers();
     }
 
     public Collection<Customer> collectionOfAllCustomers() {
@@ -174,7 +169,7 @@ public class CustomerRestfulReactiveController {
             throws WebClientResponseException {
         this.webClient.delete().uri("/"+id);
     }
-    
+
     private Flux<CustomerResponse> getResponseFlux(int size)
             throws WebClientResponseException {
         return this.webClient.get()
