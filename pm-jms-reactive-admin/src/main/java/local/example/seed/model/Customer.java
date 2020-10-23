@@ -19,29 +19,23 @@
 package local.example.seed.model;
 
 import local.example.seed.model.util.Link;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.Email;
 
-@ToString
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
 
-    @Getter
-    @Setter
     private String name;
 
-    @Getter
-    @Setter
     private String surname;
 
-    @Getter
-    @Setter
     @Email
     private String email;
 
-    @Getter
-    @Setter
     private Link _links;
 }
