@@ -86,17 +86,35 @@ public class CustomerRestfulReactiveController {
                 .block();
     }
 
-    public Customer read(String id)
+    public Mono<Customer> read(String uri)
             throws WebClientResponseException {
-        return this.webClient.get()
-                .uri("/"+id)
+        return this.webClient
+                .get()
+                .uri(uri)
+                .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        HttpStatus.NOT_FOUND::equals,
-                        clientResponse -> Mono.empty()
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customer's uri: %s ---",
+                                    uri
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
                 )
                 .bodyToMono(Customer.class)
-                .block();
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the customer's uri: %s, probably the host is down! ---",
+                            uri
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
+                .onErrorResume(exception -> Mono.empty());
     }
 
     public List<Customer> readAll()
