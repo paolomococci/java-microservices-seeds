@@ -145,14 +145,36 @@ public class CustomerRestfulReactiveController {
         return null;
     }
 
-    public void update(Customer customer, String id)
+    public void update(Customer customer, String uri)
             throws WebClientResponseException {
-        this.webClient.put()
-                .uri("/"+id)
-                .body(
-                        Mono.justOrEmpty(customer),
-                        Customer.class
-                );
+        this.webClient
+                .put()
+                .uri(uri)
+                .body(Mono.just(customer), Customer.class)
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customer's uri: %s ---",
+                                    uri
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToMono(Void.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the customer's uri: %s, probably the host is down! ---",
+                            uri
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
+                .block();
     }
 
     public void partialUpdate(Customer customer, String id)
