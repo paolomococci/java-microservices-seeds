@@ -177,9 +177,34 @@ public class CustomerRestfulReactiveController {
                 .block();
     }
 
-    public void delete(String id)
+    public void delete(String uri)
             throws WebClientResponseException {
-        this.webClient.delete().uri("/"+id);
+        this.webClient
+                .delete()
+                .uri(uri)
+                .retrieve()
+                .onStatus(
+                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customer's uri: %s ---",
+                                    uri
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToMono(Void.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the customer's uri: %s, probably the host is down! ---",
+                            uri
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
+                .block();
     }
 
     private Flux<CustomerResponse> getResponseFlux(int size)
