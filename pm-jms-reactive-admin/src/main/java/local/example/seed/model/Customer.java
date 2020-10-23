@@ -18,16 +18,15 @@
 
 package local.example.seed.model;
 
+import local.example.seed.model.util.Link;
 import lombok.*;
+
+import javax.validation.constraints.Email;
 
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
 public class Customer {
-
-    @Getter
-    @Setter
-    private String id;
 
     @Getter
     @Setter
@@ -39,5 +38,10 @@ public class Customer {
 
     @Getter
     @Setter
+    @Email
     private String email;
+
+    @Getter
+    @Setter
+    private Link _links;
 }
