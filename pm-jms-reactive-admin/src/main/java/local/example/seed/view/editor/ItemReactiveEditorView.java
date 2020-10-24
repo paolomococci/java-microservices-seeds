@@ -35,6 +35,9 @@ import local.example.seed.controller.ItemRestfulReactiveController;
 import local.example.seed.field.PriceField;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
+import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @PageTitle(value = "item reactive editor")
 @Route(value = "item-reactive-editor", layout = MainLayout.class)
@@ -74,6 +77,21 @@ public class ItemReactiveEditorView
                 GridVariant.LUMO_NO_ROW_BORDERS,
                 GridVariant.LUMO_ROW_STRIPES
         );
+        this.itemGrid.asSingleSelect().addValueChangeListener(listener -> {
+            if (listener.getValue() != null) {
+                Optional<Mono<Item>> itemFromBackend = Optional.ofNullable(
+                        this.itemRestfulReactiveController.read(
+                                listener.getValue().get_links().getSelf().getHref()
+                        ));
+                if (itemFromBackend.isPresent()) {
+                    this.populate(itemFromBackend.get().block());
+                } else {
+                    this.refresh();
+                }
+            } else {
+                this.clear();
+            }
+        });
 
         this.itemBinder = new Binder<>(Item.class);
         this.itemBinder.bindInstanceFields(this);
