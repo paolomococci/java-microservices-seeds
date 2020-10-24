@@ -18,9 +18,13 @@
 
 package local.example.seed.view.editor;
 
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
@@ -52,9 +56,74 @@ public class InvoiceReactiveEditorView
     private Button delete;
 
     public InvoiceReactiveEditorView() {
-            // TODO
+
+        this.invoiceGrid = new Grid<>(Invoice.class);
+        this.invoiceBinder = new Binder<>(Invoice.class);
+        this.invoiceBinder.bindInstanceFields(this);
+
+        this.invoice = new Invoice();
+
+        this.invoiceRestfulReactiveController = new InvoiceRestfulReactiveController();
+
+        this.cancel = new Button("cancel");
+        this.update = new Button("update");
+        this.create = new Button("create");
+        this.delete = new Button("delete");
+
+        SplitLayout splitLayout = new SplitLayout();
+        splitLayout.setSizeFull();
+
+        // TODO grid
+
+        this.createGridLayout(splitLayout);
+        this.createEditorLayout(splitLayout);
+        this.add(splitLayout);
+    }
+
+    private void createEditorLayout(
+            SplitLayout splitLayout
+    ) {
+
+    }
+
+    private void createButtonLayout(
+            Div divEditorLayout
+    ) {
+
+    }
+
+    private void createGridLayout(
+            SplitLayout splitLayout
+    ) {
+
+    }
+
+    private void addFormItem(
+            Div divWrapper,
+            FormLayout formLayout,
+            AbstractField abstractField,
+            String fieldName
+    ) {
+
+    }
+
+    private void refresh() {
+
+    }
+
+    private void clear() {
+
+    }
+
+    private void populate(Invoice invoice) {
+
+    }
+
+    private void reload() {
+
     }
 
     private void showInvoiceList(String code) {
-            // TODO
+        // TODO
+    }
 }
