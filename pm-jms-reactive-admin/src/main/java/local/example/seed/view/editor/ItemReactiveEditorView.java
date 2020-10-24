@@ -57,13 +57,14 @@ public class ItemReactiveEditorView
 
     public ItemReactiveEditorView() {
 
+        this.itemRestfulReactiveController = new ItemRestfulReactiveController();
+
         this.itemGrid = new Grid<>(Item.class);
+        
         this.itemBinder = new Binder<>(Item.class);
         this.itemBinder.bindInstanceFields(this);
 
         this.item = new Item();
-
-        this.itemRestfulReactiveController = new ItemRestfulReactiveController();
 
         this.cancel = new Button("cancel");
         this.update = new Button("update");
@@ -72,8 +73,6 @@ public class ItemReactiveEditorView
 
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
-
-        // TODO grid
 
         this.createGridLayout(splitLayout);
         this.createEditorLayout(splitLayout);
