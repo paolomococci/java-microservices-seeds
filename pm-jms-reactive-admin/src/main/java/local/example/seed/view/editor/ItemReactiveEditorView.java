@@ -19,6 +19,8 @@
 package local.example.seed.view.editor;
 
 import com.vaadin.flow.component.AbstractField;
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
@@ -31,6 +33,7 @@ import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.ItemRestfulReactiveController;
@@ -174,6 +177,19 @@ public class ItemReactiveEditorView
 
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
+
+        TextField  filterCodeField = new TextField();
+        filterCodeField.setPlaceholder("filter by code");
+        filterCodeField.setClearButtonVisible(true);
+        filterCodeField.setValueChangeMode(ValueChangeMode.LAZY);
+        filterCodeField.addFocusShortcut(
+                Key.KEY_F, KeyModifier.ALT
+        );
+        filterCodeField.addValueChangeListener(
+                listener -> this.showItemList(listener.getValue())
+        );
+
+        this.showItemList("");
 
         this.createGridLayout(splitLayout);
         this.createEditorLayout(splitLayout);
