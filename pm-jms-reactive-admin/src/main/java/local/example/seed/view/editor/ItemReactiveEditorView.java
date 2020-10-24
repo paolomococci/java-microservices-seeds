@@ -52,21 +52,21 @@ import java.util.Optional;
 public class ItemReactiveEditorView
         extends Main {
 
-    private Grid<Item> itemGrid;
-    private Binder<Item> itemBinder;
+    private final Grid<Item> itemGrid;
+    private final Binder<Item> itemBinder;
 
     private Item item;
-    private ItemRestfulReactiveController itemRestfulReactiveController;
+    private final ItemRestfulReactiveController itemRestfulReactiveController;
 
     private TextField code;
     private TextField name;
     private TextField description;
     private PriceField price;
 
-    private Button cancel;
-    private Button update;
-    private Button create;
-    private Button delete;
+    private final Button cancel;
+    private final Button update;
+    private final Button create;
+    private final Button delete;
 
     public ItemReactiveEditorView() {
 
