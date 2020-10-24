@@ -233,7 +233,8 @@ public class ItemReactiveEditorView
             AbstractField abstractField,
             String fieldName
     ) {
-
+        formLayout.addFormItem(abstractField, fieldName);
+        divWrapper.add(formLayout);
     }
 
     private void refresh() {
