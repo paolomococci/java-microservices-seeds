@@ -252,7 +252,8 @@ public class ItemReactiveEditorView
     }
 
     private void refresh() {
-
+        this.itemGrid.select(null);
+        this.itemGrid.getDataProvider().refreshAll();
     }
 
     private void clear() {
