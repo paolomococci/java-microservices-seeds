@@ -200,7 +200,17 @@ public class CustomerReactiveEditorView
     private void createEditorLayout(
             SplitLayout splitLayout
     ) {
-
+        Div divEditorLayout = new Div();
+        Div divEditor = new Div();
+        divEditorLayout.add(divEditor);
+        FormLayout formLayout = new FormLayout();
+        this.name.setAutofocus(true);
+        this.email.setClearButtonVisible(true);
+        addFormItem(divEditor, formLayout, this.name, "name");
+        addFormItem(divEditor, formLayout, this.surname, "surname");
+        addFormItem(divEditor, formLayout, this.email, "email");
+        createButtonLayout(divEditorLayout);
+        splitLayout.addToSecondary(divEditorLayout);
     }
 
     private void createButtonLayout(
