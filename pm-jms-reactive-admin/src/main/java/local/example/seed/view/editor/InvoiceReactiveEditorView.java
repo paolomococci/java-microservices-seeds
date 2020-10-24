@@ -250,7 +250,8 @@ public class InvoiceReactiveEditorView
     }
 
     private void refresh() {
-
+        this.invoiceGrid.select(null);
+        this.invoiceGrid.getDataProvider().refreshAll();
     }
 
     private void clear() {
