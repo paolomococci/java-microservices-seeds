@@ -19,6 +19,8 @@
 package local.example.seed.view.editor;
 
 import com.vaadin.flow.component.AbstractField;
+import com.vaadin.flow.component.Key;
+import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
@@ -30,6 +32,7 @@ import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.binder.ValidationException;
+import com.vaadin.flow.data.value.ValueChangeMode;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.CustomerRestfulReactiveController;
@@ -143,6 +146,17 @@ public class CustomerReactiveEditorView
 
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
+
+        TextField filterEmailField = new TextField();
+        filterEmailField.setPlaceholder("filter by email");
+        filterEmailField.setClearButtonVisible(true);
+        filterEmailField.setValueChangeMode(ValueChangeMode.LAZY);
+        filterEmailField.addFocusShortcut(
+                Key.KEY_F, KeyModifier.ALT
+        );
+        filterEmailField.addValueChangeListener(
+                listener -> this.showCustomerList(listener.getValue())
+        );
 
         // TODO grid
 
