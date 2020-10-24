@@ -257,7 +257,9 @@ public class ItemReactiveEditorView
     }
 
     private void clear() {
-
+        this.populate(
+                new Item("", "", "", Double.NaN, null)
+        );
     }
 
     private void populate(Item item) {
