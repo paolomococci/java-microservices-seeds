@@ -21,7 +21,9 @@ package local.example.seed.view.editor;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
@@ -59,7 +61,19 @@ public class InvoiceReactiveEditorView
 
         this.invoiceRestfulReactiveController = new InvoiceRestfulReactiveController();
 
-        this.invoiceGrid = new Grid<>(Invoice.class);
+        this.invoiceGrid = new Grid<>();
+        this.invoiceGrid.setItems(
+                this.invoiceRestfulReactiveController.readAll()
+        );
+        this.invoiceGrid.addColumn(Invoice::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.invoiceGrid.addColumn(Invoice::getDate).setHeader("date").setSortable(true);
+        this.invoiceGrid.addColumn(Invoice::getTotal).setHeader("total").setSortable(true);
+        this.invoiceGrid.addThemeVariants(
+                GridVariant.LUMO_NO_BORDER,
+                GridVariant.LUMO_NO_ROW_BORDERS,
+                GridVariant.LUMO_ROW_STRIPES
+        );
+        
         this.invoiceBinder = new Binder<>(Invoice.class);
         this.invoiceBinder.bindInstanceFields(this);
 
