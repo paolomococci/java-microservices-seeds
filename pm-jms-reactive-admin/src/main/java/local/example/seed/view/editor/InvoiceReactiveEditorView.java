@@ -36,6 +36,9 @@ import local.example.seed.field.DateField;
 import local.example.seed.field.TotalField;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
+import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @PageTitle(value = "invoice reactive editor")
 @Route(value = "invoice-reactive-editor", layout = MainLayout.class)
@@ -73,7 +76,22 @@ public class InvoiceReactiveEditorView
                 GridVariant.LUMO_NO_ROW_BORDERS,
                 GridVariant.LUMO_ROW_STRIPES
         );
-        
+        this.invoiceGrid.asSingleSelect().addValueChangeListener(listener -> {
+            if (listener.getValue() != null) {
+                Optional<Mono<Invoice>> invoiceFromBackend = Optional.ofNullable(
+                        this.invoiceRestfulReactiveController.read(
+                                listener.getValue().get_links().getSelf().getHref()
+                        ));
+                if (invoiceFromBackend.isPresent()) {
+                    this.populate(invoiceFromBackend.get().block());
+                } else {
+                    this.refresh();
+                }
+            } else {
+                this.clear();
+            }
+        });
+
         this.invoiceBinder = new Binder<>(Invoice.class);
         this.invoiceBinder.bindInstanceFields(this);
 
