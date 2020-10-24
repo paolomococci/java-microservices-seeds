@@ -53,20 +53,20 @@ import java.util.Optional;
 public class InvoiceReactiveEditorView
         extends Main {
 
-    private Grid<Invoice> invoiceGrid;
-    private Binder<Invoice> invoiceBinder;
+    private final Grid<Invoice> invoiceGrid;
+    private final Binder<Invoice> invoiceBinder;
 
     private Invoice invoice;
-    private InvoiceRestfulReactiveController invoiceRestfulReactiveController;
+    private final InvoiceRestfulReactiveController invoiceRestfulReactiveController;
 
     private TextField code;
     private DateField date;
     private TotalField total;
 
-    private Button cancel;
-    private Button update;
-    private Button create;
-    private Button delete;
+    private final Button cancel;
+    private final Button update;
+    private final Button create;
+    private final Button delete;
 
     public InvoiceReactiveEditorView() {
 
