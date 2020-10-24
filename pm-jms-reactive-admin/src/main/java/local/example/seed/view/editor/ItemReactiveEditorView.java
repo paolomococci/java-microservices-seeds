@@ -26,9 +26,11 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.ItemRestfulReactiveController;
@@ -103,8 +105,27 @@ public class ItemReactiveEditorView
             this.clear();
             this.refresh();
         });
-        
+
         this.update = new Button("update");
+        this.update.addClickListener(listener -> {
+            try {
+                if (this.item != null) {
+                    this.itemBinder.writeBean(this.item);
+                    this.itemRestfulReactiveController.update(
+                            this.item,
+                            this.item.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("item details have been updated");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the item details have not been updated");
+                validationException.printStackTrace();
+            }
+        });
+        
         this.create = new Button("create");
         this.delete = new Button("delete");
 
