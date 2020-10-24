@@ -253,7 +253,8 @@ public class CustomerReactiveEditorView
     }
 
     private void refresh() {
-
+        this.customerGrid.select(null);
+        this.customerGrid.getDataProvider().refreshAll();
     }
 
     private void clear() {
