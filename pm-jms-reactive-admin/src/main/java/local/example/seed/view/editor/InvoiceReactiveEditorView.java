@@ -210,7 +210,10 @@ public class InvoiceReactiveEditorView
     private void createGridLayout(
             SplitLayout splitLayout
     ) {
-
+        Div divWrapper = new Div();
+        divWrapper.setWidthFull();
+        splitLayout.addToPrimary(divWrapper);
+        divWrapper.add(this.invoiceGrid);
     }
 
     private void addFormItem(
