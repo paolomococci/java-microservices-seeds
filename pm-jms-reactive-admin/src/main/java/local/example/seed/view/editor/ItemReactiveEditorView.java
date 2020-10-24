@@ -21,7 +21,9 @@ package local.example.seed.view.editor;
 import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
@@ -59,8 +61,20 @@ public class ItemReactiveEditorView
 
         this.itemRestfulReactiveController = new ItemRestfulReactiveController();
 
-        this.itemGrid = new Grid<>(Item.class);
-        
+        this.itemGrid = new Grid<>();
+        this.itemGrid.setItems(
+                this.itemRestfulReactiveController.readAll()
+        );
+        this.itemGrid.addColumn(Item::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.itemGrid.addColumn(Item::getName).setHeader("name").setSortable(true);
+        this.itemGrid.addColumn(Item::getDescription).setHeader("description").setSortable(false);
+        this.itemGrid.addColumn(Item::getPrice).setHeader("price").setSortable(true);
+        this.itemGrid.addThemeVariants(
+                GridVariant.LUMO_NO_BORDER,
+                GridVariant.LUMO_NO_ROW_BORDERS,
+                GridVariant.LUMO_ROW_STRIPES
+        );
+
         this.itemBinder = new Binder<>(Item.class);
         this.itemBinder.bindInstanceFields(this);
 
