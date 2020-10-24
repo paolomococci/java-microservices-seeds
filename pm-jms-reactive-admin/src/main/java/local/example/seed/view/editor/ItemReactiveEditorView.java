@@ -99,6 +99,11 @@ public class ItemReactiveEditorView
         this.item = new Item();
 
         this.cancel = new Button("cancel");
+        this.cancel.addClickListener(listener -> {
+            this.clear();
+            this.refresh();
+        });
+        
         this.update = new Button("update");
         this.create = new Button("create");
         this.delete = new Button("delete");
