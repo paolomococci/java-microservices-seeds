@@ -18,9 +18,13 @@
 
 package local.example.seed.view.editor;
 
+import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
@@ -51,6 +55,71 @@ public class CustomerReactiveEditorView
     private Button delete;
 
     public CustomerReactiveEditorView() {
+
+        this.customerGrid = new Grid<>(Customer.class);
+        this.customerBinder = new Binder<>(Customer.class);
+        this.customerBinder.bindInstanceFields(this);
+
+        this.customer = new Customer();
+
+        this.customerRestfulReactiveController = new CustomerRestfulReactiveController();
+
+        this.cancel = new Button("cancel");
+        this.update = new Button("update");
+        this.create = new Button("create");
+        this.delete = new Button("delete");
+
+        SplitLayout splitLayout = new SplitLayout();
+        splitLayout.setSizeFull();
+
+        // TODO grid
+
+        this.createGridLayout(splitLayout);
+        this.createEditorLayout(splitLayout);
+        this.add(splitLayout);
+    }
+
+    private void createEditorLayout(
+            SplitLayout splitLayout
+    ) {
+
+    }
+
+    private void createButtonLayout(
+            Div divEditorLayout
+    ) {
+
+    }
+
+    private void createGridLayout(
+            SplitLayout splitLayout
+    ) {
+
+    }
+
+    private void addFormItem(
+            Div divWrapper,
+            FormLayout formLayout,
+            AbstractField abstractField,
+            String fieldName
+    ) {
+
+    }
+
+    private void refresh() {
+
+    }
+
+    private void clear() {
+
+    }
+
+    private void populate(Customer customer) {
+
+    }
+
+    private void reload() {
+
     }
 
     private void showCustomerList(String email) {
