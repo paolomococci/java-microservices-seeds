@@ -38,6 +38,7 @@ import local.example.seed.field.DateField;
 import local.example.seed.field.TotalField;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
+import local.example.seed.model.util.Link;
 import reactor.core.publisher.Mono;
 
 import java.util.Optional;
@@ -124,8 +125,33 @@ public class InvoiceReactiveEditorView
                 validationException.printStackTrace();
             }
         });
-        
+
         this.create = new Button("create");
+        this.create.addClickListener(listener -> {
+            try {
+                if (!this.code.getValue().isEmpty()) {
+                    this.invoice = new Invoice(
+                            this.code.getValue(),
+                            this.date.getValue(),
+                            this.total.getValue(),
+                            "",
+                            new Link()
+                    );
+                    this.invoiceBinder.writeBean(this.invoice);
+                    this.invoiceRestfulReactiveController.create(
+                            this.invoice
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("new invoice's details have been created");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the invoice details have not been created");
+                validationException.printStackTrace();
+            }
+        });
+        
         this.delete = new Button("delete");
 
         SplitLayout splitLayout = new SplitLayout();
