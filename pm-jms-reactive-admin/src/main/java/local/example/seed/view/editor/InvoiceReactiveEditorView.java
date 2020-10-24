@@ -18,101 +18,43 @@
 
 package local.example.seed.view.editor;
 
-import com.vaadin.flow.component.Key;
-import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
-import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Main;
-import com.vaadin.flow.component.icon.VaadinIcon;
-import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.textfield.TextField;
-import com.vaadin.flow.data.value.ValueChangeMode;
+import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.InvoiceRestfulReactiveController;
-import local.example.seed.form.InvoiceEditorReactiveForm;
+import local.example.seed.field.DateField;
+import local.example.seed.field.TotalField;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @PageTitle(value = "invoice reactive editor")
 @Route(value = "invoice-reactive-editor", layout = MainLayout.class)
 public class InvoiceReactiveEditorView
         extends Main {
 
-    private final Grid<Invoice> invoiceGrid;
-    private final InvoiceEditorReactiveForm invoiceEditorReactiveForm;
-    private final InvoiceRestfulReactiveController invoiceRestfulReactiveController;
-    private final TextField filterCodeField;
-    private final Button addInvoice;
-    private final HorizontalLayout tools;
+    private Grid<Invoice> invoiceGrid;
+    private Binder<Invoice> invoiceBinder;
 
-    @Autowired
-    public InvoiceReactiveEditorView(
-            InvoiceEditorReactiveForm invoiceEditorReactiveForm,
-            InvoiceRestfulReactiveController invoiceRestfulReactiveController
-    ) {
-        super();
+    private Invoice invoice;
+    private InvoiceRestfulReactiveController invoiceRestfulReactiveController;
 
-        this.invoiceEditorReactiveForm = invoiceEditorReactiveForm;
-        this.invoiceRestfulReactiveController = invoiceRestfulReactiveController;
+    private TextField code;
+    private DateField date;
+    private TotalField total;
 
-        this.invoiceGrid = new Grid<>();
-        this.invoiceGrid.addColumn(invoice -> invoice.getCode()).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
-        this.invoiceGrid.addColumn(invoice -> invoice.getDate()).setHeader("date").setSortable(true);
-        this.invoiceGrid.addColumn(invoice -> invoice.getTotal()).setHeader("total").setSortable(true);
+    private Button cancel;
+    private Button update;
+    private Button create;
+    private Button delete;
 
-        this.invoiceGrid.asSingleSelect().addValueChangeListener(
-                listener -> {
-                    this.invoiceEditorReactiveForm.editInvoice(listener.getValue());
-                }
-        );
-
-        this.filterCodeField = new TextField();
-        this.filterCodeField.setPlaceholder("filter by code");
-        this.filterCodeField.setClearButtonVisible(true);
-        this.filterCodeField.setValueChangeMode(ValueChangeMode.LAZY);
-        this.filterCodeField.addFocusShortcut(
-                Key.KEY_F, KeyModifier.ALT
-        );
-        this.filterCodeField.addValueChangeListener(
-                listener -> {
-                    this.showInvoiceList(listener.getValue());
-                }
-        );
-
-        this.addInvoice = new Button("add invoice", VaadinIcon.PLUS_CIRCLE_O.create());
-        this.addInvoice.addClickListener(
-                listener -> {
-                    this.invoiceGrid.asSingleSelect().clear();
-                    this.invoiceEditorReactiveForm.editInvoice(new Invoice());
-                }
-        );
-        this.addInvoice.addClickShortcut(Key.NUMPAD_ADD, KeyModifier.CONTROL);
-
-        this.tools = new HorizontalLayout(this.addInvoice);
-
-        this.add(this.invoiceGrid, this.tools, this.invoiceEditorReactiveForm);
-
-        this.invoiceEditorReactiveForm.setInvoiceChangeHandler(
-                () -> {
-                    this.invoiceEditorReactiveForm.setVisible(false);
-                }
-        );
-
-        this.showInvoiceList("");
+    public InvoiceReactiveEditorView() {
+            // TODO
     }
 
     private void showInvoiceList(String code) {
-        if (code.isEmpty() || code.isBlank()) {
-            this.invoiceGrid.setItems(
-                    this.invoiceRestfulReactiveController.collectionOfAllInvoices()
-            );
-        } else {
-            this.invoiceGrid.setItems(
-                    this.invoiceRestfulReactiveController.findByCode(code)
-            );
-        }
-    }
+            // TODO
 }
