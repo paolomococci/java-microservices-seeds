@@ -269,7 +269,7 @@ public class ItemReactiveEditorView
     }
 
     private void reload() {
-
+        this.itemGrid.setItems(itemRestfulReactiveController.readAll());
     }
 
     private void showItemList(String code) {
