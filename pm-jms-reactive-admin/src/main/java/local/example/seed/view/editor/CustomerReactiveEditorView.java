@@ -52,20 +52,20 @@ import java.util.Optional;
 public class CustomerReactiveEditorView
         extends Main {
 
-    private Grid<Customer> customerGrid;
-    private Binder<Customer> customerBinder;
+    private final Grid<Customer> customerGrid;
+    private final Binder<Customer> customerBinder;
 
     private Customer customer;
-    private CustomerRestfulReactiveController customerRestfulReactiveController;
+    private final CustomerRestfulReactiveController customerRestfulReactiveController;
 
     private TextField name;
     private TextField surname;
     private EmailField email;
 
-    private Button cancel;
-    private Button update;
-    private Button create;
-    private Button delete;
+    private final Button cancel;
+    private final Button update;
+    private final Button create;
+    private final Button delete;
 
     public CustomerReactiveEditorView() {
 
