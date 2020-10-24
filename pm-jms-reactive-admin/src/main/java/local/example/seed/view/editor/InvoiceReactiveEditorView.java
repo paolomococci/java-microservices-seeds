@@ -26,9 +26,11 @@ import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.InvoiceRestfulReactiveController;
@@ -102,8 +104,27 @@ public class InvoiceReactiveEditorView
             this.clear();
             this.refresh();
         });
-        
+
         this.update = new Button("update");
+        this.update.addClickListener(listener -> {
+            try {
+                if (this.invoice != null) {
+                    this.invoiceBinder.writeBean(this.invoice);
+                    this.invoiceRestfulReactiveController.update(
+                            this.invoice,
+                            this.invoice.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("invoice details have been updated");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the invoice details have not been updated");
+                validationException.printStackTrace();
+            }
+        });
+        
         this.create = new Button("create");
         this.delete = new Button("delete");
 
