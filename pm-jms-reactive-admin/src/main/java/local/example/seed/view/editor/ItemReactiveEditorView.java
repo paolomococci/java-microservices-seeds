@@ -152,8 +152,25 @@ public class ItemReactiveEditorView
                 validationException.printStackTrace();
             }
         });
-        
+
         this.delete = new Button("delete");
+        this.delete.addClickListener(listener -> {
+            try {
+                if (this.item != null) {
+                    this.itemBinder.writeBean(this.item);
+                    this.itemRestfulReactiveController.delete(
+                            this.item.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("the selected item has been deleted");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the selected item has not been deleted");
+                validationException.printStackTrace();
+            }
+        });
 
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
