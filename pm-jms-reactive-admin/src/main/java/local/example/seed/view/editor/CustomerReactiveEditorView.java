@@ -24,10 +24,12 @@ import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
+import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.data.binder.ValidationException;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
 import local.example.seed.controller.CustomerRestfulReactiveController;
@@ -69,8 +71,27 @@ public class CustomerReactiveEditorView
             this.clear();
             this.refresh();
         });
-        
+
         this.update = new Button("update");
+        this.update.addClickListener(listener -> {
+            try {
+                if (this.customer != null) {
+                    this.customerBinder.writeBean(this.customer);
+                    this.customerRestfulReactiveController.update(
+                            this.customer,
+                            this.customer.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("customer details have been updated");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the customer details have not been updated");
+                validationException.printStackTrace();
+            }
+        });
+        
         this.create = new Button("create");
         this.delete = new Button("delete");
 
