@@ -22,6 +22,7 @@ import com.vaadin.flow.component.AbstractField;
 import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.button.ButtonVariant;
 import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
@@ -29,6 +30,7 @@ import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.splitlayout.SplitLayout;
 import com.vaadin.flow.component.textfield.TextField;
 import com.vaadin.flow.data.binder.Binder;
@@ -215,7 +217,19 @@ public class ItemReactiveEditorView
     private void createButtonLayout(
             Div divEditorLayout
     ) {
-
+        HorizontalLayout buttonHorizontalLayout = new HorizontalLayout();
+        buttonHorizontalLayout.setWidthFull();
+        buttonHorizontalLayout.setSpacing(true);
+        this.cancel.addThemeVariants(ButtonVariant.LUMO_TERTIARY);
+        this.update.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.create.addThemeVariants(ButtonVariant.LUMO_CONTRAST);
+        this.delete.addThemeVariants(ButtonVariant.LUMO_ERROR);
+        buttonHorizontalLayout.add(
+                this.cancel, this.update, this.create, this.delete
+        );
+        buttonHorizontalLayout.setSpacing(true);
+        buttonHorizontalLayout.setMargin(true);
+        divEditorLayout.add(buttonHorizontalLayout);
     }
 
     private void createGridLayout(
