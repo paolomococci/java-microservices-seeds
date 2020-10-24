@@ -211,7 +211,10 @@ public class ItemReactiveEditorView
     private void createGridLayout(
             SplitLayout splitLayout
     ) {
-
+        Div divWrapper = new Div();
+        divWrapper.setWidthFull();
+        splitLayout.addToPrimary(divWrapper);
+        divWrapper.add(this.itemGrid);
     }
 
     private void addFormItem(
