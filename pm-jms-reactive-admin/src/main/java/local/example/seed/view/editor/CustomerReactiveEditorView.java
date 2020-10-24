@@ -267,7 +267,7 @@ public class CustomerReactiveEditorView
     }
 
     private void reload() {
-
+        this.customerGrid.setItems(customerRestfulReactiveController.readAll());
     }
 
     private void showCustomerList(String email) {
