@@ -121,8 +121,25 @@ public class CustomerReactiveEditorView
                 validationException.printStackTrace();
             }
         });
-        
+
         this.delete = new Button("delete");
+        this.delete.addClickListener(listener -> {
+            try {
+                if (this.customer != null) {
+                    this.customerBinder.writeBean(this.customer);
+                    this.customerRestfulReactiveController.delete(
+                            this.customer.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("the selected customer has been deleted");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the selected customer has not been deleted");
+                validationException.printStackTrace();
+            }
+        });
 
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
