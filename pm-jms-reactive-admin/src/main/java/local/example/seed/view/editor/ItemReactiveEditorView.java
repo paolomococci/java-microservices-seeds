@@ -37,6 +37,7 @@ import local.example.seed.controller.ItemRestfulReactiveController;
 import local.example.seed.field.PriceField;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
+import local.example.seed.model.util.Link;
 import reactor.core.publisher.Mono;
 
 import java.util.Optional;
@@ -125,8 +126,33 @@ public class ItemReactiveEditorView
                 validationException.printStackTrace();
             }
         });
-        
+
         this.create = new Button("create");
+        this.create.addClickListener(listener -> {
+            try {
+                if (!this.code.getValue().isEmpty()) {
+                    this.item = new Item(
+                            this.code.getValue(),
+                            this.name.getValue(),
+                            this.description.getValue(),
+                            this.price.getValue(),
+                            new Link()
+                    );
+                    this.itemBinder.writeBean(this.item);
+                    this.itemRestfulReactiveController.create(
+                            this.item
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("new item's details have been created");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the item details have not been created");
+                validationException.printStackTrace();
+            }
+        });
+        
         this.delete = new Button("delete");
 
         SplitLayout splitLayout = new SplitLayout();
