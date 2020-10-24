@@ -96,7 +96,7 @@ public class CustomerReactiveEditorView
                 this.clear();
             }
         });
-        
+
         this.customerBinder = new Binder<>(Customer.class);
         this.customerBinder.bindInstanceFields(this);
 
@@ -212,7 +212,10 @@ public class CustomerReactiveEditorView
     private void createGridLayout(
             SplitLayout splitLayout
     ) {
-
+        Div divWrapper = new Div();
+        divWrapper.setWidthFull();
+        splitLayout.addToPrimary(divWrapper);
+        divWrapper.add(this.customerGrid);
     }
 
     private void addFormItem(
