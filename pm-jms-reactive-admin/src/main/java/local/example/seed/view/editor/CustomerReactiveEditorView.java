@@ -158,7 +158,7 @@ public class CustomerReactiveEditorView
                 listener -> this.showCustomerList(listener.getValue())
         );
 
-        // TODO grid
+        this.showCustomerList("");
 
         this.createGridLayout(splitLayout);
         this.createEditorLayout(splitLayout);
