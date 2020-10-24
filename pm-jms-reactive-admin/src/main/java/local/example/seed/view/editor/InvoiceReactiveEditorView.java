@@ -57,13 +57,13 @@ public class InvoiceReactiveEditorView
 
     public InvoiceReactiveEditorView() {
 
+        this.invoiceRestfulReactiveController = new InvoiceRestfulReactiveController();
+
         this.invoiceGrid = new Grid<>(Invoice.class);
         this.invoiceBinder = new Binder<>(Invoice.class);
         this.invoiceBinder.bindInstanceFields(this);
 
         this.invoice = new Invoice();
-
-        this.invoiceRestfulReactiveController = new InvoiceRestfulReactiveController();
 
         this.cancel = new Button("cancel");
         this.update = new Button("update");
@@ -72,8 +72,6 @@ public class InvoiceReactiveEditorView
 
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
-
-        // TODO grid
 
         this.createGridLayout(splitLayout);
         this.createEditorLayout(splitLayout);
