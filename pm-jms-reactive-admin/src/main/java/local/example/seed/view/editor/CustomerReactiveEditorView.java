@@ -35,6 +35,7 @@ import com.vaadin.flow.router.Route;
 import local.example.seed.controller.CustomerRestfulReactiveController;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
+import local.example.seed.model.util.Link;
 
 @PageTitle(value = "customer reactive editor")
 @Route(value = "customer-reactive-editor", layout = MainLayout.class)
@@ -91,8 +92,36 @@ public class CustomerReactiveEditorView
                 validationException.printStackTrace();
             }
         });
-        
+
         this.create = new Button("create");
+        this.create.addClickListener(listener -> {
+            try {
+                if (
+                        !this.name.getValue().isEmpty() &
+                                !this.surname.getValue().isEmpty() &
+                                !this.email.getValue().isEmpty()
+                ) {
+                    this.customer = new Customer(
+                            this.name.getValue(),
+                            this.surname.getValue(),
+                            this.email.getValue(),
+                            new Link()
+                    );
+                    this.customerBinder.writeBean(this.customer);
+                    this.customerRestfulReactiveController.create(
+                            this.customer
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("new customer's details have been created");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the customer details have not been created");
+                validationException.printStackTrace();
+            }
+        });
+        
         this.delete = new Button("delete");
 
         SplitLayout splitLayout = new SplitLayout();
