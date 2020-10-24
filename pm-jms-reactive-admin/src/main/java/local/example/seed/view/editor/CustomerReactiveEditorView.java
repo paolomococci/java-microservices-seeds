@@ -258,7 +258,7 @@ public class CustomerReactiveEditorView
     }
 
     private void clear() {
-
+        this.populate(null);
     }
 
     private void populate(Customer customer) {
