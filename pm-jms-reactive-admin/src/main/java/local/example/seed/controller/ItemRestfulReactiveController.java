@@ -22,6 +22,8 @@ import io.netty.channel.ChannelOption;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Item;
+import local.example.seed.response.ItemResponse;
+import org.springframework.hateoas.MediaTypes;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -33,9 +35,11 @@ import reactor.core.publisher.Mono;
 import reactor.netty.http.client.HttpClient;
 import reactor.netty.tcp.TcpClient;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
@@ -64,66 +68,102 @@ public class ItemRestfulReactiveController {
 
     public void create(Item item)
             throws WebClientResponseException {
-        this.webClient.post()
-                .body(
-                        Mono.justOrEmpty(item),
-                        Item.class
-                );
-    }
-
-    public Item read(String id)
-            throws WebClientResponseException {
-        return this.webClient.get()
-                .uri("/"+id)
+        this.webClient
+                .post()
+                .uri(ITEM_REACTIVE_BASE_URI)
+                .body(Mono.just(item), Item.class)
+                .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        HttpStatus.NOT_FOUND::equals,
+                        httpStatus -> !HttpStatus.CREATED.equals(httpStatus),
                         clientResponse -> Mono.empty()
                 )
-                .bodyToMono(Item.class)
+                .bodyToMono(Void.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    System.out.println(timestamp +
+                            " ERROR: --- Connection refused occurred during a request create item, probably the host is down! ---\n" +
+                            item.toString());
+                })
                 .block();
     }
 
-    public List<Item> readAll()
+    public Mono<Item> read(String uri)
             throws WebClientResponseException {
-        List<Item> listOfItems = new ArrayList<>();
-        Flux<Item> fluxOfItems = this.webClient.get()
+        return this.webClient
+                .get()
+                .uri(uri)
+                .accept(MediaTypes.HAL_JSON)
                 .retrieve()
-                .bodyToFlux(Item.class);
-        Iterable<Item> fluxOfItemsIterable = fluxOfItems.toIterable();
-        for (Item item:fluxOfItemsIterable) {
-            listOfItems.add(item);
-        }
-        return listOfItems;
+                .onStatus(
+                        HttpStatus.NOT_FOUND::equals,
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- item not found, an error occurred during a request to the item's uri: %s ---",
+                                    uri
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToMono(Item.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the item's uri: %s, probably the host is down! ---",
+                            uri
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
+                .onErrorResume(exception -> Mono.empty());
+    }
+
+    public List<Item> readAll() {
+        return Objects.requireNonNull(this.getResponseFlux(
+                Objects.requireNonNull(
+                        this.getResponseFlux(0).blockFirst()).getPage().getTotalElements()
+        ).blockFirst()).get_embedded().getItems();
     }
 
     public Collection<Item> collectionOfAllItems() {
-        Collection<Item> collectionOfItems = new ArrayList<>();
-        List<Item> items = this.readAll();
-        for (Item item:items) {
-            collectionOfItems.add(item);
-        }
-        return collectionOfItems;
+        return new ArrayList<>(this.readAll());
     }
 
     public Stream<Item> streamOfAllItems() {
         return this.readAll().stream();
     }
 
-    public Item findByCode(String code)
+    public void update(Item item, String uri)
             throws WebClientResponseException {
-        // TODO
-        return null;
-    }
-
-    public void update(Item item, String id)
-            throws WebClientResponseException {
-        this.webClient.put()
-                .uri("/"+id)
-                .body(
-                        Mono.justOrEmpty(item),
-                        Item.class
-                );
+        this.webClient
+                .put()
+                .uri(uri)
+                .body(Mono.just(item), Item.class)
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .onStatus(
+                        HttpStatus.NOT_FOUND::equals,
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- item not found, an error occurred during a request to the item's uri: %s ---",
+                                    uri
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToMono(Void.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the item's uri: %s, probably the host is down! ---",
+                            uri
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
+                .block();
     }
 
     public void partialUpdate(Item item, String id)
@@ -136,8 +176,93 @@ public class ItemRestfulReactiveController {
                 );
     }
 
-    public void delete(String id)
+    public void delete(String uri)
             throws WebClientResponseException {
-        this.webClient.delete().uri("/"+id);
+        this.webClient
+                .delete()
+                .uri(uri)
+                .retrieve()
+                .onStatus(
+                        HttpStatus.NOT_FOUND::equals,
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- item not found, an error occurred during a request to the item's uri: %s ---",
+                                    uri
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToMono(Void.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the item's uri: %s, probably the host is down! ---",
+                            uri
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
+                .block();
+    }
+
+    public Mono<Item> findByCode(String code)
+            throws WebClientResponseException {
+        return this.webClient
+                .get()
+                .uri("http://127.0.0.1:8082/api/restful/items/search/findByCode?code={code}", code)
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .onStatus(
+                        HttpStatus.NOT_FOUND::equals,
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- item not found, an error occurred during a search request for the item's code: %s ---",
+                                    code
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToMono(Item.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a search request for the item's code: %s, probably the host is down! ---",
+                            code
+                    );
+                    System.out.println(timestamp + errorMessage);
+                })
+                .onErrorResume(exception -> Mono.empty());
+    }
+
+    private Flux<ItemResponse> getResponseFlux(int size)
+            throws WebClientResponseException {
+        return this.webClient.get()
+                .uri(ITEM_REACTIVE_BASE_URI+"?page=0&size={size}", size)
+                .accept(MediaTypes.HAL_JSON)
+                .retrieve()
+                .onStatus(
+                        HttpStatus.NOT_FOUND::equals,
+                        clientResponse -> {
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                            String errorMessage = String.format(
+                                    " HTTP status error: 404 --- items not found, an error occurred during a request to the items url: %s ---",
+                                    ITEM_REACTIVE_BASE_URI
+                            );
+                            System.out.println(timestamp + errorMessage);
+                            return Mono.empty();
+                        }
+                )
+                .bodyToFlux(ItemResponse.class)
+                .doOnError(exception -> {
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    String errorMessage = String.format(
+                            " ERROR: --- Connection refused, an error occurred during a request to the items url: %s, probably the host is down! ---",
+                            ITEM_REACTIVE_BASE_URI
+                    );
+                    System.out.println(timestamp + errorMessage);
+                });
     }
 }
