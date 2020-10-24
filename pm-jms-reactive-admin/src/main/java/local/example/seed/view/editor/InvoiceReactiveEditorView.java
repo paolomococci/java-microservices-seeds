@@ -198,7 +198,16 @@ public class InvoiceReactiveEditorView
     private void createEditorLayout(
             SplitLayout splitLayout
     ) {
-
+        Div divEditorLayout = new Div();
+        Div divEditor = new Div();
+        divEditorLayout.add(divEditor);
+        FormLayout formLayout = new FormLayout();
+        this.code.setAutofocus(true);
+        addFormItem(divEditor, formLayout, this.code, "code");
+        addFormItem(divEditor, formLayout, this.date, "date");
+        addFormItem(divEditor, formLayout, this.total, "total");
+        createButtonLayout(divEditorLayout);
+        splitLayout.addToSecondary(divEditorLayout);
     }
 
     private void createButtonLayout(
