@@ -274,7 +274,7 @@ public class InvoiceReactiveEditorView
     }
 
     private void reload() {
-
+        this.invoiceGrid.setItems(invoiceRestfulReactiveController.readAll());
     }
 
     private void showInvoiceList(String code) {
