@@ -90,7 +90,7 @@ public class CustomerReactiveEditorView
                                 listener.getValue().get_links().getSelf().getHref()
                         ));
                 if (customerFromBackend.isPresent()) {
-                    // TODO
+                    this.populate(customerFromBackend.get().block());
                 } else {
                     this.refresh();
                 }
