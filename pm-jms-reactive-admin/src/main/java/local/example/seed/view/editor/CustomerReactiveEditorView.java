@@ -262,7 +262,8 @@ public class CustomerReactiveEditorView
     }
 
     private void populate(Customer customer) {
-
+        this.customer = customer;
+        this.customerBinder.readBean(this.customer);
     }
 
     private void reload() {
