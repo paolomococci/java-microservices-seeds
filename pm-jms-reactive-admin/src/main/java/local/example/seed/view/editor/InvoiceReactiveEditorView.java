@@ -255,7 +255,15 @@ public class InvoiceReactiveEditorView
     }
 
     private void clear() {
-
+        this.populate(
+                new Invoice(
+                        "", 
+                        "", 
+                        Double.NaN, 
+                        "", 
+                        null
+                )
+        );
     }
 
     private void populate(Invoice invoice) {
