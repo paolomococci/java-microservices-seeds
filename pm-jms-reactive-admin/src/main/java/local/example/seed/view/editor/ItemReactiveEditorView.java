@@ -263,7 +263,9 @@ public class ItemReactiveEditorView
     }
 
     private void populate(Item item) {
-
+        this.item = item;
+        this.itemBinder.readBean(this.item);
+        this.price.setValue(this.item.getPrice());
     }
 
     private void reload() {
