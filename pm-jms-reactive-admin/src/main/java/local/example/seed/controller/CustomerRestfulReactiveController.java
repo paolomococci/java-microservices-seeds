@@ -96,7 +96,7 @@ public class CustomerRestfulReactiveController {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -119,7 +119,7 @@ public class CustomerRestfulReactiveController {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    public List<Customer> readAll(){
+    public List<Customer> readAll() {
         return Objects.requireNonNull(this.getResponseFlux(
                 Objects.requireNonNull(
                         this.getResponseFlux(0).blockFirst()).getPage().getTotalElements()
@@ -143,7 +143,7 @@ public class CustomerRestfulReactiveController {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -173,7 +173,7 @@ public class CustomerRestfulReactiveController {
                 .uri(uri)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -204,7 +204,7 @@ public class CustomerRestfulReactiveController {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
@@ -234,12 +234,12 @@ public class CustomerRestfulReactiveController {
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
-                        httpStatus -> HttpStatus.NOT_FOUND.equals(httpStatus),
+                        HttpStatus.NOT_FOUND::equals,
                         clientResponse -> {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
-                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customers uri: %s ---",
-                                    CUSTOMER_REACTIVE_BASE_URI.toString()
+                                    " HTTP status error: 404 --- customer not found, an error occurred during a request to the customers url: %s ---",
+                                    CUSTOMER_REACTIVE_BASE_URI
                             );
                             System.out.println(timestamp + errorMessage);
                             return Mono.empty();
@@ -249,8 +249,8 @@ public class CustomerRestfulReactiveController {
                 .doOnError(exception -> {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
-                            " ERROR: --- Connection refused, an error occurred during a request to the customers uri: %s, probably the host is down! ---",
-                            CUSTOMER_REACTIVE_BASE_URI.toString()
+                            " ERROR: --- Connection refused, an error occurred during a request to the customers url: %s, probably the host is down! ---",
+                            CUSTOMER_REACTIVE_BASE_URI
                     );
                     System.out.println(timestamp + errorMessage);
                 });
