@@ -23,7 +23,9 @@ import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyModifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.grid.ColumnTextAlign;
 import com.vaadin.flow.component.grid.Grid;
+import com.vaadin.flow.component.grid.GridVariant;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.html.Main;
 import com.vaadin.flow.component.notification.Notification;
@@ -39,6 +41,9 @@ import local.example.seed.controller.CustomerRestfulReactiveController;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
 import local.example.seed.model.util.Link;
+import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @PageTitle(value = "customer reactive editor")
 @Route(value = "customer-reactive-editor", layout = MainLayout.class)
@@ -62,13 +67,40 @@ public class CustomerReactiveEditorView
 
     public CustomerReactiveEditorView() {
 
-        this.customerGrid = new Grid<>(Customer.class);
+        this.customerRestfulReactiveController = new CustomerRestfulReactiveController();
+
+        this.customerGrid = new Grid<>();
+        this.customerGrid.setItems(
+                this.customerRestfulReactiveController.readAll()
+        );
+        this.customerGrid.addColumn(Customer::getName).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
+        this.customerGrid.addColumn(Customer::getSurname).setHeader("surname").setSortable(true);
+        this.customerGrid.addColumn(Customer::getEmail).setHeader("email").setSortable(true);
+        this.customerGrid.addThemeVariants(
+                GridVariant.LUMO_NO_BORDER,
+                GridVariant.LUMO_NO_ROW_BORDERS,
+                GridVariant.LUMO_ROW_STRIPES
+        );
+        this.customerGrid.asSingleSelect().addValueChangeListener(listener -> {
+            if (listener.getValue() != null) {
+                Optional<Mono<Customer>> customerFromBackend = Optional.ofNullable(
+                        this.customerRestfulReactiveController.read(
+                                listener.getValue().get_links().getSelf().getHref()
+                        ));
+                if (customerFromBackend.isPresent()) {
+                    // TODO
+                } else {
+                    this.refresh();
+                }
+            } else {
+                this.clear();
+            }
+        });
+        
         this.customerBinder = new Binder<>(Customer.class);
         this.customerBinder.bindInstanceFields(this);
 
         this.customer = new Customer();
-
-        this.customerRestfulReactiveController = new CustomerRestfulReactiveController();
 
         this.cancel = new Button("cancel");
         this.cancel.addClickListener(listener -> {
