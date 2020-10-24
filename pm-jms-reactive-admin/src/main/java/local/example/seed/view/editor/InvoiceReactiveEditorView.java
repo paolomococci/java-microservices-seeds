@@ -188,6 +188,8 @@ public class InvoiceReactiveEditorView
                 listener -> this.showInvoiceList(listener.getValue())
         );
 
+        this.showInvoiceList("");
+
         this.createGridLayout(splitLayout);
         this.createEditorLayout(splitLayout);
         this.add(splitLayout);
