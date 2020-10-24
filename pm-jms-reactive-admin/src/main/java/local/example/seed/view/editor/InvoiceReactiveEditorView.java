@@ -151,8 +151,25 @@ public class InvoiceReactiveEditorView
                 validationException.printStackTrace();
             }
         });
-        
+
         this.delete = new Button("delete");
+        this.delete.addClickListener(listener -> {
+            try {
+                if (this.invoice != null) {
+                    this.invoiceBinder.writeBean(this.invoice);
+                    this.invoiceRestfulReactiveController.delete(
+                            this.invoice.get_links().getSelf().getHref()
+                    );
+                    this.clear();
+                    this.refresh();
+                    this.reload();
+                    Notification.show("the selected invoice has been deleted");
+                }
+            } catch (ValidationException validationException) {
+                Notification.show("sorry, the selected invoice has not been deleted");
+                validationException.printStackTrace();
+            }
+        });
 
         SplitLayout splitLayout = new SplitLayout();
         splitLayout.setSizeFull();
