@@ -43,6 +43,7 @@ import local.example.seed.controller.CustomerRestfulReactiveController;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Customer;
 import local.example.seed.model.util.Link;
+import local.example.seed.service.CustomerRestfulRetrieverService;
 import reactor.core.publisher.Mono;
 
 import java.util.Optional;
@@ -79,7 +80,7 @@ public class CustomerReactiveEditorView
 
         this.customerGrid = new Grid<>();
         this.customerGrid.setItems(
-                this.customerRestfulReactiveController.collectionOfAllCustomers()
+                CustomerRestfulRetrieverService.getListOfCustomers()
         );
         this.customerGrid.addColumn(Customer::getName).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.customerGrid.addColumn(Customer::getSurname).setHeader("surname").setSortable(true);
@@ -136,8 +137,8 @@ public class CustomerReactiveEditorView
             try {
                 if (
                         !this.name.getValue().isEmpty() &
-                                !this.surname.getValue().isEmpty() &
-                                !this.email.getValue().isEmpty()
+                        !this.surname.getValue().isEmpty() &
+                        !this.email.getValue().isEmpty()
                 ) {
                     this.customer = new Customer(
                             this.name.getValue(),
@@ -268,7 +269,9 @@ public class CustomerReactiveEditorView
     }
 
     private void reload() {
-        this.customerGrid.setItems(customerRestfulReactiveController.readAll());
+        this.customerGrid.setItems(
+                CustomerRestfulRetrieverService.getListOfCustomers()
+        );
     }
 
     private void showCustomerList(String email) {
