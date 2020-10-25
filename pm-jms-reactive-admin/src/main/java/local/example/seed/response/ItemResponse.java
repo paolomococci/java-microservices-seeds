@@ -20,7 +20,6 @@ package local.example.seed.response;
 
 import local.example.seed.embedded.ItemEmbedded;
 import local.example.seed.model.util.Link;
-import local.example.seed.model.util.Page;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,6 +29,4 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ItemResponse {
     ItemEmbedded _embedded;
-    Link _links;
-    Page page;
 }
