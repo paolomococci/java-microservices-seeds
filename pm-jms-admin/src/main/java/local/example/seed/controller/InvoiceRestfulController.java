@@ -26,10 +26,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class InvoiceRestfulController {
 
@@ -62,10 +59,8 @@ public class InvoiceRestfulController {
                 INVOICE_RESTFUL_BASE_URI,
                 InvoiceResponse.class
         );
-        InvoiceEmbedded embedded = responseEntity.getBody().get_embedded();
-        for (Invoice invoice:embedded.getInvoices()) {
-            invoices.add(invoice);
-        }
+        InvoiceEmbedded embedded = Objects.requireNonNull(responseEntity.getBody()).get_embedded();
+        invoices.addAll(embedded.getInvoices());
         return invoices;
     }
 
