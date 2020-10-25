@@ -72,9 +72,14 @@ public class ItemReactiveEditorView
 
         this.itemRestfulReactiveController = new ItemRestfulReactiveController();
 
+        this.itemBinder = new Binder<>(Item.class);
+        this.itemBinder.bindInstanceFields(this);
+
+        this.item = new Item();
+
         this.itemGrid = new Grid<>();
         this.itemGrid.setItems(
-                this.itemRestfulReactiveController.readAll()
+                this.itemRestfulReactiveController.collectionOfAllItems()
         );
         this.itemGrid.addColumn(Item::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.itemGrid.addColumn(Item::getName).setHeader("name").setSortable(true);
@@ -100,11 +105,6 @@ public class ItemReactiveEditorView
                 this.clear();
             }
         });
-
-        this.itemBinder = new Binder<>(Item.class);
-        this.itemBinder.bindInstanceFields(this);
-
-        this.item = new Item();
 
         this.cancel = new Button("cancel");
         this.cancel.addClickListener(listener -> {
