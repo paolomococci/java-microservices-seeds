@@ -31,18 +31,12 @@ import local.example.seed.model.Customer;
 import local.example.seed.service.CustomerRestfulRetrieverService;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 @PageTitle(value = "customer view")
 @Route(value = "customer", layout = MainLayout.class)
 public class CustomerView
         extends Main {
 
-    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8082/api/reactive";
-
     private final Grid<Customer> customerGrid;
-    private final Button retrieveButton;
 
     public CustomerView() {
         super();
@@ -50,18 +44,18 @@ public class CustomerView
         this.customerGrid.addColumn(Customer::getName).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.customerGrid.addColumn(Customer::getSurname).setHeader("surname").setSortable(true);
         this.customerGrid.addColumn(Customer::getEmail).setHeader("email").setSortable(true);
-        this.retrieveButton = new Button(
+        Button retrieveButton = new Button(
                 "recovers all customers",
                 VaadinIcon.ARROW_CIRCLE_DOWN_O.create(),
                 listener -> {
                     try {
-                        this.customerGrid.setItems(CustomerRestfulRetrieverService.getListOfCustomers(new URI(RESTFUL_BASE_URI)));
+                        this.customerGrid.setItems(CustomerRestfulRetrieverService.getListOfCustomers());
                     } catch (
-                            ResponseStatusException | URISyntaxException exception) {
+                            ResponseStatusException exception) {
                         exception.printStackTrace();
                     }
                 });
-        this.retrieveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        this.add(this.retrieveButton, this.customerGrid);
+        retrieveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.add(retrieveButton, this.customerGrid);
     }
 }
