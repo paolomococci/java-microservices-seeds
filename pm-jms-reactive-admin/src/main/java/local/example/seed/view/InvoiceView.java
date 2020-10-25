@@ -31,18 +31,12 @@ import local.example.seed.model.Invoice;
 import local.example.seed.service.InvoiceRestfulRetrieverService;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 @PageTitle(value = "invoice view")
 @Route(value = "invoice", layout = MainLayout.class)
 public class InvoiceView
         extends Main {
 
-    private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8082/api/reactive";
-
     private final Grid<Invoice> invoiceGrid;
-    private final Button retrieveButton;
 
     public InvoiceView() {
         super();
@@ -50,18 +44,18 @@ public class InvoiceView
         this.invoiceGrid.addColumn(Invoice::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.invoiceGrid.addColumn(Invoice::getDate).setHeader("date").setSortable(true);
         this.invoiceGrid.addColumn(Invoice::getTotal).setHeader("total").setSortable(true);
-        this.retrieveButton = new Button(
+        Button retrieveButton = new Button(
                 "recovers all invoices",
                 VaadinIcon.ARROW_CIRCLE_DOWN_O.create(),
                 listener -> {
                     try {
-                        this.invoiceGrid.setItems(InvoiceRestfulRetrieverService.getListOfInvoices(new URI(RESTFUL_BASE_URI)));
+                        this.invoiceGrid.setItems(InvoiceRestfulRetrieverService.getListOfInvoices());
                     } catch (
-                            ResponseStatusException | URISyntaxException exception) {
+                            ResponseStatusException exception) {
                         exception.printStackTrace();
                     }
                 });
-        this.retrieveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        this.add(this.retrieveButton, this.invoiceGrid);
+        retrieveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.add(retrieveButton, this.invoiceGrid);
     }
 }
