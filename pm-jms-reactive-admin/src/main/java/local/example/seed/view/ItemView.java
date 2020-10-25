@@ -31,9 +31,6 @@ import local.example.seed.model.Item;
 import local.example.seed.service.ItemRestfulRetrieverService;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.net.URI;
-import java.net.URISyntaxException;
-
 @PageTitle(value = "item view")
 @Route(value = "item", layout = MainLayout.class)
 public class ItemView
@@ -42,7 +39,6 @@ public class ItemView
     private static final String RESTFUL_BASE_URI = "http://127.0.0.1:8082/api/reactive";
 
     private final Grid<Item> itemGrid;
-    private final Button retrieveButton;
 
     public ItemView() {
         super();
@@ -50,18 +46,18 @@ public class ItemView
         this.itemGrid.addColumn(Item::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.itemGrid.addColumn(Item::getName).setHeader("name").setSortable(true);
         this.itemGrid.addColumn(Item::getDescription).setHeader("description").setSortable(false);
-        this.retrieveButton = new Button(
+        Button retrieveButton = new Button(
                 "recovers all items",
                 VaadinIcon.ARROW_CIRCLE_DOWN_O.create(),
                 listener -> {
                     try {
-                        this.itemGrid.setItems(ItemRestfulRetrieverService.getListOfItems(new URI(RESTFUL_BASE_URI)));
+                        this.itemGrid.setItems(ItemRestfulRetrieverService.getListOfItems());
                     } catch (
-                            ResponseStatusException | URISyntaxException exception) {
+                            ResponseStatusException exception) {
                         exception.printStackTrace();
                     }
                 });
-        this.retrieveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
-        this.add(this.retrieveButton, this.itemGrid);
+        retrieveButton.addThemeVariants(ButtonVariant.LUMO_PRIMARY);
+        this.add(retrieveButton, this.itemGrid);
     }
 }
