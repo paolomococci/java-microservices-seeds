@@ -27,10 +27,7 @@ import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class CustomerRestfulController {
 
@@ -63,10 +60,8 @@ public class CustomerRestfulController {
                 CUSTOMER_RESTFUL_BASE_URI,
                 CustomerResponse.class
         );
-        CustomerEmbedded embedded = responseEntity.getBody().get_embedded();
-        for (Customer customer: embedded.getCustomers()) {
-            customers.add(customer);
-        }
+        CustomerEmbedded embedded = Objects.requireNonNull(responseEntity.getBody()).get_embedded();
+        customers.addAll(embedded.getCustomers());
         return customers;
     }
 
