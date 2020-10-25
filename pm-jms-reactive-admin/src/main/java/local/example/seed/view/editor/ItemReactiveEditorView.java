@@ -43,6 +43,7 @@ import local.example.seed.field.PriceField;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Item;
 import local.example.seed.model.util.Link;
+import local.example.seed.service.ItemRestfulRetrieverService;
 import reactor.core.publisher.Mono;
 
 import java.util.Optional;
@@ -79,7 +80,7 @@ public class ItemReactiveEditorView
 
         this.itemGrid = new Grid<>();
         this.itemGrid.setItems(
-                this.itemRestfulReactiveController.collectionOfAllItems()
+                ItemRestfulRetrieverService.getListOfItems()
         );
         this.itemGrid.addColumn(Item::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.itemGrid.addColumn(Item::getName).setHeader("name").setSortable(true);
@@ -269,7 +270,9 @@ public class ItemReactiveEditorView
     }
 
     private void reload() {
-        this.itemGrid.setItems(itemRestfulReactiveController.readAll());
+        this.itemGrid.setItems(
+                ItemRestfulRetrieverService.getListOfItems()
+        );
     }
 
     private void showItemList(String code) {
