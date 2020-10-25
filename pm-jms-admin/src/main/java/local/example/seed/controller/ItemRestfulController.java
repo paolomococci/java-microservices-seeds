@@ -26,10 +26,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestClientException;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class ItemRestfulController {
 
@@ -62,10 +59,8 @@ public class ItemRestfulController {
                 ITEM_RESTFUL_BASE_URI,
                 ItemResponse.class
         );
-        ItemEmbedded embedded = responseEntity.getBody().get_embedded();
-        for (Item item:embedded.getItems()) {
-            items.add(item);
-        }
+        ItemEmbedded embedded = Objects.requireNonNull(responseEntity.getBody()).get_embedded();
+        items.addAll(embedded.getItems());
         return items;
     }
 
