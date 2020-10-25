@@ -18,59 +18,34 @@
 
 package local.example.seed.controller;
 
-import io.netty.channel.ChannelOption;
-import io.netty.handler.timeout.ReadTimeoutHandler;
-import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Invoice;
 import local.example.seed.response.InvoiceResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.netty.http.client.HttpClient;
-import reactor.netty.tcp.TcpClient;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 public class InvoiceRestfulReactiveController {
 
-    private static final String INVOICE_REACTIVE_BASE_URI = "http://127.0.0.1:8082/api/restful/invoices";
-    private final WebClient webClient;
+    @Autowired
+    private final WebClient webClient = WebClient.create();
 
-    public InvoiceRestfulReactiveController() {
-        TcpClient tcpClient = TcpClient.create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 6000)
-                .doOnConnected(
-                        connection -> {
-                            connection.addHandlerLast(new ReadTimeoutHandler(6000, TimeUnit.MILLISECONDS));
-                            connection.addHandlerLast(new WriteTimeoutHandler(6000, TimeUnit.MILLISECONDS));
-                        }
-                );
-
-        this.webClient = WebClient
-                .builder()
-                .baseUrl(INVOICE_REACTIVE_BASE_URI)
-                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .build();
-    }
+    private static final String HTTP_127_0_0_1_8082_API_RESTFUL_INVOICES = "http://127.0.0.1:8082/api/restful/invoices";
 
     public void create(Invoice invoice)
             throws WebClientResponseException {
         this.webClient
                 .post()
-                .uri(INVOICE_REACTIVE_BASE_URI)
+                .uri(HTTP_127_0_0_1_8082_API_RESTFUL_INVOICES)
                 .body(Mono.just(invoice), Invoice.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -120,10 +95,7 @@ public class InvoiceRestfulReactiveController {
     }
 
     public List<Invoice> readAll() {
-        return Objects.requireNonNull(this.getResponseFlux(
-                Objects.requireNonNull(
-                        this.getResponseFlux(0).blockFirst()).getPage().getTotalElements()
-        ).blockFirst()).get_embedded().getInvoices();
+        return this.getResponseFlux().blockFirst().get_embedded().getInvoices();
     }
 
     public Collection<Invoice> collectionOfAllInvoices() {
@@ -229,10 +201,10 @@ public class InvoiceRestfulReactiveController {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    private Flux<InvoiceResponse> getResponseFlux(int size)
+    private Flux<InvoiceResponse> getResponseFlux()
             throws WebClientResponseException {
         return this.webClient.get()
-                .uri(INVOICE_REACTIVE_BASE_URI+"?page=0&size={size}", size)
+                .uri(HTTP_127_0_0_1_8082_API_RESTFUL_INVOICES)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
@@ -241,7 +213,7 @@ public class InvoiceRestfulReactiveController {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
                                     " HTTP status error: 404 --- invoice not found, an error occurred during a request to the invoices url: %s ---",
-                                    INVOICE_REACTIVE_BASE_URI
+                                    HTTP_127_0_0_1_8082_API_RESTFUL_INVOICES
                             );
                             System.out.println(timestamp + errorMessage);
                             return Mono.empty();
@@ -252,7 +224,7 @@ public class InvoiceRestfulReactiveController {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
                             " ERROR: --- Connection refused, an error occurred during a request to the invoices url: %s, probably the host is down! ---",
-                            INVOICE_REACTIVE_BASE_URI
+                            HTTP_127_0_0_1_8082_API_RESTFUL_INVOICES
                     );
                     System.out.println(timestamp + errorMessage);
                 });
