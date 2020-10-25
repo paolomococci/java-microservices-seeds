@@ -29,18 +29,21 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CustomerRestfulRetrieverService {
 
-    public static List<Customer> getListOfCustomers(URI uri) {
-        Traverson traverson = new Traverson(uri, MediaTypes.HAL_JSON);
+    private static final URI RESTFUL_BASE_URI = URI.create("http://127.0.0.1:8081/");
+
+    public static List<Customer> getListOfCustomers() {
+        Traverson traverson = new Traverson(RESTFUL_BASE_URI, MediaTypes.HAL_JSON);
         Traverson.TraversalBuilder traversalBuilder = traverson.follow("customers");
         ParameterizedTypeReference<CollectionModel<Customer>> parameterizedTypeReference;
         parameterizedTypeReference = new ParameterizedTypeReference<>() {};
         CollectionModel<Customer> collectionModelOfCustomers;
         collectionModelOfCustomers = traversalBuilder.toObject(parameterizedTypeReference);
-        Collection<Customer> collectionOfCustomers = collectionModelOfCustomers.getContent();
+        Collection<Customer> collectionOfCustomers = Objects.requireNonNull(collectionModelOfCustomers).getContent();
         return new ArrayList<>(collectionOfCustomers);
     }
 }
