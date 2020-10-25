@@ -72,9 +72,14 @@ public class InvoiceReactiveEditorView
 
         this.invoiceRestfulReactiveController = new InvoiceRestfulReactiveController();
 
+        this.invoiceBinder = new Binder<>(Invoice.class);
+        this.invoiceBinder.bindInstanceFields(this);
+
+        this.invoice = new Invoice();
+
         this.invoiceGrid = new Grid<>();
         this.invoiceGrid.setItems(
-                this.invoiceRestfulReactiveController.readAll()
+                this.invoiceRestfulReactiveController.collectionOfAllInvoices()
         );
         this.invoiceGrid.addColumn(Invoice::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.invoiceGrid.addColumn(Invoice::getDate).setHeader("date").setSortable(true);
@@ -99,11 +104,6 @@ public class InvoiceReactiveEditorView
                 this.clear();
             }
         });
-
-        this.invoiceBinder = new Binder<>(Invoice.class);
-        this.invoiceBinder.bindInstanceFields(this);
-
-        this.invoice = new Invoice();
 
         this.cancel = new Button("cancel");
         this.cancel.addClickListener(listener -> {
