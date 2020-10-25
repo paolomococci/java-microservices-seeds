@@ -33,8 +33,10 @@ import java.util.List;
 @Service
 public class ItemRestfulRetrieverService {
 
-    public static List<Item> getListOfItems(URI uri) {
-        Traverson traverson = new Traverson(uri, MediaTypes.HAL_JSON);
+    private static final URI RESTFUL_BASE_URI = URI.create("http://127.0.0.1:8082/api/reactive");
+
+    public static List<Item> getListOfItems() {
+        Traverson traverson = new Traverson(RESTFUL_BASE_URI, MediaTypes.HAL_JSON);
         Traverson.TraversalBuilder traversalBuilder = traverson.follow("items");
         ParameterizedTypeReference<CollectionModel<Item>> parameterizedTypeReference;
         parameterizedTypeReference = new ParameterizedTypeReference<>() {};
