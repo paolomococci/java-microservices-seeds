@@ -44,6 +44,7 @@ import local.example.seed.field.TotalField;
 import local.example.seed.layout.MainLayout;
 import local.example.seed.model.Invoice;
 import local.example.seed.model.util.Link;
+import local.example.seed.service.InvoiceRestfulRetrieverService;
 import reactor.core.publisher.Mono;
 
 import java.util.Optional;
@@ -79,7 +80,7 @@ public class InvoiceReactiveEditorView
 
         this.invoiceGrid = new Grid<>();
         this.invoiceGrid.setItems(
-                this.invoiceRestfulReactiveController.collectionOfAllInvoices()
+                InvoiceRestfulRetrieverService.getListOfInvoices()
         );
         this.invoiceGrid.addColumn(Invoice::getCode).setHeader("code").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.invoiceGrid.addColumn(Invoice::getDate).setHeader("date").setSortable(true);
@@ -268,7 +269,9 @@ public class InvoiceReactiveEditorView
     }
 
     private void reload() {
-        this.invoiceGrid.setItems(invoiceRestfulReactiveController.readAll());
+        this.invoiceGrid.setItems(
+                InvoiceRestfulRetrieverService.getListOfInvoices()
+        );
     }
 
     private void showInvoiceList(String code) {
