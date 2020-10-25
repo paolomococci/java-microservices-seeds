@@ -18,59 +18,34 @@
 
 package local.example.seed.controller;
 
-import io.netty.channel.ChannelOption;
-import io.netty.handler.timeout.ReadTimeoutHandler;
-import io.netty.handler.timeout.WriteTimeoutHandler;
 import local.example.seed.model.Item;
 import local.example.seed.response.ItemResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.MediaTypes;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.client.reactive.ReactorClientHttpConnector;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.reactive.function.client.WebClientResponseException;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import reactor.netty.http.client.HttpClient;
-import reactor.netty.tcp.TcpClient;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
 public class ItemRestfulReactiveController {
 
-    private static final String ITEM_REACTIVE_BASE_URI = "http://127.0.0.1:8082/api/restful/items";
-    private final WebClient webClient;
+    @Autowired
+    private final WebClient webClient = WebClient.create();
 
-    public ItemRestfulReactiveController() {
-        TcpClient tcpClient = TcpClient.create()
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS, 6000)
-                .doOnConnected(
-                        connection -> {
-                            connection.addHandlerLast(new ReadTimeoutHandler(6000, TimeUnit.MILLISECONDS));
-                            connection.addHandlerLast(new WriteTimeoutHandler(6000, TimeUnit.MILLISECONDS));
-                        }
-                );
-
-        this.webClient = WebClient
-                .builder()
-                .baseUrl(ITEM_REACTIVE_BASE_URI)
-                .clientConnector(new ReactorClientHttpConnector(HttpClient.from(tcpClient)))
-                .defaultHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                .build();
-    }
+    private static final String HTTP_127_0_0_1_8082_API_RESTFUL_ITEMS = "http://127.0.0.1:8082/api/restful/items";
 
     public void create(Item item)
             throws WebClientResponseException {
         this.webClient
                 .post()
-                .uri(ITEM_REACTIVE_BASE_URI)
+                .uri(HTTP_127_0_0_1_8082_API_RESTFUL_ITEMS)
                 .body(Mono.just(item), Item.class)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
@@ -120,10 +95,7 @@ public class ItemRestfulReactiveController {
     }
 
     public List<Item> readAll() {
-        return Objects.requireNonNull(this.getResponseFlux(
-                Objects.requireNonNull(
-                        this.getResponseFlux(0).blockFirst()).getPage().getTotalElements()
-        ).blockFirst()).get_embedded().getItems();
+        return this.getResponseFlux().blockFirst().get_embedded().getItems();
     }
 
     public Collection<Item> collectionOfAllItems() {
@@ -237,10 +209,10 @@ public class ItemRestfulReactiveController {
                 .onErrorResume(exception -> Mono.empty());
     }
 
-    private Flux<ItemResponse> getResponseFlux(int size)
+    private Flux<ItemResponse> getResponseFlux()
             throws WebClientResponseException {
         return this.webClient.get()
-                .uri(ITEM_REACTIVE_BASE_URI+"?page=0&size={size}", size)
+                .uri(HTTP_127_0_0_1_8082_API_RESTFUL_ITEMS)
                 .accept(MediaTypes.HAL_JSON)
                 .retrieve()
                 .onStatus(
@@ -249,7 +221,7 @@ public class ItemRestfulReactiveController {
                             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                             String errorMessage = String.format(
                                     " HTTP status error: 404 --- items not found, an error occurred during a request to the items url: %s ---",
-                                    ITEM_REACTIVE_BASE_URI
+                                    HTTP_127_0_0_1_8082_API_RESTFUL_ITEMS
                             );
                             System.out.println(timestamp + errorMessage);
                             return Mono.empty();
@@ -260,7 +232,7 @@ public class ItemRestfulReactiveController {
                     Timestamp timestamp = new Timestamp(System.currentTimeMillis());
                     String errorMessage = String.format(
                             " ERROR: --- Connection refused, an error occurred during a request to the items url: %s, probably the host is down! ---",
-                            ITEM_REACTIVE_BASE_URI
+                            HTTP_127_0_0_1_8082_API_RESTFUL_ITEMS
                     );
                     System.out.println(timestamp + errorMessage);
                 });
