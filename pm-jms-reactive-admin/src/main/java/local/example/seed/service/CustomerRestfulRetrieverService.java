@@ -29,6 +29,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class CustomerRestfulRetrieverService {
@@ -42,7 +43,7 @@ public class CustomerRestfulRetrieverService {
         parameterizedTypeReference = new ParameterizedTypeReference<>() {};
         CollectionModel<Customer> collectionModelOfCustomers;
         collectionModelOfCustomers = traversalBuilder.toObject(parameterizedTypeReference);
-        Collection<Customer> collectionOfCustomers = collectionModelOfCustomers.getContent();
+        Collection<Customer> collectionOfCustomers = Objects.requireNonNull(collectionModelOfCustomers).getContent();
         return new ArrayList<>(collectionOfCustomers);
     }
 }
