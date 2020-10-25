@@ -52,11 +52,12 @@ import java.util.Optional;
 public class CustomerReactiveEditorView
         extends Main {
 
+    private final CustomerRestfulReactiveController customerRestfulReactiveController;
+
     private final Grid<Customer> customerGrid;
     private final Binder<Customer> customerBinder;
 
     private Customer customer;
-    private final CustomerRestfulReactiveController customerRestfulReactiveController;
 
     private TextField name;
     private TextField surname;
@@ -71,9 +72,14 @@ public class CustomerReactiveEditorView
 
         this.customerRestfulReactiveController = new CustomerRestfulReactiveController();
 
+        this.customerBinder = new Binder<>(Customer.class);
+        this.customerBinder.bindInstanceFields(this);
+
+        this.customer = new Customer();
+
         this.customerGrid = new Grid<>();
         this.customerGrid.setItems(
-                this.customerRestfulReactiveController.readAll()
+                this.customerRestfulReactiveController.collectionOfAllCustomers()
         );
         this.customerGrid.addColumn(Customer::getName).setHeader("name").setSortable(true).setTextAlign(ColumnTextAlign.START);
         this.customerGrid.addColumn(Customer::getSurname).setHeader("surname").setSortable(true);
@@ -98,11 +104,6 @@ public class CustomerReactiveEditorView
                 this.clear();
             }
         });
-
-        this.customerBinder = new Binder<>(Customer.class);
-        this.customerBinder.bindInstanceFields(this);
-
-        this.customer = new Customer();
 
         this.cancel = new Button("cancel");
         this.cancel.addClickListener(listener -> {
