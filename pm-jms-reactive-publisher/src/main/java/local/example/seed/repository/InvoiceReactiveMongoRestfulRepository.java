@@ -18,5 +18,11 @@
 
 package local.example.seed.repository;
 
-public interface InvoiceReactiveMongoRestfulRepository {
+import local.example.seed.document.Invoice;
+import org.springframework.data.mongodb.repository.ReactiveMongoRepository;
+import org.springframework.data.rest.core.annotation.RepositoryRestResource;
+
+@RepositoryRestResource
+public interface InvoiceReactiveMongoRestfulRepository
+        extends ReactiveMongoRepository<Invoice, String> {
 }
