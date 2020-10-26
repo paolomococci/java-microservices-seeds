@@ -25,7 +25,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.sql.Date;
 import java.util.List;
 
 @Data
@@ -38,7 +37,7 @@ public class Invoice {
     @Indexed(unique = true, direction = IndexDirection.DESCENDING)
     private String code;
 
-    private Date date;
+    private String date;
     private Double total;
 
     @DBRef
