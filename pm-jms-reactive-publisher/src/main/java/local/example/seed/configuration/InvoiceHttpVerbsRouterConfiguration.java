@@ -18,7 +18,7 @@
 
 package local.example.seed.configuration;
 
-import local.example.seed.handler.InvoiceHandler;
+import local.example.seed.handler.InvoiceReactiveHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.MediaTypes;
@@ -32,7 +32,7 @@ public class InvoiceHttpVerbsRouterConfiguration {
     private final MediaType mediaType = MediaTypes.HAL_JSON;
 
     @Bean
-    public RouterFunction<ServerResponse> serverResponseRouterFunction(InvoiceHandler invoiceHandler) {
+    public RouterFunction<ServerResponse> serverResponseRouterFunction(InvoiceReactiveHandler invoiceReactiveHandler) {
         // TODO
         return null;
     }
