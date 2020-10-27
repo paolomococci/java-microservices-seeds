@@ -35,7 +35,7 @@ public class CustomerHttpVerbsRouterConfiguration {
     private final MediaType mediaType = MediaTypes.HAL_JSON;
 
     @Bean
-    public RouterFunction<ServerResponse> serverResponseRouterFunction(CustomerReactiveHandler customerReactiveHandler) {
+    public RouterFunction<ServerResponse> customerServerResponseRouterFunction(CustomerReactiveHandler customerReactiveHandler) {
         return RouterFunctions
                 .route(POST("/customers").and(accept(this.mediaType)), customerReactiveHandler::create)
                 .andRoute(GET("/customers/{id}").and(accept(this.mediaType)), customerReactiveHandler::read)
