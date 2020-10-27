@@ -18,38 +18,13 @@
 
 package local.example.seed;
 
-import com.mongodb.reactivestreams.client.MongoClient;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.mongodb.core.ReactiveMongoTemplate;
-import org.springframework.data.mongodb.repository.config.EnableReactiveMongoRepositories;
 
 @SpringBootApplication
-@EnableReactiveMongoRepositories(
-		basePackages = {
-				"local.example.seed.repository"
-		})
-@EntityScan("local.example.seed.document")
 public class Application {
-
-	private final String DATABASE_NAME = "sampledb";
-
-	@Autowired
-	MongoClient reactiveStreamsMongoClient;
 
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
 	}
-
-	@Bean
-	public ReactiveMongoTemplate reactiveMongoTemplate() {
-		return new ReactiveMongoTemplate(
-				reactiveStreamsMongoClient,
-				DATABASE_NAME
-		);
-	}
 }
-
