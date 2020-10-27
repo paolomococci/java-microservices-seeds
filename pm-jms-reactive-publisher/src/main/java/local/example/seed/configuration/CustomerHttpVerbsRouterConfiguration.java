@@ -18,7 +18,7 @@
 
 package local.example.seed.configuration;
 
-import local.example.seed.handler.CustomerHandler;
+import local.example.seed.handler.CustomerReactiveHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.MediaTypes;
@@ -35,12 +35,12 @@ public class CustomerHttpVerbsRouterConfiguration {
     private final MediaType mediaType = MediaTypes.HAL_JSON;
 
     @Bean
-    public RouterFunction<ServerResponse> serverResponseRouterFunction(CustomerHandler customerHandler) {
+    public RouterFunction<ServerResponse> serverResponseRouterFunction(CustomerReactiveHandler customerReactiveHandler) {
         return RouterFunctions
-                .route(POST("/customers").and(accept(this.mediaType)), customerHandler::create)
-                .andRoute(GET("/customers/{id}").and(accept(this.mediaType)), customerHandler::read)
-                .andRoute(GET("/customers").and(accept(this.mediaType)), customerHandler::readAll)
-                .andRoute(PUT("/customers").and(accept(this.mediaType)), customerHandler::update)
-                .andRoute(DELETE("customers/{id}").and(accept(this.mediaType)), customerHandler::delete);
+                .route(POST("/customers").and(accept(this.mediaType)), customerReactiveHandler::create)
+                .andRoute(GET("/customers/{id}").and(accept(this.mediaType)), customerReactiveHandler::read)
+                .andRoute(GET("/customers").and(accept(this.mediaType)), customerReactiveHandler::readAll)
+                .andRoute(PUT("/customers").and(accept(this.mediaType)), customerReactiveHandler::update)
+                .andRoute(DELETE("customers/{id}").and(accept(this.mediaType)), customerReactiveHandler::delete);
     }
 }
