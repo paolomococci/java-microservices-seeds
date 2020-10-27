@@ -32,7 +32,7 @@ public class ItemHttpVerbsRouterConfiguration {
     private final MediaType mediaType = MediaTypes.HAL_JSON;
 
     @Bean
-    public RouterFunction<ServerResponse> serverResponseRouterFunction(ItemReactiveHandler itemReactiveHandler) {
+    public RouterFunction<ServerResponse> itemServerResponseRouterFunction(ItemReactiveHandler itemReactiveHandler) {
         // TODO
         return null;
     }
