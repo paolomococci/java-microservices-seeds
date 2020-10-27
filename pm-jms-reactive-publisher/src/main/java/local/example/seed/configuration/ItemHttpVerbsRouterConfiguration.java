@@ -18,7 +18,7 @@
 
 package local.example.seed.configuration;
 
-import local.example.seed.handler.ItemHandler;
+import local.example.seed.handler.ItemReactiveHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.hateoas.MediaTypes;
@@ -32,7 +32,7 @@ public class ItemHttpVerbsRouterConfiguration {
     private final MediaType mediaType = MediaTypes.HAL_JSON;
 
     @Bean
-    public RouterFunction<ServerResponse> serverResponseRouterFunction(ItemHandler itemHandler) {
+    public RouterFunction<ServerResponse> serverResponseRouterFunction(ItemReactiveHandler itemReactiveHandler) {
         // TODO
         return null;
     }
