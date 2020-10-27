@@ -25,7 +25,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@RepositoryRestResource
+@RepositoryRestResource(collectionResourceRel = "invoices", path = "invoices")
 public interface InvoiceReactiveMongoRestfulRepository
         extends ReactiveMongoRepository<Invoice, String> {
 
