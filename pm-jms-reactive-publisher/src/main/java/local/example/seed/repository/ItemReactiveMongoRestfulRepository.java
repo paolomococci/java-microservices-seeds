@@ -25,7 +25,7 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-@RepositoryRestResource
+@RepositoryRestResource(collectionResourceRel = "items", path = "items")
 public interface ItemReactiveMongoRestfulRepository
         extends ReactiveMongoRepository<Item, String> {
 
