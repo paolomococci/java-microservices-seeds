@@ -118,8 +118,7 @@ public class SeedRestController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id)
-            throws URISyntaxException {
+    public ResponseEntity<?> delete(@PathVariable Long id) {
         seedRepository.deleteById(id);
         return ResponseEntity.noContent().build();
     }
