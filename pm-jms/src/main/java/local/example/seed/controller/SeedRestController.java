@@ -101,8 +101,7 @@ public class SeedRestController {
     }
 
     @PatchMapping(path = "/{id}/percentage")
-    public ResponseEntity<?> percentageUpdate(@RequestBody Seed updated, @PathVariable Long id)
-            throws URISyntaxException {
+    public ResponseEntity<?> percentageUpdate(@RequestBody Seed updated, @PathVariable Long id) {
         Seed temp = seedRepository.findById(id)
                 .orElseGet(() -> {
                     updated.setId(id);
