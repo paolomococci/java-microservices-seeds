@@ -1,3 +1,3 @@
 # pm-jms
 
-## some tests from the command line
+## demo template RESTful application
