@@ -18,11 +18,10 @@
 
 package local.example.seed.controller;
 
-import java.net.URISyntaxException;
+import local.example.seed.assembler.SeedRepresentationModelAssembler;
 import local.example.seed.exception.SeedNotFoundException;
 import local.example.seed.model.Seed;
 import local.example.seed.repository.SeedRepository;
-import local.example.seed.assembler.SeedRepresentationModelAssembler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -66,8 +65,7 @@ public class SeedRestController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> update(@RequestBody Seed updated, @PathVariable Long id)
-            throws URISyntaxException {
+    public ResponseEntity<?> update(@RequestBody Seed updated, @PathVariable Long id) {
         Seed temp = seedRepository.findById(id)
                 .map(seed -> {
                     seed.setName(updated.getName());
