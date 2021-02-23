@@ -33,21 +33,20 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping(value = "/api/seeds", produces = "application/hal+json")
 public class SeedRestController {
-    
+
     @Autowired
     SeedRepository seedRepository;
-    
+
     @Autowired
     SeedRepresentationModelAssembler seedRepresentationModelAssembler;
-    
+
     @PostMapping
-    public ResponseEntity<?> create(@RequestBody Seed seed) 
-            throws URISyntaxException {
+    public ResponseEntity<?> create(@RequestBody Seed seed) {
         EntityModel<Seed> entityModelOfSeed = seedRepresentationModelAssembler
                 .toModel(seedRepository.save(seed));
         return new ResponseEntity<>(entityModelOfSeed, HttpStatus.CREATED);
     }
-    
+
     @GetMapping(path = "/{id}")
     public ResponseEntity<?> read(@PathVariable Long id) {
         Seed seed = seedRepository.findById(id).orElseThrow(
@@ -56,7 +55,7 @@ public class SeedRestController {
                 .toModel(seed);
         return new ResponseEntity<>(entityModelOfSeed, HttpStatus.OK);
     }
-    
+
     @GetMapping
     public ResponseEntity<?> readAll() {
         Iterable<Seed> seeds = seedRepository.findAll();
@@ -65,9 +64,9 @@ public class SeedRestController {
                 .toCollectionModel(seeds);
         return new ResponseEntity<>(collectionModelOfSeeds, HttpStatus.OK);
     }
-    
+
     @PutMapping(path = "/{id}")
-    public ResponseEntity<?> update(@RequestBody Seed updated, @PathVariable Long id) 
+    public ResponseEntity<?> update(@RequestBody Seed updated, @PathVariable Long id)
             throws URISyntaxException {
         Seed temp = seedRepository.findById(id)
                 .map(seed -> {
@@ -83,9 +82,9 @@ public class SeedRestController {
                 .toModel(temp);
         return new ResponseEntity<>(entityModelOfSeed, HttpStatus.OK);
     }
-    
+
     @PatchMapping(path = "/{id}/name")
-    public ResponseEntity<?> nameUpdate(@RequestBody Seed updated, @PathVariable Long id) 
+    public ResponseEntity<?> nameUpdate(@RequestBody Seed updated, @PathVariable Long id)
             throws URISyntaxException {
         Seed temp = seedRepository.findById(id)
                 .orElseGet(() -> {
@@ -100,9 +99,9 @@ public class SeedRestController {
                 .toModel(temp);
         return new ResponseEntity<>(entityModelOfSeed, HttpStatus.OK);
     }
-    
+
     @PatchMapping(path = "/{id}/percentage")
-    public ResponseEntity<?> percentageUpdate(@RequestBody Seed updated, @PathVariable Long id) 
+    public ResponseEntity<?> percentageUpdate(@RequestBody Seed updated, @PathVariable Long id)
             throws URISyntaxException {
         Seed temp = seedRepository.findById(id)
                 .orElseGet(() -> {
@@ -117,9 +116,9 @@ public class SeedRestController {
                 .toModel(temp);
         return new ResponseEntity<>(entityModelOfSeed, HttpStatus.OK);
     }
-    
+
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<?> delete(@PathVariable Long id) 
+    public ResponseEntity<?> delete(@PathVariable Long id)
             throws URISyntaxException {
         seedRepository.deleteById(id);
         return ResponseEntity.noContent().build();
