@@ -58,7 +58,7 @@ public class SeedRestController {
     @GetMapping
     public ResponseEntity<?> readAll() {
         Iterable<Seed> seeds = seedRepository.findAll();
-        CollectionModel<EntityModel<Seed>> collectionModelOfSeeds;
+        CollectionModel collectionModelOfSeeds;
         collectionModelOfSeeds = seedRepresentationModelAssembler
                 .toCollectionModel(seeds);
         return new ResponseEntity<>(collectionModelOfSeeds, HttpStatus.OK);
