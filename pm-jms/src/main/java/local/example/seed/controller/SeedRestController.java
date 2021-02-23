@@ -84,8 +84,7 @@ public class SeedRestController {
     }
 
     @PatchMapping(path = "/{id}/name")
-    public ResponseEntity<?> nameUpdate(@RequestBody Seed updated, @PathVariable Long id)
-            throws URISyntaxException {
+    public ResponseEntity<?> nameUpdate(@RequestBody Seed updated, @PathVariable Long id) {
         Seed temp = seedRepository.findById(id)
                 .orElseGet(() -> {
                     updated.setId(id);
