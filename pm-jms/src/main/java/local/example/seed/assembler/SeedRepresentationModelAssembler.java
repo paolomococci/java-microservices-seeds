@@ -28,12 +28,12 @@ import org.springframework.stereotype.Component;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.*;
 
 @Component
-public class SeedRepresentationModelAssembler 
+public class SeedRepresentationModelAssembler
         implements RepresentationModelAssembler<Seed, EntityModel<Seed>>{
 
     @Override
     public EntityModel<Seed> toModel(Seed seed) {
-        return new EntityModel<>(seed, 
+        return EntityModel.of(seed,
                 linkTo(methodOn(SeedRestController.class).read(seed.getId())).withSelfRel(),
                 linkTo(methodOn(SeedRestController.class).readAll()).withRel("seeds")
         );
