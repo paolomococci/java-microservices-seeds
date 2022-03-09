@@ -20,7 +20,7 @@ repositories {
 }
 
 ext {
-	set('vaadinVersion', "14.8.4")
+	set('vaadinVersion', "14.8.5")
 }
 
 dependencies {
